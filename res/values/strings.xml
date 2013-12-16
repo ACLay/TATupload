@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TAT Upload</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="doc_hint">google doc</string>
+    <string name="toggle_button">ToggleButton</string>
+
+</resources>

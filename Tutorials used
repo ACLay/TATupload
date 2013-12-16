@@ -1,0 +1,10 @@
+For receiving texts:
+	stackoverflow.com/questions/2735571/detecting-sms-incoming-and-outgoing
+	particularly the mobiforge link
+	
+To send messages to the emulator:
+	stackoverflow.com/questions/3537307/simulating-sms-on-android-devices-when-developing
+	
+Regex string splitting:
+	http://stackoverflow.com/questions/4416425/how-to-split-string-with-some-seperator-but-without-removing-that-seperator-in-j
+
