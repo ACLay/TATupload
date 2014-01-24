@@ -8,3 +8,15 @@ To send messages to the emulator:
 Regex string splitting:
 	http://stackoverflow.com/questions/4416425/how-to-split-string-with-some-seperator-but-without-removing-that-seperator-in-j
 
+Google script (in android) guide:
+	https://www.youtube.com/watch?v=RSgMEtRl0sw
+	https://github.com/entaq/GoogleAppsScript/tree/master/Android
+	
+Google script API:
+	https://developers.google.com/apps-script
+	
+Javascript tutorials:
+	http://www.w3schools.com/js/default.asp
+	
+URL fetching:
+	https://developers.google.com/appengine/docs/java/urlfetch/

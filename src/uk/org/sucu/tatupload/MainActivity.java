@@ -10,6 +10,10 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		SmsReciever rec = new SmsReciever();
+		rec.processMessage("1K_53Zp5cvliE_ZfUiJJ3Qmjw0dB8A7npUm0huHDd8mQ", 
+				"42",
+				"I'm in the stags. I want a cheese toastie. Why are other religions wrong?");
 	}
 
 	@Override
