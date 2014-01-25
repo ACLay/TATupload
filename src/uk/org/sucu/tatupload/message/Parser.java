@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Parser {
 	
 
-	String[] flavourProperty = {"ham","cheese","tomato","pineapple","allery","allergic"};
+	String[] flavourProperty = {"ham","cheese","tomato","pineapple","nutella","bbq"};
 	String[] locationProperty = {"monte","glen","connaught","bencraft","highfield","archers","gateley","south hill",
 			"library","stags","susu","bridge","hartley",
 			"road"," rd","avenue", "gardens","street"," st","terrace",
