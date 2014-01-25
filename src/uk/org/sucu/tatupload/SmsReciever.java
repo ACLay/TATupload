@@ -70,7 +70,7 @@ public class SmsReciever extends BroadcastReceiver{
 
 		String toastie = "";
 		for(String s : p.getFlavours(message)){
-			toastie += s;
+			toastie += s + " ";
 		}
 		//keeping the original message may be useful?
 		String encodedMessage = "";
