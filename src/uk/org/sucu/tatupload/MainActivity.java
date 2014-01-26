@@ -16,8 +16,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		//get screen rotation
 		int rot = getResources().getConfiguration().orientation % 2;
-		
-		if(rot == 0){//if device is landscape
+		//load UI based on rotation
+		if(rot == 0){
 			setContentView(R.layout.activity_main_landscape);
 		} else {
 			setContentView(R.layout.activity_main_portrait);
@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void testUpload(){
-		SmsReciever rec = new SmsReciever();
+		SmsReceiver rec = new SmsReceiver();
 		Uri uri = rec.prepareURI(formID, 
 				"0123456789",
 				"I am in hartley library. I want a ham and tomato toastie. What is God's favourite cake?");
