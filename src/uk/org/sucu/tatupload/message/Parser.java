@@ -1,10 +1,18 @@
 package uk.org.sucu.tatupload.message;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
+import android.net.Uri;
 
 public class Parser {
 	
-
+	private static final String uploadScriptURI = "https://script.google.com/macros/s/AKfycbzfPd5U7tbyOmK8EERxB8LPn53CzLy_nzXzAu2jb2_fYC8V_aof/exec";
+	
 	String[] flavourProperty = {"ham","cheese","tomato","pineapple","nutella","bbq"};
 	String[] locationProperty = {"monte","glen","connaught","bencraft","highfield","archers","gateley","south hill",
 			"library","stags","susu","bridge","hartley",
@@ -68,6 +76,54 @@ public class Parser {
 			}
 		}
 		return flavours;
+	}
+	
+	public String concatenateArrayList(ArrayList<String> strings){
+		StringBuilder builder = new StringBuilder();
+		Iterator<String> iterator = strings.iterator();
+
+		while (iterator.hasNext()) {
+			String line = iterator.next();
+			builder.append(line);
+			if (iterator.hasNext()) {
+				builder.append(' ');
+			}
+		}
+
+		return builder.toString();
+	}
+	
+	public String timeStampToString(long timeStampMillis){
+		Date d = new Date(timeStampMillis);
+		return (DateFormat.getDateTimeInstance().format(d));
+	}
+	
+	public Uri createUri(String formID, String number, String question, String location, String toastie, String sms){
+		
+		StringBuilder builder = new StringBuilder();
+
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("formID", formID);
+		params.put("number", number);
+		params.put("question", question);
+		params.put("location", location);
+		params.put("toastie", toastie);
+		params.put("SMS", sms);
+
+		Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
+		builder.append(uploadScriptURI).append("?");
+
+		while (iterator.hasNext()) {
+			Entry<String, String> param = iterator.next();
+			builder.append(param.getKey()).append('=').append(param.getValue());
+			if (iterator.hasNext()) {
+				builder.append('&');
+			}
+		}
+		
+		String uri = builder.toString();
+		
+		return Uri.parse(uri);
 	}
 	
 	

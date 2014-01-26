@@ -5,14 +5,14 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="doc_hint">google doc</string>
-    
-    <string name="processing_texts">Processing incoming texts</string><string name="not_processing_texts">Not currently processing texts</string><string name="toggle_button">Toggle</string>
-    
-    
-    <string name="form_id">Form ID</string><string name="confirm_checkbox">Confirm extraction before upload</string>
+    <string name="processing_texts">Processing incoming texts</string>
+    <string name="not_processing_texts">Not currently processing texts</string>
+    <string name="toggle_button">Toggle</string>
+    <string name="form_id">Form ID</string>
+    <string name="confirm_checkbox">Confirm extraction before upload</string>
     <string name="modify_button">Modify data extraction parameters</string>
-    
-    <string name="clear_queue_button">Clear message queue</string><string name="queue_title">Messages to process:</string>
+    <string name="clear_queue_button">Clear message queue</string>
+    <string name="queue_title">Messages to process:</string>
     <string name="message_number">Sender\'s number:</string>
     <string name="message_time">Time received:</string>
     <string name="message_body">Message:</string>
@@ -22,5 +22,7 @@
     <string name="upload">Upload</string>
     <string name="undo_changes">Undo changes</string>
     <string name="discard">Discard</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_sms_review">SmsReviewActivity</string>
 
 </resources>

@@ -60,7 +60,8 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="171dp"
                 android:layout_height="wrap_content"
-                android:text="@string/modify_button" />
+                android:text="@string/modify_button"
+                android:onClick="" />
 
             <Button
                 android:id="@+id/clearQueueButton"

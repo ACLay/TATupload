@@ -27,11 +27,20 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".SmsReceiver" >
+        <receiver android:name="uk.org.sucu.tatupload.SmsReceiver" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="uk.org.sucu.tatupload.SmsReviewActivity"
+            android:label="@string/title_activity_sms_review"
+            android:parentActivityName="uk.org.sucu.tatupload.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.org.sucu.tatupload.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
