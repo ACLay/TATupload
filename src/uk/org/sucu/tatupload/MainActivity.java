@@ -6,8 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -16,16 +14,13 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		//get screen rotation
 		int rot = getResources().getConfiguration().orientation % 2;
 		
-		TextView text = (TextView) findViewById(R.id.processingTextView);
-		text.setText(Integer.valueOf(rot).toString());
-		
 		if(rot == 0){//if device is landscape
-			//change the orientation so the incoming messages are queued next to, not below, the controls
-			LinearLayout layout = (LinearLayout) findViewById(R.id.main_layout);
-			layout.setOrientation(LinearLayout.HORIZONTAL);
+			setContentView(R.layout.activity_main_landscape);
+		} else {
+			setContentView(R.layout.activity_main_portrait);
 		}
 		
 	}

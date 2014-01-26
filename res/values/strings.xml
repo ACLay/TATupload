@@ -13,7 +13,7 @@
     <string name="modify_button">Modify data extraction parameters</string>
     
     <string name="clear_queue_button">Clear message queue</string><string name="queue_title">Messages to process:</string>
-    <string name="message_number">Sender's number:</string>
+    <string name="message_number">Sender\'s number:</string>
     <string name="message_time">Time received:</string>
     <string name="message_body">Message:</string>
     <string name="message_question">Question:</string>
