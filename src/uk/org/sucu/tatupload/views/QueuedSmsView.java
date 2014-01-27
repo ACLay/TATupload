@@ -1,5 +1,6 @@
-package uk.org.sucu.tatupload.message;
+package uk.org.sucu.tatupload.views;
 
+import uk.org.sucu.tatupload.message.Parser;
 import android.content.Context;
 import android.telephony.SmsMessage;
 import android.widget.LinearLayout;

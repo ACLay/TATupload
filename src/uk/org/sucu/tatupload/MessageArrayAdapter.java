@@ -2,7 +2,7 @@ package uk.org.sucu.tatupload;
 
 import java.util.ArrayList;
 
-import uk.org.sucu.tatupload.message.QueuedSmsView;
+import uk.org.sucu.tatupload.views.QueuedSmsView;
 import android.content.Context;
 import android.telephony.SmsMessage;
 import android.view.View;

@@ -1,5 +1,7 @@
 package uk.org.sucu.tatupload.message;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,11 +9,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import uk.org.sucu.tatupload.TatUploadApplication;
 import android.net.Uri;
 
 public class Parser {
-	
-	private static final String uploadScriptURI = "https://script.google.com/macros/s/AKfycbzfPd5U7tbyOmK8EERxB8LPn53CzLy_nzXzAu2jb2_fYC8V_aof/exec";
 	
 	String[] flavourProperty = {"ham","cheese","tomato","pineapple","nutella","bbq"};
 	String[] locationProperty = {"monte","glen","connaught","bencraft","highfield","archers","gateley","south hill",
@@ -21,8 +22,7 @@ public class Parser {
 			"block","flat","floor","room"};
 	String[] questionProperty = {"who","what","where","when","why","how","could","would","is","?"};
 	
-	
-	
+
 	public ArrayList<String> getQuestion(String message){
 		ArrayList<String> question = new ArrayList<String>();
 		String[] sentences = message.split("(?<=[?.])");
@@ -98,10 +98,37 @@ public class Parser {
 		return (DateFormat.getDateTimeInstance().format(d));
 	}
 	
-	public Uri createUri(String formID, String number, String question, String location, String toastie, String sms){
+	public Uri createNewFormUri(String formName){
+		//TODO should not accept empty string
+		try{
+			formName = URLEncoder.encode(formName, "utf-8");
+		} catch (UnsupportedEncodingException e){
+			
+		}
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append(TatUploadApplication.getMakeFormScriptURL());
+		builder.append("?formName=");
+		builder.append(formName);
+		
+		String uri = builder.toString();
+		
+		return Uri.parse(uri);
+	}
+	
+	public Uri createUploadUri(String formID, String number, String question, String location, String toastie, String sms){
 		
 		StringBuilder builder = new StringBuilder();
 
+		try{
+			question = URLEncoder.encode(question, "utf-8");
+			location = URLEncoder.encode(location, "utf-8");
+			toastie = URLEncoder.encode(toastie, "utf-8");
+			sms = URLEncoder.encode(sms, "utf-8");
+		} catch (UnsupportedEncodingException e){
+
+		}
+		
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("formID", formID);
 		params.put("number", number);
@@ -111,7 +138,7 @@ public class Parser {
 		params.put("SMS", sms);
 
 		Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
-		builder.append(uploadScriptURI).append("?");
+		builder.append(TatUploadApplication.getUploadScriptURL()).append("?");
 
 		while (iterator.hasNext()) {
 			Entry<String, String> param = iterator.next();

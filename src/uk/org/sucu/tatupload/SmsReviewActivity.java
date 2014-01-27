@@ -6,8 +6,10 @@ import uk.org.sucu.tatupload.message.Parser;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Browser;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -103,6 +105,29 @@ public class SmsReviewActivity extends Activity {
 
 	
 	public void uploadMessage(View v){
+		EditText questionEdit = (EditText) findViewById(R.id.messageQuestionEditText);
+		EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
+		EditText toastieEdit = (EditText) findViewById(R.id.messageToastieEditText);
+		EditText bodyEdit = (EditText) findViewById(R.id.messageBodyEditText);
+		String formID = TatUploadApplication.getFormID();
+		
+		String question = questionEdit.getText().toString();
+		String location = locationEdit.getText().toString();
+		String toastie = toastieEdit.getText().toString();
+		String body = bodyEdit.getText().toString();
+		
+		Parser par = new Parser();
+		
+		//TODO this code block is identical to one in SmsReceiver
+		Uri uri = par.createUploadUri(formID, number, question, location, toastie, body);
+				
+		//While it would be nice to handle everything in-app, it seems for the time being I'll need to go via the browser.
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+		//open all this apps requests in the same tab, prevents new ones with each call
+		browserIntent.putExtra(Browser.EXTRA_APPLICATION_ID, getPackageName());
+		//allows a new task to be started outside of a current task
+		browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		this.startActivity(browserIntent);
 		
 	}
 	

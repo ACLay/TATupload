@@ -8,7 +8,7 @@
     <string name="processing_texts">Processing incoming texts</string>
     <string name="not_processing_texts">Not currently processing texts</string>
     <string name="toggle_button">Toggle</string>
-    <string name="form_id">Form ID</string>
+    <string name="form_id">Form ID: </string>
     <string name="confirm_checkbox">Confirm extraction before upload</string>
     <string name="modify_button">Modify data extraction parameters</string>
     <string name="clear_queue_button">Clear message queue</string>
@@ -24,5 +24,11 @@
     <string name="discard">Discard</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_sms_review">SmsReviewActivity</string>
+    <string name="new_form_name_request">Name of new form</string>
+    <string name="text_a_toastie">Text a toastie</string>
+    <string name="make_new_form">Make new form</string>
+    <string name="cancel">Cancel</string>
+    <string name="new_form_id">ID of Google form:</string>
+    <string name="accept">Accept</string>
 
 </resources>
