@@ -32,16 +32,14 @@
             android:layout_height="wrap_content"
             android:text="@string/form_id" />
 
-        <EditText
-            android:id="@+id/formIdEditText"
-            android:layout_width="0dip"
+        <Button
+            android:id="@+id/button1"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="text" >
+            android:text="@string/change_form_id"
+            android:onClick="changeFormID" />
 
-            <requestFocus />
-        </EditText>
     </LinearLayout>
 
     <CheckBox

@@ -30,5 +30,6 @@
     <string name="cancel">Cancel</string>
     <string name="new_form_id">ID of Google form:</string>
     <string name="accept">Accept</string>
+    <string name="change_form_id">Change form</string>
 
 </resources>

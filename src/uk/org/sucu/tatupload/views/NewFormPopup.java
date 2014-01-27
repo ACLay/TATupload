@@ -25,7 +25,7 @@ public class NewFormPopup extends TextInputPopup {
 		
 		Date d = new Date(Calendar.getInstance().getTimeInMillis());
 		String date = DateFormat.getDateInstance().format(d);
-		textBox.setText(date + " " + R.string.text_a_toastie);
+		textBox.setText(date + " " + c.getString(R.string.text_a_toastie));
 		
 		button1.setText(R.string.make_new_form);
 		button1.setOnClickListener(new View.OnClickListener() {

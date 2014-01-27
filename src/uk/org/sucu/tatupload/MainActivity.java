@@ -3,9 +3,9 @@ package uk.org.sucu.tatupload;
 import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.message.SmsReceiver;
+import uk.org.sucu.tatupload.views.ChangeFormIdPopup;
 import uk.org.sucu.tatupload.views.NewFormPopup;
 import uk.org.sucu.tatupload.views.QueuedSmsView;
-import uk.org.sucu.tatupload.views.ChangeFormIdPopup;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +16,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 
@@ -75,8 +75,8 @@ public class MainActivity extends Activity {
 		ToggleButton processTexts = (ToggleButton) findViewById(R.id.processingToggleButton);
 		processTexts.setChecked(TatUploadApplication.getProcessingTexts());
 		
-		EditText formId = (EditText) findViewById(R.id.formIdEditText);
-		formId.setText(TatUploadApplication.getFormID());
+		TextView formIdText = (TextView) findViewById(R.id.formIdTextView);
+		formIdText.setText(getString(R.string.form_id) + TatUploadApplication.getFormID());
 		
 		CheckBox confirmSplit = (CheckBox) findViewById(R.id.confirmSplitCheckBox);
 		confirmSplit.setChecked(TatUploadApplication.getConfirmSplit());

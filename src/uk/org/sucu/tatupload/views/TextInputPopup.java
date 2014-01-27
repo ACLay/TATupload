@@ -1,6 +1,7 @@
 package uk.org.sucu.tatupload.views;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,13 +19,15 @@ public class TextInputPopup extends PopupWindow {
 	
 	public TextInputPopup(Context c){
 		super(c);
-		
+		this.setHeight(200);
+		this.setWidth(200);
 		context = c;
 		
 		LinearLayout layout = new LinearLayout(c);
 		layout.setOrientation(LinearLayout.VERTICAL);
 		
 		header = new TextView(c);
+		header.setTextColor(Color.BLACK);
 		
 		textBox = new EditText(c);
 		
@@ -40,7 +43,9 @@ public class TextInputPopup extends PopupWindow {
 		layout.addView(header);
 		layout.addView(textBox);
 		layout.addView(buttonLayout);
+		layout.setBackgroundColor(Color.WHITE);
 		
+		this.setFocusable(true);
 		this.setContentView(layout);
 	}
 	

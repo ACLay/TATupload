@@ -25,7 +25,7 @@ public class Parser {
 
 	public ArrayList<String> getQuestion(String message){
 		ArrayList<String> question = new ArrayList<String>();
-		String[] sentences = message.split("(?<=[?.])");
+		String[] sentences = message.split("(?<=[?!.])");
 		for(String sentence : sentences){
 			
 			for(String s : questionProperty){
@@ -49,7 +49,7 @@ public class Parser {
 	
 	public ArrayList<String> getLocation(String message){
 		ArrayList<String> location = new ArrayList<String>();
-		String[] sentences = message.split("(?<=[?.,])");
+		String[] sentences = message.split("(?<=[?.!,])");
 		for(String l : locationProperty){
 			for(String sentence : sentences){
 				if(sentence.contains(l)){
