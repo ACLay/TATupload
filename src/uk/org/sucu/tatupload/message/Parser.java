@@ -20,10 +20,11 @@ public class Parser {
 			"road"," rd","avenue", "gardens","street"," st","terrace",
 			"hobbit","jesters","sobar",
 			"block","flat","floor","room"};
-	String[] questionProperty = {"who","what","where","when","why","how","could","would","is","?"};
+	String[] questionProperty = {"who","what","where","when","why","how","could","would","?"};
 	
 
 	public ArrayList<String> getQuestion(String message){
+		message = message.toLowerCase();
 		ArrayList<String> question = new ArrayList<String>();
 		String[] sentences = message.split("(?<=[?!.])");
 		for(String sentence : sentences){
@@ -48,6 +49,7 @@ public class Parser {
 	}
 	
 	public ArrayList<String> getLocation(String message){
+		message = message.toLowerCase();
 		ArrayList<String> location = new ArrayList<String>();
 		String[] sentences = message.split("(?<=[?.!,])");
 		for(String l : locationProperty){
@@ -69,6 +71,7 @@ public class Parser {
 	}
 	
 	public ArrayList<String> getFlavours(String message){
+		message = message.toLowerCase();
 		ArrayList<String> flavours = new ArrayList<String>();
 		for(String s : flavourProperty){
 			if(message.contains(s)){
