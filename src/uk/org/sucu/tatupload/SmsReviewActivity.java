@@ -40,7 +40,7 @@ public class SmsReviewActivity extends Activity {
 		numberText.setText(number);
 		//fill the recieved time textview
 		TextView timeText = (TextView) findViewById(R.id.timeRecievedTextView);
-		String time = new Parser().timeStampToString(timeStamp);
+		String time = Parser.timeStampToString(timeStamp);
 		timeText.setText(time);
 		//fill the editTexts
 		performDefaultSplit();
@@ -50,22 +50,21 @@ public class SmsReviewActivity extends Activity {
 	}
 	
 	private void performDefaultSplit(){
-		Parser par = new Parser();
 		
 		EditText bodyEdit = (EditText) findViewById(R.id.messageBodyEditText);
 		bodyEdit.setText(messageBody);
 		
 		EditText questionEdit = (EditText) findViewById(R.id.messageQuestionEditText);
-		ArrayList<String> questions = par.getQuestion(messageBody);
-		questionEdit.setText(par.concatenateArrayList(questions));
+		ArrayList<String> questions = Parser.getQuestion(messageBody);
+		questionEdit.setText(Parser.concatenateArrayList(questions));
 		
 		EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
-		ArrayList<String> locations = par.getLocation(messageBody);
-		locationEdit.setText(par.concatenateArrayList(locations));
+		ArrayList<String> locations = Parser.getLocation(messageBody);
+		locationEdit.setText(Parser.concatenateArrayList(locations));
 		
 		EditText toastieEdit = (EditText) findViewById(R.id.messageToastieEditText);
-		ArrayList<String> flavours = par.getFlavours(messageBody);
-		toastieEdit.setText(par.concatenateArrayList(flavours));
+		ArrayList<String> flavours = Parser.getFlavours(messageBody);
+		toastieEdit.setText(Parser.concatenateArrayList(flavours));
 	}
 
 	/**
@@ -109,17 +108,15 @@ public class SmsReviewActivity extends Activity {
 		EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
 		EditText toastieEdit = (EditText) findViewById(R.id.messageToastieEditText);
 		EditText bodyEdit = (EditText) findViewById(R.id.messageBodyEditText);
-		String formID = TatUploadApplication.getFormID();
+		String formName = TatUploadApplication.getFormName();
 		
 		String question = questionEdit.getText().toString();
 		String location = locationEdit.getText().toString();
 		String toastie = toastieEdit.getText().toString();
 		String body = bodyEdit.getText().toString();
 		
-		Parser par = new Parser();
-		
 		//TODO this code block is identical to one in SmsReceiver
-		Uri uri = par.createUploadUri(formID, number, question, location, toastie, body);
+		Uri uri = Parser.createUploadUri(formName, number, question, location, toastie, body);
 				
 		//While it would be nice to handle everything in-app, it seems for the time being I'll need to go via the browser.
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);

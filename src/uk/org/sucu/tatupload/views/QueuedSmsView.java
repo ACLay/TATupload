@@ -22,8 +22,7 @@ public class QueuedSmsView extends LinearLayout {
 		TextView numberText = new TextView(context);
 		TextView messageText = new TextView(context);
 		
-		Parser p = new Parser();
-		timeText.setText(p.timeStampToString(sms.getTimestampMillis()));
+		timeText.setText(Parser.timeStampToString(sms.getTimestampMillis()));
 		numberText.setText(sms.getOriginatingAddress());
 		messageText.setText(sms.getMessageBody());
 		

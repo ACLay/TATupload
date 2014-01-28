@@ -27,10 +27,10 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/formIdTextView"
+            android:id="@+id/formNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/form_id" />
+            android:text="@string/form_name" />
 
         <Button
             android:id="@+id/button1"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/change_form_id"
-            android:onClick="changeFormID" />
+            android:onClick="changeFormName" />
 
     </LinearLayout>
 

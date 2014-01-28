@@ -75,8 +75,8 @@ public class MainActivity extends Activity {
 		ToggleButton processTexts = (ToggleButton) findViewById(R.id.processingToggleButton);
 		processTexts.setChecked(TatUploadApplication.getProcessingTexts());
 		
-		TextView formIdText = (TextView) findViewById(R.id.formIdTextView);
-		formIdText.setText(getString(R.string.form_id) + TatUploadApplication.getFormID());
+		TextView formNameText = (TextView) findViewById(R.id.formNameTextView);
+		formNameText.setText(getString(R.string.form_name) + TatUploadApplication.getFormName());
 		
 		CheckBox confirmSplit = (CheckBox) findViewById(R.id.confirmSplitCheckBox);
 		confirmSplit.setChecked(TatUploadApplication.getConfirmSplit());
@@ -134,5 +134,7 @@ public class MainActivity extends Activity {
 		}
 		adapter.notifyDataSetChanged();
 	}
+	
+
 
 }

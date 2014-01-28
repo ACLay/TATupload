@@ -10,7 +10,7 @@ public class TatUploadApplication extends Application {
 	private static boolean processingTexts = true;
 	private static boolean confirmSplit = true;
 	private static ArrayList<SmsMessage> messages = new ArrayList<SmsMessage>();
-	private static String formID = "";
+	private static String formName = "";
 	private static final String makeFormScript = "https://script.google.com/macros/s/AKfycbxAr_Ji_fzvgYuDCL-Qc1mSvgvxMLM1P38QsFaxHtzKstlEwJmI/exec";
 	private static final String uploadScript = "https://script.google.com/macros/s/AKfycbzfPd5U7tbyOmK8EERxB8LPn53CzLy_nzXzAu2jb2_fYC8V_aof/exec";
 	
@@ -32,11 +32,11 @@ public class TatUploadApplication extends Application {
 		return messages;
 	}
 	
-	public static void setFormID(String newID){
-		formID = newID;
+	public static void setFormName(String newName){
+		formName= newName;
 	}
-	public static String getFormID(){
-		return formID;
+	public static String getFormName(){
+		return formName;
 	}
 	
 	public static String getMakeFormScriptURL(){

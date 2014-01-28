@@ -22,10 +22,10 @@ public class ChangeFormIdPopup extends TextInputPopup {
 
 			@Override
 			public void onClick(View v) {
-				String id = textBox.getText().toString();
-				TatUploadApplication.setFormID(id);
-				TextView formIdTextView = (TextView) activity.findViewById(R.id.formIdTextView);
-				String txt = context.getString(R.string.form_id) + id;
+				String name = textBox.getText().toString();
+				TatUploadApplication.setFormName(name);
+				TextView formIdTextView = (TextView) activity.findViewById(R.id.formNameTextView);
+				String txt = context.getString(R.string.form_name) + name;
 				formIdTextView.setText(txt);
 				dismiss();
 			}

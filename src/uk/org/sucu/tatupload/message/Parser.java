@@ -13,42 +13,42 @@ import uk.org.sucu.tatupload.TatUploadApplication;
 import android.net.Uri;
 
 public class Parser {
-	
-	String[] flavourProperty = {"ham","cheese","tomato","pineapple","nutella","bbq"};
-	String[] locationProperty = {"monte","glen","connaught","bencraft","highfield","archers","gateley","south hill",
-			"library","stags","susu","bridge","hartley",
-			"road"," rd","avenue", "gardens","street"," st","terrace",
-			"hobbit","jesters","sobar",
-			"block","flat","floor","room"};
-	String[] questionProperty = {"who","what","where","when","why","how","could","would","?"};
-	
+	//TODO make this class static
+	private static String[] flavourProperty = {"ham","cheese","tomato","pineapple","nutella","bbq"};
+	private static String[] locationProperty = {"monte","glen","connaught","bencraft","highfield","archers","gateley","south hill",
+		"library","stags","susu","bridge","hartley",
+		"road"," rd","avenue", "gardens","street"," st","terrace",
+		"hobbit","jesters","sobar",
+		"block","flat","floor","room"};
+	private static String[] questionProperty = {"who","what","where","when","why","how","could","would","?"};
 
-	public ArrayList<String> getQuestion(String message){
+
+	public static ArrayList<String> getQuestion(String message){
 		message = message.toLowerCase();
 		ArrayList<String> question = new ArrayList<String>();
 		String[] sentences = message.split("(?<=[?!.])");
 		for(String sentence : sentences){
-			
+
 			for(String s : questionProperty){
 				if (sentence.contains(s)){;
-					question.add(sentence);
+				question.add(sentence);
 				}
 			}
-			
+
 		}
-		
+
 		ArrayList<String> uniques = new ArrayList<String>();
 		for (String s : question){
 			if (!uniques.contains(s)){
 				uniques.add(s);
 			}
 		}
-		
-		
+
+
 		return uniques;
 	}
-	
-	public ArrayList<String> getLocation(String message){
+
+	public static ArrayList<String> getLocation(String message){
 		message = message.toLowerCase();
 		ArrayList<String> location = new ArrayList<String>();
 		String[] sentences = message.split("(?<=[?.!,])");
@@ -59,18 +59,18 @@ public class Parser {
 				}
 			}
 		}
-		
+
 		ArrayList<String> uniques = new ArrayList<String>();
 		for (String s : location){
 			if (!uniques.contains(s)){
 				uniques.add(s);
 			}
 		}
-		
+
 		return uniques;
 	}
-	
-	public ArrayList<String> getFlavours(String message){
+
+	public static ArrayList<String> getFlavours(String message){
 		message = message.toLowerCase();
 		ArrayList<String> flavours = new ArrayList<String>();
 		for(String s : flavourProperty){
@@ -80,8 +80,8 @@ public class Parser {
 		}
 		return flavours;
 	}
-	
-	public String concatenateArrayList(ArrayList<String> strings){
+
+	public static String concatenateArrayList(ArrayList<String> strings){
 		StringBuilder builder = new StringBuilder();
 		Iterator<String> iterator = strings.iterator();
 
@@ -95,35 +95,36 @@ public class Parser {
 
 		return builder.toString();
 	}
-	
-	public String timeStampToString(long timeStampMillis){
+
+	public static String timeStampToString(long timeStampMillis){
 		Date d = new Date(timeStampMillis);
 		return (DateFormat.getDateTimeInstance().format(d));
 	}
-	
-	public Uri createNewFormUri(String formName){
+
+	public static Uri createNewFormUri(String formName){
 		//TODO should not accept empty string
 		try{
 			formName = URLEncoder.encode(formName, "utf-8");
 		} catch (UnsupportedEncodingException e){
-			
+
 		}
-		
+
 		StringBuilder builder = new StringBuilder();
 		builder.append(TatUploadApplication.getMakeFormScriptURL());
 		builder.append("?formName=");
 		builder.append(formName);
-		
+
 		String uri = builder.toString();
-		
+
 		return Uri.parse(uri);
 	}
-	
-	public Uri createUploadUri(String formID, String number, String question, String location, String toastie, String sms){
-		
+
+	public static Uri createUploadUri(String formName, String number, String question, String location, String toastie, String sms){
+
 		StringBuilder builder = new StringBuilder();
 
 		try{
+			formName = URLEncoder.encode(formName, "utf-8");
 			question = URLEncoder.encode(question, "utf-8");
 			location = URLEncoder.encode(location, "utf-8");
 			toastie = URLEncoder.encode(toastie, "utf-8");
@@ -131,9 +132,9 @@ public class Parser {
 		} catch (UnsupportedEncodingException e){
 
 		}
-		
+
 		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("formID", formID);
+		params.put("formName", formName);
 		params.put("number", number);
 		params.put("question", question);
 		params.put("location", location);
@@ -150,11 +151,11 @@ public class Parser {
 				builder.append('&');
 			}
 		}
-		
+
 		String uri = builder.toString();
-		
+
 		return Uri.parse(uri);
 	}
-	
-	
+
+
 }

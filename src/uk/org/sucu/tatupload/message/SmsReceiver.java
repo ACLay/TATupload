@@ -61,29 +61,28 @@ public class SmsReceiver extends BroadcastReceiver{
 
 	public void autoProcess(SmsMessage text, Context context){
 
-		Parser p = new Parser();
 		String body = text.getMessageBody();
 		String number = text.getOriginatingAddress();
-		String formID = TatUploadApplication.getFormID();
+		String formName = TatUploadApplication.getFormName();
 
 		String question = "";
-		for(String s : p.getQuestion(body)){
+		for(String s : Parser.getQuestion(body)){
 			question += s;
 		}
 
 		String location = "";
-		for(String s : p.getLocation(body)){
+		for(String s : Parser.getLocation(body)){
 			location += s;
 		}
 
 		String toastie = "";
-		for(String s : p.getFlavours(body)){
+		for(String s : Parser.getFlavours(body)){
 			toastie += s + " ";
 		}
 		//keeping the original message may be useful?
 
 		//TODO this code block is identical to one in SmsReviewActivity
-		Uri uri = p.createUploadUri(formID, number, question, location, toastie, body);
+		Uri uri = Parser.createUploadUri(formName, number, question, location, toastie, body);
 
 		//While it would be nice to handle everything in-app, it seems for the time being I'll need to go via the browser.
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
