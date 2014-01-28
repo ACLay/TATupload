@@ -105,7 +105,7 @@ public class MainActivity extends Activity {
 		//TODO allow modification of parameters, then enable button in xml
 	}
 	
-	public void changeFormID(View v){
+	public void changeFormName(View v){
 		ChangeFormIdPopup popup = new ChangeFormIdPopup(this);
 		popup.showAtLocation(v, Gravity.CENTER, 0, 0);
 	}
