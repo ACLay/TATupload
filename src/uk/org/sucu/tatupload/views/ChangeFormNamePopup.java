@@ -6,12 +6,12 @@ import uk.org.sucu.tatupload.TatUploadApplication;
 import android.view.View;
 import android.widget.TextView;
 
-public class ChangeFormIdPopup extends TextInputPopup {
+public class ChangeFormNamePopup extends TextInputPopup {
 
-	private final MainActivity activity;
+	private MainActivity activity;
 	
 	//need to use Activity to make the findViewById work
-	public ChangeFormIdPopup(MainActivity a) {
+	public ChangeFormNamePopup(MainActivity a) {
 		super(a);
 		
 		activity = a;
@@ -22,11 +22,14 @@ public class ChangeFormIdPopup extends TextInputPopup {
 
 			@Override
 			public void onClick(View v) {
+				//get the name from the EditText
 				String name = textBox.getText().toString();
+				//store it in the application
 				TatUploadApplication.setFormName(name);
+				//show it in the settings menu
 				TextView formIdTextView = (TextView) activity.findViewById(R.id.formNameTextView);
-				String txt = context.getString(R.string.form_name) + name;
-				formIdTextView.setText(txt);
+				formIdTextView.setText(name);
+				//close the popup window
 				dismiss();
 			}
 			

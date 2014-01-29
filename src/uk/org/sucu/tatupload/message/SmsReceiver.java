@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Browser;
 import android.telephony.SmsMessage;
-import android.util.Log;
 
 public class SmsReceiver extends BroadcastReceiver{
 
@@ -27,30 +26,27 @@ public class SmsReceiver extends BroadcastReceiver{
 			//get the SMS message passed in
 			Bundle bundle = intent.getExtras();
 			SmsMessage[] msgs = null;
-			String str = "";
 			if (bundle != null){
 				//retrieve the SMS message received
 				Object[] pdus = (Object[]) bundle.get("pdus");
 				msgs = new SmsMessage[pdus.length];
+
+				//TODO MULTIPART TEXTS
+				//TODO use uk time
 				for (int i=0; i<msgs.length; i++){
 					//createFromPdu to be deprecated soon... new method added in 4.4 KitKat
 					msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
-
-					str += "SMS from " + msgs[i].getOriginatingAddress();
-					str += " :";
-					str += msgs[i].getMessageBody().toString();
-					str += "\n";
 				}
-				//display the new SMS message
-				Log.i("message",str);
-
 
 				//process the message!
-				if(TatUploadApplication.getConfirmSplit()){
+				if(TatUploadApplication.getConfirmSplit() || !activity.isOnline()){
+					//queue it if we're confirming before upload, or there's no network connection
 					activity.addMessages(msgs);
 				} else {
 					for(SmsMessage m : msgs){
-						autoProcess(m, context);
+						if(m != null){
+							autoProcess(m, context);
+						}
 					}
 				}
 

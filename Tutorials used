@@ -27,5 +27,5 @@ ListView filling:
 Popup gravity allignment:
 	http://stackoverflow.com/questions/6063667/show-a-popupwindow-centralized
 	
-Getting data from a WebView
-	http://lexandera.com/2009/01/extracting-html-from-a-webview/
+Checking network connection:
+	http://stackoverflow.com/questions/4238921/android-detect-whether-there-is-an-internet-connection-available

@@ -19,7 +19,7 @@ public class TextInputPopup extends PopupWindow {
 	
 	public TextInputPopup(Context c){
 		super(c);
-		this.setHeight(200);
+		this.setHeight(150);
 		this.setWidth(200);
 		context = c;
 		

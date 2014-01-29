@@ -13,7 +13,7 @@ public class MessageArrayAdapter extends ArrayAdapter<SmsMessage> {
 
 	public MessageArrayAdapter(Context context, int resource, ArrayList<SmsMessage> messages) {
 		super(context, resource, messages);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override

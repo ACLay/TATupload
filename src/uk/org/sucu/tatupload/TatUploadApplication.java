@@ -7,7 +7,7 @@ import android.telephony.SmsMessage;
 
 public class TatUploadApplication extends Application {
 	
-	private static boolean processingTexts = true;
+	private static boolean processingTexts = false;
 	private static boolean confirmSplit = true;
 	private static ArrayList<SmsMessage> messages = new ArrayList<SmsMessage>();
 	private static String formName = "";
@@ -46,10 +46,5 @@ public class TatUploadApplication extends Application {
 	public static String getUploadScriptURL(){
 		return uploadScript;
 	}
-	
-	
-	
-	
-	
 	
 }

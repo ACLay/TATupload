@@ -27,19 +27,35 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/formNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/form_name" />
+
+        <TextView
+            android:id="@+id/formNameTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
         <Button
             android:id="@+id/button1"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/change_form_id"
-            android:onClick="changeFormName" />
+            android:onClick="changeFormName"
+            android:text="@string/change_form_id" />
 
+        <Button
+            android:id="@+id/newFormButton"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="buildNewForm"
+            android:text="@string/make_new_form" />
     </LinearLayout>
 
     <CheckBox
@@ -50,20 +66,11 @@
         android:text="@string/confirm_checkbox" />
 
     <Button
-        android:clickable="false"
         android:id="@+id/modifyParametersButton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="modifyParameters"
         android:text="@string/modify_button" />
-    
-    <Button 
-        android:id="@+id/newFormButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="buildNewForm"
-        android:text="@string/make_new_form"/>
 
 </LinearLayout>

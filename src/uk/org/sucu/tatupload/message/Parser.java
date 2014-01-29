@@ -13,7 +13,7 @@ import uk.org.sucu.tatupload.TatUploadApplication;
 import android.net.Uri;
 
 public class Parser {
-	//TODO make this class static
+
 	private static String[] flavourProperty = {"ham","cheese","tomato","pineapple","nutella","bbq"};
 	private static String[] locationProperty = {"monte","glen","connaught","bencraft","highfield","archers","gateley","south hill",
 		"library","stags","susu","bridge","hartley",

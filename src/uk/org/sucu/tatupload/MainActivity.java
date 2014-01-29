@@ -3,11 +3,15 @@ package uk.org.sucu.tatupload;
 import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.message.SmsReceiver;
-import uk.org.sucu.tatupload.views.ChangeFormIdPopup;
+import uk.org.sucu.tatupload.views.ChangeFormNamePopup;
 import uk.org.sucu.tatupload.views.NewFormPopup;
 import uk.org.sucu.tatupload.views.QueuedSmsView;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.view.Gravity;
@@ -26,14 +30,44 @@ public class MainActivity extends Activity {
 	public final static String MESSAGE_NUMBER = "uk.org.sucu.tatupload.NUMBER";
 	public final static String MESSAGE_BODY = "uk.org.sucu.tatupload.BODY";
 	public final static String MESSAGE_TIME = "uk.org.sucu.tatupload.TIME";
-	
-	
+
+	private static boolean tutorialNeedsShown = true;
+
 	//private ArrayList<SmsMessage> messages = new ArrayList<SmsMessage>();
 	private MessageArrayAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		setupUI();
+
+		if(tutorialNeedsShown){
+			//show the tutorial once per run.
+			new AlertDialog.Builder(this)
+			.setTitle("TATupload")  
+			.setMessage("This app uses 2 google scripts to create, and upload texts to, a google form."
+					+ "To do this the scripts run in your phones browser and will require authorisation from your google account the first time they are run."
+					+ "Any login information storage is done so by your browser and google account, and is not accessed by TATupload."
+					+ "The documents created will be in the Google drive belonging to the google account signed into the browser"
+					+ "Before texts can be uploaded the app will need to create a form and spreadsheet, or have the name of one it has made before entered."
+					+ "Currently, it is not possible to change the data extraction parameters. The button is just a placeholder.")
+					.setPositiveButton("Okay", null)  
+					.setCancelable(false)  
+					.create()  
+					.show();
+
+			tutorialNeedsShown = false;
+		}
+
+		SmsReceiver.giveMainActivity(this);
+
+	}
+
+	//TODO REMOVE FROM QUEUE WHEN PROCESSED
+
+	
+	private void setupUI(){
 		//get screen rotation
 		int rot = getResources().getConfiguration().orientation % 2;
 		//load UI based on rotation
@@ -42,7 +76,7 @@ public class MainActivity extends Activity {
 		} else {
 			setContentView(R.layout.activity_main_portrait);
 		}
-		
+
 		populateFields();
 
 
@@ -54,45 +88,62 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-				// Get the sms message contained in the clicked object
-				QueuedSmsView smsView = (QueuedSmsView) v;
-				SmsMessage sms = smsView.getSMS();
-				//send it in an intent to an SmsReviewActivity
-				Intent intent = new Intent(v.getContext(), SmsReviewActivity.class);
-				intent.putExtra(MESSAGE_NUMBER, sms.getOriginatingAddress());
-				intent.putExtra(MESSAGE_BODY, sms.getMessageBody());
-				intent.putExtra(MESSAGE_TIME, sms.getTimestampMillis());
-				startActivity(intent);
+
+				if(isOnline()){
+
+					// Get the sms message contained in the clicked object
+					QueuedSmsView smsView = (QueuedSmsView) v;
+					SmsMessage sms = smsView.getSMS();
+					//send it in an intent to an SmsReviewActivity
+					Intent intent = new Intent(v.getContext(), SmsReviewActivity.class);
+					intent.putExtra(MESSAGE_NUMBER, sms.getOriginatingAddress());
+					intent.putExtra(MESSAGE_BODY, sms.getMessageBody());
+					intent.putExtra(MESSAGE_TIME, sms.getTimestampMillis());
+					startActivity(intent);
+				} else {
+
+				}
 			}
 
 		});
-
-		SmsReceiver.giveMainActivity(this);
-
 	}
 
 	private void populateFields(){
 		ToggleButton processTexts = (ToggleButton) findViewById(R.id.processingToggleButton);
 		processTexts.setChecked(TatUploadApplication.getProcessingTexts());
-		
+
 		TextView formNameText = (TextView) findViewById(R.id.formNameTextView);
-		formNameText.setText(getString(R.string.form_name) + TatUploadApplication.getFormName());
-		
+		formNameText.setText(TatUploadApplication.getFormName());
+
 		CheckBox confirmSplit = (CheckBox) findViewById(R.id.confirmSplitCheckBox);
 		confirmSplit.setChecked(TatUploadApplication.getConfirmSplit());
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	public void toggleProcessing(View v){
-		ToggleButton toggle = (ToggleButton) findViewById(R.id.processingToggleButton);
-		boolean processing = toggle.isChecked();
-		TatUploadApplication.setProcessingTexts(processing);
+		ToggleButton toggle = (ToggleButton) v;
+
+		if(TatUploadApplication.getFormName().equals("")){
+			//TODO this should show up when entering form names
+			new AlertDialog.Builder(this)
+			.setTitle("Error")  
+			.setMessage("You need to enter a form name to be able to process texts")
+			.setPositiveButton("Okay", null)  
+			.setCancelable(false)  
+			.create()  
+			.show();
+
+			toggle.setChecked(false);
+		} else {
+			boolean processing = toggle.isChecked();
+			TatUploadApplication.setProcessingTexts(processing);
+		}		
 	}
 
 	public void toggleConfirmSplit(View v){
@@ -100,21 +151,30 @@ public class MainActivity extends Activity {
 		boolean confirmSplit = box.isChecked();
 		TatUploadApplication.setConfirmSplit(confirmSplit);
 	}
-	
+
 	public void modifyParameters(View v){
-		//TODO allow modification of parameters, then enable button in xml
+		//TODO allow modification of parameters
+		new AlertDialog.Builder(this)
+		.setTitle("Notice")  
+		.setMessage("Currently, it is not possible to change the data extraction parameters. The button is just a placeholder.")
+		.setPositiveButton(android.R.string.ok, null)  
+		.setCancelable(false)  
+		.create()  
+		.show();
 	}
-	
+
 	public void changeFormName(View v){
-		ChangeFormIdPopup popup = new ChangeFormIdPopup(this);
-		popup.showAtLocation(v, Gravity.CENTER, 0, 0);
+		ChangeFormNamePopup popup = new ChangeFormNamePopup(this);
+		popup.showAtLocation(findViewById(R.id.main), Gravity.CENTER, 0, 0);
 	}
 
 	public void buildNewForm(View v){
-		NewFormPopup popup = new NewFormPopup(this);
-		popup.showAtLocation(v, Gravity.CENTER, 0, 0);
+		//if(isOnline()){
+			NewFormPopup popup = new NewFormPopup(this);
+			popup.showAtLocation(findViewById(R.id.main), Gravity.CENTER, 0, 0);
+		//}
 	}
-	
+
 	public void clearMessages(View v){
 		ArrayList<SmsMessage> messages = TatUploadApplication.getMessageList();
 		synchronized(messages){
@@ -134,7 +194,23 @@ public class MainActivity extends Activity {
 		}
 		adapter.notifyDataSetChanged();
 	}
-	
 
+	public boolean isOnline(){
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
+		boolean online =  activeNetworkInfo != null && activeNetworkInfo.isConnected();
+		//show an error dialog if there's no network connection
+		if(!online){
+			new AlertDialog.Builder(this)
+			.setTitle("Problem")  
+			.setMessage("There is no network connection available.")
+			.setPositiveButton(android.R.string.ok, null)  
+			.setCancelable(false)  
+			.create()  
+			.show();
+		}
+
+		return online;
+	}
 
 }
