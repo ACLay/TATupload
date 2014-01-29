@@ -1,17 +1,17 @@
 package uk.org.sucu.tatupload.views;
 
 import uk.org.sucu.tatupload.message.Parser;
+import uk.org.sucu.tatupload.message.Text;
 import android.content.Context;
-import android.telephony.SmsMessage;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class QueuedSmsView extends LinearLayout {
 
 	
-	private SmsMessage sms;
+	private Text sms;
 	
-	public QueuedSmsView(SmsMessage text, Context context){
+	public QueuedSmsView(Text text, Context context){
 		super(context);
 		sms = text;
 		
@@ -22,9 +22,9 @@ public class QueuedSmsView extends LinearLayout {
 		TextView numberText = new TextView(context);
 		TextView messageText = new TextView(context);
 		
-		timeText.setText(Parser.timeStampToString(sms.getTimestampMillis()));
-		numberText.setText(sms.getOriginatingAddress());
-		messageText.setText(sms.getMessageBody());
+		timeText.setText(Parser.timeStampToString(sms.getTimestamp()));
+		numberText.setText(sms.getNumber());
+		messageText.setText(sms.getBody());
 		
 		header.addView(timeText);
 		header.addView(numberText);
@@ -33,7 +33,7 @@ public class QueuedSmsView extends LinearLayout {
 		
 	}
 	
-	public SmsMessage getSMS(){
+	public Text getSMS(){
 		return sms;
 	}
 	

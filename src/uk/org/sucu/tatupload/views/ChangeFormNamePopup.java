@@ -15,7 +15,7 @@ public class ChangeFormNamePopup extends TextInputPopup {
 		super(a);
 		
 		activity = a;
-		// TODO Auto-generated constructor stub
+
 		header.setText(R.string.new_form_id);
 		button1.setText(R.string.accept);
 		button1.setOnClickListener(new View.OnClickListener(){

@@ -1,5 +1,8 @@
 package uk.org.sucu.tatupload.message;
 
+import java.util.Collection;
+import java.util.HashMap;
+
 import uk.org.sucu.tatupload.MainActivity;
 import uk.org.sucu.tatupload.TatUploadApplication;
 import android.content.BroadcastReceiver;
@@ -32,18 +35,29 @@ public class SmsReceiver extends BroadcastReceiver{
 				msgs = new SmsMessage[pdus.length];
 
 				//TODO MULTIPART TEXTS
+				HashMap<String,Text> numberBodyMap = new HashMap<String,Text>();
 				//TODO use uk time
-				for (int i=0; i<msgs.length; i++){
+				for (int i = 0; i < msgs.length; i++){
 					//createFromPdu to be deprecated soon... new method added in 4.4 KitKat
 					msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
+					//if 2 texts in the same receive are from the same number, merge them
+					String number = msgs[i].getOriginatingAddress();
+					if(numberBodyMap.containsKey(number)){
+						Text currentMsg = numberBodyMap.get(number);
+						currentMsg.appendBody(msgs[i].getMessageBody());
+					} else {
+						numberBodyMap.put(number, new Text(msgs[i]));
+					}
 				}
+				
+				Collection<Text> texts = numberBodyMap.values();
 
 				//process the message!
 				if(TatUploadApplication.getConfirmSplit() || !activity.isOnline()){
 					//queue it if we're confirming before upload, or there's no network connection
-					activity.addMessages(msgs);
+					activity.addMessages(texts);
 				} else {
-					for(SmsMessage m : msgs){
+					for(Text m : texts){
 						if(m != null){
 							autoProcess(m, context);
 						}
@@ -55,10 +69,10 @@ public class SmsReceiver extends BroadcastReceiver{
 
 	}
 
-	public void autoProcess(SmsMessage text, Context context){
+	public void autoProcess(Text text, Context context){
 
-		String body = text.getMessageBody();
-		String number = text.getOriginatingAddress();
+		String body = text.getBody();
+		String number = text.getNumber();
 		String formName = TatUploadApplication.getFormName();
 
 		String question = "";

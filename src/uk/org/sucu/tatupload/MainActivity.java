@@ -1,8 +1,10 @@
 package uk.org.sucu.tatupload;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import uk.org.sucu.tatupload.message.SmsReceiver;
+import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.views.ChangeFormNamePopup;
 import uk.org.sucu.tatupload.views.NewFormPopup;
 import uk.org.sucu.tatupload.views.QueuedSmsView;
@@ -13,7 +15,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.telephony.SmsMessage;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -93,12 +94,12 @@ public class MainActivity extends Activity {
 
 					// Get the sms message contained in the clicked object
 					QueuedSmsView smsView = (QueuedSmsView) v;
-					SmsMessage sms = smsView.getSMS();
+					Text sms = smsView.getSMS();
 					//send it in an intent to an SmsReviewActivity
 					Intent intent = new Intent(v.getContext(), SmsReviewActivity.class);
-					intent.putExtra(MESSAGE_NUMBER, sms.getOriginatingAddress());
-					intent.putExtra(MESSAGE_BODY, sms.getMessageBody());
-					intent.putExtra(MESSAGE_TIME, sms.getTimestampMillis());
+					intent.putExtra(MESSAGE_NUMBER, sms.getNumber());
+					intent.putExtra(MESSAGE_BODY, sms.getBody());
+					intent.putExtra(MESSAGE_TIME, sms.getTimestamp());
 					startActivity(intent);
 				} else {
 
@@ -176,7 +177,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void clearMessages(View v){
-		ArrayList<SmsMessage> messages = TatUploadApplication.getMessageList();
+		ArrayList<Text> messages = TatUploadApplication.getMessageList();
 		synchronized(messages){
 			while(!messages.isEmpty()){
 				messages.remove(0);
@@ -185,11 +186,11 @@ public class MainActivity extends Activity {
 		adapter.notifyDataSetChanged();
 	}
 	//synchronized prevents these 2 from fighting.
-	public void addMessages(SmsMessage[] msgs){
-		ArrayList<SmsMessage> messages = TatUploadApplication.getMessageList();
+	public void addMessages(Collection<Text> msgs){
+		ArrayList<Text> messages = TatUploadApplication.getMessageList();
 		synchronized(messages){
-			for(SmsMessage m : msgs){
-				messages.add(m);
+			for(Text txt : msgs){
+				messages.add(txt);
 			}
 		}
 		adapter.notifyDataSetChanged();
