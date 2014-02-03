@@ -110,8 +110,9 @@ public class Parser {
 		}
 
 		StringBuilder builder = new StringBuilder();
-		builder.append(TatUploadApplication.getMakeFormScriptURL());
-		builder.append("?formName=");
+		builder.append(TatUploadApplication.getScriptURL());
+		builder.append("?action=create&");
+		builder.append("formName=");
 		builder.append(formName);
 
 		String uri = builder.toString();
@@ -134,6 +135,7 @@ public class Parser {
 		}
 
 		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("action", "upload");
 		params.put("formName", formName);
 		params.put("number", number);
 		params.put("question", question);
@@ -142,7 +144,7 @@ public class Parser {
 		params.put("SMS", sms);
 
 		Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
-		builder.append(TatUploadApplication.getUploadScriptURL()).append("?");
+		builder.append(TatUploadApplication.getScriptURL()).append("?");
 
 		while (iterator.hasNext()) {
 			Entry<String, String> param = iterator.next();

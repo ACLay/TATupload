@@ -31,6 +31,8 @@ public class MainActivity extends Activity {
 	public final static String MESSAGE_NUMBER = "uk.org.sucu.tatupload.NUMBER";
 	public final static String MESSAGE_BODY = "uk.org.sucu.tatupload.BODY";
 	public final static String MESSAGE_TIME = "uk.org.sucu.tatupload.TIME";
+	
+	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
 	private static boolean tutorialNeedsShown = true;
 
@@ -97,9 +99,7 @@ public class MainActivity extends Activity {
 					Text sms = smsView.getSMS();
 					//send it in an intent to an SmsReviewActivity
 					Intent intent = new Intent(v.getContext(), SmsReviewActivity.class);
-					intent.putExtra(MESSAGE_NUMBER, sms.getNumber());
-					intent.putExtra(MESSAGE_BODY, sms.getBody());
-					intent.putExtra(MESSAGE_TIME, sms.getTimestamp());
+					intent.putExtra(TEXT_MESSAGE, sms);
 					startActivity(intent);
 				} else {
 
@@ -170,10 +170,10 @@ public class MainActivity extends Activity {
 	}
 
 	public void buildNewForm(View v){
-		//if(isOnline()){
+		if(isOnline()){
 			NewFormPopup popup = new NewFormPopup(this);
 			popup.showAtLocation(findViewById(R.id.main), Gravity.CENTER, 0, 0);
-		//}
+		}
 	}
 
 	public void clearMessages(View v){

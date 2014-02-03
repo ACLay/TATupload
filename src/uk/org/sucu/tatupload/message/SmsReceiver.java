@@ -4,13 +4,13 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import uk.org.sucu.tatupload.MainActivity;
+import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.TatUploadApplication;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Browser;
 import android.telephony.SmsMessage;
 
 public class SmsReceiver extends BroadcastReceiver{
@@ -34,9 +34,8 @@ public class SmsReceiver extends BroadcastReceiver{
 				Object[] pdus = (Object[]) bundle.get("pdus");
 				msgs = new SmsMessage[pdus.length];
 
-				//TODO MULTIPART TEXTS
 				HashMap<String,Text> numberBodyMap = new HashMap<String,Text>();
-				//TODO use uk time
+				
 				for (int i = 0; i < msgs.length; i++){
 					//createFromPdu to be deprecated soon... new method added in 4.4 KitKat
 					msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
@@ -49,7 +48,7 @@ public class SmsReceiver extends BroadcastReceiver{
 						numberBodyMap.put(number, new Text(msgs[i]));
 					}
 				}
-				
+
 				Collection<Text> texts = numberBodyMap.values();
 
 				//process the message!
@@ -89,18 +88,10 @@ public class SmsReceiver extends BroadcastReceiver{
 		for(String s : Parser.getFlavours(body)){
 			toastie += s + " ";
 		}
-		//keeping the original message may be useful?
 
-		//TODO this code block is identical to one in SmsReviewActivity
+
 		Uri uri = Parser.createUploadUri(formName, number, question, location, toastie, body);
-
-		//While it would be nice to handle everything in-app, it seems for the time being I'll need to go via the browser.
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-		//open all this apps requests in the same tab, prevents new ones with each call
-		browserIntent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
-		//allows a new task to be started outside of a current task
-		browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(browserIntent);
+		NetCaller.callScript(uri, context);
 
 	}
 

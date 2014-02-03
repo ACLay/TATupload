@@ -3,6 +3,7 @@ package uk.org.sucu.tatupload;
 import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.message.Parser;
+import uk.org.sucu.tatupload.message.Text;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,7 +14,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Browser;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,28 +23,25 @@ import android.widget.TextView;
 
 public class SmsReviewActivity extends Activity {
 
-	private String messageBody;
-	private String number;
-	private long timeStamp;
+	private Text text;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//extract the sms parameters from the intent
 		Intent intent = getIntent();
-		messageBody = intent.getStringExtra(MainActivity.MESSAGE_BODY);
-		number = intent.getStringExtra(MainActivity.MESSAGE_NUMBER);
-		timeStamp = intent.getLongExtra(MainActivity.MESSAGE_TIME, 0);
+		
+		text = (Text) intent.getSerializableExtra(MainActivity.TEXT_MESSAGE);
 
 		//create the UI
 		setContentView(R.layout.activity_sms_review);
 
 		//fill the phone number textview
 		TextView numberText = (TextView) findViewById(R.id.senderNumberTextView);
-		numberText.setText(number);
+		numberText.setText(text.getNumber());
 		//fill the recieved time textview
 		TextView timeText = (TextView) findViewById(R.id.timeRecievedTextView);
-		String time = Parser.timeStampToString(timeStamp);
+		String time = Parser.timeStampToString(text.getTimestamp());
 		timeText.setText(time);
 		//fill the editTexts
 		performDefaultSplit();
@@ -56,18 +53,18 @@ public class SmsReviewActivity extends Activity {
 	private void performDefaultSplit(){
 
 		EditText bodyEdit = (EditText) findViewById(R.id.messageBodyEditText);
-		bodyEdit.setText(messageBody);
+		bodyEdit.setText(text.getBody());
 
 		EditText questionEdit = (EditText) findViewById(R.id.messageQuestionEditText);
-		ArrayList<String> questions = Parser.getQuestion(messageBody);
+		ArrayList<String> questions = Parser.getQuestion(text.getBody());
 		questionEdit.setText(Parser.concatenateArrayList(questions));
 
 		EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
-		ArrayList<String> locations = Parser.getLocation(messageBody);
+		ArrayList<String> locations = Parser.getLocation(text.getBody());
 		locationEdit.setText(Parser.concatenateArrayList(locations));
 
 		EditText toastieEdit = (EditText) findViewById(R.id.messageToastieEditText);
-		ArrayList<String> flavours = Parser.getFlavours(messageBody);
+		ArrayList<String> flavours = Parser.getFlavours(text.getBody());
 		toastieEdit.setText(Parser.concatenateArrayList(flavours));
 	}
 
@@ -122,16 +119,19 @@ public class SmsReviewActivity extends Activity {
 			String toastie = toastieEdit.getText().toString();
 			String body = bodyEdit.getText().toString();
 
-			//TODO this code block is identical to one in SmsReceiver
-			Uri uri = Parser.createUploadUri(formName, number, question, location, toastie, body);
-
-			//While it would be nice to handle everything in-app, it seems for the time being I'll need to go via the browser.
-			Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-			//open all this apps requests in the same tab, prevents new ones with each call
-			browserIntent.putExtra(Browser.EXTRA_APPLICATION_ID, getPackageName());
-			//allows a new task to be started outside of a current task
-			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			this.startActivity(browserIntent);
+			
+			Uri uri = Parser.createUploadUri(formName, text.getNumber(), question, location, toastie, body);
+			NetCaller.callScript(uri, this);
+			
+		} else {
+			//TODO another copy of this block
+			new AlertDialog.Builder(this)
+			.setTitle("Problem")  
+			.setMessage("There is no network connection available.")
+			.setPositiveButton(android.R.string.ok, null)  
+			.setCancelable(false)  
+			.create()  
+			.show();
 		}
 	}
 

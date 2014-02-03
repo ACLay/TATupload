@@ -11,7 +11,6 @@ public class TatUploadApplication extends Application {
 	private static boolean confirmSplit = true;
 	private static ArrayList<Text> messages = new ArrayList<Text>();
 	private static String formName = "";
-	private static final String makeFormScript = "https://script.google.com/macros/s/AKfycbxAr_Ji_fzvgYuDCL-Qc1mSvgvxMLM1P38QsFaxHtzKstlEwJmI/exec";
 	private static final String uploadScript = "https://script.google.com/macros/s/AKfycbzfPd5U7tbyOmK8EERxB8LPn53CzLy_nzXzAu2jb2_fYC8V_aof/exec";
 	
 	public static boolean getProcessingTexts(){
@@ -39,11 +38,7 @@ public class TatUploadApplication extends Application {
 		return formName;
 	}
 	
-	public static String getMakeFormScriptURL(){
-		return makeFormScript;
-	}
-	
-	public static String getUploadScriptURL(){
+	public static String getScriptURL(){
 		return uploadScript;
 	}
 	

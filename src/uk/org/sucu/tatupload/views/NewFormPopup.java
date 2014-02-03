@@ -4,13 +4,12 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.TatUploadApplication;
 import uk.org.sucu.tatupload.message.Parser;
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
-import android.provider.Browser;
 import android.view.View;
 import android.widget.TextView;
 
@@ -36,15 +35,10 @@ public class NewFormPopup extends TextInputPopup {
 			public void onClick(View v) {
 				//get the text
 				String formName = textBox.getText().toString();
-				//make the url
+				
 				Uri uri = Parser.createNewFormUri(formName);
-				//TODO make a single sendURIintent method
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-				//open all this apps requests in the same tab, prevents new ones with each call
-				browserIntent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
-				//allows a new task to be started outside of a current task
-				browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				context.startActivity(browserIntent);
+				
+				NetCaller.callScript(uri, context);
 
 				//store the formName
 				TatUploadApplication.setFormName(formName);
