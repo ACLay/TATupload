@@ -10,7 +10,6 @@ import uk.org.sucu.tatupload.views.NewFormPopup;
 import uk.org.sucu.tatupload.views.QueuedSmsView;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -25,7 +24,7 @@ import android.widget.ToggleButton;
 
 
 public class MainActivity extends Activity {
-	
+
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
 	private static boolean tutorialNeedsShown = true;
@@ -61,7 +60,7 @@ public class MainActivity extends Activity {
 
 	//TODO REMOVE FROM QUEUE WHEN PROCESSED
 
-	
+
 	private void setupUI(){
 		//get screen rotation
 		int rot = getResources().getConfiguration().orientation % 2;
@@ -79,27 +78,18 @@ public class MainActivity extends Activity {
 		adapter = new MessageArrayAdapter(this, R.id.messageListView, TatUploadApplication.getMessageList());
 		messageView.setAdapter(adapter);
 
-		final Context context = this;
-		
 		messageView.setOnItemClickListener(new OnItemClickListener(){
 
-			Context c = context;
-			
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 
-				if(NetCaller.isOnlineWithErrorBox(c)){
-
-					// Get the sms message contained in the clicked object
-					QueuedSmsView smsView = (QueuedSmsView) v;
-					Text sms = smsView.getSMS();
-					//send it in an intent to an SmsReviewActivity
-					Intent intent = new Intent(v.getContext(), SmsReviewActivity.class);
-					intent.putExtra(TEXT_MESSAGE, sms);
-					startActivity(intent);
-				} else {
-
-				}
+				// Get the sms message contained in the clicked object
+				QueuedSmsView smsView = (QueuedSmsView) v;
+				Text sms = smsView.getSMS();
+				//send it in an intent to an SmsReviewActivity
+				Intent intent = new Intent(v.getContext(), SmsReviewActivity.class);
+				intent.putExtra(TEXT_MESSAGE, sms);
+				startActivity(intent);
 			}
 
 		});

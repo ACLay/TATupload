@@ -6,7 +6,6 @@ import uk.org.sucu.tatupload.message.Parser;
 import uk.org.sucu.tatupload.message.Text;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -115,21 +114,10 @@ public class SmsReviewActivity extends Activity {
 			String location = locationEdit.getText().toString();
 			String toastie = toastieEdit.getText().toString();
 			String body = bodyEdit.getText().toString();
-
 			
 			Uri uri = Parser.createUploadUri(formName, text.getNumber(), question, location, toastie, body);
 			NetCaller.callScript(uri, this);
 			
-		} else {
-			//TODO is this second error box necessary?
-			//TODO another copy of this block
-			new AlertDialog.Builder(this)
-			.setTitle("Problem")  
-			.setMessage("There is no network connection available.")
-			.setPositiveButton(android.R.string.ok, null)  
-			.setCancelable(false)  
-			.create()  
-			.show();
 		}
 	}
 
