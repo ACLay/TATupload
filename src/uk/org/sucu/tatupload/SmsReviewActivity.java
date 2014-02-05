@@ -124,6 +124,7 @@ public class SmsReviewActivity extends Activity {
 			NetCaller.callScript(uri, this);
 			
 		} else {
+			//TODO is this second error box necessary?
 			//TODO another copy of this block
 			new AlertDialog.Builder(this)
 			.setTitle("Problem")  

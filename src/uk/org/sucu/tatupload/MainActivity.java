@@ -27,16 +27,11 @@ import android.widget.ToggleButton;
 
 
 public class MainActivity extends Activity {
-
-	public final static String MESSAGE_NUMBER = "uk.org.sucu.tatupload.NUMBER";
-	public final static String MESSAGE_BODY = "uk.org.sucu.tatupload.BODY";
-	public final static String MESSAGE_TIME = "uk.org.sucu.tatupload.TIME";
 	
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
 	private static boolean tutorialNeedsShown = true;
 
-	//private ArrayList<SmsMessage> messages = new ArrayList<SmsMessage>();
 	private MessageArrayAdapter adapter;
 
 	@Override
@@ -49,12 +44,11 @@ public class MainActivity extends Activity {
 			//show the tutorial once per run.
 			new AlertDialog.Builder(this)
 			.setTitle("TATupload")  
-			.setMessage("This app uses 2 google scripts to create, and upload texts to, a google form."
-					+ "To do this the scripts run in your phones browser and will require authorisation from your google account the first time they are run."
-					+ "Any login information storage is done so by your browser and google account, and is not accessed by TATupload."
-					+ "The documents created will be in the Google drive belonging to the google account signed into the browser"
-					+ "Before texts can be uploaded the app will need to create a form and spreadsheet, or have the name of one it has made before entered."
-					+ "Currently, it is not possible to change the data extraction parameters. The button is just a placeholder.")
+			.setMessage("This app uses a google web script to create, and upload texts to, a google form."
+					+ "The scripts run in your phones browser and will require authorisation from your google account the first time it is run."
+					+ "Login information is stored by your browser, and is not accessed by TATupload."
+					+ "The documents created will be in the Google drive belonging to the google account signed into the browser."
+					+ "Before texts can be uploaded the app will need to create a form and spreadsheet, or have the name of one it has made before, entered.")
 					.setPositiveButton("Okay", null)  
 					.setCancelable(false)  
 					.create()  
@@ -131,7 +125,7 @@ public class MainActivity extends Activity {
 		ToggleButton toggle = (ToggleButton) v;
 
 		if(TatUploadApplication.getFormName().equals("")){
-			//TODO this should show up when entering form names
+
 			new AlertDialog.Builder(this)
 			.setTitle("Error")  
 			.setMessage("You need to enter a form name to be able to process texts")
