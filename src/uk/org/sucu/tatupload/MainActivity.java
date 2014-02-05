@@ -44,10 +44,10 @@ public class MainActivity extends Activity {
 			//show the tutorial once per run.
 			new AlertDialog.Builder(this)
 			.setTitle("TATupload")  
-			.setMessage("This app uses a google web script to create, and upload texts to, a google form."
-					+ "The scripts run in your phones browser and will require authorisation from your google account the first time it is run."
-					+ "Login information is stored by your browser, and is not accessed by TATupload."
-					+ "The documents created will be in the Google drive belonging to the google account signed into the browser."
+			.setMessage("This app uses a google web script to create, and upload texts to, a google form. "
+					+ "The scripts run in your phones browser and will require authorisation from your google account the first time it is run. "
+					+ "Login information is stored by your browser, and is not accessed by TATupload. "
+					+ "The documents created will be in the Google drive belonging to the google account signed into the browser. "
 					+ "Before texts can be uploaded the app will need to create a form and spreadsheet, or have the name of one it has made before, entered.")
 					.setPositiveButton("Okay", null)  
 					.setCancelable(false)  

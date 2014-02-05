@@ -14,7 +14,7 @@ import android.net.Uri;
 
 public class Parser {
 
-	private static String[] flavourProperty = {"ham","cheese","tomato","pineapple","nutella","bbq"};
+	private static String[] flavourProperty = {"ham","cheese","tomato","pineapple"};
 	private static String[] locationProperty = {"monte","glen","connaught","bencraft","highfield","archers","gateley","south hill",
 		"library","stags","susu","bridge","hartley",
 		"road"," rd","avenue", "gardens","street"," st","terrace",
@@ -26,7 +26,7 @@ public class Parser {
 	public static ArrayList<String> getQuestion(String message){
 		message = message.toLowerCase();
 		ArrayList<String> question = new ArrayList<String>();
-		String[] sentences = message.split("(?<=[?!.])");
+		String[] sentences = splitSentences(message);
 		for(String sentence : sentences){
 
 			for(String s : questionProperty){
@@ -51,7 +51,7 @@ public class Parser {
 	public static ArrayList<String> getLocation(String message){
 		message = message.toLowerCase();
 		ArrayList<String> location = new ArrayList<String>();
-		String[] sentences = message.split("(?<=[?.!,])");
+		String[] sentences = splitSentences(message);
 		for(String l : locationProperty){
 			for(String sentence : sentences){
 				if(sentence.contains(l)){
@@ -71,11 +71,13 @@ public class Parser {
 	}
 
 	public static ArrayList<String> getFlavours(String message){
-		message = message.toLowerCase();
 		ArrayList<String> flavours = new ArrayList<String>();
-		for(String s : flavourProperty){
-			if(message.contains(s)){
-				flavours.add(s);
+		String[] messageWords = splitWords(message.toLowerCase());
+		for(String word : messageWords){
+			for(String flavour : flavourProperty){
+				if(word.equals(flavour)){
+					flavours.add(flavour);
+				}
 			}
 		}
 		return flavours;
@@ -157,6 +159,14 @@ public class Parser {
 		String uri = builder.toString();
 
 		return Uri.parse(uri);
+	}
+
+	private static String[] splitSentences(String message){
+		return message.split("(?<=[?!.])");		
+	}
+
+	public static String[] splitWords(String sentence){
+		return sentence.split("[[ ]*|[,]*|[\\.]*|[:]*|[;]*|[/]*|[!]*|[?]*|[+]*]+");
 	}
 
 
