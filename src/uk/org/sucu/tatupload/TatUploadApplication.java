@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.message.Text;
 import android.app.Application;
+import android.content.Context;
 
 public class TatUploadApplication extends Application {
 	

@@ -12,8 +12,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -81,12 +79,16 @@ public class MainActivity extends Activity {
 		adapter = new MessageArrayAdapter(this, R.id.messageListView, TatUploadApplication.getMessageList());
 		messageView.setAdapter(adapter);
 
+		final Context context = this;
+		
 		messageView.setOnItemClickListener(new OnItemClickListener(){
 
+			Context c = context;
+			
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 
-				if(isOnline()){
+				if(NetCaller.isOnlineWithErrorBox(c)){
 
 					// Get the sms message contained in the clicked object
 					QueuedSmsView smsView = (QueuedSmsView) v;
@@ -164,7 +166,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void buildNewForm(View v){
-		if(isOnline()){
+		if(NetCaller.isOnlineWithErrorBox(this)){
 			NewFormPopup popup = new NewFormPopup(this);
 			popup.showAtLocation(findViewById(R.id.main), Gravity.CENTER, 0, 0);
 		}
@@ -188,24 +190,6 @@ public class MainActivity extends Activity {
 			}
 		}
 		adapter.notifyDataSetChanged();
-	}
-
-	public boolean isOnline(){
-		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
-		boolean online =  activeNetworkInfo != null && activeNetworkInfo.isConnected();
-		//show an error dialog if there's no network connection
-		if(!online){
-			new AlertDialog.Builder(this)
-			.setTitle("Problem")  
-			.setMessage("There is no network connection available.")
-			.setPositiveButton(android.R.string.ok, null)  
-			.setCancelable(false)  
-			.create()  
-			.show();
-		}
-
-		return online;
 	}
 
 }

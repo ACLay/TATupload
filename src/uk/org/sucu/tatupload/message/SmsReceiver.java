@@ -52,7 +52,7 @@ public class SmsReceiver extends BroadcastReceiver{
 				Collection<Text> texts = numberBodyMap.values();
 
 				//process the message!
-				if(TatUploadApplication.getConfirmSplit() || !activity.isOnline()){
+				if(TatUploadApplication.getConfirmSplit() || !NetCaller.isOnline(activity)){
 					//queue it if we're confirming before upload, or there's no network connection
 					activity.addMessages(texts);
 				} else {

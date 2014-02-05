@@ -7,10 +7,7 @@ import uk.org.sucu.tatupload.message.Text;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -106,7 +103,7 @@ public class SmsReviewActivity extends Activity {
 
 	public void uploadMessage(View v){
 
-		if(isOnline()){
+		if(NetCaller.isOnlineWithErrorBox(this)){
 
 			EditText questionEdit = (EditText) findViewById(R.id.messageQuestionEditText);
 			EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
@@ -143,23 +140,6 @@ public class SmsReviewActivity extends Activity {
 	public void discardText(View v){
 		this.finish();
 	}
-	//TODO this is a duplicate of a method in MainActivity
-	public boolean isOnline(){
-		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
-		boolean online =  activeNetworkInfo != null && activeNetworkInfo.isConnected();
-		//show an error dialog if there's no network connection
-		if(!online){
-			new AlertDialog.Builder(this)
-			.setTitle("Problem")  
-			.setMessage("There is no network connection available.")
-			.setPositiveButton(android.R.string.ok, null)  
-			.setCancelable(false)  
-			.create()  
-			.show();
-		}
 
-		return online;
-	}
 
 }
