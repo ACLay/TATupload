@@ -11,7 +11,7 @@
     <string name="form_name">Form Name: </string>
     <string name="confirm_checkbox">Confirm extraction before upload</string>
     <string name="modify_button">Modify data extraction parameters</string>
-    <string name="clear_queue_button">Clear message queue</string>
+    <string name="clear_queue_button">Clear queue</string>
     <string name="queue_title">Messages to process:</string>
     <string name="message_number">Sender\'s number:</string>
     <string name="message_time">Time received:</string>
@@ -31,5 +31,8 @@
     <string name="new_form_id">ID of Google form:</string>
     <string name="accept">Accept</string>
     <string name="change_form_id">Change form</string>
+    <string name="start">Start TAT</string>
+    <string name="stop">Stop TAT</string>
+    <string name="settings">Settings</string>
 
 </resources>

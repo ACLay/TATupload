@@ -1,7 +1,7 @@
 package uk.org.sucu.tatupload.views;
 
-import uk.org.sucu.tatupload.message.Parser;
 import uk.org.sucu.tatupload.message.Text;
+import uk.org.sucu.tatupload.parse.Parser;
 import android.content.Context;
 import android.widget.LinearLayout;
 import android.widget.TextView;

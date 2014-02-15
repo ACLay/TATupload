@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.message;
+package uk.org.sucu.tatupload.parse;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -22,7 +22,8 @@ public class Parser {
 		"block","flat","floor","room"};
 	private static String[] questionProperty = {"who","what","where","when","why","how","could","would","?"};
 
-
+	
+	
 	public static ArrayList<String> getQuestion(String message){
 		message = message.toLowerCase();
 		ArrayList<String> question = new ArrayList<String>();
@@ -161,12 +162,12 @@ public class Parser {
 		return Uri.parse(uri);
 	}
 
-	private static String[] splitSentences(String message){
-		return message.split("(?<=[?!.])");		
+	public static String[] splitSentences(String message){
+		return message.split("(?<=[?!.[\\n]])");		
 	}
 
 	public static String[] splitWords(String sentence){
-		return sentence.split("[[ ]*|[,]*|[\\.]*|[:]*|[;]*|[/]*|[!]*|[?]*|[+]*]+");
+		return sentence.split("[[ ]*|[,]*|[\\.]*|[:]*|[;]*|[/]*|[!]*|[?]*|[+]*|[\\n]*]+");
 	}
 
 

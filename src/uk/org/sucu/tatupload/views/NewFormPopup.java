@@ -7,7 +7,7 @@ import java.util.Date;
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.TatUploadApplication;
-import uk.org.sucu.tatupload.message.Parser;
+import uk.org.sucu.tatupload.parse.Parser;
 import android.app.Activity;
 import android.net.Uri;
 import android.view.View;
@@ -33,22 +33,24 @@ public class NewFormPopup extends TextInputPopup {
 
 			@Override
 			public void onClick(View v) {
-				//get the text
-				String formName = textBox.getText().toString();
-				
-				Uri uri = Parser.createNewFormUri(formName);
-				
-				NetCaller.callScript(uri, context);
 
-				//store the formName
-				TatUploadApplication.setFormName(formName);
-				//show it in the settings menu
-				TextView formIdTextView = (TextView) activity.findViewById(R.id.formNameTextView);
-				formIdTextView.setText(formName);
+				if(NetCaller.isOnlineWithErrorBox(activity)){
+					//get the text
+					String formName = textBox.getText().toString();
 
-				//close the popup
-				dismiss();
+					Uri uri = Parser.createNewFormUri(formName);
 
+					NetCaller.callScript(uri, context);
+
+					//store the formName
+					TatUploadApplication.setFormName(formName);
+					//show it in the settings menu
+					TextView formIdTextView = (TextView) activity.findViewById(R.id.formNameTextView);
+					formIdTextView.setText(formName);
+
+					//close the popup
+					dismiss();
+				}
 			}
 		});
 

@@ -141,13 +141,7 @@ public class MainActivity extends Activity {
 
 	public void modifyParameters(View v){
 		//TODO allow modification of parameters
-		new AlertDialog.Builder(this)
-		.setTitle("Notice")  
-		.setMessage("Currently, it is not possible to change the data extraction parameters. The button is just a placeholder.")
-		.setPositiveButton(android.R.string.ok, null)  
-		.setCancelable(false)  
-		.create()  
-		.show();
+		//the button is commented out in the xml
 	}
 
 	public void changeFormName(View v){

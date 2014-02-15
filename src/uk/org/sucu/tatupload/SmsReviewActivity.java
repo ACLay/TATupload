@@ -2,8 +2,8 @@ package uk.org.sucu.tatupload;
 
 import java.util.ArrayList;
 
-import uk.org.sucu.tatupload.message.Parser;
 import uk.org.sucu.tatupload.message.Text;
+import uk.org.sucu.tatupload.parse.Parser;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class SmsReviewActivity extends Activity {
-
+	//TODO number blacklist
 	private Text text;
 
 	@Override
@@ -118,7 +118,11 @@ public class SmsReviewActivity extends Activity {
 			Uri uri = Parser.createUploadUri(formName, text.getNumber(), question, location, toastie, body);
 			NetCaller.callScript(uri, this);
 			
+			//TODO update the adapter...
+			TatUploadApplication.getMessageList().remove(text);
+			this.finish();
 		}
+		
 	}
 
 	public void undoChanges(View v){
@@ -126,6 +130,8 @@ public class SmsReviewActivity extends Activity {
 	}
 
 	public void discardText(View v){
+		TatUploadApplication.getMessageList().remove(text);
+		//TODO update the adapter
 		this.finish();
 	}
 

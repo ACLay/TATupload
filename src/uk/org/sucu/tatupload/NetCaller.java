@@ -29,7 +29,7 @@ public class NetCaller {
 
 		return online;
 	}
-	
+	//TODO prevent wifi sleep?
 	public static boolean isOnlineWithErrorBox(Context context){
 		boolean online =  isOnline(context);
 		//show an error dialog if there's no network connection

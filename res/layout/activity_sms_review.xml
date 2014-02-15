@@ -57,7 +57,7 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="text"
+     		    android:inputType="textMultiLine"
                 android:ems="10" >
 
                 <requestFocus />
@@ -79,7 +79,7 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:ems="10" />
 
         </LinearLayout>
@@ -98,7 +98,7 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:ems="10" />
 
         </LinearLayout>
@@ -117,7 +117,7 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:ems="10" />
 
         </LinearLayout>
