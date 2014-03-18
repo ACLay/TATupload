@@ -1,5 +1,9 @@
 package uk.org.sucu.tatupload;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import uk.org.sucu.tatupload.parse.Parser;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +19,11 @@ public class SetupActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_setup_layout);
+		EditText nameBox = (EditText) findViewById(R.id.editText1);
+		//generate a reccomended form name based on the date.
+		Date d = new Date(Calendar.getInstance().getTimeInMillis());
+		String date = DateFormat.getDateInstance().format(d);
+		nameBox.setText(date + " " + getString(R.string.text_a_toastie));
 	}
 
 	@Override
@@ -28,11 +37,11 @@ public class SetupActivity extends Activity {
 
 		if(NetCaller.isOnlineWithErrorBox(this)){
 
-			TatUploadApplication.setProcessingTexts(true);
+			((TatUploadApplication) getApplication()).setProcessingTexts(true);
 
 			EditText formNameEdit = (EditText) findViewById(R.id.editText1);
 			String formName = formNameEdit.getText().toString();
-			TatUploadApplication.setFormName(formName);
+			((TatUploadApplication) getApplication()).setFormName(formName);
 
 			Uri uri = Parser.createNewFormUri(formName);
 			NetCaller.callScript(uri, this);

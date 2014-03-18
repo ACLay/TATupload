@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
-	private static boolean tutorialNeedsShown = true;
+	private static final int TUTORIAL_VERSION = 1;//TODO update this each time the tutorial is changed.
 
 	private MessageArrayAdapter adapter;
 
@@ -33,7 +33,9 @@ public class MainActivity extends Activity {
 		
 		SmsReceiver.giveMainActivity(this);
 
-		if(tutorialNeedsShown){
+		int versionShown = TatUploadApplication.getTutorialVersionShown();
+		
+		if(versionShown < TUTORIAL_VERSION){
 			//show the tutorial once per run.
 			new AlertDialog.Builder(this)
 			.setTitle("TATupload")  
@@ -47,7 +49,7 @@ public class MainActivity extends Activity {
 					.create()  
 					.show();
 
-			tutorialNeedsShown = false;
+			((TatUploadApplication)getApplication()).setTutorialVersionShown(TUTORIAL_VERSION);
 		}
 
 	}
@@ -170,7 +172,8 @@ public class MainActivity extends Activity {
 	}
 	
 	public void stopTat(View v){
-		TatUploadApplication.setProcessingTexts(false);
+		//TODO is there a better way to do this?
+		((TatUploadApplication) getApplication()).setProcessingTexts(false);
 		setupUI();
 	}
 	
@@ -178,5 +181,6 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
 	}
+
 	
 }

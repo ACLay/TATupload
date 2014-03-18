@@ -25,7 +25,7 @@ public class ChangeFormNamePopup extends TextInputPopup {
 				//get the name from the EditText
 				String name = textBox.getText().toString();
 				//store it in the application
-				TatUploadApplication.setFormName(name);
+				((TatUploadApplication) activity.getApplication()).setFormName(name);
 				//show it in the settings menu
 				TextView formIdTextView = (TextView) activity.findViewById(R.id.formNameTextView);
 				formIdTextView.setText(name);

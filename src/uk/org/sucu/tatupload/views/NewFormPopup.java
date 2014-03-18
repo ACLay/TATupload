@@ -43,7 +43,7 @@ public class NewFormPopup extends TextInputPopup {
 					NetCaller.callScript(uri, context);
 
 					//store the formName
-					TatUploadApplication.setFormName(formName);
+					((TatUploadApplication) activity.getApplication()).setFormName(formName);
 					//show it in the settings menu
 					TextView formIdTextView = (TextView) activity.findViewById(R.id.formNameTextView);
 					formIdTextView.setText(formName);

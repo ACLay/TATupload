@@ -32,7 +32,7 @@ public class SettingsActivity extends Activity {
 	public void toggleAutoQueue(View v){
 		CheckBox confirmSplitBox = (CheckBox) v;
 		boolean confirm = confirmSplitBox.isChecked();
-		TatUploadApplication.setConfirmSplit(confirm);
+		((TatUploadApplication) getApplication()).setConfirmSplit(confirm);
 	}
 	
 }
