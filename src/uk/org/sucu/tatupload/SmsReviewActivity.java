@@ -118,8 +118,13 @@ public class SmsReviewActivity extends Activity {
 			Uri uri = Parser.createUploadUri(formName, text.getNumber(), question, location, toastie, body);
 			NetCaller.callScript(uri, this);
 			
-			//TODO update the adapter...
-			TatUploadApplication.getMessageList().remove(text);
+			ArrayList<Text> texts = TatUploadApplication.getMessageList();
+			synchronized(texts){
+				texts.remove(text);
+			}				
+
+			Intent intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
 			this.finish();
 		}
 		
@@ -130,10 +135,19 @@ public class SmsReviewActivity extends Activity {
 	}
 
 	public void discardText(View v){
-		TatUploadApplication.getMessageList().remove(text);
-		//TODO update the adapter
+		//TODO R U SURE BOX
+		ArrayList<Text> texts = TatUploadApplication.getMessageList();
+		synchronized(texts){
+			texts.remove(text);
+		}
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
 		this.finish();
 	}
 
+	public void cancel(View v){
+		this.finish();
+	}
 
+	//TODO upload time text was received
 }

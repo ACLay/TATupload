@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.message.Text;
 import android.app.Application;
-import android.content.Context;
 
 public class TatUploadApplication extends Application {
 	
 	private static boolean processingTexts = false;
-	private static boolean confirmSplit = true;
+	private static boolean confirmSplit = false;
 	private static ArrayList<Text> messages = new ArrayList<Text>();
 	private static String formName = "";
 	private static final String uploadScript = "https://script.google.com/macros/s/AKfycbzfPd5U7tbyOmK8EERxB8LPn53CzLy_nzXzAu2jb2_fYC8V_aof/exec";
