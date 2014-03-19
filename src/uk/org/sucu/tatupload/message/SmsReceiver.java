@@ -24,7 +24,7 @@ public class SmsReceiver extends BroadcastReceiver{
 	public static void giveMainActivity(MainActivity main){
 		activity = main;
 	}
-
+	//TODO upload names with messages, maybe
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		//only proceed if we're processing
