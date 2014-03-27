@@ -6,6 +6,7 @@ import java.util.HashMap;
 import uk.org.sucu.tatupload.MainActivity;
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.TatUploadApplication;
+import uk.org.sucu.tatupload.parse.Parser;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
