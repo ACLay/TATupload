@@ -10,6 +10,9 @@ import uk.org.sucu.tatupload.parse.Parser;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
@@ -17,11 +20,11 @@ import android.telephony.SmsMessage;
 public class SmsReceiver extends BroadcastReceiver{
 
 	private static MainActivity activity;
-
+	//TODO I don't like that this code is still necessary
 	public static void giveMainActivity(MainActivity main){
 		activity = main;
 	}
-
+	//TODO upload names with messages, maybe
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		//only proceed if we're processing
@@ -53,10 +56,24 @@ public class SmsReceiver extends BroadcastReceiver{
 				Collection<Text> texts = numberBodyMap.values();
 
 				//process the message!
-				if(TatUploadApplication.getConfirmSplit() || !NetCaller.isOnline(activity)){
+				if(TatUploadApplication.getConfirmSplit()){
 					//queue it if we're confirming before upload, or there's no network connection
-					activity.addMessages(texts);
-				} else {
+					queueMessages(texts);
+					
+				} else if(!NetCaller.isOnline(context)){
+					//store current volume and set it to max
+					AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+					int currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
+					int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
+					audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVolume, AudioManager.FLAG_PLAY_SOUND);
+					//TODO PLAY ALARM WHEN TRYING TO UPLOAD AND NO NETWORK!!!
+					Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+					Ringtone r = RingtoneManager.getRingtone(context.getApplicationContext(), soundUri);
+					r.play();
+					//restore volume to previous level
+					audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, currentVolume, AudioManager.FLAG_PLAY_SOUND);
+					queueMessages(texts);
+				}else {
 					for(Text m : texts){
 						if(m != null){
 							autoProcess(m, context);
@@ -67,6 +84,16 @@ public class SmsReceiver extends BroadcastReceiver{
 			}
 		}
 
+	}
+	
+	private void queueMessages(Collection<Text> messages){
+		/*ArrayList<Text> queue = TatUploadApplication.getMessageList();
+		synchronized(queue){
+			for(Text text : messages){
+				queue.add(text);
+			}
+		}*/
+		activity.addMessages(messages);
 	}
 
 	public void autoProcess(Text text, Context context){

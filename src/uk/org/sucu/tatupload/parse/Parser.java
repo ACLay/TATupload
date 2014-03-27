@@ -163,11 +163,11 @@ public class Parser {
 	}
 
 	public static String[] splitSentences(String message){
-		return message.split("(?<=[?!.[\\n]])");		
+		return message.split("(?<=[?!.[\\n][\\r]])");		
 	}
 
 	public static String[] splitWords(String sentence){
-		return sentence.split("[[ ]*|[,]*|[\\.]*|[:]*|[;]*|[/]*|[!]*|[?]*|[+]*|[\\n]*]+");
+		return sentence.split("[[ ]*|[,]*|[\\.]*|[:]*|[;]*|[/]*|[!]*|[?]*|[+]*|[\\n]*|[\\r]*]+");
 	}
 
 
