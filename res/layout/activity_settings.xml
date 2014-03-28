@@ -30,4 +30,25 @@
         android:text="@string/confirm_checkbox"
         android:onClick="toggleAutoQueue" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Flavour"
+        android:onClick="showFlavourParams" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:onClick="showLocationParams"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Question"
+        android:onClick="showQuestionParams" />
+
 </LinearLayout>

@@ -1,6 +1,8 @@
 package uk.org.sucu.tatupload;
 
+import uk.org.sucu.tatupload.parse.Parser;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -33,6 +35,24 @@ public class SettingsActivity extends Activity {
 		CheckBox confirmSplitBox = (CheckBox) v;
 		boolean confirm = confirmSplitBox.isChecked();
 		((TatUploadApplication) getApplication()).setConfirmSplit(confirm);
+	}
+	
+	public void showFlavourparams(View v){
+		Intent intent = new Intent(this, ParameterViewActivity.class);
+		intent.putExtra(Parser.PARAMETER, Parser.FLAVOUR_PARAMETER);
+		startActivity(intent);
+	}
+	
+	public void showLocationParams(View v){
+		Intent intent = new Intent(this, ParameterViewActivity.class);
+		intent.putExtra(Parser.PARAMETER, Parser.LOCATION_PARAMETER);
+		startActivity(intent);
+	}
+	
+	public void showQuestionParams(View v){
+		Intent intent = new Intent(this, ParameterViewActivity.class);
+		intent.putExtra(Parser.PARAMETER, Parser.QUESTION_PARAMETER);
+		startActivity(intent);
 	}
 	
 }
