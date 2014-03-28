@@ -1,16 +1,24 @@
 package uk.org.sucu.tatupload;
 
+import java.util.Set;
+
+import uk.org.sucu.tatupload.views.AddParameterPopup;
+import uk.org.sucu.tatupload.views.EditParameterPopup;
+import uk.org.sucu.tatupload.views.RemoveParameterPopup;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 public class ParameterViewActivity extends Activity {
 
+	Set<String> parameter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,13 +62,16 @@ public class ParameterViewActivity extends Activity {
 	}
 
 	public void openAddDialogue(View v){
-		
+		AddParameterPopup popup = new AddParameterPopup(this, parameter);
+		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
 	}
 	public void openEditDialogue(View v){
-		
+		EditParameterPopup popup = new EditParameterPopup(this, parameter);
+		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
 	}
 	public void openRemoveDialogue(View v){
-		
+		RemoveParameterPopup popup = new RemoveParameterPopup(this, parameter);
+		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
 	}
 	
 }
