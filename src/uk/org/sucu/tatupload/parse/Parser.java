@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,15 +15,18 @@ import android.net.Uri;
 
 public class Parser {
 
-	private static String[] flavourProperty = {"ham","cheese","tomato","pineapple"};
-	private static String[] locationProperty = {"monte","glen","connaught","bencraft","highfield","archers","gateley","south hill",
+	private static ArrayList<String> flavourProperty = new ArrayList<String>(Arrays.asList("ham","cheese","tomato","pineapple"));
+	private static ArrayList<String> locationProperty = new ArrayList<String>(Arrays.asList("monte","glen","connaught","bencraft","highfield","archers","gateley","south hill",
 		"library","stags","susu","bridge","hartley",
 		"road"," rd","avenue", "gardens","street"," st","terrace",
 		"hobbit","jesters","sobar",
-		"block","flat","floor","room"};
-	private static String[] questionProperty = {"who","what","where","when","why","how","could","would","?"};
+		"block","flat","floor","room"));
+	private static ArrayList<String> questionProperty = new ArrayList<String>(Arrays.asList("who","what","where","when","why","how","could","would","?"));
 
-	
+	public static final String FLAVOUR_PARAMETER = "uk.org.sucu.tatupload.FLAVOUR_PARAMETER";
+	public static final String LOCATION_PARAMETER = "uk.org.sucu.tatupload.LOCATION_PARAMETER";
+	public static final String QUESTION_PARAMETER = "uk.org.sucu.tatupload.QUESTION_PARAMETER";
+	public static final String PARAMETER = "uk.org.sucu.tatupload.PARAMETER";
 	
 	public static ArrayList<String> getQuestion(String message){
 		message = message.toLowerCase();
@@ -170,5 +174,15 @@ public class Parser {
 		return sentence.split("[[ ]*|[,]*|[\\.]*|[:]*|[;]*|[/]*|[!]*|[?]*|[+]*|[\\n]*|[\\r]*]+");
 	}
 
-
+	//TODO consistent naming of these collections
+	public static ArrayList<String> getFlavourparameter(){
+		return flavourProperty;
+	}
+	public static ArrayList<String> getLocationparameter(){
+		return flavourProperty;
+	}
+	public static ArrayList<String> getQuestionparameter(){
+		return flavourProperty;
+	}
+	
 }
