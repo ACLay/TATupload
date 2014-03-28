@@ -1,7 +1,6 @@
 package uk.org.sucu.tatupload.views;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import android.content.Context;
 import android.view.View;
@@ -14,9 +13,9 @@ import android.widget.Spinner;
 public class RemoveParameterPopup extends PopupWindow {
 
 	private Spinner dropDown;
-	private Set<String> parameterStrings;
+	private ArrayList<String> parameterStrings;
 	
-	public RemoveParameterPopup(Context c, Set<String> strings){
+	public RemoveParameterPopup(Context c, ArrayList<String> strings){
 		super(c);
 		
 		parameterStrings = strings;
@@ -25,7 +24,7 @@ public class RemoveParameterPopup extends PopupWindow {
 		layout.setOrientation(LinearLayout.VERTICAL);
 		
 		dropDown = new Spinner(c);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(c,android.R.layout.simple_spinner_dropdown_item, makeList(strings));
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(c,android.R.layout.simple_spinner_dropdown_item, parameterStrings);
 		dropDown.setAdapter(adapter);
 		
 		Button removeButton = new Button(c);
@@ -55,15 +54,5 @@ public class RemoveParameterPopup extends PopupWindow {
 		layout.addView(dropDown);
 		layout.addView(buttonLayout);
 		
-	}
-	
-	private ArrayList<String> makeList(Set<String> params){
-		ArrayList<String> list = new ArrayList<String>();
-		
-		for(String s : params){
-			list.add(s);
-		}
-		
-		return list;
 	}
 }

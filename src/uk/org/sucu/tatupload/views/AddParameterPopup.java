@@ -1,6 +1,6 @@
 package uk.org.sucu.tatupload.views;
 
-import java.util.Set;
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.view.View;
@@ -11,10 +11,10 @@ import android.widget.PopupWindow;
 
 public class AddParameterPopup extends PopupWindow {
 
-	private Set<String> parameterStrings;
+	private ArrayList<String> parameterStrings;
 	private EditText textbox;
 	
-	public AddParameterPopup(Context context, Set<String> params) {
+	public AddParameterPopup(Context context, ArrayList<String> params) {
 		// TODO Auto-generated constructor stub
 		super();
 		

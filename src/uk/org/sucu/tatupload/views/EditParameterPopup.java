@@ -1,7 +1,6 @@
 package uk.org.sucu.tatupload.views;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import android.content.Context;
 import android.view.View;
@@ -18,10 +17,10 @@ import android.widget.TextView;
 public class EditParameterPopup extends PopupWindow {
 	
 	private Spinner dropDown;
-	private Set<String> parameterStrings;
+	private ArrayList<String> parameterStrings;
 	private EditText textbox;
 	
-	public EditParameterPopup(Context c, Set<String> strings){
+	public EditParameterPopup(Context c, ArrayList<String> strings){
 		super(c);
 		
 		parameterStrings = strings;
@@ -30,7 +29,7 @@ public class EditParameterPopup extends PopupWindow {
 		layout.setOrientation(LinearLayout.VERTICAL);
 		
 		dropDown = new Spinner(c);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(c,android.R.layout.simple_spinner_dropdown_item, makeList(strings));
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(c,android.R.layout.simple_spinner_dropdown_item, parameterStrings);
 		dropDown.setAdapter(adapter);
 		dropDown.setOnItemSelectedListener(new OnItemSelectedListener(){
 
@@ -88,15 +87,5 @@ public class EditParameterPopup extends PopupWindow {
 		layout.addView(replaceLayout);
 		layout.addView(buttonLayout);
 		
-	}
-	
-	private ArrayList<String> makeList(Set<String> params){
-		ArrayList<String> list = new ArrayList<String>();
-		
-		for(String s : params){
-			list.add(s);
-		}
-		
-		return list;
 	}
 }
