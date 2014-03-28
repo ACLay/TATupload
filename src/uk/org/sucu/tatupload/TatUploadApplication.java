@@ -14,6 +14,7 @@ public class TatUploadApplication extends Application {
 	private static ArrayList<Text> messages = new ArrayList<Text>();
 	private static String formName = "";
 	private static final String uploadScript = "https://script.google.com/macros/s/AKfycbzfPd5U7tbyOmK8EERxB8LPn53CzLy_nzXzAu2jb2_fYC8V_aof/exec";
+
 	private static int tutorialVersionShown;
 	
 	public static boolean getProcessingTexts(){
@@ -27,7 +28,7 @@ public class TatUploadApplication extends Application {
 		editor.putBoolean(getString(R.string.processing_key), processingTexts);
 		editor.commit();
 	}
-	
+
 	public static boolean getConfirmSplit(){
 		return confirmSplit;
 	}
@@ -39,7 +40,7 @@ public class TatUploadApplication extends Application {
 		editor.putBoolean(getString(R.string.confirm_split_key), confirmSplit);
 		editor.commit();
 	}
-	
+
 	public static ArrayList<Text> getMessageList(){
 		return messages;
 	}
@@ -55,7 +56,7 @@ public class TatUploadApplication extends Application {
 	public static String getFormName(){
 		return formName;
 	}
-	
+
 	public static String getScriptURL(){
 		return uploadScript;
 	}
@@ -84,4 +85,5 @@ public class TatUploadApplication extends Application {
 		tutorialVersionShown = sharedPref.getInt(getString(R.string.tutorial_ver_key), 0);
 		
 	}
+
 }
