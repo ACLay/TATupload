@@ -1,12 +1,14 @@
 package uk.org.sucu.tatupload;
 
-import java.util.Set;
+import java.util.ArrayList;
 
+import uk.org.sucu.tatupload.parse.Parser;
 import uk.org.sucu.tatupload.views.AddParameterPopup;
 import uk.org.sucu.tatupload.views.EditParameterPopup;
 import uk.org.sucu.tatupload.views.RemoveParameterPopup;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -17,7 +19,7 @@ import android.view.View;
 
 public class ParameterViewActivity extends Activity {
 
-	Set<String> parameter;
+	ArrayList<String> parameter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,20 @@ public class ParameterViewActivity extends Activity {
 		setContentView(R.layout.activity_parameter_view);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		Intent intent = getIntent();
+		String identifier = intent.getStringExtra(Parser.PARAMETER);
+		
+		if(identifier == Parser.FLAVOUR_PARAMETER){
+			parameter = Parser.getFlavourparameter();
+		} else if (identifier == Parser.LOCATION_PARAMETER){
+			parameter = Parser.getLocationparameter();
+		} else if (identifier == Parser.QUESTION_PARAMETER){
+			parameter = Parser.getQuestionparameter();
+		} else {
+			finish();
+		}
+			
 	}
 
 	/**
