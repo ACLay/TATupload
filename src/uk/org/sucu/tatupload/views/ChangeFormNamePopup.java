@@ -1,17 +1,17 @@
 package uk.org.sucu.tatupload.views;
 
-import uk.org.sucu.tatupload.MainActivity;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.TatUploadApplication;
+import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
 
 public class ChangeFormNamePopup extends TextInputPopup {
 
-	private MainActivity activity;
+	private Activity activity;
 	
 	//need to use Activity to make the findViewById work
-	public ChangeFormNamePopup(MainActivity a) {
+	public ChangeFormNamePopup(Activity a) {
 		super(a);
 		
 		activity = a;
