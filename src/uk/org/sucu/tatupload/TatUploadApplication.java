@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class TatUploadApplication extends Application {
-	//TODO better persistence names;
+	
 	private static boolean processingTexts = false;
 	private static boolean confirmSplit = false;
 	private static ArrayList<Text> messages = new ArrayList<Text>();
