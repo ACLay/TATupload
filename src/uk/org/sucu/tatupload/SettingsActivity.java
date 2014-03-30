@@ -37,7 +37,7 @@ public class SettingsActivity extends Activity {
 		((TatUploadApplication) getApplication()).setConfirmSplit(confirm);
 	}
 	
-	public void showFlavourparams(View v){
+	public void showFlavourParams(View v){
 		Intent intent = new Intent(this, ParameterViewActivity.class);
 		intent.putExtra(Parser.PARAMETER, Parser.FLAVOUR_PARAMETER);
 		startActivity(intent);
