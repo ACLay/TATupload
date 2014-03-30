@@ -44,13 +44,15 @@
             android:id="@+id/edit_param_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit" />
+            android:text="Edit"
+            android:onClick="openEditDialogue" />
 
         <Button
             android:id="@+id/remove_param_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remove" />
+            android:text="Remove"
+            android:onClick="openRemoveDialogue" />
 
     </LinearLayout>
 
