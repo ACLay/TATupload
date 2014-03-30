@@ -3,6 +3,7 @@ package uk.org.sucu.tatupload.views;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -20,16 +21,18 @@ public class EditParameterPopup extends PopupWindow {
 	private ArrayList<String> parameterStrings;
 	private EditText textbox;
 	
-	public EditParameterPopup(Context c, ArrayList<String> strings){
-		super(c);
+	public EditParameterPopup(Context context, ArrayList<String> strings){
+		super(context);
+		this.setHeight(300);
+		this.setWidth(200);
 		
 		parameterStrings = strings;
 		
-		LinearLayout layout = new LinearLayout(c);
+		LinearLayout layout = new LinearLayout(context);
 		layout.setOrientation(LinearLayout.VERTICAL);
 		
-		dropDown = new Spinner(c);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(c,android.R.layout.simple_spinner_dropdown_item, parameterStrings);
+		dropDown = new Spinner(context);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_dropdown_item, parameterStrings);
 		dropDown.setAdapter(adapter);
 		dropDown.setOnItemSelectedListener(new OnItemSelectedListener(){
 
@@ -48,25 +51,26 @@ public class EditParameterPopup extends PopupWindow {
 			
 		});
 		
-		TextView label = new TextView(c);
+		TextView label = new TextView(context);
 		label.setText("Change to:");
 		
-		textbox = new EditText(c);
+		textbox = new EditText(context);
 		
-		Button updateButton = new Button(c);
+		Button updateButton = new Button(context);
 		updateButton.setText("Update");
 		updateButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String toChange = (String) dropDown.getSelectedItem();
-				if(parameterStrings.remove(toChange)){
-					parameterStrings.add(textbox.getText().toString().toLowerCase());
+				int index = parameterStrings.indexOf(toChange);
+				if(index != -1){//indexOf returns -1 if the object isn't present
+					parameterStrings.set(index, textbox.getText().toString().toLowerCase());
 				}
 				dismiss();
 			}
 		});
 		
-		Button cancelButton = new Button(c);
+		Button cancelButton = new Button(context);
 		cancelButton.setText("Cancel");
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -75,17 +79,21 @@ public class EditParameterPopup extends PopupWindow {
 			}
 		});
 		
-		LinearLayout replaceLayout = new LinearLayout(c);
+		LinearLayout replaceLayout = new LinearLayout(context);
 		replaceLayout.addView(label);
 		replaceLayout.addView(textbox);
 		
-		LinearLayout buttonLayout = new LinearLayout(c);
+		LinearLayout buttonLayout = new LinearLayout(context);
 		buttonLayout.addView(updateButton);
 		buttonLayout.addView(cancelButton);
 		
 		layout.addView(dropDown);
 		layout.addView(replaceLayout);
 		layout.addView(buttonLayout);
+		layout.setBackgroundColor(Color.WHITE);
+		
+		this.setFocusable(true);
+		this.setContentView(layout);
 		
 	}
 }

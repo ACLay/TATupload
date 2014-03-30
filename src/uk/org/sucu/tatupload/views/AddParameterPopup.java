@@ -3,6 +3,7 @@ package uk.org.sucu.tatupload.views;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +17,25 @@ public class AddParameterPopup extends PopupWindow {
 	
 	public AddParameterPopup(Context context, ArrayList<String> params) {
 		// TODO Auto-generated constructor stub
-		super();
+		super(context);
+		this.setHeight(150);
+		this.setWidth(200);
+		
+		parameterStrings = params;
 		
 		LinearLayout layout = new LinearLayout(context);
 		layout.setOrientation(LinearLayout.VERTICAL);
+		
+		setup(layout,context);
+		
+		layout.setBackgroundColor(Color.WHITE);
+		
+		this.setFocusable(true);
+		this.setContentView(layout);
+		
+	}
+
+	private void setup(LinearLayout layout, Context context){
 		
 		textbox = new EditText(context);
 		
@@ -31,6 +47,7 @@ public class AddParameterPopup extends PopupWindow {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				parameterStrings.add(textbox.getText().toString().toLowerCase());
+				dismiss();
 			}
 		});
 		
@@ -49,11 +66,6 @@ public class AddParameterPopup extends PopupWindow {
 		
 		layout.addView(textbox);
 		layout.addView(buttonLayout);
-		
-		this.setContentView(layout);
-		
 	}
-
-	
 
 }

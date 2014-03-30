@@ -3,6 +3,7 @@ package uk.org.sucu.tatupload.views;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,6 +18,8 @@ public class RemoveParameterPopup extends PopupWindow {
 	
 	public RemoveParameterPopup(Context c, ArrayList<String> strings){
 		super(c);
+		this.setHeight(150);
+		this.setWidth(200);
 		
 		parameterStrings = strings;
 		
@@ -53,6 +56,9 @@ public class RemoveParameterPopup extends PopupWindow {
 		
 		layout.addView(dropDown);
 		layout.addView(buttonLayout);
+		layout.setBackgroundColor(Color.WHITE);
 		
+		this.setFocusable(true);
+		this.setContentView(layout);
 	}
 }
