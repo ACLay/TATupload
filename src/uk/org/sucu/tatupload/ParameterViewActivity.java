@@ -31,14 +31,15 @@ public class ParameterViewActivity extends Activity {
 		Intent intent = getIntent();
 		String identifier = intent.getStringExtra(Parser.PARAMETER);
 		
-		if(identifier == Parser.FLAVOUR_PARAMETER){
+		if(identifier.equals(Parser.FLAVOUR_PARAMETER)){
 			parameter = Parser.getFlavourparameter();
-		} else if (identifier == Parser.LOCATION_PARAMETER){
+		} else if (identifier.equals(Parser.LOCATION_PARAMETER)){
 			parameter = Parser.getLocationparameter();
-		} else if (identifier == Parser.QUESTION_PARAMETER){
+		} else if (identifier.equals(Parser.QUESTION_PARAMETER)){
 			parameter = Parser.getQuestionparameter();
 		} else {
-			finish();
+			parameter = new ArrayList<String>();
+			parameter.add("This shouldn't appear");
 		}
 			
 	}
