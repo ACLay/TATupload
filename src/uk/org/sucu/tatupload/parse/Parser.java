@@ -26,7 +26,14 @@ public class Parser {
 	public static final String FLAVOUR_PARAMETER = "uk.org.sucu.tatupload.FLAVOUR_PARAMETER";
 	public static final String LOCATION_PARAMETER = "uk.org.sucu.tatupload.LOCATION_PARAMETER";
 	public static final String QUESTION_PARAMETER = "uk.org.sucu.tatupload.QUESTION_PARAMETER";
-	public static final String PARAMETER = "uk.org.sucu.tatupload.PARAMETER";
+	public static final String PARAMETER = "uk.org.sucu.tatupload.PARAMETER"; //identifies a parameter being passed in an intent extra
+	
+	private static ArrayList<String> defaultFlavourProperty = new ArrayList<String>(Arrays.asList("ham","cheese","tomato","pineapple"));
+	private static ArrayList<String> defaultLocationProperty = new ArrayList<String>(Arrays.asList("library","bar","pub","club",
+																									"road", " rd","avenue","gardens","street"," st","terrace",
+																									"block","flat","floor","room"));
+	private static ArrayList<String> defaultQuestionProperty = new ArrayList<String>(Arrays.asList("who","what","where","when","why","how","could","would","?"));
+
 	
 	public static ArrayList<String> getQuestion(String message){
 		message = message.toLowerCase();
@@ -174,15 +181,15 @@ public class Parser {
 		return sentence.split("[[ ]*|[,]*|[\\.]*|[:]*|[;]*|[/]*|[!]*|[?]*|[+]*|[\\n]*|[\\r]*]+");
 	}
 
-	//TODO consistent naming of these collections
+	
 	public static ArrayList<String> getFlavourparameter(){
 		return flavourProperty;
 	}
 	public static ArrayList<String> getLocationparameter(){
-		return flavourProperty;
+		return locationProperty;
 	}
 	public static ArrayList<String> getQuestionparameter(){
-		return flavourProperty;
+		return questionProperty;
 	}
 	
 }
