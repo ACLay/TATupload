@@ -16,17 +16,18 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 public class ParameterViewActivity extends Activity {
 
 	ArrayList<String> parameter;
+	ParameterArrayAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_parameter_view);
-		// Show the Up button in the action bar.
-		setupActionBar();
 		
 		Intent intent = getIntent();
 		String identifier = intent.getStringExtra(Parser.PARAMETER);
@@ -41,7 +42,16 @@ public class ParameterViewActivity extends Activity {
 			parameter = new ArrayList<String>();
 			parameter.add("This shouldn't appear");
 		}
-			
+		
+		
+		ListView paramListView = (ListView) findViewById(R.id.param_list);
+		adapter = new ParameterArrayAdapter(this, R.id.param_list, parameter);
+		paramListView.setAdapter(adapter);
+		//adapter.notifyDataSetChanged();
+		
+		// Show the Up button in the action bar.
+		setupActionBar();
+		
 	}
 
 	/**
