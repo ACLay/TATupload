@@ -16,7 +16,7 @@ public class AddParameterPopup extends PopupWindow {
 	private EditText textbox;
 	
 	public AddParameterPopup(Context context, ArrayList<String> params) {
-		// TODO Auto-generated constructor stub
+
 		super(context);
 		this.setHeight(150);
 		this.setWidth(200);
@@ -45,7 +45,6 @@ public class AddParameterPopup extends PopupWindow {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				parameterStrings.add(textbox.getText().toString().toLowerCase());
 				dismiss();
 			}

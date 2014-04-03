@@ -37,15 +37,12 @@ public class EditParameterPopup extends PopupWindow {
 		dropDown.setOnItemSelectedListener(new OnItemSelectedListener(){
 
 			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				// TODO Auto-generated method stub
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				textbox.setText((String)dropDown.getSelectedItem());
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
 				
 			}
 			
