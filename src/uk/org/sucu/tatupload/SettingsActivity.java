@@ -1,5 +1,6 @@
 package uk.org.sucu.tatupload;
 
+import uk.org.sucu.tatupload.parse.Parameters;
 import uk.org.sucu.tatupload.parse.Parser;
 import android.app.Activity;
 import android.content.Intent;
@@ -39,19 +40,19 @@ public class SettingsActivity extends Activity {
 	
 	public void showFlavourParams(View v){
 		Intent intent = new Intent(this, ParameterViewActivity.class);
-		intent.putExtra(Parser.PARAMETER, Parser.FLAVOUR_PARAMETER);
+		intent.putExtra(Parameters.PARAMETER, Parameters.FLAVOUR_PARAMETER);
 		startActivity(intent);
 	}
 	
 	public void showLocationParams(View v){
 		Intent intent = new Intent(this, ParameterViewActivity.class);
-		intent.putExtra(Parser.PARAMETER, Parser.LOCATION_PARAMETER);
+		intent.putExtra(Parameters.PARAMETER, Parameters.LOCATION_PARAMETER);
 		startActivity(intent);
 	}
 	
 	public void showQuestionParams(View v){
 		Intent intent = new Intent(this, ParameterViewActivity.class);
-		intent.putExtra(Parser.PARAMETER, Parser.QUESTION_PARAMETER);
+		intent.putExtra(Parameters.PARAMETER, Parameters.QUESTION_PARAMETER);
 		startActivity(intent);
 	}
 	
