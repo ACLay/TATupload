@@ -51,4 +51,12 @@
         android:text="Question"
         android:onClick="showQuestionParams" />
 
+    <Button
+        android:id="@+id/button4"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restore defaults"
+        android:onClick="restoreDefaults" />
+
 </LinearLayout>
