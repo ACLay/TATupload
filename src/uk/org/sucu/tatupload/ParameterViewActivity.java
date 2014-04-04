@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.PopupWindow.OnDismissListener;
 
 public class ParameterViewActivity extends Activity {
 
@@ -90,14 +91,32 @@ public class ParameterViewActivity extends Activity {
 
 	public void openAddDialogue(View v){
 		AddParameterPopup popup = new AddParameterPopup(this, parameter);
+		popup.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss() {
+				adapter.notifyDataSetChanged();
+			}
+		});
 		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
 	}
 	public void openEditDialogue(View v){
 		EditParameterPopup popup = new EditParameterPopup(this, parameter);
+		popup.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss() {
+				adapter.notifyDataSetChanged();
+			}
+		});
 		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
 	}
 	public void openRemoveDialogue(View v){
 		RemoveParameterPopup popup = new RemoveParameterPopup(this, parameter);
+		popup.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss() {
+				adapter.notifyDataSetChanged();
+			}
+		});
 		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
 	}
 	
