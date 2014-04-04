@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
-	private static final int TUTORIAL_VERSION = 1;//TODO update this each time the tutorial is changed.
+	private static final int TUTORIAL_VERSION = 2;//TODO update this each time the tutorial is changed.
 
 	private MessageArrayAdapter adapter;
 
@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 					+ "The scripts run in your phones browser and will require authorisation from your google account the first time it is run. "
 					+ "Login information is stored by your browser, and is not accessed by TATupload. "
 					+ "The documents created will be in the Google drive belonging to the google account signed into the browser. "
-					+ "Before texts can be uploaded the app will need to create a form and spreadsheet, or have the name of one it has made before, entered.")
+					+ "Before starting, please go to settings and enter names of flavours and locations you will be serving so they can be (hopefully) identified.")
 					.setPositiveButton("Okay", null)  
 					.setCancelable(false)  
 					.create()  
@@ -100,49 +100,6 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-/*
-	public void toggleProcessing(View v){
-		ToggleButton toggle = (ToggleButton) v;
-
-		if(TatUploadApplication.getFormName().equals("")){
-
-			new AlertDialog.Builder(this)
-			.setTitle("Error")  
-			.setMessage("You need to enter a form name to be able to process texts")
-			.setPositiveButton("Okay", null)  
-			.setCancelable(false)  
-			.create()  
-			.show();
-
-			toggle.setChecked(false);
-		} else {
-			boolean processing = toggle.isChecked();
-			TatUploadApplication.setProcessingTexts(processing);
-		}		
-	}*/
-/*
-	public void toggleConfirmSplit(View v){
-		CheckBox box = (CheckBox) findViewById(R.id.confirmSplitCheckBox);
-		boolean confirmSplit = box.isChecked();
-		TatUploadApplication.setConfirmSplit(confirmSplit);
-	}*/
-/*
-	public void modifyParameters(View v){
-		//TODO allow modification of parameters
-		//the button is commented out in the xml
-	}*/
-/*
-	public void changeFormName(View v){
-		ChangeFormNamePopup popup = new ChangeFormNamePopup(this);
-		popup.showAtLocation(findViewById(R.id.main), Gravity.CENTER, 0, 0);
-	}*/
-/*
-	public void buildNewForm(View v){
-		if(NetCaller.isOnlineWithErrorBox(this)){
-			NewFormPopup popup = new NewFormPopup(this);
-			popup.showAtLocation(findViewById(R.id.main), Gravity.CENTER, 0, 0);
-		}
-	}*/
 
 	public void clearMessages(View v){
 		ArrayList<Text> messages = TatUploadApplication.getMessageList();
