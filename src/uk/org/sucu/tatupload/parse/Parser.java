@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,33 +14,13 @@ import android.net.Uri;
 
 public class Parser {
 
-	private static ArrayList<String> flavourProperty = new ArrayList<String>(Arrays.asList("ham","cheese","tomato","pineapple"));
-	private static ArrayList<String> locationProperty = new ArrayList<String>(Arrays.asList("monte","glen","connaught","bencraft","highfield","archers","gateley","south hill",
-		"library","stags","susu","bridge","hartley",
-		"road"," rd","avenue", "gardens","street"," st","terrace",
-		"hobbit","jesters","sobar",
-		"block","flat","floor","room"));
-	private static ArrayList<String> questionProperty = new ArrayList<String>(Arrays.asList("who","what","where","when","why","how","could","would","?"));
-
-	public static final String FLAVOUR_PARAMETER = "uk.org.sucu.tatupload.FLAVOUR_PARAMETER";
-	public static final String LOCATION_PARAMETER = "uk.org.sucu.tatupload.LOCATION_PARAMETER";
-	public static final String QUESTION_PARAMETER = "uk.org.sucu.tatupload.QUESTION_PARAMETER";
-	public static final String PARAMETER = "uk.org.sucu.tatupload.PARAMETER"; //identifies a parameter being passed in an intent extra
-	
-	private static ArrayList<String> defaultFlavourProperty = new ArrayList<String>(Arrays.asList("ham","cheese","tomato","pineapple"));
-	private static ArrayList<String> defaultLocationProperty = new ArrayList<String>(Arrays.asList("library","bar","pub","club",
-																									"road", " rd","avenue","gardens","street"," st","terrace",
-																									"block","flat","floor","room"));
-	private static ArrayList<String> defaultQuestionProperty = new ArrayList<String>(Arrays.asList("who","what","where","when","why","how","could","would","?"));
-
-	
 	public static ArrayList<String> getQuestion(String message){
 		message = message.toLowerCase();
 		ArrayList<String> question = new ArrayList<String>();
 		String[] sentences = splitSentences(message);
 		for(String sentence : sentences){
 
-			for(String s : questionProperty){
+			for(String s : Parameters.questionParameter){
 				if (sentence.contains(s)){;
 				question.add(sentence);
 				}
@@ -64,7 +43,7 @@ public class Parser {
 		message = message.toLowerCase();
 		ArrayList<String> location = new ArrayList<String>();
 		String[] sentences = splitSentences(message);
-		for(String l : locationProperty){
+		for(String l : Parameters.locationParameter){
 			for(String sentence : sentences){
 				if(sentence.contains(l)){
 					location.add(sentence);
@@ -86,7 +65,7 @@ public class Parser {
 		ArrayList<String> flavours = new ArrayList<String>();
 		String[] messageWords = splitWords(message.toLowerCase());
 		for(String word : messageWords){
-			for(String flavour : flavourProperty){
+			for(String flavour : Parameters.flavourParameter){
 				if(word.equals(flavour)){
 					flavours.add(flavour);
 				}
@@ -182,7 +161,7 @@ public class Parser {
 	}
 
 	
-	public static ArrayList<String> getFlavourparameter(){
+	/*public static ArrayList<String> getFlavourparameter(){
 		return flavourProperty;
 	}
 	public static ArrayList<String> getLocationparameter(){
@@ -190,6 +169,6 @@ public class Parser {
 	}
 	public static ArrayList<String> getQuestionparameter(){
 		return questionProperty;
-	}
+	}*/
 	
 }
