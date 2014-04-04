@@ -2,7 +2,7 @@ package uk.org.sucu.tatupload;
 
 import java.util.ArrayList;
 
-import uk.org.sucu.tatupload.parse.Parser;
+import uk.org.sucu.tatupload.parse.Parameters;
 import uk.org.sucu.tatupload.views.AddParameterPopup;
 import uk.org.sucu.tatupload.views.EditParameterPopup;
 import uk.org.sucu.tatupload.views.RemoveParameterPopup;
@@ -21,8 +21,9 @@ import android.widget.PopupWindow.OnDismissListener;
 
 public class ParameterViewActivity extends Activity {
 
-	ArrayList<String> parameter;
-	ParameterArrayAdapter adapter;
+	private ArrayList<String> parameter;
+	private ParameterArrayAdapter adapter;
+	private String parameterIdentifier;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +32,11 @@ public class ParameterViewActivity extends Activity {
 		setContentView(R.layout.activity_parameter_view);
 		
 		Intent intent = getIntent();
-		String identifier = intent.getStringExtra(Parser.PARAMETER);
+		parameterIdentifier = intent.getStringExtra(Parameters.PARAMETER);
 		
-		if(identifier.equals(Parser.FLAVOUR_PARAMETER)){
-			parameter = Parser.getFlavourparameter();
-		} else if (identifier.equals(Parser.LOCATION_PARAMETER)){
-			parameter = Parser.getLocationparameter();
-		} else if (identifier.equals(Parser.QUESTION_PARAMETER)){
-			parameter = Parser.getQuestionparameter();
-		} else {
+		parameter = Parameters.getList(parameterIdentifier);
+		if(parameterIdentifier == null) {
+			parameterIdentifier = null;
 			parameter = new ArrayList<String>();
 			parameter.add("This shouldn't appear");
 		}
@@ -95,6 +92,7 @@ public class ParameterViewActivity extends Activity {
 			@Override
 			public void onDismiss() {
 				adapter.notifyDataSetChanged();
+				saveParameter();
 			}
 		});
 		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
@@ -105,6 +103,7 @@ public class ParameterViewActivity extends Activity {
 			@Override
 			public void onDismiss() {
 				adapter.notifyDataSetChanged();
+				saveParameter();
 			}
 		});
 		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
@@ -115,9 +114,17 @@ public class ParameterViewActivity extends Activity {
 			@Override
 			public void onDismiss() {
 				adapter.notifyDataSetChanged();
+				saveParameter();
 			}
 		});
 		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
+	}
+	
+	private void saveParameter(){
+		if(parameterIdentifier != null){
+			TatUploadApplication application = (TatUploadApplication) getApplication();
+			application.saveParameter(parameterIdentifier);
+		}
 	}
 	
 }
