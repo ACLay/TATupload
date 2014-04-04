@@ -3,6 +3,7 @@ package uk.org.sucu.tatupload;
 import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.message.Text;
+import uk.org.sucu.tatupload.parse.Parameters;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -84,6 +85,21 @@ public class TatUploadApplication extends Application {
 		confirmSplit = sharedPref.getBoolean(getString(R.string.confirm_split_key), false);
 		tutorialVersionShown = sharedPref.getInt(getString(R.string.tutorial_ver_key), 0);
 		
+		String flavour = sharedPref.getString(Parameters.FLAVOUR_PARAMETER, Parameters.defaultFlavour);
+		String location = sharedPref.getString(Parameters.LOCATION_PARAMETER, Parameters.defaultLocation);
+		String question = sharedPref.getString(Parameters.QUESTION_PARAMETER, Parameters.defaultQuestion);
+		
+		Parameters.loadParameters(flavour, location, question);
+		
+	}
+	
+	public void saveParameter(String identifier){
+		if(identifier != null){
+			SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+			SharedPreferences.Editor editor = sharedPref.edit();
+			editor.putString(identifier, Parameters.getAsString(identifier));
+			editor.commit();
+		}
 	}
 
 }
