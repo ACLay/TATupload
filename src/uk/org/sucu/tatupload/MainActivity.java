@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
-	private static final int TUTORIAL_VERSION = 2;//TODO update this each time the tutorial is changed.
+	private static final int TUTORIAL_VERSION = 3;//TODO update this each time the tutorial is changed.
 
 	private MessageArrayAdapter adapter;
 
@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 			new AlertDialog.Builder(this)
 			.setTitle("TATupload")  
 			.setMessage("This app uses a google web script to create, and upload texts to, a google form. "
-					+ "The scripts run in your phones browser and will require authorisation from your google account the first time it is run. "
+					+ "The script run in your phones browser and will require authorisation from your google account the first time it is run. "
 					+ "Login information is stored by your browser, and is not accessed by TATupload. "
 					+ "The documents created will be in the Google drive belonging to the google account signed into the browser. "
 					+ "Before starting, please go to settings and enter names of flavours and locations you will be serving so they can be (hopefully) identified.")
