@@ -9,9 +9,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import uk.org.sucu.tatupload.TatUploadApplication;
+import uk.org.sucu.tatupload.R;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.net.Uri;
 
+@SuppressLint("DefaultLocale")
 public class Parser {
 
 	public static ArrayList<String> getQuestion(String message){
@@ -94,7 +97,7 @@ public class Parser {
 		return (DateFormat.getDateTimeInstance().format(d));
 	}
 
-	public static Uri createNewFormUri(String formName){
+	public static Uri createNewFormUri(String formName, Context context){
 		//TODO should not accept empty string
 		try{
 			formName = URLEncoder.encode(formName, "utf-8");
@@ -103,7 +106,7 @@ public class Parser {
 		}
 
 		StringBuilder builder = new StringBuilder();
-		builder.append(TatUploadApplication.getScriptURL());
+		builder.append(context.getString(R.string.scriptURL));
 		builder.append("?action=create&");
 		builder.append("formName=");
 		builder.append(formName);
@@ -113,7 +116,7 @@ public class Parser {
 		return Uri.parse(uri);
 	}
 
-	public static Uri createUploadUri(String formName, String number, String question, String location, String toastie, String sms){
+	public static Uri createUploadUri(String formName, String number, String question, String location, String toastie, String sms, Context context){
 
 		StringBuilder builder = new StringBuilder();
 
@@ -137,7 +140,7 @@ public class Parser {
 		params.put("SMS", sms);
 
 		Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
-		builder.append(TatUploadApplication.getScriptURL()).append("?");
+		builder.append(context.getString(R.string.scriptURL)).append("?");
 
 		while (iterator.hasNext()) {
 			Entry<String, String> param = iterator.next();
@@ -159,16 +162,5 @@ public class Parser {
 	public static String[] splitWords(String sentence){
 		return sentence.split("[[ ]*|[,]*|[\\.]*|[:]*|[;]*|[/]*|[!]*|[?]*|[+]*|[\\n]*|[\\r]*]+");
 	}
-
-	
-	/*public static ArrayList<String> getFlavourparameter(){
-		return flavourProperty;
-	}
-	public static ArrayList<String> getLocationparameter(){
-		return locationProperty;
-	}
-	public static ArrayList<String> getQuestionparameter(){
-		return questionProperty;
-	}*/
 	
 }
