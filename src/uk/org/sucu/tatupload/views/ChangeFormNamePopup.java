@@ -2,10 +2,12 @@ package uk.org.sucu.tatupload.views;
 
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.TatUploadApplication;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
 
+@SuppressLint("ViewConstructor")
 public class ChangeFormNamePopup extends TextInputPopup {
 
 	private Activity activity;

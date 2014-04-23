@@ -3,16 +3,17 @@ package uk.org.sucu.tatupload.views;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.TatUploadApplication;
 import uk.org.sucu.tatupload.parse.Parser;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
+@SuppressLint("ViewConstructor")
 public class NewFormPopup extends TextInputPopup {
 
 	private Activity activity;
@@ -38,7 +39,7 @@ public class NewFormPopup extends TextInputPopup {
 					//get the text
 					String formName = textBox.getText().toString();
 
-					Uri uri = Parser.createNewFormUri(formName);
+					Uri uri = Parser.createNewFormUri(formName, activity);
 
 					NetCaller.callScript(uri, context);
 
