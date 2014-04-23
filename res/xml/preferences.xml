@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/confirm_split_key"
+        android:title="@string/confirm_checkbox" />
+
+    <PreferenceCategory 
+        android:title="Data extraction parameters">
+    
+    <Preference android:title="@string/flavour_heading" >
+        <intent 
+            android:action="android.intent.action.VIEW"
+			android:targetPackage="uk.org.sucu.tatupload"
+            android:targetClass="uk.org.sucu.tatupload.ParameterViewActivity" >
+            <extra
+                android:name="@string/parameter_indicator"
+                android:value="@string/flavour_parameter" />
+        </intent>	
+
+    </Preference>
+
+    <Preference android:title="@string/location_heading" >
+        <intent 
+            android:action="android.intent.action.VIEW"
+			android:targetPackage="uk.org.sucu.tatupload"
+            android:targetClass="uk.org.sucu.tatupload.ParameterViewActivity" >
+            <extra
+                android:name="@string/parameter_indicator"
+                android:value="@string/location_parameter" />
+        </intent>	
+
+    </Preference>
+    
+    <Preference android:title="@string/question_heading" >
+        <intent 
+            android:action="android.intent.action.VIEW"
+			android:targetPackage="uk.org.sucu.tatupload"
+            android:targetClass="uk.org.sucu.tatupload.ParameterViewActivity" >
+            <extra
+                android:name="@string/parameter_indicator"
+                android:value="@string/question_parameter" />
+        </intent>	
+
+    </Preference>
+    
+    </PreferenceCategory>
+</PreferenceScreen>
