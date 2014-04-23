@@ -17,11 +17,11 @@ public class SettingsActivity extends Activity {
 		setContentView(R.layout.activity_settings);
 		
 		CheckBox confirmSplit = (CheckBox) findViewById(R.id.checkBox1);
-		confirmSplit.setChecked(TatUploadApplication.getConfirmSplit());
+		confirmSplit.setChecked(SettingsAccessor.getAutoQueueTexts(this));
 		
 		TextView formLabel = (TextView) findViewById(R.id.textView1);
 		
-		formLabel.setText(getString(R.string.form_name) + TatUploadApplication.getFormName());
+		formLabel.setText(getString(R.string.form_name) + SettingsAccessor.getFormName(this));
 	}
 
 	@Override
@@ -57,10 +57,9 @@ public class SettingsActivity extends Activity {
 	
 	public void restoreDefaults(View v){
 		Parameters.restoreDefaults();
-		TatUploadApplication app = ((TatUploadApplication) getApplication());
-		app.saveParameter(Parameters.FLAVOUR_PARAMETER);
-		app.saveParameter(Parameters.LOCATION_PARAMETER);
-		app.saveParameter(Parameters.QUESTION_PARAMETER);
+		Parameters.saveParameter(Parameters.FLAVOUR_PARAMETER,this);
+		Parameters.saveParameter(Parameters.LOCATION_PARAMETER,this);
+		Parameters.saveParameter(Parameters.QUESTION_PARAMETER,this);
 	}
 	
 }
