@@ -122,8 +122,7 @@ public class ParameterViewActivity extends Activity {
 	
 	private void saveParameter(){
 		if(parameterIdentifier != null){
-			TatUploadApplication application = (TatUploadApplication) getApplication();
-			application.saveParameter(parameterIdentifier);
+			Parameters.saveParameter(parameterIdentifier, this);
 		}
 	}
 	
