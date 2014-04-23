@@ -2,6 +2,10 @@ package uk.org.sucu.tatupload.parse;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 public class Parameters {
 
 	public static final String FLAVOUR_PARAMETER = "uk.org.sucu.tatupload.FLAVOUR_PARAMETER";
@@ -80,6 +84,15 @@ public class Parameters {
 			return false;
 		} else {
 			return true;
+		}
+	}
+	
+	public static void saveParameter(String identifier, Context context){
+		if(identifier != null){
+			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+			SharedPreferences.Editor editor = sharedPref.edit();
+			editor.putString(identifier, Parameters.getAsString(identifier));
+			editor.commit();
 		}
 	}
 }
