@@ -42,5 +42,14 @@
     <string name="confirm_split_key">uk.org.sucu.tatupload.confirmSplit</string>
     <string name="tutorial_ver_key">uk.org.sucu.tatupload.tutorialVersion</string>
     <string name="title_activity_parameter_view">ParameterViewActivity</string>
-
+    <string name="title_activity_option">OptionActivity</string>
+    <string name="scriptURL">https://script.google.com/macros/s/AKfycbzfPd5U7tbyOmK8EERxB8LPn53CzLy_nzXzAu2jb2_fYC8V_aof/exec</string>
+	<string name="parameter_indicator">uk.org.sucu.tatupload.PARAMETER</string>
+	<string name="flavour_parameter">uk.org.sucu.tatupload.FLAVOUR_PARAMETER</string>
+	<string name="question_parameter">uk.org.sucu.tatupload.QUESTION_PARAMETER</string>
+	<string name="location_parameter">uk.org.sucu.tatupload.LOCATION_PARAMETER</string>
+    <string name="flavour_heading">Toastie flavour</string>
+    <string name="question_heading">Question asked</string>
+    <string name="location_heading">Delivery location</string>
+    
 </resources>
