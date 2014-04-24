@@ -45,7 +45,6 @@ public class ParameterViewActivity extends Activity {
 		ListView paramListView = (ListView) findViewById(R.id.param_list);
 		adapter = new ParameterArrayAdapter(this, R.id.param_list, parameter);
 		paramListView.setAdapter(adapter);
-		//adapter.notifyDataSetChanged();
 		
 		// Show the Up button in the action bar.
 		setupActionBar();

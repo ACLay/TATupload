@@ -3,7 +3,6 @@ package uk.org.sucu.tatupload;
 import java.util.Collection;
 
 import uk.org.sucu.tatupload.message.SmsList;
-import uk.org.sucu.tatupload.message.SmsReceiver;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.views.QueuedSmsView;
 import android.app.Activity;
@@ -30,8 +29,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setupUI();
-		
-		SmsReceiver.giveMainActivity(this);
 
 		int versionShown = SettingsAccessor.getTutorialVersionSeen(this);
 		
@@ -52,16 +49,7 @@ public class MainActivity extends Activity {
 			((TatUploadApplication)getApplication()).setTutorialVersionShown(TUTORIAL_VERSION);
 		}
 
-	}
-/*
-	//when the activity resumes, redraw the message queue, other activities may have dequeued texts.
-	protected void onResume(){
-		super.onResume();
-		/*if(adapter != null){
-			adapter.notifyDataSetChanged();
-		}
-	}*/
-	
+	}	
 	
 
 	private void setupUI(){
@@ -103,13 +91,11 @@ public class MainActivity extends Activity {
 
 	public void clearMessages(View v){
 		SmsList.clearList();
-		//adapter.notifyDataSetChanged();
 	}
 	//synchronized prevents these 2 from fighting.
 	//TODO should these methods be static in the application?
 	public void addMessages(Collection<Text> msgs){
 		SmsList.addTexts(msgs);
-		//adapter.notifyDataSetChanged();
 	}
 
 	public void startTat(View v){
@@ -125,7 +111,6 @@ public class MainActivity extends Activity {
 	}
 	
 	public void showSettings(View v){
-		//Intent intent = new Intent(this, SettingsActivity.class);
 		Intent intent = new Intent(this, OptionActivity.class);
 		startActivity(intent);
 	}

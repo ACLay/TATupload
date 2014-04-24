@@ -3,7 +3,6 @@ package uk.org.sucu.tatupload.message;
 import java.util.Collection;
 import java.util.HashMap;
 
-import uk.org.sucu.tatupload.MainActivity;
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.SettingsAccessor;
 import uk.org.sucu.tatupload.parse.Parser;
@@ -19,11 +18,6 @@ import android.telephony.SmsMessage;
 
 public class SmsReceiver extends BroadcastReceiver{
 
-	private static MainActivity activity;
-	//TODO I don't like that this code is still necessary
-	public static void giveMainActivity(MainActivity main){
-		activity = main;
-	}
 	//TODO option to upload names from contacts with messages
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -87,12 +81,6 @@ public class SmsReceiver extends BroadcastReceiver{
 	}
 	
 	private void queueMessages(Collection<Text> messages){
-		/*ArrayList<Text> queue = TatUploadApplication.getMessageList();
-		synchronized(queue){
-			for(Text text : messages){
-				queue.add(text);
-			}
-		}*/
 		SmsList.addTexts(messages);
 	}
 

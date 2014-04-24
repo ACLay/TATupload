@@ -15,9 +15,6 @@ public class TatUploadApplication extends Application {
 
 	private static int tutorialVersionShown;
 	
-	/*public static boolean getProcessingTexts(){
-		return processingTexts;
-	}*/
 	public void setProcessingTexts(boolean b){
 		processingTexts = b;
 		//TODO is there a better way to do this?
@@ -27,9 +24,6 @@ public class TatUploadApplication extends Application {
 		editor.commit();
 	}
 
-	/*public static boolean getConfirmSplit(){
-		return confirmSplit;
-	}*/
 	public void setConfirmSplit(boolean b){
 		confirmSplit = b;
 		
@@ -38,10 +32,6 @@ public class TatUploadApplication extends Application {
 		editor.putBoolean(getString(R.string.confirm_split_key), confirmSplit);
 		editor.commit();
 	}
-
-	/*public static ArrayList<Text> getMessageList(){
-		return messages;
-	}*/
 	
 	public void setFormName(String newName){
 		formName= newName;
@@ -51,17 +41,6 @@ public class TatUploadApplication extends Application {
 		editor.putString(getString(R.string.form_name_key), formName);
 		editor.commit();
 	}
-	/*public static String getFormName(){
-		return formName;
-	}*/
-
-	/*public static String getScriptURL(){
-		return uploadScript;
-	}*/
-	
-	/*public static int getTutorialVersionShown(){
-		return tutorialVersionShown;
-	}*/
 	
 	public void setTutorialVersionShown(int version){
 		tutorialVersionShown = version;
@@ -76,12 +55,7 @@ public class TatUploadApplication extends Application {
 		super.onCreate();
 		//Load the application settings
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		/*
-		formName = sharedPref.getString(getString(R.string.form_name_key), "");
-		processingTexts = sharedPref.getBoolean(getString(R.string.processing_key), false);
-		confirmSplit = sharedPref.getBoolean(getString(R.string.confirm_split_key), false);
-		tutorialVersionShown = sharedPref.getInt(getString(R.string.tutorial_ver_key), 0);
-		*/
+		//TODO can this bit be done in another section, maybe remove this method altogether?
 		String flavour = sharedPref.getString(Parameters.FLAVOUR_PARAMETER, Parameters.defaultFlavour);
 		String location = sharedPref.getString(Parameters.LOCATION_PARAMETER, Parameters.defaultLocation);
 		String question = sharedPref.getString(Parameters.QUESTION_PARAMETER, Parameters.defaultQuestion);
@@ -89,14 +63,5 @@ public class TatUploadApplication extends Application {
 		Parameters.loadParameters(flavour, location, question);
 		
 	}
-	
-	/*public void saveParameter(String identifier){
-		if(identifier != null){
-			SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-			SharedPreferences.Editor editor = sharedPref.edit();
-			editor.putString(identifier, Parameters.getAsString(identifier));
-			editor.commit();
-		}
-	}*/
 
 }
