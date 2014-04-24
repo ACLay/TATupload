@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import uk.org.sucu.tatupload.MainActivity;
 import uk.org.sucu.tatupload.NetCaller;
-import uk.org.sucu.tatupload.TatUploadApplication;
+import uk.org.sucu.tatupload.SettingsAccessor;
 import uk.org.sucu.tatupload.parse.Parser;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,7 +28,7 @@ public class SmsReceiver extends BroadcastReceiver{
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		//only proceed if we're processing
-		if(TatUploadApplication.getProcessingTexts()){
+		if(SettingsAccessor.getProcessingTexts(context)){
 
 			//get the SMS message passed in
 			Bundle bundle = intent.getExtras();
@@ -56,7 +56,7 @@ public class SmsReceiver extends BroadcastReceiver{
 				Collection<Text> texts = numberBodyMap.values();
 
 				//process the message!
-				if(TatUploadApplication.getConfirmSplit()){
+				if(SettingsAccessor.getAutoQueueTexts(context)){
 					//queue it if we're confirming before upload, or there's no network connection
 					queueMessages(texts);
 					
@@ -93,14 +93,14 @@ public class SmsReceiver extends BroadcastReceiver{
 				queue.add(text);
 			}
 		}*/
-		activity.addMessages(messages);
+		SmsList.addTexts(messages);
 	}
 
 	public void autoProcess(Text text, Context context){
 
 		String body = text.getBody();
 		String number = text.getNumber();
-		String formName = TatUploadApplication.getFormName();
+		String formName = SettingsAccessor.getFormName(context);
 
 		String question = "";
 		for(String s : Parser.getQuestion(body)){
@@ -118,10 +118,9 @@ public class SmsReceiver extends BroadcastReceiver{
 		}
 
 
-		Uri uri = Parser.createUploadUri(formName, number, question, location, toastie, body);
+		Uri uri = Parser.createUploadUri(formName, number, question, location, toastie, body, context);
 		NetCaller.callScript(uri, context);
 
 	}
-
 
 }
