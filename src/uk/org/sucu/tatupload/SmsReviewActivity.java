@@ -2,6 +2,7 @@ package uk.org.sucu.tatupload;
 
 import java.util.ArrayList;
 
+import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.parse.Parser;
 import android.annotation.TargetApi;
@@ -108,20 +109,17 @@ public class SmsReviewActivity extends Activity {
 			EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
 			EditText toastieEdit = (EditText) findViewById(R.id.messageToastieEditText);
 			EditText bodyEdit = (EditText) findViewById(R.id.messageBodyEditText);
-			String formName = TatUploadApplication.getFormName();
+			String formName = SettingsAccessor.getFormName(this);
 
 			String question = questionEdit.getText().toString();
 			String location = locationEdit.getText().toString();
 			String toastie = toastieEdit.getText().toString();
 			String body = bodyEdit.getText().toString();
 			
-			Uri uri = Parser.createUploadUri(formName, text.getNumber(), question, location, toastie, body);
+			Uri uri = Parser.createUploadUri(formName, text.getNumber(), question, location, toastie, body, this);
 			NetCaller.callScript(uri, this);
 			
-			ArrayList<Text> texts = TatUploadApplication.getMessageList();
-			synchronized(texts){
-				texts.remove(text);
-			}				
+			SmsList.removeText(text);
 
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
@@ -136,10 +134,8 @@ public class SmsReviewActivity extends Activity {
 
 	public void discardText(View v){
 		//TODO R U SURE BOX
-		ArrayList<Text> texts = TatUploadApplication.getMessageList();
-		synchronized(texts){
-			texts.remove(text);
-		}
+		SmsList.removeText(text);
+
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 		this.finish();
