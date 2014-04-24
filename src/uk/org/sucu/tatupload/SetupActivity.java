@@ -37,18 +37,18 @@ public class SetupActivity extends Activity {
 
 		if(NetCaller.isOnlineWithErrorBox(this)){
 
-			((TatUploadApplication) getApplication()).setProcessingTexts(true);
-
 			EditText formNameEdit = (EditText) findViewById(R.id.editText1);
 			String formName = formNameEdit.getText().toString();
 			((TatUploadApplication) getApplication()).setFormName(formName);
 
-			Uri uri = Parser.createNewFormUri(formName);
+			Uri uri = Parser.createNewFormUri(formName, this);
 			NetCaller.callScript(uri, this);
 
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 			
+			((TatUploadApplication) getApplication()).setProcessingTexts(true);
+
 			this.finish();
 		}
 	}
