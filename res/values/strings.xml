@@ -9,7 +9,7 @@
     <string name="not_processing_texts">Not currently processing texts</string>
     <string name="toggle_button">Toggle</string>
     <string name="form_name">Form Name: </string>
-    <string name="confirm_checkbox">Confirm extraction before upload</string>
+    <string name="confirm_checkbox">Queue all messages</string>
     <string name="modify_button">Modify data extraction parameters</string>
     <string name="clear_queue_button">Clear queue</string>
     <string name="queue_title">Messages to process:</string>
@@ -51,5 +51,5 @@
     <string name="flavour_heading">Toastie flavour</string>
     <string name="question_heading">Question asked</string>
     <string name="location_heading">Delivery location</string>
-    
+    <string name="restore_defaults">Restore defaults</string>
 </resources>
