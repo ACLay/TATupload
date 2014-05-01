@@ -10,8 +10,8 @@ public class OptionActivity extends PreferenceActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-        
-        
+        //TODO reenable 'restore defaults' functionality
+        //TODO show current form name (if processing)?
     }
 
 }
