@@ -46,4 +46,6 @@
     </Preference>
     
     </PreferenceCategory>
+    
+    <Preference android:title="@string/restore_defaults" android:key="@string/restore_defaults"/>
 </PreferenceScreen>
