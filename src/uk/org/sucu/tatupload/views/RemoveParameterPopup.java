@@ -1,7 +1,7 @@
 package uk.org.sucu.tatupload.views;
 
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 
+@SuppressLint("ViewConstructor")
 public class RemoveParameterPopup extends PopupWindow {
 
 	private Spinner dropDown;
