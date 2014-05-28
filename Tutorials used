@@ -32,3 +32,6 @@ Checking network connection:
 	
 Saving arraylists with API level < 11
 	http://stackoverflow.com/questions/7057845/save-arraylist-to-sharedpreferences
+	
+Non-crashing spinners in higher versions of android (so helpful, much gladness, ahhh)
+	http://stackoverflow.com/a/16032355

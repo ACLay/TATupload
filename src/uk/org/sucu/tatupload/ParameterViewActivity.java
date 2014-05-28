@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import uk.org.sucu.tatupload.parse.Parameters;
 import uk.org.sucu.tatupload.views.AddParameterPopup;
 import uk.org.sucu.tatupload.views.EditParameterPopup;
-import uk.org.sucu.tatupload.views.RemoveParameterPopup;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,17 +14,26 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
+import android.widget.Spinner;
 
 public class ParameterViewActivity extends Activity {
 
 	private ArrayList<String> parameter;
 	private ParameterArrayAdapter adapter;
 	private String parameterIdentifier;
+	
+	private PopupWindow popup;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,18 +96,19 @@ public class ParameterViewActivity extends Activity {
 	}
 
 	public void openAddDialogue(View v){
-		AddParameterPopup popup = new AddParameterPopup(this, parameter);
-		popup.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss() {
-				adapter.notifyDataSetChanged();
-				saveParameter();
-			}
-		});
-		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
+		popup = new AddParameterPopup(this, parameter);
+		openPopup();
 	}
 	public void openEditDialogue(View v){
-		EditParameterPopup popup = new EditParameterPopup(this, parameter);
+		popup = makeEditPopup();
+		openPopup();
+	}
+	public void openRemoveDialogue(View v){
+		popup = makeRemovalPopup();
+		openPopup();
+	}
+	
+	private void openPopup(){
 		popup.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss() {
@@ -109,16 +118,28 @@ public class ParameterViewActivity extends Activity {
 		});
 		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
 	}
-	public void openRemoveDialogue(View v){
-		RemoveParameterPopup popup = new RemoveParameterPopup(ParameterViewActivity.this, parameter);
-		popup.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss() {
-				adapter.notifyDataSetChanged();
-				saveParameter();
-			}
-		});
-		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
+	
+	public void closePopup(View v){
+		popup.dismiss();
+	}
+	
+	public void editParameter(View v){
+		Spinner spin = (Spinner) popup.getContentView().findViewById(R.id.removeSpinner);
+		String toChange = (String) spin.getSelectedItem();
+		EditText textbox = (EditText) popup.getContentView().findViewById(R.id.editParamTextField);
+		
+		int index = parameter.indexOf(toChange);
+		if(index != -1){//indexOf returns -1 if the object isn't present
+			parameter.set(index, textbox.getText().toString().toLowerCase());
+		}
+		closePopup(v);
+	}
+	
+	public void removeParameter(View v){
+		Spinner spin = (Spinner) popup.getContentView().findViewById(R.id.removeSpinner);
+		String toTake = (String) spin.getSelectedItem();
+		parameter.remove(toTake);
+		closePopup(v);
 	}
 	
 	private void saveParameter(){
@@ -137,4 +158,60 @@ public class ParameterViewActivity extends Activity {
 		}
 	}
 	
+	private PopupWindow makeRemovalPopup(){
+		
+		View viewToLoad = LayoutInflater.from(this).inflate(R.layout.remove_param_popup, null);		
+		PopupWindow popup = new PopupWindow(viewToLoad, 200, 150, true);
+		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.removeSpinner);
+		
+		ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spin.setAdapter(adapter);
+		
+		Button cancel = (Button) viewToLoad.findViewById(R.id.cancelRemove);
+		cancel.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				closePopup(arg0);
+			}
+		});
+		
+		Button remove = (Button) viewToLoad.findViewById(R.id.removeButton);
+		remove.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				removeParameter(v);
+			}
+		});
+		
+		return popup;
+	}
+
+	private PopupWindow makeEditPopup(){
+		View viewToLoad = LayoutInflater.from(this).inflate(R.layout.edit_param_popup, null);		
+		PopupWindow popup = new PopupWindow(viewToLoad, 200, 300, true);
+		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.editSpinner);
+		
+		ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spin.setAdapter(adapter);
+		
+		Button cancel = (Button) viewToLoad.findViewById(R.id.cancelEdit);
+		cancel.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				closePopup(arg0);
+			}
+		});
+		
+		Button remove = (Button) viewToLoad.findViewById(R.id.editButton);
+		remove.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				removeParameter(v);
+			}
+		});
+		
+		return popup;
+	}
 }
