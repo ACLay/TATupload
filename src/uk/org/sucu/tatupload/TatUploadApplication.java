@@ -1,5 +1,10 @@
 package uk.org.sucu.tatupload;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.apache.pig.impl.util.ObjectSerializer;
+
 import uk.org.sucu.tatupload.parse.Parameters;
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -56,11 +61,41 @@ public class TatUploadApplication extends Application {
 		//Load the application settings
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		//TODO can this bit be done in another section, maybe remove this method altogether?
-		String flavour = sharedPref.getString(Parameters.FLAVOUR_PARAMETER, Parameters.defaultFlavour);
-		String location = sharedPref.getString(Parameters.LOCATION_PARAMETER, Parameters.defaultLocation);
-		String question = sharedPref.getString(Parameters.QUESTION_PARAMETER, Parameters.defaultQuestion);
+		String flavourSer = sharedPref.getString(Parameters.FLAVOUR_PARAMETER, null);
+		String locationSer = sharedPref.getString(Parameters.LOCATION_PARAMETER, null);
+		String questionSer = sharedPref.getString(Parameters.QUESTION_PARAMETER, null);
 		
-		Parameters.loadParameters(flavour, location, question);
+		ArrayList<String> flavourList = null;
+		try {
+			flavourList = (ArrayList<String>) ObjectSerializer.deserialize(flavourSer);
+		} catch (IOException e) {
+			
+		}
+		if(flavourList == null){
+			flavourList = Parameters.getDefaultList(Parameters.FLAVOUR_PARAMETER);
+		}
+			
+		ArrayList<String> locationList = null;
+		try {
+			locationList = (ArrayList<String>) ObjectSerializer.deserialize(locationSer);
+		} catch (IOException e) {
+			
+		}
+		if(locationList == null){
+			locationList = Parameters.getDefaultList(Parameters.LOCATION_PARAMETER);
+		}
+
+		ArrayList<String> questionList = null;
+		try {
+			questionList = (ArrayList<String>) ObjectSerializer.deserialize(questionSer);
+		} catch (IOException e) {
+			
+		}
+		if(questionList == null){
+			questionList = Parameters.getDefaultList(Parameters.QUESTION_PARAMETER);
+		}
+
+		Parameters.loadParameters(flavourList, locationList, questionList);
 		
 	}
 

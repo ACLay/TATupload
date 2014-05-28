@@ -29,3 +29,6 @@ Popup gravity allignment:
 	
 Checking network connection:
 	http://stackoverflow.com/questions/4238921/android-detect-whether-there-is-an-internet-connection-available
+	
+Saving arraylists with API level < 11
+	http://stackoverflow.com/questions/7057845/save-arraylist-to-sharedpreferences

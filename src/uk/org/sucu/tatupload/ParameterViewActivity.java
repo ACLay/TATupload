@@ -1,5 +1,6 @@
 package uk.org.sucu.tatupload;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.parse.Parameters;
@@ -8,6 +9,7 @@ import uk.org.sucu.tatupload.views.EditParameterPopup;
 import uk.org.sucu.tatupload.views.RemoveParameterPopup;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -108,7 +110,7 @@ public class ParameterViewActivity extends Activity {
 		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
 	}
 	public void openRemoveDialogue(View v){
-		RemoveParameterPopup popup = new RemoveParameterPopup(this, parameter);
+		RemoveParameterPopup popup = new RemoveParameterPopup(ParameterViewActivity.this, parameter);
 		popup.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss() {
@@ -121,7 +123,17 @@ public class ParameterViewActivity extends Activity {
 	
 	private void saveParameter(){
 		if(parameterIdentifier != null){
-			Parameters.saveParameter(parameterIdentifier, this);
+			try {
+				Parameters.saveParameter(parameterIdentifier, this);
+			} catch (IOException e) {
+				new AlertDialog.Builder(this)
+						.setTitle("TATupload")  
+						.setMessage("Unable to save the parameter.")
+						.setPositiveButton("Okay", null)  
+						.setCancelable(false)  
+						.create()  
+						.show();
+			}
 		}
 	}
 	
