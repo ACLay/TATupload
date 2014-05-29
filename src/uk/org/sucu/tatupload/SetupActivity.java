@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
@@ -26,12 +25,6 @@ public class SetupActivity extends Activity {
 		nameBox.setText(date + " " + getString(R.string.text_a_toastie));
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.setup, menu);
-		return true;
-	}
 
 	public void startTat(View v){
 
