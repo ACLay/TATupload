@@ -52,4 +52,7 @@
     <string name="question_heading">Question asked</string>
     <string name="location_heading">Delivery location</string>
     <string name="restore_defaults">Restore defaults</string>
+    <string name="change_label">Change to:</string>
+    <string name="change_param">Change</string>
+    <string name="remove_param">Remove</string>
 </resources>

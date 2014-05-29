@@ -19,13 +19,13 @@
             android:id="@+id/cancelRemove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel" />
+            android:text="@string/cancel" />
         
         <Button
             android:id="@+id/removeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remove" />
+            android:text="@string/remove_param" />
 
     </LinearLayout>
 
