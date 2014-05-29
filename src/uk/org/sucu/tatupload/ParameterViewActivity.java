@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.parse.Parameters;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -121,6 +122,7 @@ public class ParameterViewActivity extends Activity {
 		popup.dismiss();
 	}
 	
+	@SuppressLint("DefaultLocale")
 	public void addParameter(){
 		EditText textbox = (EditText) popup.getContentView().findViewById(R.id.addParamTextField);
 		String param = textbox.getText().toString().toLowerCase();
@@ -130,7 +132,8 @@ public class ParameterViewActivity extends Activity {
 		}
 		closePopup();
 	}
-	
+
+	@SuppressLint("DefaultLocale")
 	public void editParameter(){
 		Spinner spin = (Spinner) popup.getContentView().findViewById(R.id.editSpinner);
 		String toChange = (String) spin.getSelectedItem();

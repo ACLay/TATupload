@@ -56,6 +56,7 @@ public class TatUploadApplication extends Application {
 		editor.commit();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void onCreate(){
 		super.onCreate();
 		//Load the application settings
