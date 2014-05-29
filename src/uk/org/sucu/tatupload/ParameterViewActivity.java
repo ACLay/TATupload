@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.parse.Parameters;
 import uk.org.sucu.tatupload.views.AddParameterPopup;
-import uk.org.sucu.tatupload.views.EditParameterPopup;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -119,7 +118,7 @@ public class ParameterViewActivity extends Activity {
 		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
 	}
 	
-	public void closePopup(View v){
+	public void closePopup(){
 		popup.dismiss();
 	}
 	
@@ -132,14 +131,14 @@ public class ParameterViewActivity extends Activity {
 		if(index != -1){//indexOf returns -1 if the object isn't present
 			parameter.set(index, textbox.getText().toString().toLowerCase());
 		}
-		closePopup(v);
+		closePopup();
 	}
 	
-	public void removeParameter(View v){
+	public void removeParameter(){
 		Spinner spin = (Spinner) popup.getContentView().findViewById(R.id.removeSpinner);
 		String toTake = (String) spin.getSelectedItem();
 		parameter.remove(toTake);
-		closePopup(v);
+		closePopup();
 	}
 	
 	private void saveParameter(){
@@ -164,6 +163,7 @@ public class ParameterViewActivity extends Activity {
 		PopupWindow popup = new PopupWindow(viewToLoad, 200, 150, true);
 		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.removeSpinner);
 		
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(adapter);
@@ -172,7 +172,7 @@ public class ParameterViewActivity extends Activity {
 		cancel.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				closePopup(arg0);
+				closePopup();
 			}
 		});
 		
@@ -180,7 +180,7 @@ public class ParameterViewActivity extends Activity {
 		remove.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				removeParameter(v);
+				removeParameter();
 			}
 		});
 		
@@ -192,6 +192,7 @@ public class ParameterViewActivity extends Activity {
 		PopupWindow popup = new PopupWindow(viewToLoad, 200, 300, true);
 		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.editSpinner);
 		
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(adapter);
@@ -200,7 +201,7 @@ public class ParameterViewActivity extends Activity {
 		cancel.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				closePopup(arg0);
+				closePopup();
 			}
 		});
 		
@@ -208,7 +209,7 @@ public class ParameterViewActivity extends Activity {
 		remove.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				removeParameter(v);
+				removeParameter();
 			}
 		});
 		
