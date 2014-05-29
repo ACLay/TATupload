@@ -131,8 +131,8 @@ public class ParameterViewActivity extends Activity {
 		closePopup();
 	}
 	
-	public void editParameter(View v){
-		Spinner spin = (Spinner) popup.getContentView().findViewById(R.id.removeSpinner);
+	public void editParameter(){
+		Spinner spin = (Spinner) popup.getContentView().findViewById(R.id.editSpinner);
 		String toChange = (String) spin.getSelectedItem();
 		EditText textbox = (EditText) popup.getContentView().findViewById(R.id.editParamTextField);
 		
@@ -218,7 +218,7 @@ public class ParameterViewActivity extends Activity {
 		remove.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				removeParameter();
+				editParameter();
 			}
 		});
 		
