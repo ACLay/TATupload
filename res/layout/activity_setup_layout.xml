@@ -27,7 +27,7 @@
 
         <EditText
             android:id="@+id/editText1"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
