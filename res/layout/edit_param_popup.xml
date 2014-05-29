@@ -38,18 +38,18 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/editButton"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Change" />
-
-        <Button
             android:id="@+id/cancelEdit"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel" />
+        
+        <Button
+            android:id="@+id/editButton"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change" />
 
     </LinearLayout>
 
