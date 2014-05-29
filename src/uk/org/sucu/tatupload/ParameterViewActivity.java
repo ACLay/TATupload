@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.parse.Parameters;
-import uk.org.sucu.tatupload.views.AddParameterPopup;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -95,7 +94,7 @@ public class ParameterViewActivity extends Activity {
 	}
 
 	public void openAddDialogue(View v){
-		popup = new AddParameterPopup(this, parameter);
+		popup = makeAddPopup();
 		openPopup();
 	}
 	public void openEditDialogue(View v){
@@ -118,8 +117,18 @@ public class ParameterViewActivity extends Activity {
 		popup.showAtLocation(findViewById(R.id.parameterLayout), Gravity.CENTER, 0, 0);
 	}
 	
-	public void closePopup(){
+	private void closePopup(){
 		popup.dismiss();
+	}
+	
+	public void addParameter(){
+		EditText textbox = (EditText) popup.getContentView().findViewById(R.id.addParamTextField);
+		String param = textbox.getText().toString().toLowerCase();
+		
+		if(!parameter.contains(param)){
+			parameter.add(param);
+		}
+		closePopup();
 	}
 	
 	public void editParameter(View v){
@@ -206,6 +215,29 @@ public class ParameterViewActivity extends Activity {
 		});
 		
 		Button remove = (Button) viewToLoad.findViewById(R.id.editButton);
+		remove.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				removeParameter();
+			}
+		});
+		
+		return popup;
+	}
+	
+	private PopupWindow makeAddPopup(){
+		View viewToLoad = LayoutInflater.from(this).inflate(R.layout.add_param_popup, null);		
+		PopupWindow popup = new PopupWindow(viewToLoad, 200, 150, true);
+		
+		Button cancel = (Button) viewToLoad.findViewById(R.id.cancelAdd);
+		cancel.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				closePopup();
+			}
+		});
+		
+		Button remove = (Button) viewToLoad.findViewById(R.id.addButton);
 		remove.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {

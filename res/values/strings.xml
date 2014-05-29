@@ -55,4 +55,5 @@
     <string name="change_label">Change to:</string>
     <string name="change_param">Change</string>
     <string name="remove_param">Remove</string>
+    <string name="add_param">Add</string>
 </resources>
