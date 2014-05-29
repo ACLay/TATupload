@@ -1,0 +1,8 @@
+This is a Google apps script that creates the form and spreadsheet, and enters the texts sent to it contained in the called URL.
+A project that runs the code can be created at script.google.com
+
+If you modify and use the script youself, the URL of the deployed script will need to be updated in the android apps strings.xml file.
+
+The script is given in 3 files, but this just is for readability by grouping functions (entering texts, creating the form, receiving the call) and should be able to run from a single file with no issues.
+
+When deploying, "Execute the app as:" should be set to "User accessing the web app". Otherwise users of the app who are not you, will be unable to access the submitted messages and created forms.
