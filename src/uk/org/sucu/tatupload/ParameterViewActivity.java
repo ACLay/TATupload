@@ -68,9 +68,18 @@ public class ParameterViewActivity extends Activity {
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setupActionBar() {
+		String text;
+		
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
+			getActionBar().setTitle(Parameters.getParamDescription(parameterIdentifier, this));
+			text = "";
+		} else {
+			text = Parameters.getParamDescription(parameterIdentifier, this);
 		}
+		
+		TextView tv = (TextView) findViewById(R.id.param_name_label);
+		tv.setText(text);
 	}
 
 	@Override
