@@ -31,15 +31,12 @@ public class OptionActivity extends PreferenceActivity {
 	
 	private void resetParameters(){
 		
-		int ver_seen = SettingsAccessor.getTutorialVersionSeen(this);
-		boolean processing = SettingsAccessor.getProcessingTexts(this);
-
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		//clear the user settings from the file, keeping the tutorial version seen
+		//clear the users parameter settings from the file, keeping the tutorial version seen
 		sharedPref.edit()
-			.clear()
-			.putBoolean(getString(R.string.processing_key), processing)
-			.putInt(getString(R.string.tutorial_ver_key), ver_seen)
+			.remove(Parameters.FLAVOUR_PARAMETER)
+			.remove(Parameters.LOCATION_PARAMETER)
+			.remove(Parameters.QUESTION_PARAMETER)
 			.commit();
 		Parameters.restoreDefaults();//update the values kept in memory
 	}
