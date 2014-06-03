@@ -14,7 +14,7 @@
         android:id="@+id/param_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/invalid_desc" />
 
     <ListView
     	android:id="@+id/param_list"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="openAddDialogue"
-            android:text="Add" />
+            android:text="@string/add_param" />
 
         <Button
             android:id="@+id/edit_param_button"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="openEditDialogue"
-            android:text="Edit" />
+            android:text="@string/change_param" />
 
         <Button
             android:id="@+id/remove_param_button"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="openRemoveDialogue"
-            android:text="Remove" />
+            android:text="@string/remove_param" />
 
     </LinearLayout>
 
