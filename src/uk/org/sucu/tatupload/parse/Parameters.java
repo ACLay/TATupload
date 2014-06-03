@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.apache.pig.impl.util.ObjectSerializer;
 
+import uk.org.sucu.tatupload.R;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -63,6 +64,24 @@ public class Parameters {
 			return questionParameter;
 		}
 		return null;
+	}
+	
+	public static String getParamDescription(String identifier, Context c){
+		
+		if(isValidIdentifier(identifier)){
+			if(identifier.equals(FLAVOUR_PARAMETER)){
+				return c.getString(R.string.flavour_desc);
+			}
+			if(identifier.equals(LOCATION_PARAMETER)){
+				return c.getString(R.string.location_desc);
+			}
+			if(identifier.equals(QUESTION_PARAMETER)){
+				return c.getString(R.string.question_desc);
+			}
+		}
+		
+		return c.getString(R.string.invalid_desc);
+				
 	}
 	
 	public static String getAsString(String identifier)throws NotSerializableException{

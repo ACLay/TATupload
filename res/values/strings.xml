@@ -56,4 +56,8 @@
     <string name="change_param">Change</string>
     <string name="remove_param">Remove</string>
     <string name="add_param">Add</string>
+    <string name="invalid_desc">Invalid Parameter, you shouldn\'t see this.</string>
+    <string name="flavour_desc">Toastie flavours:</string>
+    <string name="location_desc">Location names:</string>
+    <string name="question_desc">Question indicators:</string>
 </resources>
