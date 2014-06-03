@@ -57,7 +57,7 @@
         </activity>
         <activity
             android:name="uk.org.sucu.tatupload.OptionActivity"
-            android:label="@string/title_activity_option" >
+            android:label="@string/settings" >
         </activity>
     </application>
 
