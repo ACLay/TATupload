@@ -92,8 +92,7 @@ public class MainActivity extends Activity {
 	public void clearMessages(View v){
 		SmsList.clearList();
 	}
-	//synchronized prevents these 2 from fighting.
-	//TODO should these methods be static in the application?
+
 	public void addMessages(Collection<Text> msgs){
 		SmsList.addTexts(msgs);
 	}
@@ -105,7 +104,6 @@ public class MainActivity extends Activity {
 	}
 	
 	public void stopTat(View v){
-		//TODO is there a better way to do this?
 		((TatUploadApplication) getApplication()).setProcessingTexts(false);
 		setupUI();
 	}
