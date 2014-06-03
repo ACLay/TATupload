@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class ParameterViewActivity extends Activity {
 
@@ -41,6 +42,9 @@ public class ParameterViewActivity extends Activity {
 		
 		Intent intent = getIntent();
 		parameterIdentifier = intent.getStringExtra(Parameters.PARAMETER);
+		
+		TextView tv = (TextView) findViewById(R.id.param_name_label);
+		tv.setText(Parameters.getParamDescription(parameterIdentifier, this));
 		
 		parameter = Parameters.getList(parameterIdentifier);
 		if(parameterIdentifier == null) {
