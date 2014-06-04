@@ -1,6 +1,5 @@
 package uk.org.sucu.tatupload;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.parse.Parameters;
