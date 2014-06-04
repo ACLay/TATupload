@@ -60,4 +60,5 @@
     <string name="flavour_desc">Toastie flavours:</string>
     <string name="location_desc">Location names:</string>
     <string name="question_desc">Question indicators:</string>
+    <string name="param_load_error">Unable to load stored parameter data. Check the settings are correct before running TAT</string>
 </resources>

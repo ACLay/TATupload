@@ -1,8 +1,15 @@
 package uk.org.sucu.tatupload;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.apache.pig.impl.util.ObjectSerializer;
+
+import uk.org.sucu.tatupload.parse.Parameters;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 public class SettingsAccessor {
 	
@@ -28,6 +35,26 @@ public class SettingsAccessor {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 		int versionSeen = sharedPref.getInt(context.getString(R.string.tutorial_ver_key), 0);
 		return versionSeen;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<String> getSavedParameter(Context context, String parameter){
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+		String serialData = sharedPref.getString(parameter, null);
+		ArrayList<String> list = null;
+		
+		try {
+			list = (ArrayList<String>) ObjectSerializer.deserialize(serialData);
+		} catch (IOException e) {
+			if(getTutorialVersionSeen(context) != 0){
+				Toast.makeText(context, context.getString(R.string.param_load_error), Toast.LENGTH_LONG).show();
+			}
+		}
+		
+		if(list == null){//The serializer will return null if the string is null or length 0
+			return Parameters.getDefaultList(parameter);
+		}
+		return list;
 	}
 	
 }
