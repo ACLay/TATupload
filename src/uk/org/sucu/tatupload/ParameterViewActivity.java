@@ -249,7 +249,7 @@ public class ParameterViewActivity extends Activity {
 		remove.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				removeParameter();
+				addParameter();
 			}
 		});
 		
