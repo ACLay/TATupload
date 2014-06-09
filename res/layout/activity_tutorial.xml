@@ -23,7 +23,8 @@
             android:id="@+id/tutorial_toastie_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/flavour_heading" />
+            android:text="@string/flavour_heading"
+            android:onClick="setupFlavours" />
 
         <TextView
             android:id="@+id/textView2"
@@ -40,7 +41,8 @@
             android:id="@+id/tutorial_location_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/location_heading" />
+            android:text="@string/location_heading"
+            android:onClick="setupLocation" />
 
         <TextView
             android:id="@+id/textView3"
