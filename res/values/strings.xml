@@ -44,14 +44,14 @@
     <string name="title_activity_parameter_view">ParameterViewActivity</string>
     <string name="title_activity_option">OptionActivity</string>
     <string name="scriptURL">https://script.google.com/macros/s/AKfycbzfPd5U7tbyOmK8EERxB8LPn53CzLy_nzXzAu2jb2_fYC8V_aof/exec</string>
-	<string name="parameter_indicator">uk.org.sucu.tatupload.PARAMETER</string>
-	<string name="flavour_parameter">uk.org.sucu.tatupload.FLAVOUR_PARAMETER</string>
-	<string name="question_parameter">uk.org.sucu.tatupload.QUESTION_PARAMETER</string>
-	<string name="location_parameter">uk.org.sucu.tatupload.LOCATION_PARAMETER</string>
-    <string name="flavour_heading">Toastie flavour</string>
-    <string name="question_heading">Question asked</string>
-    <string name="location_heading">Delivery location</string>
-    <string name="restore_defaults">Restore defaults</string>
+    <string name="parameter_indicator">uk.org.sucu.tatupload.PARAMETER</string>
+    <string name="flavour_parameter">uk.org.sucu.tatupload.FLAVOUR_PARAMETER</string>
+    <string name="question_parameter">uk.org.sucu.tatupload.QUESTION_PARAMETER</string>
+    <string name="location_parameter">uk.org.sucu.tatupload.LOCATION_PARAMETER</string>
+    <string name="flavour_heading">Toastie flavours</string>
+    <string name="question_heading">Question identifiers</string>
+    <string name="location_heading">Delivery locations</string>
+    <string name="restore_defaults">Restore default extraction parameters</string>
     <string name="change_label">Change to:</string>
     <string name="change_param">Change</string>
     <string name="remove_param">Remove</string>
@@ -61,4 +61,10 @@
     <string name="location_desc">Location names:</string>
     <string name="question_desc">Question indicators:</string>
     <string name="param_load_error">Unable to load stored parameter data. Check the settings are correct before running TAT</string>
+    <string name="title_activity_tutorial">Initial Setup</string>
+    <string name="first_run_tutorial">Welcome to TATupload. Before starting, please enter the names of toastie flavours you will be using, as well as major delivery locations, such as names of halls of residence.</string>
+	<string name="tutorial_done">Done</string>
+	<string name="flavour_explanation">The names of flavours that you are offering</string>
+	<string name="location_explanation">One of these words marks a sentence as being a location</string>
+	<string name="tutorial_info">TATupload puts data into a google drive spreadsheet using a form in the phones browser. Do not delete or rename the form in your google drive, or the app will not be able to use it. The documents are created in the drive of the google account signed into the phones browser. Login may be required when making the documents.</string>
 </resources>
