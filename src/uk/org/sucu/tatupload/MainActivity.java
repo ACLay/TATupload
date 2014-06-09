@@ -6,7 +6,6 @@ import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.views.QueuedSmsView;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -33,20 +32,13 @@ public class MainActivity extends Activity {
 
 		int versionShown = SettingsAccessor.getTutorialVersionSeen(this);
 		
-		if(versionShown < TUTORIAL_VERSION){
-			//show the tutorial once per run.
-			new AlertDialog.Builder(this)
-			.setTitle("TATupload")  
-			.setMessage("This app uses a google web script to create, and upload texts to, a google form. "
-					+ "The script run in your phones browser and will require authorisation from your google account the first time it is run. "
-					+ "Login information is stored by your browser, and is not accessed by TATupload. "
-					+ "The documents created will be in the Google drive belonging to the google account signed into the browser. "
-					+ "Before starting, please go to settings and enter names of flavours and locations you will be serving so they can be (hopefully) identified.")
-					.setPositiveButton("Okay", null)  
-					.setCancelable(false)  
-					.create()  
-					.show();
-
+		if(versionShown == 0){
+			Intent intent = new Intent(this, TutorialActivity.class);
+			startActivity(intent);
+		} else {// add extra cases inform the user of changes to the app, etc.
+			
+		}
+		if(versionShown != TUTORIAL_VERSION){
 			((TatUploadApplication)getApplication()).setTutorialVersionShown(TUTORIAL_VERSION);
 		}
 
