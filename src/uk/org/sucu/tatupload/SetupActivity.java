@@ -18,8 +18,8 @@ public class SetupActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_setup_layout);
-		EditText nameBox = (EditText) findViewById(R.id.editText1);
-		//generate a reccomended form name based on the date.
+		EditText nameBox = (EditText) findViewById(R.id.formNameEditText);
+		//generate a recommended form name based on the date.
 		Date d = new Date(Calendar.getInstance().getTimeInMillis());
 		String date = DateFormat.getDateInstance().format(d);
 		nameBox.setText(date + " " + getString(R.string.text_a_toastie));
@@ -30,7 +30,7 @@ public class SetupActivity extends Activity {
 
 		if(NetCaller.isOnlineWithErrorBox(this)){
 
-			EditText formNameEdit = (EditText) findViewById(R.id.editText1);
+			EditText formNameEdit = (EditText) findViewById(R.id.formNameEditText);
 			String formName = formNameEdit.getText().toString();
 			((TatUploadApplication) getApplication()).setFormName(formName);
 

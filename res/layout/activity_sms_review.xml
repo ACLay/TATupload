@@ -127,7 +127,7 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/uploadButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                 android:onClick="uploadMessage" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/resetReviewButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                 android:onClick="undoChanges" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/discardSmsButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                 android:onClick="discardText" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/cancelReviewButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -29,7 +29,7 @@
             android:text="@string/clear_queue_button" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/stopTatButton"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:onClick="stopTat" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/openSettingsButton"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
