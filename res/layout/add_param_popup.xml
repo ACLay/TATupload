@@ -21,14 +21,12 @@
 
         <Button
             android:id="@+id/cancelAdd"
-            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel" />
 
         <Button
             android:id="@+id/addButton"
-            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_param" />
