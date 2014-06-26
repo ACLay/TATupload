@@ -112,7 +112,6 @@ public class Parameters {
 			try {
 				data = Parameters.getAsString(identifier);
 			} catch (NotSerializableException e) {
-				// TODO Auto-generated catch block
 				throw new IOException(e.getMessage());
 			}
 			
