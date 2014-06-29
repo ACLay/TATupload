@@ -7,6 +7,8 @@ function doGet(e){
     output = submit(e);
   } else if (action == 'create'){
     output = createForm(e);
+  } else if (action == 'test'){
+    output = 'Browser test complete';
   } else {
     output = 'Invalid action code.';
   }

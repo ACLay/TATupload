@@ -27,7 +27,7 @@ public class TutorialActivity extends Activity {
 	}
 	
 	public void testBrowser(View v){
-		Uri uri = Uri.parse(getString(R.string.scriptURL));
+		Uri uri = Uri.parse(getString(R.string.scriptURL)+"?action=test");
 		NetCaller.callScriptWithChoice(uri, this);
 	}
 	
