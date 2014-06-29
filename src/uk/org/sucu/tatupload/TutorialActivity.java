@@ -2,6 +2,7 @@ package uk.org.sucu.tatupload;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -23,6 +24,11 @@ public class TutorialActivity extends Activity {
 		Intent intent = new Intent(this, ParameterViewActivity.class);
 		intent.putExtra(getString(R.string.parameter_indicator), getString(R.string.location_parameter));
 		startActivity(intent);
+	}
+	
+	public void testBrowser(View v){
+		Uri uri = Uri.parse(getString(R.string.scriptURL));
+		NetCaller.callScriptWithChoice(uri, this);
 	}
 	
 	public void done(View v){

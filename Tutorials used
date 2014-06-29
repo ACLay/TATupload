@@ -35,3 +35,6 @@ Saving arraylists with API level < 11
 	
 Non-crashing spinners in higher versions of android (so helpful, much gladness, ahhh)
 	http://stackoverflow.com/a/16032355
+	
+Opening links in the first available browser:
+	http://stackoverflow.com/a/23820594
