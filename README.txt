@@ -10,10 +10,12 @@ If there's a feature you think the app could benefit from, or is missing, please
 
 Permissions used:
 Receive SMS messages - This allows the app to access texts sent to the phone. Processing texts in TATupload can be stopped when you're not running TAT.
-View Network Connections - This lets the app tell if the phone is connected to the internet, and if it's possible to upload a text.
+View Network Connections - This lets the app tell if the phone is connected to the Internet, and if it's possible to upload a text.
 
 No guarantees are made that the data will be correctly extracted from texts, or that the data will always make it to the spreadsheet. Texts should be read carefully to ensure the correct toasties are delivered and that any reported food allergies are taken into account.
-By using this app you agree not to hold the developer responsible for any incorrect deliveries made or alergic incidents that arise from these. 
+By using this app you agree not to hold the developer responsible for any incorrect deliveries made or allergic incidents that arise from these. 
+
+Before starting be sure to enter the relevant locations and flavours that you will be providing to improve data extraction.
 
 I will be unable to fix problems on the servers for Google Drive or Google web scripts.
 
