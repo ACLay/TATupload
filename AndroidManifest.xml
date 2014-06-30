@@ -47,10 +47,6 @@
             android:label="@string/title_activity_setup" >
         </activity>
         <activity
-            android:name="uk.org.sucu.tatupload.SettingsActivity"
-            android:label="@string/title_activity_settings_" >
-        </activity>
-        <activity
             android:name="uk.org.sucu.tatupload.ParameterViewActivity"
             android:label="@string/title_activity_parameter_view"
             android:parentActivityName="uk.org.sucu.tatupload.SettingsActivity" >
