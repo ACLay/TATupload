@@ -28,19 +28,18 @@ public class Parameters {
 	}
 	
 	public static void loadParameters(ArrayList<String> flavour, ArrayList<String> location, ArrayList<String> question){
-		flavourParameter.clear();
-		for(String s : flavour){
-			flavourParameter.add(s);
-		}
-		
-		questionParameter.clear();
-		for(String s : question){
-			questionParameter.add(s);
-		}
-		
-		locationParameter.clear();
-		for(String s : location){
-			locationParameter.add(s);
+		loadParameter(FLAVOUR_PARAMETER, flavour);
+		loadParameter(QUESTION_PARAMETER, question);
+		loadParameter(LOCATION_PARAMETER, location);
+	}
+	
+	public static void loadParameter(String identifier, ArrayList<String> values){
+		if(isValidIdentifier(identifier)){
+			ArrayList<String> param = getList(identifier);
+			param.clear();
+			for(String s : values){
+				param.add(s);
+			}
 		}
 	}
 	
