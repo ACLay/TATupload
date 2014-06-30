@@ -11,9 +11,9 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -81,22 +81,31 @@ public class ParameterViewActivity extends Activity {
 		TextView tv = (TextView) findViewById(R.id.param_name_label);
 		tv.setText(text);
 	}
-
+	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.parameter_view, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item){
+		
+		switch (item.getItemId()){
+			case R.id.restore_default:
+				restoreDefaultParameter();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
+		
+	}
+
+	public void restoreDefaultParameter(){
+		ArrayList<String> defaults = Parameters.getDefaultList(parameterIdentifier);
+		Parameters.loadParameter(parameterIdentifier, defaults);
+		saveParameter();
+		adapter.notifyDataSetChanged();
 	}
 
 	public void openAddDialogue(View v){
