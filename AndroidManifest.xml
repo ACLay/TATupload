@@ -9,7 +9,6 @@
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -49,7 +48,7 @@
         <activity
             android:name="uk.org.sucu.tatupload.ParameterViewActivity"
             android:label="@string/title_activity_parameter_view"
-            android:parentActivityName="uk.org.sucu.tatupload.SettingsActivity" >
+            android:parentActivityName="uk.org.sucu.tatupload.OptionActivity" >
         </activity>
         <activity
             android:name="uk.org.sucu.tatupload.OptionActivity"
