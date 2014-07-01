@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
-	private static final int TUTORIAL_VERSION = 3;//TODO update this each time the tutorial is changed.
+	public static final int TUTORIAL_VERSION = 3;//TODO update this each time the tutorial is changed.
 
 	private MessageArrayAdapter adapter;
 
@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 		if(versionShown == 0){
 			Intent intent = new Intent(this, TutorialActivity.class);
 			startActivity(intent);
+			this.finish();
 		} else {// add extra cases inform the user of changes to the app, etc.
 			
 		}

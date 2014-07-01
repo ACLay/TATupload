@@ -32,6 +32,11 @@ public class TutorialActivity extends Activity {
 	}
 	
 	public void done(View v){
+		//update the saved value of seen tutorial version
+		((TatUploadApplication)getApplication()).setTutorialVersionShown(MainActivity.TUTORIAL_VERSION);
+		//relaunch the main activity
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
 		this.finish();
 	}
 }
