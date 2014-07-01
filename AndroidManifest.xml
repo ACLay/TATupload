@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="uk.org.sucu.tatupload.MainActivity"
+            android:name="uk.org.sucu.tatupload.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,29 +34,29 @@
         </receiver>
 
         <activity
-            android:name="uk.org.sucu.tatupload.SmsReviewActivity"
+            android:name="uk.org.sucu.tatupload.activity.SmsReviewActivity"
             android:label="@string/title_activity_sms_review"
-            android:parentActivityName="uk.org.sucu.tatupload.MainActivity" >
+            android:parentActivityName="uk.org.sucu.tatupload.activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.org.sucu.tatupload.MainActivity" />
         </activity>
         <activity
-            android:name="uk.org.sucu.tatupload.SetupActivity"
+            android:name="uk.org.sucu.tatupload.activity.SetupActivity"
             android:label="@string/title_activity_setup" >
         </activity>
         <activity
-            android:name="uk.org.sucu.tatupload.ParameterViewActivity"
+            android:name="uk.org.sucu.tatupload.activity.ParameterViewActivity"
             android:label="@string/title_activity_parameter_view"
-            android:parentActivityName="uk.org.sucu.tatupload.OptionActivity" >
+            android:parentActivityName="uk.org.sucu.tatupload.activity.OptionActivity" >
         </activity>
         <activity
-            android:name="uk.org.sucu.tatupload.OptionActivity"
+            android:name="uk.org.sucu.tatupload.activity.OptionActivity"
             android:label="@string/settings"
-            android:parentActivityName="uk.org.sucu.tatupload.MainActivity" >
+            android:parentActivityName="uk.org.sucu.tatupload.activity.MainActivity" >
         </activity>
         <activity
-            android:name="uk.org.sucu.tatupload.TutorialActivity"
+            android:name="uk.org.sucu.tatupload.activity.TutorialActivity"
             android:label="@string/title_activity_tutorial" >
         </activity>
     </application>

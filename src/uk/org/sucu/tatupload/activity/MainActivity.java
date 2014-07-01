@@ -1,7 +1,14 @@
-package uk.org.sucu.tatupload;
+package uk.org.sucu.tatupload.activity;
 
 import java.util.Collection;
 
+import uk.org.sucu.tatupload.MessageArrayAdapter;
+import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload.SettingsAccessor;
+import uk.org.sucu.tatupload.TatUploadApplication;
+import uk.org.sucu.tatupload.R.id;
+import uk.org.sucu.tatupload.R.layout;
+import uk.org.sucu.tatupload.R.menu;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.views.QueuedSmsView;

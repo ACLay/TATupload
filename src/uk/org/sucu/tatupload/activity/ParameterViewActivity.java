@@ -1,8 +1,14 @@
-package uk.org.sucu.tatupload;
+package uk.org.sucu.tatupload.activity;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import uk.org.sucu.tatupload.ParameterArrayAdapter;
+import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload.R.id;
+import uk.org.sucu.tatupload.R.layout;
+import uk.org.sucu.tatupload.R.menu;
+import uk.org.sucu.tatupload.R.string;
 import uk.org.sucu.tatupload.parse.Parameters;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

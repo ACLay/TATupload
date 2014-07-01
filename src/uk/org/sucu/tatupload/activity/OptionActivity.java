@@ -1,5 +1,7 @@
-package uk.org.sucu.tatupload;
+package uk.org.sucu.tatupload.activity;
 
+import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload.R.xml;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 

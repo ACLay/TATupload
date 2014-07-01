@@ -1,9 +1,15 @@
-package uk.org.sucu.tatupload;
+package uk.org.sucu.tatupload.activity;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import uk.org.sucu.tatupload.NetCaller;
+import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload.TatUploadApplication;
+import uk.org.sucu.tatupload.R.id;
+import uk.org.sucu.tatupload.R.layout;
+import uk.org.sucu.tatupload.R.string;
 import uk.org.sucu.tatupload.parse.Parser;
 import android.app.Activity;
 import android.content.Intent;

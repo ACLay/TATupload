@@ -1,5 +1,10 @@
-package uk.org.sucu.tatupload;
+package uk.org.sucu.tatupload.activity;
 
+import uk.org.sucu.tatupload.NetCaller;
+import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload.TatUploadApplication;
+import uk.org.sucu.tatupload.R.layout;
+import uk.org.sucu.tatupload.R.string;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
