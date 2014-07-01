@@ -11,7 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:id="@+id/smsReviewRoot" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,44 +120,6 @@
                 android:layout_weight="1"
                 android:inputType="textMultiLine"
                 android:ems="10" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/uploadButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-	            android:layout_weight="1"
-                android:text="@string/upload"
-                android:onClick="uploadMessage" />
-
-            <Button
-                android:id="@+id/resetReviewButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-	            android:layout_weight="1"
-                android:text="@string/undo_changes"
-                android:onClick="undoChanges" />
-
-            <Button
-                android:id="@+id/discardSmsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-	            android:layout_weight="1"
-                android:text="@string/discard"
-                android:onClick="discardText" />
-
-            <Button
-                android:id="@+id/cancelReviewButton"
-	            android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cancel"
-                android:onClick="cancel" />
 
         </LinearLayout>
 

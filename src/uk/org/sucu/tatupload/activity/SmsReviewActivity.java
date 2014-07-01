@@ -14,11 +14,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SmsReviewActivity extends Activity {
@@ -45,7 +46,17 @@ public class SmsReviewActivity extends Activity {
 		timeText.setText(time);
 		//fill the editTexts
 		performDefaultSplit();
-
+		//add the control buttons
+		LinearLayout layout = (LinearLayout) findViewById(R.id.smsReviewRoot);
+		LinearLayout buttons;
+		int rot = getResources().getConfiguration().orientation % 2;
+		if(rot == 0){//landscape
+			buttons = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.sms_review_button_landscape, null);
+		} else {//portrait
+			buttons = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.sms_review_button_portrait, null);
+		}
+		layout.addView(buttons);
+		
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
@@ -89,15 +100,9 @@ public class SmsReviewActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpFromSameTask(this);
+		case R.id.action_settings:
+			Intent intent = new Intent(this, OptionActivity.class);
+			startActivity(intent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
