@@ -37,8 +37,6 @@ function createForm(e) {
   //TODO implement timezone in app settings
   sheet.setSpreadsheetTimeZone('Europe/London');
   form.setDestination(FormApp.DestinationType.SPREADSHEET, spreadsheetID);
-  Logger.log(form.getEditUrl());
-  Logger.log(form.getPublishedUrl());
   
   return 'Form created';
 }
