@@ -10,6 +10,8 @@ import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.parse.Parser;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -141,12 +143,22 @@ public class SmsReviewActivity extends Activity {
 	}
 
 	public void discardText(View v){
-		//TODO R U SURE BOX
-		SmsList.removeText(text);
+		final Activity act = this;
+		new AlertDialog.Builder(this)
+		.setTitle(R.string.discard)
+		.setMessage(R.string.confirm_choice)
+		.setPositiveButton(R.string.discard, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				SmsList.removeText(text);
+				act.finish();
+			}
+		})
+		.setNegativeButton(R.string.cancel, null)
+		.create()
+		.show();
+		
 
-		Intent intent = new Intent(this, MainActivity.class);
-		startActivity(intent);
-		this.finish();
 	}
 
 	public void cancel(View v){

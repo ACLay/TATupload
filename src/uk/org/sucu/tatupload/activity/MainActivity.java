@@ -10,6 +10,8 @@ import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.views.QueuedSmsView;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -88,7 +90,16 @@ public class MainActivity extends Activity {
 	}
 
 	public void clearMessages(View v){
-		SmsList.clearList();
+		//confirm user choice
+		DialogInterface.OnClickListener action = new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//remove
+				SmsList.clearList();
+			}
+		};
+		
+		confirmChoice(action, R.string.clear_queue_button);
 	}
 
 	public void addMessages(Collection<Text> msgs){
@@ -102,12 +113,31 @@ public class MainActivity extends Activity {
 	}
 	
 	public void stopTat(View v){
-		((TatUploadApplication) getApplication()).setProcessingTexts(false);
-		setupUI();
+		DialogInterface.OnClickListener action = new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//stop processing
+				((TatUploadApplication) getApplication()).setProcessingTexts(false);
+				//rebuild UI
+				setupUI();
+			}
+		};
+		confirmChoice(action, R.string.stop);
 	}
 	
 	public void showSettings(View v){
 		showSettings();
+	}
+	
+	private void confirmChoice(DialogInterface.OnClickListener action, int action_name){
+		//confirm user choice
+		new AlertDialog.Builder(this)
+		.setTitle(action_name)
+		.setMessage(R.string.confirm_choice)
+		.setPositiveButton(action_name, action)
+		.setNegativeButton(R.string.cancel, null)
+		.create()
+		.show();
 	}
 	
 	public void showSettings(){

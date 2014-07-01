@@ -69,4 +69,5 @@
 	<string name="tutorial_info2">If you have multiple browsers, you can set the default browser for the app with the browser test button. If no default is set, the app will select the first one it finds.</string>
 	<string name="form_warning">Do not delete or rename the form in your google drive, or the app will not be able to use it.</string>
 	<string name="browser_test">Broswer test</string>
+	<string name="confirm_choice">Are you sure?</string>
 </resources>
