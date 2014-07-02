@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent(this, TutorialActivity.class);
 			startActivity(intent);
 			this.finish();
+			return;
 		} else {// add extra cases inform the user of changes to the app, etc.
 			
 		}
