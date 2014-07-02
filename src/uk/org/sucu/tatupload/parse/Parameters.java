@@ -47,7 +47,7 @@ public class Parameters {
 		if(identifier.equals(FLAVOUR_PARAMETER)){
 			return new ArrayList<String>(Arrays.asList("ham","cheese","tomato","pineapple"));
 		} else if(identifier.equals(LOCATION_PARAMETER)){
-			return new ArrayList<String>(Arrays.asList("library","bar","pub","club","road","rd","avenue","gardens","street","st","terrace","block","flat","floor","room"));
+			return new ArrayList<String>(Arrays.asList("library","bar","pub","club","road","rd","avenue","gardens","street","st","crescent","terrace","block","flat","floor","room"));
 		} else if(identifier.equals(QUESTION_PARAMETER)){
 			return new ArrayList<String>(Arrays.asList("who","what","where","when","why","how","could","would","should","?"));
 		}
