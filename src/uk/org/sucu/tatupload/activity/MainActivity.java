@@ -91,16 +91,19 @@ public class MainActivity extends Activity {
 	}
 
 	public void clearMessages(View v){
-		//confirm user choice
-		DialogInterface.OnClickListener action = new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				//remove
-				SmsList.clearList();
-			}
-		};
-		
-		confirmChoice(action, R.string.clear_queue_button);
+		//show nothing if the list is empty
+		if(!SmsList.isEmpty()){
+			//confirm user choice
+			DialogInterface.OnClickListener action = new DialogInterface.OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					//remove
+					SmsList.clearList();
+				}
+			};
+
+			confirmChoice(action, R.string.clear_queue_button);
+		}
 	}
 
 	public void addMessages(Collection<Text> msgs){
