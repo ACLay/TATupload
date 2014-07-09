@@ -13,7 +13,6 @@ import uk.org.sucu.tatupload.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-import android.widget.Toast;
 
 @SuppressLint("DefaultLocale")
 public class Parser {
