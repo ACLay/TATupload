@@ -12,13 +12,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="uk.org.sucu.tatupload.TatUploadApplication"
+        android:name=".TatUploadApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="uk.org.sucu.tatupload.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,36 +27,36 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="uk.org.sucu.tatupload.message.SmsReceiver" >
+        <receiver android:name=".message.SmsReceiver" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name="uk.org.sucu.tatupload.activity.SmsReviewActivity"
+            android:name=".activity.SmsReviewActivity"
             android:label="@string/title_activity_sms_review"
-            android:parentActivityName="uk.org.sucu.tatupload.activity.MainActivity" >
+            android:parentActivityName=".activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.org.sucu.tatupload.MainActivity" />
         </activity>
         <activity
-            android:name="uk.org.sucu.tatupload.activity.SetupActivity"
+            android:name=".activity.SetupActivity"
             android:label="@string/title_activity_setup" >
         </activity>
         <activity
-            android:name="uk.org.sucu.tatupload.activity.ParameterViewActivity"
+            android:name=".activity.ParameterViewActivity"
             android:label="@string/title_activity_parameter_view"
-            android:parentActivityName="uk.org.sucu.tatupload.activity.OptionActivity" >
+            android:parentActivityName=".activity.OptionActivity" >
         </activity>
         <activity
-            android:name="uk.org.sucu.tatupload.activity.OptionActivity"
+            android:name=".activity.OptionActivity"
             android:label="@string/settings"
-            android:parentActivityName="uk.org.sucu.tatupload.activity.MainActivity" >
+            android:parentActivityName=".activity.MainActivity" >
         </activity>
         <activity
-            android:name="uk.org.sucu.tatupload.activity.TutorialActivity"
+            android:name=".activity.TutorialActivity"
             android:label="@string/title_activity_tutorial" >
         </activity>
     </application>
