@@ -1,42 +1,28 @@
-//makes a form, a spreadsheet to store it's responses, and returns the forms' ID
-function createForm(e) {
-  var formName = e.parameters.formName;
-  //make the form
-  var title = 'Text A Toastie';
-  var description = 'What do they want?';
+function create(e){
+  var sheetName = e.parameters.sheetName;
+  try{
+    build(sheetName);
+    return 'Sheet created successfully';
+  }catch (err){
+    return 'Unable to make and format sheet. Error description: ' + err.message;
+  }
+}
 
-  var form = FormApp.create(formName)
-      .setDescription(description)
-      .setConfirmationMessage('Toastie request uploaded!');
+function build(sheetName){
+  //create the spreadsheet
+  var spreadsheet = SpreadsheetApp.create(sheetName);
+  //rename the sheet
+  var sheet = spreadsheet.getSheets()[0];
+  sheet.setName(getSheetName());
+  //insert headers into the first row
+  var range = sheet.getRange(1, 1, 1, 6);
+  range.setValues([["Time received", "Their phone number", "What do they want to know?", "Where are they?", "What toastie do they want?", "Original text"]]);
+  /*for(var i = 1; i <= 6; i++){
+    sheet.autoResizeColumn(i);//Not yet supported by new version of sheets
+  }*/
+  sheet.getRange(1,1,sheet.getMaxRows(),6).setWrap(true);
+}
 
-  form.addTextItem()
-      .setTitle('What is their number?')
-      .setRequired(true);
-
-  form.addTextItem()
-      .setTitle('What do they want to know?')
-      .setRequired(true);
-  
-  form.addTextItem()
-      .setTitle('Where are they?')
-      .setRequired(true);
-
-  form.addTextItem()
-      .setTitle('What toastie do they want?')
-      .setRequired(true);
-  
-  form.addTextItem()
-      .setTitle('Original message')
-      .setRequired(false);
-    
-  //form responses seem to be timestamped on submission, so that's not delt with here :)
-  
-  //make the spreadsheet to send responses to
-  var sheet = SpreadsheetApp.create(formName + ' (responses)');
-  var spreadsheetID = sheet.getId() /*I don't have a semicolon here, why does it work?!?*/
-  //TODO implement timezone in app settings
-  sheet.setSpreadsheetTimeZone('Europe/London');
-  form.setDestination(FormApp.DestinationType.SPREADSHEET, spreadsheetID);
-  
-  return 'Form created';
+function testBuild(){
+  build("Sheet");
 }
