@@ -46,4 +46,8 @@ public class SmsList {
 		adapter = new MessageArrayAdapter(context, R.id.messageListView, texts);
 		return adapter;
 	}
+	
+	public static boolean isEmpty(){
+		return texts.isEmpty();
+	}
 }
