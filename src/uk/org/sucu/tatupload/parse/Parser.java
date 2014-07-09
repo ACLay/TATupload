@@ -13,6 +13,7 @@ import uk.org.sucu.tatupload.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+import android.widget.Toast;
 
 @SuppressLint("DefaultLocale")
 public class Parser {
@@ -97,10 +98,10 @@ public class Parser {
 		return (DateFormat.getDateTimeInstance().format(d));
 	}
 
-	public static Uri createNewFormUri(String formName, Context context){
+	public static Uri createNewFormUri(String sheetName, Context context){
 		//TODO should not accept empty string
 		try{
-			formName = URLEncoder.encode(formName, "utf-8");
+			sheetName = URLEncoder.encode(sheetName, "utf-8");
 		} catch (UnsupportedEncodingException e){
 
 		}
@@ -108,36 +109,38 @@ public class Parser {
 		StringBuilder builder = new StringBuilder();
 		builder.append(context.getString(R.string.scriptURL));
 		builder.append("?action=create&");
-		builder.append("formName=");
-		builder.append(formName);
+		builder.append("sheetName=");
+		builder.append(sheetName);
 
 		String uri = builder.toString();
 
 		return Uri.parse(uri);
 	}
 
-	public static Uri createUploadUri(String formName, String number, String question, String location, String toastie, String sms, Context context){
+	public static Uri createUploadUri(String sheetName, String number, String question, String location, String toastie, String sms, String time, Context context){
 
 		StringBuilder builder = new StringBuilder();
 
 		try{
-			formName = URLEncoder.encode(formName, "utf-8");
+			sheetName = URLEncoder.encode(sheetName, "utf-8");
 			question = URLEncoder.encode(question, "utf-8");
 			location = URLEncoder.encode(location, "utf-8");
 			toastie = URLEncoder.encode(toastie, "utf-8");
 			sms = URLEncoder.encode(sms, "utf-8");
+			time = URLEncoder.encode(time, "utf-8");
 		} catch (UnsupportedEncodingException e){
 
 		}
 
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("action", "upload");
-		params.put("formName", formName);
+		params.put("sheetName", sheetName);
 		params.put("number", number);
 		params.put("question", question);
 		params.put("location", location);
 		params.put("toastie", toastie);
 		params.put("SMS", sms);
+		params.put("time", time);
 
 		Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
 		builder.append(context.getString(R.string.scriptURL)).append("?");

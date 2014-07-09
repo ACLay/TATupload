@@ -105,8 +105,9 @@ public class SmsReceiver extends BroadcastReceiver{
 			toastie += s + " ";
 		}
 
+		String time = Parser.timeStampToString(text.getTimestamp());
 
-		Uri uri = Parser.createUploadUri(formName, number, question, location, toastie, body, context);
+		Uri uri = Parser.createUploadUri(formName, number, question, location, toastie, body, time, context);
 		NetCaller.callScript(uri, context);
 
 	}

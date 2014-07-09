@@ -125,8 +125,9 @@ public class SmsReviewActivity extends Activity {
 			String location = locationEdit.getText().toString();
 			String toastie = toastieEdit.getText().toString();
 			String body = bodyEdit.getText().toString();
+			String time = Parser.timeStampToString(text.getTimestamp());
 			
-			Uri uri = Parser.createUploadUri(formName, text.getNumber(), question, location, toastie, body, this);
+			Uri uri = Parser.createUploadUri(formName, text.getNumber(), question, location, toastie, body, time, this);
 			NetCaller.callScript(uri, this);
 			
 			SmsList.removeText(text);
