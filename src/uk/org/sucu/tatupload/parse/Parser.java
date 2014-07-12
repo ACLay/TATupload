@@ -122,6 +122,7 @@ public class Parser {
 
 		try{
 			sheetName = URLEncoder.encode(sheetName, "utf-8");
+			number = URLEncoder.encode(number, "utf-8");
 			question = URLEncoder.encode(question, "utf-8");
 			location = URLEncoder.encode(location, "utf-8");
 			toastie = URLEncoder.encode(toastie, "utf-8");
