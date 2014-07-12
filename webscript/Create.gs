@@ -1,28 +1,43 @@
 function create(e){
   var sheetName = e.parameters.sheetName;
   try{
-    build(sheetName);
+    var spread = buildSpread(sheetName);
+    var oldSheet = spread.getSheets()[0];
+    buildSheet(spread);
+    spread.deleteSheet(oldSheet);
     return 'Sheet created successfully';
   }catch (err){
-    return 'Unable to make and format sheet. Error description: ' + err.message;
+    return 'Unable to create + format sheet. Error description: ' + err.message;
   }
 }
 
-function build(sheetName){
+function buildSpread(sheetName){
   //create the spreadsheet
   var spreadsheet = SpreadsheetApp.create(sheetName);
-  //rename the sheet
-  var sheet = spreadsheet.getSheets()[0];
-  sheet.setName(getSheetName());
+  //save its ID
+  saveSpreadsheetId(spreadsheet.getId());
+  return spreadsheet;
+}
+
+function buildSheet(spreadsheet){
+  //make a new sheet
+  var sheet = spreadsheet.insertSheet();
+  sheet.setName("Texts");
   //insert headers into the first row
   var range = sheet.getRange(1, 1, 1, 6);
-  range.setValues([["Time received", "Their phone number", "What do they want to know?", "Where are they?", "What toastie do they want?", "Original text"]]);
+  range.setValues([["Time received", "Their phone number", "Question", "Location", "Toastie flavours", "Original text"]]);
   /*for(var i = 1; i <= 6; i++){
     sheet.autoResizeColumn(i);//Not yet supported by new version of sheets
   }*/
   sheet.getRange(1,1,sheet.getMaxRows(),6).setWrap(true);
+  //Save its ID
+  saveSheetId(sheet.getSheetId());
 }
 
 function testBuild(){
-  build("Sheet");
+  var spread = buildSpread("Test spreadsheet");
+  var oldSheet = spread.getSheets()[0];
+  buildSheet(spread);
+  spread.deleteSheet(oldSheet);
+  return 'Sheet created successfully';
 }

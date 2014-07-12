@@ -1,5 +1,6 @@
 function doGet(e){
   var output;
+  
   var action = e.parameters.action;
  
   if(action == 'upload'){
@@ -13,9 +14,4 @@ function doGet(e){
   }
   
   return ContentService.createTextOutput(output);
-}
-
-//prevent typing the literal incorrectly in code
-function getSheetName(){
-  return "Texts";
 }
