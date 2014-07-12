@@ -64,10 +64,9 @@
     <string name="first_run_tutorial">Welcome to TATupload. Before starting, please enter the names of toastie flavours you will be using, as well as major delivery locations, such as names of halls of residence.</string>
     <string name="tutorial_done">Done</string>
     <string name="flavour_explanation">The names of flavours that you are offering</string>
-    <string name="location_explanation">One of these words marks a sentence as being a location</string>
-    <string name="tutorial_info">TATupload puts data into a google drive spreadsheet using a form in the phones browser. The documents are created in the drive of the google account signed into the phones browser.</string>
+    <string name="location_explanation">One of these words marks a sentence as containing a location</string>
+    <string name="tutorial_info">TATupload puts data into a google drive spreadsheet using a web script called by the phones browser. Spreadsheets are created in the drive of the google account signed into the phones browser.</string>
     <string name="tutorial_info2">If you have multiple browsers, you can set the default browser for the app with the browser test button. If no default is set, the app will select the first one it finds.</string>
-    <string name="form_warning">Do not move or rename the spreadsheet, or rename its sheet called \'Texts\', or the app will not be able to use it. New texts will be added to the first empty row.</string>
     <string name="browser_test">Broswer test</string>
     <string name="confirm_choice">Are you sure?</string>
 
