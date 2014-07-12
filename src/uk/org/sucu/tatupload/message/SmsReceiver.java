@@ -88,7 +88,6 @@ public class SmsReceiver extends BroadcastReceiver{
 
 		String body = text.getBody();
 		String number = text.getNumber();
-		String formName = SettingsAccessor.getFormName(context);
 
 		String question = "";
 		for(String s : Parser.getQuestion(body)){
@@ -107,7 +106,7 @@ public class SmsReceiver extends BroadcastReceiver{
 
 		String time = Parser.timeStampToString(text.getTimestamp());
 
-		Uri uri = Parser.createUploadUri(formName, number, question, location, toastie, body, time, context);
+		Uri uri = Parser.createUploadUri(number, question, location, toastie, body, time, context);
 		NetCaller.callScript(uri, context);
 
 	}

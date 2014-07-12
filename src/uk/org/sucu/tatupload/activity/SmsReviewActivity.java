@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.SettingsAccessor;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.parse.Parser;
@@ -119,15 +118,14 @@ public class SmsReviewActivity extends Activity {
 			EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
 			EditText toastieEdit = (EditText) findViewById(R.id.messageToastieEditText);
 			EditText bodyEdit = (EditText) findViewById(R.id.messageBodyEditText);
-			String formName = SettingsAccessor.getFormName(this);
-
+			
 			String question = questionEdit.getText().toString();
 			String location = locationEdit.getText().toString();
 			String toastie = toastieEdit.getText().toString();
 			String body = bodyEdit.getText().toString();
 			String time = Parser.timeStampToString(text.getTimestamp());
 			
-			Uri uri = Parser.createUploadUri(formName, text.getNumber(), question, location, toastie, body, time, this);
+			Uri uri = Parser.createUploadUri(text.getNumber(), question, location, toastie, body, time, this);
 			NetCaller.callScript(uri, this);
 			
 			SmsList.removeText(text);

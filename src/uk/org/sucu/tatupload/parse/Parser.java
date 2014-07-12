@@ -116,12 +116,11 @@ public class Parser {
 		return Uri.parse(uri);
 	}
 
-	public static Uri createUploadUri(String sheetName, String number, String question, String location, String toastie, String sms, String time, Context context){
+	public static Uri createUploadUri(String number, String question, String location, String toastie, String sms, String time, Context context){
 
 		StringBuilder builder = new StringBuilder();
 
 		try{
-			sheetName = URLEncoder.encode(sheetName, "utf-8");
 			number = URLEncoder.encode(number, "utf-8");
 			question = URLEncoder.encode(question, "utf-8");
 			location = URLEncoder.encode(location, "utf-8");
@@ -134,7 +133,6 @@ public class Parser {
 
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("action", "upload");
-		params.put("sheetName", sheetName);
 		params.put("number", number);
 		params.put("question", question);
 		params.put("location", location);
