@@ -125,6 +125,7 @@ public class ParameterViewActivity extends Activity {
 		
 		if(!parameter.contains(param)){
 			parameter.add(param);
+			saveParameter();
 			adapter.notifyDataSetChanged();
 		}
 	}
@@ -138,6 +139,7 @@ public class ParameterViewActivity extends Activity {
 		int index = parameter.indexOf(toChange);
 		if(index != -1){//indexOf returns -1 if the object isn't present
 			parameter.set(index, textbox.getText().toString().toLowerCase());
+			saveParameter();
 			adapter.notifyDataSetChanged();
 		}
 	}
@@ -146,6 +148,7 @@ public class ParameterViewActivity extends Activity {
 		Spinner spin = (Spinner) dialog.findViewById(R.id.removeSpinner);
 		String toTake = (String) spin.getSelectedItem();
 		parameter.remove(toTake);
+		saveParameter();
 		adapter.notifyDataSetChanged();
 	}
 	
