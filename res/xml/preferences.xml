@@ -47,4 +47,8 @@
     
     </PreferenceCategory>
     
+    <Preference android:title="@string/browser"
+        android:summary="@string/browser_description"
+        android:key="@string/browser" />
+    
 </PreferenceScreen>
