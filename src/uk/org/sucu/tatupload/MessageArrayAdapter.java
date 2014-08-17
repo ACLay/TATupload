@@ -1,6 +1,6 @@
 package uk.org.sucu.tatupload;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.views.QueuedSmsView;
@@ -11,9 +11,8 @@ import android.widget.ArrayAdapter;
 
 public class MessageArrayAdapter extends ArrayAdapter<Text> {
 
-	public MessageArrayAdapter(Context context, int resource, ArrayList<Text> messages) {
+	public MessageArrayAdapter(Context context, int resource, List<Text> messages) {
 		super(context, resource, messages);
-		
 	}
 
 	@Override
