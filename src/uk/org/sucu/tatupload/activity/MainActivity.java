@@ -5,7 +5,6 @@ import java.util.Collection;
 import uk.org.sucu.tatupload.MessageArrayAdapter;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.Settings;
-import uk.org.sucu.tatupload.TatUploadApplication;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.views.QueuedSmsView;
@@ -45,10 +44,10 @@ public class MainActivity extends Activity {
 			return;
 		} else if(versionSeen < 4){// add extra cases inform the user of changes to the app, etc.
 			//remove the now unused form name field from the preference save file.
-			((TatUploadApplication)getApplication()).removePreference(getString(R.string.form_name_key));
+			Settings.removePreference(getString(R.string.form_name_key),this);
 		}
 		if(versionSeen != TUTORIAL_VERSION){
-			((TatUploadApplication)getApplication()).setTutorialVersionShown(TUTORIAL_VERSION);
+			Settings.setTutorialVersionShown(TUTORIAL_VERSION, this);
 		}
 
 	}	
@@ -122,7 +121,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				//stop processing
-				((TatUploadApplication) getApplication()).setProcessingTexts(false);
+				Settings.setProcessingTexts(false, MainActivity.this);
 				//rebuild UI
 				setupUI();
 			}

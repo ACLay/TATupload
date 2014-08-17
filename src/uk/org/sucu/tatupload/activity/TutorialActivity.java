@@ -2,7 +2,7 @@ package uk.org.sucu.tatupload.activity;
 
 import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.TatUploadApplication;
+import uk.org.sucu.tatupload.Settings;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -37,7 +37,7 @@ public class TutorialActivity extends Activity {
 		
 		if(BrowserAccessor.browserSet(this)){
 			//update the saved value of seen tutorial version
-			((TatUploadApplication)getApplication()).setTutorialVersionShown(MainActivity.TUTORIAL_VERSION);
+			Settings.setTutorialVersionShown(MainActivity.TUTORIAL_VERSION, this);
 			//relaunch the main activity
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);

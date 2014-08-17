@@ -71,7 +71,7 @@ public class BrowserAccessor {
 				String packageName = getPackageName(selected);
 				String className = getName(selected);
 				//save it
-				((TatUploadApplication) activity.getApplication()).setBrowserData(packageName, className);
+				Settings.setBrowserData(packageName, className, activity);
 			}
 		})
 		.setCancelable(cancelable);
