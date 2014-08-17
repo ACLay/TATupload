@@ -1,11 +1,11 @@
 package uk.org.sucu.tatupload.activity;
 
-import uk.org.sucu.tatupload.NetCaller;
+import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.TatUploadApplication;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -29,17 +29,27 @@ public class TutorialActivity extends Activity {
 		startActivity(intent);
 	}
 	
-	public void testBrowser(View v){
-		Uri uri = Uri.parse(getString(R.string.scriptURL)+"?action=test");
-		NetCaller.callScriptWithChoice(uri, this);
+	public void setBrowser(View v){
+		BrowserAccessor.openBrowserChoicePopup(this, false);
 	}
 	
 	public void done(View v){
-		//update the saved value of seen tutorial version
-		((TatUploadApplication)getApplication()).setTutorialVersionShown(MainActivity.TUTORIAL_VERSION);
-		//relaunch the main activity
-		Intent intent = new Intent(this, MainActivity.class);
-		startActivity(intent);
-		this.finish();
+		
+		if(BrowserAccessor.browserSet(this)){
+			//update the saved value of seen tutorial version
+			((TatUploadApplication)getApplication()).setTutorialVersionShown(MainActivity.TUTORIAL_VERSION);
+			//relaunch the main activity
+			Intent intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
+			this.finish();
+		} else {
+			//TODO show a 'you must set a browser' popup
+			new AlertDialog.Builder(this)
+			.setTitle("TATupload")  
+			.setMessage("You must set a browser for TATupload to use before continuing.")
+			.setPositiveButton("Okay", null)
+			.create()
+			.show();
+		}
 	}
 }

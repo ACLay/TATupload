@@ -65,9 +65,9 @@
     <string name="tutorial_done">Done</string>
     <string name="flavour_explanation">The names of flavours that you are offering</string>
     <string name="location_explanation">One of these words marks a sentence as containing a location</string>
-    <string name="tutorial_info">TATupload puts data into a google drive spreadsheet using a web script called by the phones browser. Spreadsheets are created in the drive of the google account signed into the phones browser.</string>
-    <string name="tutorial_info2">If you have multiple browsers, you can set the default browser for the app with the browser test button. If no default is set, the app will select the first one it finds.</string>
-    <string name="browser_test">Broswer test</string>
+    <string name="tutorial_info">TATupload puts data into a google drive spreadsheet using web links opened in a browser. Spreadsheets are created in the drive of the google account signed into that browser.</string>
+    <string name="tutorial_info2">Please select which browser TATupload should use to open web links. This can be changed later in the settings menu.</string>
+    <string name="web_browser">Web Broswer</string>
     <string name="confirm_choice">Are you sure?</string>
     <string name="browser_package_key">uk.org.sucu.tatupload.browserPackage</string>
     <string name="browser_name_key">uk.org.sucu.tatupload.browserName</string>
