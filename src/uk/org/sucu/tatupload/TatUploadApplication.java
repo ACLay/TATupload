@@ -51,8 +51,7 @@ public class TatUploadApplication extends Application {
 	
 	public void onCreate(){
 		super.onCreate();
-		//Load the application settings
-		//TODO can this bit be done in another section?
+		//Load the data extraction parameters, which need de-serializing to be usable, for improved access time.
 		
 		ArrayList<String> flavourList = SettingsAccessor.getSavedParameter(this, Parameters.FLAVOUR_PARAMETER);	
 		ArrayList<String> locationList = SettingsAccessor.getSavedParameter(this, Parameters.LOCATION_PARAMETER);
