@@ -2,6 +2,7 @@ package uk.org.sucu.tatupload.activity;
 
 import java.util.ArrayList;
 
+import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.message.SmsList;
@@ -112,6 +113,10 @@ public class SmsReviewActivity extends Activity {
 
 	public void uploadMessage(View v){
 
+		if(!BrowserAccessor.usable(this)){
+			BrowserAccessor.openBrowserChoicePopup(this, false);
+		}
+		
 		if(NetCaller.isOnlineWithErrorBox(this)){
 
 			EditText questionEdit = (EditText) findViewById(R.id.messageQuestionEditText);

@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.TatUploadApplication;
@@ -30,7 +31,11 @@ public class SetupActivity extends Activity {
 
 
 	public void startTat(View v){
-
+		//if the browser is unusable, get them to choose a new one
+		if(!BrowserAccessor.usable(this)){
+			BrowserAccessor.openBrowserChoicePopup(this, false);
+		}
+		
 		if(NetCaller.isOnlineWithErrorBox(this)){
 
 			EditText formNameEdit = (EditText) findViewById(R.id.formNameEditText);
