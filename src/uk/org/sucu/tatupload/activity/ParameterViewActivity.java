@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -183,8 +182,7 @@ public class ParameterViewActivity extends Activity {
 			.create();
 		//connect the dialogs spinner to the data structure
 		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.removeSpinner);
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
+		ParameterArrayAdapter adapter = new ParameterArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(adapter);
 		//display the dialog
@@ -206,8 +204,7 @@ public class ParameterViewActivity extends Activity {
 			.create();
 		//connect its spinner to the data structure
 		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.editSpinner);
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
+		ParameterArrayAdapter adapter = new ParameterArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(adapter);
 		//display the dialog
