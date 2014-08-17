@@ -69,5 +69,8 @@
     <string name="tutorial_info2">If you have multiple browsers, you can set the default browser for the app with the browser test button. If no default is set, the app will select the first one it finds.</string>
     <string name="browser_test">Broswer test</string>
     <string name="confirm_choice">Are you sure?</string>
-
+    <string name="browser_package_key">uk.org.sucu.tatupload.browserPackage</string>
+    <string name="browser_name_key">uk.org.sucu.tatupload.browserName</string>
+	<string name="browser">Browser</string>
+	<string name="browser_description">The browser to upload messages with</string>
 </resources>
