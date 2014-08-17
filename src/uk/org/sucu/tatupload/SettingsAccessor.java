@@ -24,7 +24,7 @@ public class SettingsAccessor {
 		boolean confirmSplit = sharedPref.getBoolean(context.getString(R.string.confirm_split_key), false);
 		return confirmSplit;
 	}
-	
+	//TODO This is no longer used
 	public static String getFormName(Context context){
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 		String formName = sharedPref.getString(context.getString(R.string.form_name_key), "");
@@ -55,6 +55,18 @@ public class SettingsAccessor {
 			return Parameters.getDefaultList(parameter);
 		}
 		return list;
+	}
+	
+	public static String getChosenBrowserPackage(Context context){
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+		String browserPackage = sharedPref.getString(context.getString(R.string.browser_package_key), null);
+		return browserPackage;
+	}
+	
+	public static String getChosenBrowserName(Context context){
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+		String browserName = sharedPref.getString(context.getString(R.string.browser_name_key), null);
+		return browserName;
 	}
 	
 }
