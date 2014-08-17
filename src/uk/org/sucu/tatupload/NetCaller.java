@@ -1,13 +1,8 @@
 package uk.org.sucu.tatupload;
 
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -23,24 +18,13 @@ public class NetCaller {
 	    browserIntent.setData(uri);
 	    //open all this apps requests in the same tab, prevents new ones with each call
 	    browserIntent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
-	  		
-	    // 1: Try to find the default browser and launch the URL with it
-	    final ResolveInfo defaultResolution = context.getPackageManager().resolveActivity(browserIntent, PackageManager.MATCH_DEFAULT_ONLY);
-	    if (defaultResolution != null) {
-	        final ActivityInfo activity = defaultResolution.activityInfo;
-	        if (!activity.name.equals("com.android.internal.app.ResolverActivity")) {
-	            browserIntent.setClassName(activity.applicationInfo.packageName, activity.name);
-	            context.startActivity(browserIntent);
-	            return;
-	        }
-	    }
-	    // 2: Try to find anything that we can launch the URL with. Pick up the first one that can.
-	    final List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities(browserIntent, PackageManager.MATCH_DEFAULT_ONLY);
-	    if (!resolveInfoList.isEmpty()) {
-	        browserIntent.setClassName(resolveInfoList.get(0).activityInfo.packageName, resolveInfoList.get(0).activityInfo.name);
-	        context.startActivity(browserIntent);
-	        return;
-	    }
+	  	//get data about the chosen browser
+	    String packageName = SettingsAccessor.getChosenBrowserPackage(context);
+	    String className = SettingsAccessor.getChosenBrowserName(context);
+	    //add it to the intent
+	    browserIntent.setClassName(packageName, className);
+	    //start the browser
+	    context.startActivity(browserIntent);
 	}
 	
 	public static void callScriptWithChoice(Uri uri, Context context){
