@@ -17,7 +17,6 @@ import android.widget.Spinner;
 
 public class BrowserAccessor {
 
-	//TODO review scope of methods
 	public static List<ResolveInfo> getResolvers(Context context){
 		//build an intent that launches to the webscript url
 		Uri uri = Uri.parse(context.getString(R.string.scriptURL));
@@ -62,7 +61,7 @@ public class BrowserAccessor {
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity)
 		.setTitle("Select browser")
 		.setView(viewToLoad)
-		.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {//TODO replace my version of the string with this android one
+		.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				//get the selected ResolveInfo
