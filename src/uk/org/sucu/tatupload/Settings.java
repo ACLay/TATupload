@@ -72,32 +72,32 @@ public class Settings {
 	}
 
 	
-	public void setProcessingTexts(boolean processingTexts, Context context){
+	public static void setProcessingTexts(boolean processingTexts, Context context){
 		getEditor(context)
 		.putBoolean(context.getString(R.string.processing_key), processingTexts)
 		.commit();
 	}
 
-	public void setConfirmSplit(boolean confirmSplit, Context context){
+	public static void setConfirmSplit(boolean confirmSplit, Context context){
 		getEditor(context)
 		.putBoolean(context.getString(R.string.confirm_split_key), confirmSplit)
 		.commit();
 	}
 	
-	public void setTutorialVersionShown(int version, Context context){
+	public static void setTutorialVersionShown(int version, Context context){
 		getEditor(context)
 		.putInt(context.getString(R.string.tutorial_ver_key), version)
 		.commit();
 	}
 	
-	public void setBrowserData(String packageName, String name, Context context){
+	public static void setBrowserData(String packageName, String name, Context context){
 		getEditor(context)
 		.putString(context.getString(R.string.browser_package_key), packageName)
 		.putString(context.getString(R.string.browser_name_key), name)
 		.commit();
 	}
 	
-	public void removePreference(String key, Context context){
+	public static void removePreference(String key, Context context){
 		getEditor(context)
 		.remove(key)
 		.commit();
@@ -105,7 +105,7 @@ public class Settings {
 	
 	
 	@SuppressLint("CommitPrefEdits")
-	private SharedPreferences.Editor getEditor(Context context){
+	private static SharedPreferences.Editor getEditor(Context context){
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = sharedPref.edit();
 		return editor;
