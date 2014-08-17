@@ -81,7 +81,7 @@ public class BrowserAccessor {
 		}
 		
 		builder.create();
-		//TODO check the usage of adapters, and whether the created classes are actually used
+		
 		List<ResolveInfo> resolvers = getResolvers(activity);
 		
 		//connect the dialogs spinner to the data structure
@@ -98,7 +98,7 @@ public class BrowserAccessor {
 		String packageName = SettingsAccessor.getChosenBrowserPackage(context);
 		String className = SettingsAccessor.getChosenBrowserName(context);
 		//check they're actual saved values, not the defaults from failure
-		if(packageName == SettingsAccessor.BROWSER_PACKAGE_DEFAULT || className == SettingsAccessor.BROWSER_NAME_DEFAULT){//TODO store the default values as constants in SettingsAccessor
+		if(packageName == SettingsAccessor.BROWSER_PACKAGE_DEFAULT || className == SettingsAccessor.BROWSER_NAME_DEFAULT){
 			return false;
 		}
 		//check it's still installed
