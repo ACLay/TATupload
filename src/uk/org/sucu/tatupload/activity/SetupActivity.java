@@ -34,6 +34,7 @@ public class SetupActivity extends Activity {
 		//if the browser is unusable, get them to choose a new one
 		if(!BrowserAccessor.usable(this)){
 			BrowserAccessor.openBrowserChoicePopup(this, false);
+			return;
 		}
 		
 		if(NetCaller.isOnlineWithErrorBox(this)){

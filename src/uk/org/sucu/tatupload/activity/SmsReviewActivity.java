@@ -115,6 +115,7 @@ public class SmsReviewActivity extends Activity {
 
 		if(!BrowserAccessor.usable(this)){
 			BrowserAccessor.openBrowserChoicePopup(this, false);
+			return;
 		}
 		
 		if(NetCaller.isOnlineWithErrorBox(this)){
