@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
 			this.finish();
 			return;
 		} else if(versionSeen < 4){// add extra cases inform the user of changes to the app, etc.
-			//TODO remove now unused saved settings
+			//remove the now unused form name field from the preference save file.
 			((TatUploadApplication)getApplication()).removePreference(getString(R.string.form_name_key));
 		}
 		if(versionSeen != TUTORIAL_VERSION){
