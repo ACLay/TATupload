@@ -3,15 +3,13 @@ package uk.org.sucu.tatupload.message;
 import java.util.Collection;
 import java.util.HashMap;
 
+import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.NetCaller;
-import uk.org.sucu.tatupload.SettingsAccessor;
+import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.parse.Parser;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
@@ -22,7 +20,7 @@ public class SmsReceiver extends BroadcastReceiver{
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		//only proceed if we're processing
-		if(SettingsAccessor.getProcessingTexts(context)){
+		if(Settings.getProcessingTexts(context)){
 
 			//get the SMS message passed in
 			Bundle bundle = intent.getExtras();
@@ -50,22 +48,13 @@ public class SmsReceiver extends BroadcastReceiver{
 				Collection<Text> texts = numberBodyMap.values();
 
 				//process the message!
-				if(SettingsAccessor.getAutoQueueTexts(context)){
-					//queue it if we're confirming before upload, or there's no network connection
+				if(Settings.getAutoQueueTexts(context)){
+					//queue it if set to confirm before upload, the browser is not set/is uninstalled, or there's no network connection
 					queueMessages(texts);
-					
+				} else if(!BrowserAccessor.usable(context)){
+					queueMessages(texts);
 				} else if(!NetCaller.isOnline(context)){
-					//store current volume and set it to max
-					AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-					int currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
-					int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
-					audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVolume, AudioManager.FLAG_PLAY_SOUND);
 					//TODO PLAY ALARM WHEN TRYING TO UPLOAD AND NO NETWORK!!!
-					Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-					Ringtone r = RingtoneManager.getRingtone(context.getApplicationContext(), soundUri);
-					r.play();
-					//restore volume to previous level
-					audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, currentVolume, AudioManager.FLAG_PLAY_SOUND);
 					queueMessages(texts);
 				}else {
 					for(Text m : texts){

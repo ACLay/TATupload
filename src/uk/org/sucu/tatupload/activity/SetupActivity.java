@@ -4,9 +4,10 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.TatUploadApplication;
+import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.parse.Parser;
 import android.app.Activity;
 import android.content.Intent;
@@ -30,12 +31,15 @@ public class SetupActivity extends Activity {
 
 
 	public void startTat(View v){
-
+		//if the browser is unusable, get them to choose a new one
+		if(!BrowserAccessor.usable(this)){
+			BrowserAccessor.openBrowserChoicePopup(this, false);
+		}
+		
 		if(NetCaller.isOnlineWithErrorBox(this)){
 
 			EditText formNameEdit = (EditText) findViewById(R.id.formNameEditText);
 			String formName = formNameEdit.getText().toString();
-			((TatUploadApplication) getApplication()).setFormName(formName);
 
 			Uri uri = Parser.createNewFormUri(formName, this);
 			NetCaller.callScript(uri, this);
@@ -43,7 +47,7 @@ public class SetupActivity extends Activity {
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 			
-			((TatUploadApplication) getApplication()).setProcessingTexts(true);
+			Settings.setProcessingTexts(true, this);
 
 			this.finish();
 		}

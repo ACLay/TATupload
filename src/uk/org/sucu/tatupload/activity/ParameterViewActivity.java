@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -125,6 +124,7 @@ public class ParameterViewActivity extends Activity {
 		
 		if(!parameter.contains(param)){
 			parameter.add(param);
+			saveParameter();
 			adapter.notifyDataSetChanged();
 		}
 	}
@@ -138,6 +138,7 @@ public class ParameterViewActivity extends Activity {
 		int index = parameter.indexOf(toChange);
 		if(index != -1){//indexOf returns -1 if the object isn't present
 			parameter.set(index, textbox.getText().toString().toLowerCase());
+			saveParameter();
 			adapter.notifyDataSetChanged();
 		}
 	}
@@ -146,6 +147,7 @@ public class ParameterViewActivity extends Activity {
 		Spinner spin = (Spinner) dialog.findViewById(R.id.removeSpinner);
 		String toTake = (String) spin.getSelectedItem();
 		parameter.remove(toTake);
+		saveParameter();
 		adapter.notifyDataSetChanged();
 	}
 	
@@ -176,12 +178,11 @@ public class ParameterViewActivity extends Activity {
 					removeParameter();
 				}
 			})
-			.setNegativeButton(R.string.cancel, null)
+			.setNegativeButton(android.R.string.cancel, null)
 			.create();
 		//connect the dialogs spinner to the data structure
 		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.removeSpinner);
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
+		ParameterArrayAdapter adapter = new ParameterArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(adapter);
 		//display the dialog
@@ -199,12 +200,11 @@ public class ParameterViewActivity extends Activity {
 					editParameter();
 				}
 			})
-			.setNegativeButton(R.string.cancel, null)
+			.setNegativeButton(android.R.string.cancel, null)
 			.create();
 		//connect its spinner to the data structure
 		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.editSpinner);
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
+		ParameterArrayAdapter adapter = new ParameterArrayAdapter(this, android.R.layout.simple_spinner_item,parameter);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(adapter);
 		//display the dialog
@@ -223,7 +223,7 @@ public class ParameterViewActivity extends Activity {
 					addParameter();
 				}
 			})
-			.setNegativeButton(R.string.cancel, null)
+			.setNegativeButton(android.R.string.cancel, null)
 			.create();
 		dialog.show();
 		

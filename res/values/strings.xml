@@ -27,7 +27,6 @@
     <string name="new_form_name_request">Name of new form</string>
     <string name="text_a_toastie">Text a toastie</string>
     <string name="make_new_form">Make new form</string>
-    <string name="cancel">Cancel</string>
     <string name="new_form_id">ID of Google form:</string>
     <string name="accept">Accept</string>
     <string name="change_form_id">Change form</string>
@@ -65,9 +64,13 @@
     <string name="tutorial_done">Done</string>
     <string name="flavour_explanation">The names of flavours that you are offering</string>
     <string name="location_explanation">One of these words marks a sentence as containing a location</string>
-    <string name="tutorial_info">TATupload puts data into a google drive spreadsheet using a web script called by the phones browser. Spreadsheets are created in the drive of the google account signed into the phones browser.</string>
-    <string name="tutorial_info2">If you have multiple browsers, you can set the default browser for the app with the browser test button. If no default is set, the app will select the first one it finds.</string>
-    <string name="browser_test">Broswer test</string>
+    <string name="tutorial_info">TATupload puts data into a google drive spreadsheet using web links opened in a browser. Spreadsheets are created in the drive of the google account signed into that browser.</string>
+    <string name="tutorial_info2">Please select which browser TATupload should use to open web links. This can be changed later in the settings menu.</string>
+    <string name="web_browser">Web Broswer</string>
     <string name="confirm_choice">Are you sure?</string>
-
+    <string name="browser_package_key">uk.org.sucu.tatupload.browserPackage</string>
+    <string name="browser_name_key">uk.org.sucu.tatupload.browserName</string>
+	<string name="browser">Browser</string>
+	<string name="browser_description">The browser to upload messages with</string>
+	<string name="chrome_warning">Warning! Chrome will not open links, and hence won\'t upload texts, when the phone is sleeping. It should not be used.</string>
 </resources>
