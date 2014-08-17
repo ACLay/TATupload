@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import uk.org.sucu.tatupload.MessageArrayAdapter;
 import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.SettingsAccessor;
+import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.TatUploadApplication;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
@@ -36,9 +36,9 @@ public class MainActivity extends Activity {
 
 		setupUI();
 
-		int versionSeen = SettingsAccessor.getTutorialVersionSeen(this);
+		int versionSeen = Settings.getTutorialVersionSeen(this);
 		
-		if(versionSeen == SettingsAccessor.TUTORIAL_SEEN_DEFAULT){
+		if(versionSeen == Settings.TUTORIAL_SEEN_DEFAULT){
 			Intent intent = new Intent(this, TutorialActivity.class);
 			startActivity(intent);
 			this.finish();
@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
 
 	private void setupUI(){
 
-		if(SettingsAccessor.getProcessingTexts(this)){
+		if(Settings.getProcessingTexts(this)){
 			setContentView(R.layout.message_queue);
 			ListView messageView = (ListView) findViewById(R.id.messageListView);
 			adapter = SmsList.getMessageArrayAdapter(this);

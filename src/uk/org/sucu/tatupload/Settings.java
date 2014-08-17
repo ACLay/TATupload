@@ -11,7 +11,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-public class SettingsAccessor {
+public class Settings {
 	
 	public static final boolean PROCESSING_TEXTS_DEFAULT = false;
 	public static final boolean AUTO_QUEUE_TEXTS_DEFAULT = false;

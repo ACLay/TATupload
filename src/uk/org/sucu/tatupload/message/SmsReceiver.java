@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.NetCaller;
-import uk.org.sucu.tatupload.SettingsAccessor;
+import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.parse.Parser;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -20,7 +20,7 @@ public class SmsReceiver extends BroadcastReceiver{
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		//only proceed if we're processing
-		if(SettingsAccessor.getProcessingTexts(context)){
+		if(Settings.getProcessingTexts(context)){
 
 			//get the SMS message passed in
 			Bundle bundle = intent.getExtras();
@@ -48,7 +48,7 @@ public class SmsReceiver extends BroadcastReceiver{
 				Collection<Text> texts = numberBodyMap.values();
 
 				//process the message!
-				if(SettingsAccessor.getAutoQueueTexts(context)){
+				if(Settings.getAutoQueueTexts(context)){
 					//queue it if set to confirm before upload, the browser is not set/is uninstalled, or there's no network connection
 					queueMessages(texts);
 				} else if(!BrowserAccessor.usable(context)){

@@ -19,8 +19,8 @@ public class NetCaller {
 	    //open all this apps requests in the same tab, prevents new ones with each call
 	    browserIntent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
 	  	//get data about the chosen browser
-	    String packageName = SettingsAccessor.getChosenBrowserPackage(context);
-	    String className = SettingsAccessor.getChosenBrowserName(context);
+	    String packageName = Settings.getChosenBrowserPackage(context);
+	    String className = Settings.getChosenBrowserName(context);
 	    //add it to the intent
 	    browserIntent.setClassName(packageName, className);
 	    //start the browser

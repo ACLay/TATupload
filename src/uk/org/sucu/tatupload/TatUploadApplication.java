@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 
 public class TatUploadApplication extends Application {
 	
-	//TODO move settings into SettingsAccessor class
+	//TODO move settings into Settings class
 	public void setProcessingTexts(boolean processingTexts){
 		getEditor()
 		.putBoolean(getString(R.string.processing_key), processingTexts)
@@ -53,9 +53,9 @@ public class TatUploadApplication extends Application {
 		super.onCreate();
 		//Load the data extraction parameters, which need de-serializing to be usable, for improved access time.
 		
-		ArrayList<String> flavourList = SettingsAccessor.getSavedParameter(this, Parameters.FLAVOUR_PARAMETER);	
-		ArrayList<String> locationList = SettingsAccessor.getSavedParameter(this, Parameters.LOCATION_PARAMETER);
-		ArrayList<String> questionList = SettingsAccessor.getSavedParameter(this, Parameters.QUESTION_PARAMETER);
+		ArrayList<String> flavourList = Settings.getSavedParameter(this, Parameters.FLAVOUR_PARAMETER);	
+		ArrayList<String> locationList = Settings.getSavedParameter(this, Parameters.LOCATION_PARAMETER);
+		ArrayList<String> questionList = Settings.getSavedParameter(this, Parameters.QUESTION_PARAMETER);
 
 		Parameters.loadParameters(flavourList, locationList, questionList);
 	}
