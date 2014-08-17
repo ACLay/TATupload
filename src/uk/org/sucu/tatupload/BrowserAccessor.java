@@ -97,8 +97,8 @@ public class BrowserAccessor {
 		//load the browser data
 		String packageName = SettingsAccessor.getChosenBrowserPackage(context);
 		String className = SettingsAccessor.getChosenBrowserName(context);
-		//check they're actual saved values, null is default value
-		if(packageName == null || className == null){//TODO store the default values as constants in SettingsAccessor
+		//check they're actual saved values, not the defaults from failure
+		if(packageName == SettingsAccessor.BROWSER_PACKAGE_DEFAULT || className == SettingsAccessor.BROWSER_NAME_DEFAULT){//TODO store the default values as constants in SettingsAccessor
 			return false;
 		}
 		//check it's still installed

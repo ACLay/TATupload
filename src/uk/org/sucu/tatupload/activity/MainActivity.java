@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 
 		int versionSeen = SettingsAccessor.getTutorialVersionSeen(this);
 		
-		if(versionSeen == 0){
+		if(versionSeen == SettingsAccessor.TUTORIAL_SEEN_DEFAULT){
 			Intent intent = new Intent(this, TutorialActivity.class);
 			startActivity(intent);
 			this.finish();
