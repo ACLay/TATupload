@@ -22,13 +22,6 @@ public class TatUploadApplication extends Application {
 		.commit();
 	}
 	
-	//TODO this is no longer used, and should be removed from existing installations
-	public void setFormName(String formName){
-		getEditor()
-		.putString(getString(R.string.form_name_key), formName)
-		.commit();
-	}
-	
 	public void setTutorialVersionShown(int version){
 		getEditor()
 		.putInt(getString(R.string.tutorial_ver_key), version)
@@ -40,7 +33,14 @@ public class TatUploadApplication extends Application {
 		.putString(getString(R.string.browser_package_key), packageName)
 		.putString(getString(R.string.browser_name_key), name)
 		.commit();
+	}//TODO update this code, so much legacy garbage!!!
+	
+	public void removePreference(String key){
+		getEditor()
+		.remove(key)
+		.commit();
 	}
+	
 	
 	@SuppressLint("CommitPrefEdits")
 	private SharedPreferences.Editor getEditor(){

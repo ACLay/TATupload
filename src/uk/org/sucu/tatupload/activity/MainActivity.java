@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
-	public static final int TUTORIAL_VERSION = 3;//TODO update this each time the tutorial is changed.
+	public static final int TUTORIAL_VERSION = 4;//TODO update this each time the tutorial is changed.
 
 	private MessageArrayAdapter adapter;
 
@@ -36,17 +36,18 @@ public class MainActivity extends Activity {
 
 		setupUI();
 
-		int versionShown = SettingsAccessor.getTutorialVersionSeen(this);
+		int versionSeen = SettingsAccessor.getTutorialVersionSeen(this);
 		
-		if(versionShown == 0){
+		if(versionSeen == 0){
 			Intent intent = new Intent(this, TutorialActivity.class);
 			startActivity(intent);
 			this.finish();
 			return;
-		} else {// add extra cases inform the user of changes to the app, etc.
-			
+		} else if(versionSeen < 4){// add extra cases inform the user of changes to the app, etc.
+			//TODO remove now unused saved settings
+			((TatUploadApplication)getApplication()).removePreference(getString(R.string.form_name_key));
 		}
-		if(versionShown != TUTORIAL_VERSION){
+		if(versionSeen != TUTORIAL_VERSION){
 			((TatUploadApplication)getApplication()).setTutorialVersionShown(TUTORIAL_VERSION);
 		}
 

@@ -40,7 +40,6 @@ public class SetupActivity extends Activity {
 
 			EditText formNameEdit = (EditText) findViewById(R.id.formNameEditText);
 			String formName = formNameEdit.getText().toString();
-			((TatUploadApplication) getApplication()).setFormName(formName);
 
 			Uri uri = Parser.createNewFormUri(formName, this);
 			NetCaller.callScript(uri, this);
