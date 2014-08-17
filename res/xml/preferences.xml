@@ -5,6 +5,10 @@
         android:defaultValue="false"
         android:key="@string/confirm_split_key"
         android:title="@string/confirm_checkbox" />
+    
+    <Preference android:title="@string/web_browser"
+        android:summary="@string/browser_description"
+        android:key="@string/browser" />
 
     <PreferenceCategory 
         android:title="Data extraction parameters">
@@ -46,9 +50,5 @@
     </Preference>
     
     </PreferenceCategory>
-    
-    <Preference android:title="@string/browser"
-        android:summary="@string/browser_description"
-        android:key="@string/browser" />
     
 </PreferenceScreen>
