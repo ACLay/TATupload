@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 public class ParameterArrayAdapter extends ArrayAdapter<String> {
 
-	public ParameterArrayAdapter(Context context, int resource,
-			List<String> objects) {
+	public ParameterArrayAdapter(Context context, int resource,	List<String> objects) {
 		super(context, resource, objects);
 	}
 
