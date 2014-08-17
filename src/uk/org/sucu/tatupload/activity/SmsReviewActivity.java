@@ -169,5 +169,4 @@ public class SmsReviewActivity extends Activity {
 		this.finish();
 	}
 
-	//TODO upload time text was received
 }
