@@ -33,7 +33,7 @@ public class TatUploadApplication extends Application {
 		.putString(getString(R.string.browser_package_key), packageName)
 		.putString(getString(R.string.browser_name_key), name)
 		.commit();
-	}//TODO update this code, so much legacy garbage!!!
+	}
 	
 	public void removePreference(String key){
 		getEditor()
@@ -44,7 +44,7 @@ public class TatUploadApplication extends Application {
 	
 	@SuppressLint("CommitPrefEdits")
 	private SharedPreferences.Editor getEditor(){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);//TODO TatUploadApplication.this and statics...
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor editor = sharedPref.edit();
 		return editor;
 	}
