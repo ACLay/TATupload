@@ -43,7 +43,7 @@ public class TutorialActivity extends Activity {
 			startActivity(intent);
 			this.finish();
 		} else {
-			//TODO show a 'you must set a browser' popup
+			//show a 'you must set a browser' popup if no browser is set.
 			new AlertDialog.Builder(this)
 			.setTitle("TATupload")  
 			.setMessage("You must set a browser for TATupload to use before continuing.")
