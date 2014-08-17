@@ -178,7 +178,7 @@ public class ParameterViewActivity extends Activity {
 					removeParameter();
 				}
 			})
-			.setNegativeButton(R.string.cancel, null)
+			.setNegativeButton(android.R.string.cancel, null)
 			.create();
 		//connect the dialogs spinner to the data structure
 		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.removeSpinner);
@@ -200,7 +200,7 @@ public class ParameterViewActivity extends Activity {
 					editParameter();
 				}
 			})
-			.setNegativeButton(R.string.cancel, null)
+			.setNegativeButton(android.R.string.cancel, null)
 			.create();
 		//connect its spinner to the data structure
 		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.editSpinner);
@@ -223,7 +223,7 @@ public class ParameterViewActivity extends Activity {
 					addParameter();
 				}
 			})
-			.setNegativeButton(R.string.cancel, null)
+			.setNegativeButton(android.R.string.cancel, null)
 			.create();
 		dialog.show();
 		

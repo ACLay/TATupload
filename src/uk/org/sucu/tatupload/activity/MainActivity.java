@@ -140,7 +140,7 @@ public class MainActivity extends Activity {
 		.setTitle(action_name)
 		.setMessage(R.string.confirm_choice)
 		.setPositiveButton(action_name, action)
-		.setNegativeButton(R.string.cancel, null)
+		.setNegativeButton(android.R.string.cancel, null)
 		.create()
 		.show();
 	}

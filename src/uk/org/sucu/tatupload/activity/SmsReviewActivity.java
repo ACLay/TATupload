@@ -158,7 +158,7 @@ public class SmsReviewActivity extends Activity {
 				act.finish();
 			}
 		})
-		.setNegativeButton(R.string.cancel, null)
+		.setNegativeButton(android.R.string.cancel, null)
 		.create()
 		.show();
 		
