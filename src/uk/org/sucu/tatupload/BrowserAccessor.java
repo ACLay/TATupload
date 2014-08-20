@@ -37,8 +37,9 @@ public class BrowserAccessor {
 	
 	public static boolean browserSet(Context context){
 		String browserPackageName = Settings.getChosenBrowserPackage(context);
+		String browserName = Settings.getChosenBrowserName(context);
 		//null is returned as default if no saved browser package name is able to be loaded
-		return ! browserPackageName.equals(null);
+		return ((browserPackageName != null) && (browserName != null));
 	}
 	
 	public static boolean isInstalled(String packageName, String className, Context context){
