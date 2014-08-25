@@ -3,7 +3,6 @@ package uk.org.sucu.tatupload;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -56,10 +55,10 @@ public class BrowserAccessor {
 	}
 	
 	@SuppressLint("InflateParams")
-	public static void openBrowserChoicePopup(final Activity activity, boolean cancelable){
-		final View viewToLoad = LayoutInflater.from(activity).inflate(R.layout.browser_choice_popup, null);	
+	public static void openBrowserChoicePopup(final Context context, boolean cancelable){
+		final View viewToLoad = LayoutInflater.from(context).inflate(R.layout.browser_choice_popup, null);	
 		
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+		AlertDialog.Builder builder = new AlertDialog.Builder(context)
 		.setTitle("Select browser")
 		.setView(viewToLoad)
 		.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -72,7 +71,7 @@ public class BrowserAccessor {
 				String packageName = getPackageName(selected);
 				String className = getName(selected);
 				//save it
-				Settings.setBrowserData(packageName, className, activity);
+				Settings.setBrowserData(packageName, className, context);
 			}
 		})
 		.setCancelable(cancelable);
@@ -83,11 +82,11 @@ public class BrowserAccessor {
 		
 		builder.create();
 		
-		List<ResolveInfo> resolvers = getResolvers(activity);
+		List<ResolveInfo> resolvers = getResolvers(context);
 		
 		//connect the dialogs spinner to the data structure
 		Spinner spin = (Spinner) viewToLoad.findViewById(R.id.browserSpinner);
-		ResolveInfoArrayAdapter adapter = new ResolveInfoArrayAdapter(activity, android.R.layout.simple_spinner_item, resolvers);
+		ResolveInfoArrayAdapter adapter = new ResolveInfoArrayAdapter(context, android.R.layout.simple_spinner_item, resolvers);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spin.setAdapter(adapter);
 
