@@ -26,7 +26,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 
 
 public class MainActivity extends Activity {
@@ -53,7 +52,7 @@ public class MainActivity extends Activity {
 		} else if(versionSeen < 4){// add extra cases inform the user of changes to the app, etc.
 			//remove the now unused form name field from the preference save file.
 			Settings.removePreference(getString(R.string.form_name_key),this);
-			BrowserAccessor.openBrowserChoicePopup(this, false);
+			BrowserAccessor.openBrowserChoicePopup(this, false, null);
 		}
 		if(versionSeen != TUTORIAL_VERSION){
 			Settings.setTutorialVersionShown(TUTORIAL_VERSION, this);
@@ -131,118 +130,96 @@ public class MainActivity extends Activity {
 		startTatNewSpreadsheet();
 	}
 	
-	//TODO test these start methods, implement new webscript methods
+	//TODO test these start methods
 	private void resumeTat(){
 		Settings.setProcessingTexts(true, this);
 		Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
 		toggleButton.setText(R.string.stop);
 	}
 	
-	private void startTatNewSheet(){
-		if(NetCaller.isOnlineWithToast(this)){
-			Uri uri = Parser.createAddSheetUri(this,"Texts");
-			NetCaller.callScript(uri, this);
-			resumeTat();
-		} else {
-			openStartTatDialog();
-		}
-	}
-	
 	private void startTatNewSpreadsheet(){
-		startTatNewSpreadsheet(getString(R.string.text_a_toastie) + " " + Parser.getCurrentDateString());
+		String name = getString(R.string.text_a_toastie) + " " + Parser.getCurrentDateString();
+		startTatNewSpreadsheet(name);
 	}
 	
 	private void startTatNewSpreadsheet(String defaultName){
-		View view = LayoutInflater.from(this).inflate(R.layout.setup_layout , null);
-		final EditText ssNameEdit = (EditText) view.findViewById(R.id.ssNameEditText);
-		
-		ssNameEdit.setText(defaultName);
-				
-		new AlertDialog.Builder(this)
-		.setTitle(R.string.start)
-		.setView(view)
-		.setPositiveButton(R.string.start, new DialogInterface.OnClickListener() {
+		if(BrowserAccessor.usable(this)){
 			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				
-				String ssName = ssNameEdit.getText().toString();
-					
-				if(NetCaller.isOnlineWithToast(MainActivity.this)){
-						
-					Uri uri = Parser.createNewSpreadsheetUri(ssName, MainActivity.this);
-					NetCaller.callScript(uri, MainActivity.this);
-					
-					if(!Settings.getUsed(MainActivity.this)){
-						Settings.setUsed(true, MainActivity.this);
-						setupUI();//the toggle button must be created before resumeTat() sets its text
-					}
-					
-					resumeTat();
-					
-				} else {
-					startTatNewSpreadsheet(ssName);
-				}
-				
+			View view = LayoutInflater.from(this).inflate(R.layout.setup_layout , null);
+			final EditText ssNameEdit = (EditText) view.findViewById(R.id.ssNameEditText);
 
-			}
-		})
-		.setNegativeButton(android.R.string.cancel, null)
-		.create()
-		.show();
+			ssNameEdit.setText(defaultName);
+
+			new AlertDialog.Builder(this)
+			.setTitle(R.string.start)
+			.setView(view)
+			.setPositiveButton(R.string.start, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					String ssName = ssNameEdit.getText().toString();
+					//TODO Browser checks in MainActivity
+					if(NetCaller.isOnlineWithToast(MainActivity.this)){
+						//create the spreadsheet in the browser
+						Uri uri = Parser.createNewSpreadsheetUri(ssName, MainActivity.this);
+						NetCaller.callScript(uri, MainActivity.this);
+						//If it's the first use, set used to true
+						if(!Settings.getUsed(MainActivity.this)){
+							Settings.setUsed(true, MainActivity.this);
+							setupUI();//the toggle button must be created before resumeTat() sets its text
+						}
+
+						resumeTat();
+
+					} else {
+						//If no network connection is available, reopen the dialog
+						startTatNewSpreadsheet(ssName);
+					}
+
+
+				}
+			})
+			.setNegativeButton(android.R.string.cancel, null)
+			.create()
+			.show();
+
+		} else {
+			final String name = defaultName;
+			Runnable code = new Runnable(){
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					startTatNewSpreadsheet(name);
+				}
+			};
+			BrowserAccessor.openBrowserChoicePopup(this, false, code);
+		}
 	}
 	
 	private void stopTat(){
-		Settings.setProcessingTexts(false, this);
-		Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
-		toggleButton.setText(R.string.start);
+		
+		DialogInterface.OnClickListener positiveAction = new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//stop processing new texts
+				Settings.setProcessingTexts(false, MainActivity.this);
+				//change button text to Start
+				Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
+				toggleButton.setText(R.string.start);
+			}
+		};
+		
+		confirmChoice(positiveAction, R.string.stop);
 	}
 	
 	public void toggleTat(View v){
 		//if TAT is running
 		if(Settings.getProcessingTexts(this)){
-			DialogInterface.OnClickListener positiveAction = new DialogInterface.OnClickListener(){
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					//stop processing new texts
-					stopTat();
-				}
-			};
-			confirmChoice(positiveAction, R.string.stop);
+			stopTat();
 		} else {
-			openStartTatDialog();
+			startTatNewSpreadsheet();
 		}
-	}
-	
-	public void openStartTatDialog(){
-		final RadioGroup v = (RadioGroup) LayoutInflater.from(this).inflate(R.layout.start_method_chooser , null);;
-		//give choice to start in same sheet, new sheet, or new spreadsheet
-		new AlertDialog.Builder(this)
-		.setTitle(R.string.start)
-		.setView(v)
-	
-		.setPositiveButton(R.string.start, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				
-				int selected = v.getCheckedRadioButtonId();
-				
-				switch(selected){
-				case R.id.radio_new_ss:
-					startTatNewSpreadsheet();
-					break;
-				/*case R.id.radio_new_sheet:
-					startTatNewSheet();
-					break;*/ //TODO add this
-				case R.id.radio_resume:
-					resumeTat();
-					break;
-				}
-			}
-		})
-		.setNegativeButton(android.R.string.cancel, null)
-		.create()
-		.show();
 	}
 	
 	public void showSettings(View v){
