@@ -54,6 +54,10 @@ public class BrowserAccessor {
 		return false;
 	}
 	
+	public static void openBrowserChoicePopup(Context context, boolean cancelable){
+		openBrowserChoicePopup(context, cancelable, null);
+	}
+	
 	@SuppressLint("InflateParams")
 	public static void openBrowserChoicePopup(final Context context, boolean cancelable, final Runnable onCloseCode){
 		final View viewToLoad = LayoutInflater.from(context).inflate(R.layout.browser_choice_popup, null);	
