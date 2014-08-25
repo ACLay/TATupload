@@ -1,12 +1,12 @@
 package uk.org.sucu.tatupload;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.Browser;
+import android.widget.Toast;
 
 public class NetCaller {
 
@@ -36,17 +36,11 @@ public class NetCaller {
 		return online;
 	}
 	//TODO prevent wifi sleep?
-	public static boolean isOnlineWithErrorBox(Context context){
-		boolean online =  isOnline(context);
-		//show an error dialog if there's no network connection
+	public static boolean isOnlineWithToast(Context context){
+		boolean online = isOnline(context);
+		
 		if(!online){
-			new AlertDialog.Builder(context)
-			.setTitle("Problem")  
-			.setMessage("There is no network connection available.")
-			.setPositiveButton(android.R.string.ok, null)  
-			.setCancelable(false)  
-			.create()  
-			.show();
+			Toast.makeText(context, "There is no network connection available.", Toast.LENGTH_SHORT).show();
 		}
 
 		return online;
