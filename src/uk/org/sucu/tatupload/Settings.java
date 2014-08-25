@@ -20,6 +20,7 @@ public class Settings {
 	private static final String SAVED_PARAMETER_DEFAULT = null;
 	public static final String BROWSER_PACKAGE_DEFAULT = null;
 	public static final String BROWSER_NAME_DEFAULT = null;
+	public static final boolean USED_DEFAULT = false;
 
 	public static boolean getProcessingTexts(Context context){
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -70,6 +71,12 @@ public class Settings {
 		String browserName = sharedPref.getString(context.getString(R.string.browser_name_key), BROWSER_NAME_DEFAULT);
 		return browserName;
 	}
+	
+	public static boolean getUsed(Context context){
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+		boolean used = sharedPref.getBoolean(context.getString(R.string.used_key), USED_DEFAULT);
+		return used;
+	}
 
 	
 	public static void setProcessingTexts(boolean processingTexts, Context context){
@@ -94,6 +101,12 @@ public class Settings {
 		getEditor(context)
 		.putString(context.getString(R.string.browser_package_key), packageName)
 		.putString(context.getString(R.string.browser_name_key), name)
+		.commit();
+	}
+	
+	public static void setUsed(boolean used, Context context){
+		getEditor(context)
+		.putBoolean(context.getString(R.string.used_key), used)
 		.commit();
 	}
 	
