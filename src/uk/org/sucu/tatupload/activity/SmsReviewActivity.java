@@ -118,7 +118,7 @@ public class SmsReviewActivity extends Activity {
 			return;
 		}
 		
-		if(NetCaller.isOnlineWithErrorBox(this)){
+		if(NetCaller.isOnlineWithToast(this)){
 
 			EditText questionEdit = (EditText) findViewById(R.id.messageQuestionEditText);
 			EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
@@ -136,8 +136,6 @@ public class SmsReviewActivity extends Activity {
 			
 			SmsList.removeText(text);
 
-			Intent intent = new Intent(this, MainActivity.class);
-			startActivity(intent);
 			this.finish();
 		}
 		
