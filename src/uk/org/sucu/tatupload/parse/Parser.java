@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -96,8 +97,14 @@ public class Parser {
 		Date d = new Date(timeStampMillis);
 		return (DateFormat.getDateTimeInstance().format(d));
 	}
+	
+	public static String getCurrentDateString(){
+		Date d = new Date(Calendar.getInstance().getTimeInMillis());
+		String date = DateFormat.getDateInstance().format(d);
+		return date;
+	}
 
-	public static Uri createNewFormUri(String sheetName, Context context){
+	public static Uri createNewSpreadsheetUri(String sheetName, Context context){
 		//TODO should not accept empty string
 		try{
 			sheetName = URLEncoder.encode(sheetName, "utf-8");
@@ -109,6 +116,24 @@ public class Parser {
 		builder.append(context.getString(R.string.scriptURL));
 		builder.append("?action=create&");
 		builder.append("sheetName=");
+		builder.append(sheetName);
+
+		String uri = builder.toString();
+
+		return Uri.parse(uri);
+	}
+	
+	public static Uri createAddSheetUri(Context context, String sheetName){
+		try{
+			sheetName = URLEncoder.encode(sheetName, "utf-8");
+		} catch (UnsupportedEncodingException e){
+
+		}
+		//TODO add field for sheet name (and in webscript)
+		StringBuilder builder = new StringBuilder();
+		builder.append(context.getString(R.string.scriptURL));
+		builder.append("?action=addSheet");
+		builder.append("&name=");
 		builder.append(sheetName);
 
 		String uri = builder.toString();
