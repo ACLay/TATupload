@@ -29,12 +29,11 @@
             android:text="@string/clear_queue_button" />
 
         <Button
-            android:id="@+id/stopTatButton"
+            android:id="@+id/toggleTatButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/stop"
-            android:onClick="stopTat" />
+            android:onClick="toggleTat" />
 
         <Button
             android:id="@+id/openSettingsButton"
