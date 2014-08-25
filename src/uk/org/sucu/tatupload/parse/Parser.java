@@ -122,24 +122,6 @@ public class Parser {
 
 		return Uri.parse(uri);
 	}
-	
-	public static Uri createAddSheetUri(Context context, String sheetName){
-		try{
-			sheetName = URLEncoder.encode(sheetName, "utf-8");
-		} catch (UnsupportedEncodingException e){
-
-		}
-		//TODO add field for sheet name (and in webscript)
-		StringBuilder builder = new StringBuilder();
-		builder.append(context.getString(R.string.scriptURL));
-		builder.append("?action=addSheet");
-		builder.append("&name=");
-		builder.append(sheetName);
-
-		String uri = builder.toString();
-
-		return Uri.parse(uri);
-	}
 
 	public static Uri createUploadUri(String number, String question, String location, String toastie, String sms, String time, Context context){
 
