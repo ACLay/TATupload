@@ -113,11 +113,21 @@ public class SmsReviewActivity extends Activity {
 
 	public void uploadMessage(View v){
 
-		if(!BrowserAccessor.usable(this)){
-			BrowserAccessor.openBrowserChoicePopup(this, false);
-			return;
+		if(BrowserAccessor.usable(this)){
+			uploadMessage();
+		} else {
+			Runnable code = new Runnable(){
+				@Override
+				public void run() {
+					uploadMessage();
+				}
+			};
+			BrowserAccessor.openBrowserChoicePopup(this, false, code);
 		}
-		
+	}
+	
+	
+	private void uploadMessage(){
 		if(NetCaller.isOnlineWithToast(this)){
 
 			EditText questionEdit = (EditText) findViewById(R.id.messageQuestionEditText);
