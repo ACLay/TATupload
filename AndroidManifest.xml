@@ -43,10 +43,6 @@
                 android:value="uk.org.sucu.tatupload.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.SetupActivity"
-            android:label="@string/title_activity_setup" >
-        </activity>
-        <activity
             android:name=".activity.ParameterViewActivity"
             android:label="@string/title_activity_parameter_view"
             android:parentActivityName=".activity.OptionActivity" >
