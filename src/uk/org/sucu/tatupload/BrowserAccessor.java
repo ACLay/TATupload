@@ -55,7 +55,7 @@ public class BrowserAccessor {
 	}
 	
 	@SuppressLint("InflateParams")
-	public static void openBrowserChoicePopup(final Context context, boolean cancelable){
+	public static void openBrowserChoicePopup(final Context context, boolean cancelable, final Runnable onCloseCode){
 		final View viewToLoad = LayoutInflater.from(context).inflate(R.layout.browser_choice_popup, null);	
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(context)
@@ -72,6 +72,9 @@ public class BrowserAccessor {
 				String className = getName(selected);
 				//save it
 				Settings.setBrowserData(packageName, className, context);
+				if(onCloseCode != null){
+					onCloseCode.run();
+				}
 			}
 		})
 		.setCancelable(cancelable);
