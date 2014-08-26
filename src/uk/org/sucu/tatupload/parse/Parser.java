@@ -38,24 +38,20 @@ public class Parser {
 
 	public static ArrayList<String> getLocation(String message){
 		message = message.toLowerCase();
-		ArrayList<String> location = new ArrayList<String>();
+		ArrayList<String> locations = new ArrayList<String>();
 		String[] sentences = splitSentences(message);
-		for(String l : Parameters.locationParameter){
-			for(String sentence : sentences){
+		//for each sentence in the message
+		for(String sentence : sentences){
+			//if it contains a location identifier, add it to the list of locations
+			for(String l : Parameters.locationParameter){
 				if(sentence.contains(l)){
-					location.add(sentence);
+					locations.add(sentence);
+					break;
 				}
 			}
 		}
 
-		ArrayList<String> uniques = new ArrayList<String>();
-		for (String s : location){
-			if (!uniques.contains(s)){
-				uniques.add(s);
-			}
-		}
-
-		return uniques;
+		return locations;
 	}
 
 	public static ArrayList<String> getFlavours(String message){
