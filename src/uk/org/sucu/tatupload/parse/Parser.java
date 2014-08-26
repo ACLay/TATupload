@@ -78,7 +78,7 @@ public class Parser {
 		return flavours;
 	}
 
-	public static String concatenateArrayList(ArrayList<String> strings){
+	public static String concatenateArrayList(ArrayList<String> strings, String divider){
 		StringBuilder builder = new StringBuilder();
 		Iterator<String> iterator = strings.iterator();
 
@@ -86,7 +86,7 @@ public class Parser {
 			String line = iterator.next();
 			builder.append(line);
 			if (iterator.hasNext()) {
-				builder.append(' ');
+				builder.append(divider);
 			}
 		}
 
