@@ -40,8 +40,8 @@ public class ParameterViewActivity extends Activity {
 		Intent intent = getIntent();
 		parameterIdentifier = intent.getStringExtra(Parameters.PARAMETER);
 		
-		TextView tv = (TextView) findViewById(R.id.param_name_label);
-		tv.setText(Parameters.getParamDescription(parameterIdentifier, this));
+		TextView tv = (TextView) findViewById(R.id.param_explanation_label);
+		tv.setText(Parameters.getParamExplanation(parameterIdentifier, this));
 		
 		parameter = Parameters.getList(parameterIdentifier);
 		if(parameterIdentifier == null) {
@@ -65,18 +65,10 @@ public class ParameterViewActivity extends Activity {
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setupActionBar() {
-		String text;
-		
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
-			getActionBar().setTitle(Parameters.getParamDescription(parameterIdentifier, this));
-			text = "";
-		} else {
-			text = Parameters.getParamDescription(parameterIdentifier, this);
+			getActionBar().setTitle(Parameters.getParamHeading(parameterIdentifier, this));
 		}
-		
-		TextView tv = (TextView) findViewById(R.id.param_name_label);
-		tv.setText(text);
 	}
 	
 	@Override
@@ -167,6 +159,7 @@ public class ParameterViewActivity extends Activity {
 		}
 	}
 	
+	@SuppressLint("InflateParams")
 	private void makeRemovalPopup(){
 		//build the dialog box
 		View viewToLoad = LayoutInflater.from(this).inflate(R.layout.remove_param_popup, null);		
@@ -189,6 +182,7 @@ public class ParameterViewActivity extends Activity {
 		dialog.show();
 	}
 
+	@SuppressLint("InflateParams")
 	private void makeEditPopup(){
 		View viewToLoad = LayoutInflater.from(this).inflate(R.layout.edit_param_popup, null);	
 		//build the dialog box
@@ -212,6 +206,7 @@ public class ParameterViewActivity extends Activity {
 		
 	}
 	
+	@SuppressLint("InflateParams")
 	private void makeAddPopup(){
 		View viewToLoad = LayoutInflater.from(this).inflate(R.layout.add_param_popup, null);	
 		

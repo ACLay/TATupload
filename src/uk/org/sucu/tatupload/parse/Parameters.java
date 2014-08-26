@@ -47,7 +47,7 @@ public class Parameters {
 		if(identifier.equals(FLAVOUR_PARAMETER)){
 			return new ArrayList<String>(Arrays.asList("ham","cheese","tomato","pineapple"));
 		} else if(identifier.equals(LOCATION_PARAMETER)){
-			return new ArrayList<String>(Arrays.asList("library","bar","pub","club","road","rd","avenue","gardens","street","st","crescent","terrace","block","flat","floor","room"));
+			return new ArrayList<String>(Arrays.asList("library","bar","pub","club","road","rd","avenue","gardens","street","st","crescent","terrace","block","flat","floor","room"));//TODO fix st matching in other words
 		} else if(identifier.equals(QUESTION_PARAMETER)){
 			return new ArrayList<String>(Arrays.asList("who","what","where","when","why","how","could","would","should","?"));
 		}
@@ -65,22 +65,39 @@ public class Parameters {
 		return null;
 	}
 	
-	public static String getParamDescription(String identifier, Context c){
+	public static String getParamHeading(String identifier, Context c){
 		
 		if(isValidIdentifier(identifier)){
 			if(identifier.equals(FLAVOUR_PARAMETER)){
-				return c.getString(R.string.flavour_desc);
+				return c.getString(R.string.flavour_heading);
 			}
 			if(identifier.equals(LOCATION_PARAMETER)){
-				return c.getString(R.string.location_desc);
+				return c.getString(R.string.location_heading);
 			}
 			if(identifier.equals(QUESTION_PARAMETER)){
-				return c.getString(R.string.question_desc);
+				return c.getString(R.string.question_heading);
 			}
 		}
 		
-		return c.getString(R.string.invalid_desc);
+		return c.getString(R.string.invalid_heading);
 				
+	}
+	
+	public static String getParamExplanation(String identifier, Context c){
+		if(isValidIdentifier(identifier)){
+			if(identifier.equals(FLAVOUR_PARAMETER)){
+				return c.getString(R.string.flavour_explanation);
+			}
+			if(identifier.equals(LOCATION_PARAMETER)){
+				return c.getString(R.string.location_explanation);
+			}
+			if(identifier.equals(QUESTION_PARAMETER)){
+				return c.getString(R.string.question_explanation);
+			}
+		}
+		
+		return c.getString(R.string.invalid_heading);
+			
 	}
 	
 	public static String getAsString(String identifier)throws NotSerializableException{

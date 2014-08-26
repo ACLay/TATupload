@@ -11,10 +11,11 @@
     android:id="@+id/parameterLayout" >
 
     <TextView
-        android:id="@+id/param_name_label"
+        android:id="@+id/param_explanation_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/invalid_desc" />
+        android:text="@string/invalid_heading"
+    	android:paddingBottom="@dimen/activity_vertical_margin" />
 
     <ListView
     	android:id="@+id/param_list"
