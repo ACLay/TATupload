@@ -20,27 +20,20 @@ public class Parser {
 
 	public static ArrayList<String> getQuestion(String message){
 		message = message.toLowerCase();
-		ArrayList<String> question = new ArrayList<String>();
+		ArrayList<String> questions = new ArrayList<String>();
 		String[] sentences = splitSentences(message);
+		//for each sentence in the message
 		for(String sentence : sentences){
-
-			for(String s : Parameters.questionParameter){
-				if (sentence.contains(s)){;
-				question.add(sentence);
+			for(String qID : Parameters.questionParameter){
+				//if it contains a question identifier, add it to the list of questions
+				if (sentence.contains(qID)){
+					questions.add(sentence);
+					break;
 				}
 			}
-
 		}
-
-		ArrayList<String> uniques = new ArrayList<String>();
-		for (String s : question){
-			if (!uniques.contains(s)){
-				uniques.add(s);
-			}
-		}
-
-
-		return uniques;
+		
+		return questions;
 	}
 
 	public static ArrayList<String> getLocation(String message){
