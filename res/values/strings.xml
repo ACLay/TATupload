@@ -15,8 +15,7 @@
     <string name="upload">Upload</string>
     <string name="undo_changes">Undo changes</string>
     <string name="discard">Discard text</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_sms_review">SmsReviewActivity</string>
+    <string name="title_activity_sms_review">Message Review</string>
     <string name="text_a_toastie">Text a toastie</string>
     <string name="accept">Accept</string>
     <string name="change_form_id">Change form</string>
@@ -28,8 +27,6 @@
     <string name="processing_key">uk.org.sucu.tatupload.processing</string>
     <string name="confirm_split_key">uk.org.sucu.tatupload.confirmSplit</string>
     <string name="tutorial_ver_key">uk.org.sucu.tatupload.tutorialVersion</string>
-    <string name="title_activity_parameter_view">ParameterViewActivity</string>
-    <string name="title_activity_option">OptionActivity</string>
     <string name="scriptURL">https://script.google.com/macros/s/AKfycbzlHUVyYLlB6oWRCUomhNKBNVfsXD1fPJH61D_RsY8R1uhKmpNz/exec</string>
     <string name="parameter_indicator">uk.org.sucu.tatupload.PARAMETER</string>
     <string name="flavour_parameter">uk.org.sucu.tatupload.FLAVOUR_PARAMETER</string>

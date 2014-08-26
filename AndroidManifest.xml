@@ -44,7 +44,7 @@
         </activity>
         <activity
             android:name=".activity.ParameterViewActivity"
-            android:label="@string/title_activity_parameter_view"
+            android:label="@string/invalid_heading"
             android:parentActivityName=".activity.OptionActivity" >
         </activity>
         <activity
