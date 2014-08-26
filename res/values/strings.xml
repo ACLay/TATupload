@@ -58,4 +58,5 @@
 	<string name="browser_description">The browser to upload messages with</string>
 	<string name="chrome_warning">Warning! Chrome will not open links, and hence won\'t upload texts, when the phone is sleeping. It should not be used.</string>
 	<string name="used_key">uk.org.sucu.tatupload.usedBefore</string>
+	<string name="no">No</string>
 </resources>

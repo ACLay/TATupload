@@ -1,7 +1,6 @@
 package uk.org.sucu.tatupload.activity;
 
 import java.util.Collection;
-
 import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.MessageArrayAdapter;
 import uk.org.sucu.tatupload.NetCaller;
@@ -11,6 +10,7 @@ import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.parse.Parser;
 import uk.org.sucu.tatupload.views.QueuedSmsView;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -130,7 +130,7 @@ public class MainActivity extends Activity {
 		startTatNewSpreadsheet();
 	}
 	
-	//TODO test these start methods
+	//TODO test the browser check runnables
 	private void resumeTat(){
 		Settings.setProcessingTexts(true, this);
 		Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
@@ -142,6 +142,7 @@ public class MainActivity extends Activity {
 		startTatNewSpreadsheet(name);
 	}
 	
+	@SuppressLint("InflateParams")
 	private void startTatNewSpreadsheet(String defaultName){
 		if(BrowserAccessor.usable(this)){
 			
@@ -159,7 +160,7 @@ public class MainActivity extends Activity {
 				public void onClick(DialogInterface dialog, int which) {
 
 					String ssName = ssNameEdit.getText().toString();
-					//TODO Browser checks in MainActivity
+					
 					if(NetCaller.isOnlineWithToast(MainActivity.this)){
 						//create the spreadsheet in the browser
 						Uri uri = Parser.createNewSpreadsheetUri(ssName, MainActivity.this);
@@ -189,7 +190,6 @@ public class MainActivity extends Activity {
 			Runnable code = new Runnable(){
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
 					startTatNewSpreadsheet(name);
 				}
 			};
@@ -218,8 +218,36 @@ public class MainActivity extends Activity {
 		if(Settings.getProcessingTexts(this)){
 			stopTat();
 		} else {
-			startTatNewSpreadsheet();
+			if(SmsList.isEmpty()){
+				startTatNewSpreadsheet();
+			} else {
+				clearQueueBeforeStartDialog();
+			}
+			
+			
 		}
+	}
+	
+	private void clearQueueBeforeStartDialog(){
+		new AlertDialog.Builder(this)
+		.setTitle(R.string.start)
+		.setMessage("Clear message queue before starting?")
+		.setNegativeButton(android.R.string.cancel, null)
+		.setNeutralButton(R.string.no, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				startTatNewSpreadsheet();
+			}
+		})
+		.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				SmsList.clearList();
+				startTatNewSpreadsheet();
+			}
+		})
+		.create()
+		.show();
 	}
 	
 	public void showSettings(View v){
