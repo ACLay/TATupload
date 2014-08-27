@@ -71,15 +71,15 @@ public class SmsReviewActivity extends Activity {
 
 		EditText questionEdit = (EditText) findViewById(R.id.messageQuestionEditText);
 		ArrayList<String> questions = Parser.getQuestion(text.getBody());
-		questionEdit.setText(Parser.concatenateArrayList(questions, " "));
+		questionEdit.setText(Parser.concatenateArrayList(questions, ""));
 
 		EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
 		ArrayList<String> locations = Parser.getLocation(text.getBody());
-		locationEdit.setText(Parser.concatenateArrayList(locations, " "));
+		locationEdit.setText(Parser.concatenateArrayList(locations, ""));
 
 		EditText toastieEdit = (EditText) findViewById(R.id.messageToastieEditText);
 		ArrayList<String> flavours = Parser.getFlavours(text.getBody());
-		toastieEdit.setText(Parser.concatenateArrayList(flavours, " "));
+		toastieEdit.setText(Parser.concatenateArrayList(flavours, ", "));
 	}
 
 	/**
