@@ -77,24 +77,12 @@ public class SmsReceiver extends BroadcastReceiver{
 
 		String body = text.getBody();
 		String number = text.getNumber();
-
-		String question = "";
-		for(String s : Parser.getQuestion(body)){
-			question += s;
-		}
-
-		String location = "";
-		for(String s : Parser.getLocation(body)){
-			location += s;
-		}
-
-		String toastie = "";
-		for(String s : Parser.getFlavours(body)){
-			toastie += s + " ";
-		}
-
 		String time = Parser.timeStampToString(text.getTimestamp());
 
+		String question = Parser.concatenateArrayList(Parser.getQuestion(body), "");
+		String location = Parser.concatenateArrayList(Parser.getLocation(body), "");
+		String toastie = Parser.concatenateArrayList(Parser.getFlavours(body), ", ");
+		
 		Uri uri = Parser.createUploadUri(number, question, location, toastie, body, time, context);
 		NetCaller.callScript(uri, context);
 
