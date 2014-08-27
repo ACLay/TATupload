@@ -44,7 +44,7 @@ public class Parser {
 		for(String sentence : sentences){
 			//if it contains a location identifier, add it to the list of locations
 			for(String l : Parameters.locationParameter){
-				if(sentence.contains(l)){
+				if(sentenceContainsWord(sentence, l)){
 					locations.add(sentence);
 					break;
 				}
