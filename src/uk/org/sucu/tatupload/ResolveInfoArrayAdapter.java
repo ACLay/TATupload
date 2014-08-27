@@ -25,7 +25,6 @@ public class ResolveInfoArrayAdapter extends ArrayAdapter<ResolveInfo> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
-		//TODO include app icon
 		return makeView(position);
 	}
 	
@@ -39,10 +38,9 @@ public class ResolveInfoArrayAdapter extends ArrayAdapter<ResolveInfo> {
 		TextView tv = (TextView) view.findViewById(R.id.browserNameLabel);
 		tv.setText(info.loadLabel(pm));
 		
-		ImageView iv = (ImageView) view.findViewById(R.id.iconImageView);//your package name
-		Drawable icon;
+		ImageView iv = (ImageView) view.findViewById(R.id.iconImageView);
 		try {
-			icon = getContext().getPackageManager().getApplicationIcon(info.activityInfo.packageName);
+			Drawable icon = getContext().getPackageManager().getApplicationIcon(info.activityInfo.packageName);
 			iv.setImageDrawable(icon);
 		} catch (NameNotFoundException e) {
 			
