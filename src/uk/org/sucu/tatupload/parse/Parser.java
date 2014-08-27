@@ -56,15 +56,53 @@ public class Parser {
 
 	public static ArrayList<String> getFlavours(String message){
 		ArrayList<String> flavours = new ArrayList<String>();
-		String[] messageWords = splitWords(message.toLowerCase());
-		for(String word : messageWords){
-			for(String flavour : Parameters.flavourParameter){
-				if(word.equals(flavour)){
-					flavours.add(flavour);
+		ArrayList<String> parameter = Parameters.flavourParameter;
+		String[] sentences = splitSentences(message.toLowerCase());
+		//for each sentence in the message
+		for(String sentence : sentences){
+			String[] words = splitWords(sentence);
+			//for each word in the sentence
+			word_loop:for(int i = 0; i < words.length; i++){
+				//for each flavour in the parameter
+				for(int j = 0; j < parameter.size(); j++){
+					String flavour = parameter.get(j);
+					String[] flavour_words = splitWords(flavour);
+					boolean added = false;
+					//for each word in that flavour
+					for(int k = 0; k < flavour_words.length; k++){
+						//if the word and flavour word match
+						if(words[i].equals(flavour_words[k])){
+							//add the flavour to the list if it hasn't already been (from this match)
+							if(!added){
+								flavours.add(flavour);
+								added = true;
+							}
+							//check the next word
+							i++;
+							//if there is no next word, finish the sentence
+							if(i >= words.length){
+								break word_loop;
+							}
+						}else if(added){//if this word doesn't match, but previous ones did match this flavour
+							//restart flavour check on this word;
+							j = -1;//(will be incremented to 0 by j control loop)
+							break;
+						}//if no match, and the flavour not already added, it will check the next word in the flavour against the sentence word
+					}
 				}
 			}
 		}
 		return flavours;
+	}
+	
+	private static boolean sentenceContainsWord(String sentence, String word){
+		String[] words = splitWords(sentence.toLowerCase());
+		for(String sentenceWord : words){
+			if(sentenceWord.equals(word)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static String concatenateArrayList(ArrayList<String> strings, String divider){
