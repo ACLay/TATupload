@@ -56,7 +56,7 @@
     <string name="browser_name_key">uk.org.sucu.tatupload.browserName</string>
 	<string name="browser">Browser</string>
 	<string name="browser_description">The browser to upload messages with</string>
-	<string name="chrome_warning">Warning! Chrome will not open links, and hence won\'t upload texts, when the phone is sleeping. It should not be used.</string>
+	<string name="chrome_warning">Warning! Chrome will not open links when the phone is sleeping. This can cause messages to be lost from TATupload. It should not be used.</string>
 	<string name="used_key">uk.org.sucu.tatupload.usedBefore</string>
 	<string name="no">No</string>
 	<string name="icon_description">App icon</string>
