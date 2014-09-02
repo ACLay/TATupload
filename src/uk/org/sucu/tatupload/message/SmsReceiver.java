@@ -71,7 +71,7 @@ public class SmsReceiver extends BroadcastReceiver{
 	
 	private void queueMessages(Collection<Text> messages, Context context){
 		SmsList.addTexts(messages);
-		SmsList.saveQueue(context);
+		Settings.saveSmsList(context);
 	}
 
 	public void autoProcess(Text text, Context context){

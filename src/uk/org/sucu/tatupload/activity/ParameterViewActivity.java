@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.ParameterArrayAdapter;
 import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.parse.Parameters;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -147,7 +148,7 @@ public class ParameterViewActivity extends Activity {
 	private void saveParameter(){
 		if(parameterIdentifier != null){
 			try {
-				Parameters.saveParameter(parameterIdentifier, this);
+				Settings.saveParameter(parameterIdentifier, this);
 			} catch (IOException e) {
 				Toast.makeText(this, "Unable to save parameter.", Toast.LENGTH_SHORT).show();
 			}

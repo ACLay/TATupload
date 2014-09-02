@@ -1,9 +1,11 @@
 package uk.org.sucu.tatupload.activity;
 
 import java.util.ArrayList;
+
 import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.parse.Parser;
@@ -146,7 +148,7 @@ public class SmsReviewActivity extends Activity {
 			NetCaller.callScript(uri, this);
 			
 			SmsList.removeText(text);
-			SmsList.saveQueue(this);
+			Settings.saveSmsList(this);
 
 			this.finish();
 		}
@@ -166,7 +168,7 @@ public class SmsReviewActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				SmsList.removeText(text);
-				SmsList.saveQueue(SmsReviewActivity.this);
+				Settings.saveSmsList(SmsReviewActivity.this);
 				act.finish();
 			}
 		})

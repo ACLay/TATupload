@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.apache.pig.impl.util.ObjectSerializer;
 
+import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.parse.Parameters;
 import android.annotation.SuppressLint;
@@ -128,6 +129,31 @@ public class Settings {
 		.putBoolean(context.getString(R.string.used_key), used)
 		.commit();
 	}
+	
+	public static void saveSmsList(Context context){
+		String data = null;
+		try {
+			data = SmsList.getSerialList();
+		} catch (IOException e) {
+
+		}
+		
+		getEditor(context)
+		.putString(context.getString(R.string.saved_queue_key), data)
+		.commit();
+	}
+	
+	public static void saveParameter(String identifier, Context context) throws IOException{
+		if(Parameters.isValidIdentifier(identifier)){
+			
+			String data = Parameters.getAsSerialString(identifier);
+			
+			getEditor(context)
+			.putString(identifier, data)
+			.commit();
+		}
+	}
+	
 	
 	public static void removePreference(String key, Context context){
 		getEditor(context)

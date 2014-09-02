@@ -1,7 +1,6 @@
 package uk.org.sucu.tatupload.parse;
 
 import java.io.IOException;
-import java.io.NotSerializableException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -9,8 +8,6 @@ import org.apache.pig.impl.util.ObjectSerializer;
 
 import uk.org.sucu.tatupload.R;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 public class Parameters {
 
@@ -100,17 +97,10 @@ public class Parameters {
 			
 	}
 	
-	public static String getAsString(String identifier)throws NotSerializableException{
-		return asString(getList(identifier));
-	}
-	
-	public static String asString(ArrayList<String> list) throws NotSerializableException{
+	public static String getAsSerialString(String identifier)throws IOException{
+		ArrayList<String> list = getList(identifier);
 		
-		try {
-			return ObjectSerializer.serialize(list);
-		} catch (IOException e) {
-			throw new NotSerializableException(e.getMessage());
-		}
+		return ObjectSerializer.serialize(list);
 	}
 	
 	public static boolean isValidIdentifier(String identifier){
@@ -120,24 +110,5 @@ public class Parameters {
 			return true;
 		}
 	}
-	
-	public static void saveParameter(String identifier, Context context) throws IOException{
-		if(isValidIdentifier(identifier)){
-			
-			String data;
-			try {
-				data = Parameters.getAsString(identifier);
-			} catch (NotSerializableException e) {
-				throw new IOException(e.getMessage());
-			}
-			
-			
-			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-			SharedPreferences.Editor editor = sharedPref.edit();
-			editor.putString(identifier, data);
-			editor.commit();
-		}
-	}
-	
 
 }

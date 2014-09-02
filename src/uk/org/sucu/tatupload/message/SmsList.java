@@ -9,8 +9,6 @@ import org.apache.pig.impl.util.ObjectSerializer;
 import uk.org.sucu.tatupload.MessageArrayAdapter;
 import uk.org.sucu.tatupload.R;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 public class SmsList {
 
@@ -64,19 +62,11 @@ public class SmsList {
 		return texts.isEmpty();
 	}
 	
-	public static void saveQueue(Context context){
-		String data = null;
-		try {
-			synchronized(texts){
-				data = ObjectSerializer.serialize(texts);
-			}
-		} catch (IOException e) {
-
-		}		
-		
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-		SharedPreferences.Editor editor = sharedPref.edit();
-		editor.putString(context.getString(R.string.saved_queue_key), data);
-		editor.commit();
+	public static String getSerialList() throws IOException{
+		String data;
+		synchronized(texts){
+			data = ObjectSerializer.serialize(texts);
+		}
+		return data;
 	}
 }
