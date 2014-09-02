@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ParameterViewActivity extends Activity {
 
@@ -148,13 +149,7 @@ public class ParameterViewActivity extends Activity {
 			try {
 				Parameters.saveParameter(parameterIdentifier, this);
 			} catch (IOException e) {
-				new AlertDialog.Builder(this)
-						.setTitle("TATupload")  
-						.setMessage("Unable to save the parameter.")
-						.setPositiveButton("Okay", null)  
-						.setCancelable(false)  
-						.create()
-						.show();
+				Toast.makeText(this, "Unable to save parameter.", Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
