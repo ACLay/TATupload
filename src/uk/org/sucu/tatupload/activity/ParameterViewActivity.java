@@ -160,6 +160,7 @@ public class ParameterViewActivity extends Activity {
 		//build the dialog box
 		View viewToLoad = LayoutInflater.from(this).inflate(R.layout.remove_param_popup, null);		
 		dialog = new AlertDialog.Builder(this)
+			.setTitle(R.string.remove_param)
 			.setView(viewToLoad)
 			.setPositiveButton(R.string.remove_param, new DialogInterface.OnClickListener(){
 				@Override
@@ -183,6 +184,7 @@ public class ParameterViewActivity extends Activity {
 		View viewToLoad = LayoutInflater.from(this).inflate(R.layout.edit_param_popup, null);	
 		//build the dialog box
 		dialog = new AlertDialog.Builder(this)
+			.setTitle(R.string.change_param)
 			.setView(viewToLoad)
 			.setPositiveButton(R.string.change_param, new DialogInterface.OnClickListener(){
 				@Override
@@ -207,6 +209,7 @@ public class ParameterViewActivity extends Activity {
 		View viewToLoad = LayoutInflater.from(this).inflate(R.layout.add_param_popup, null);	
 		
 		dialog = new AlertDialog.Builder(this)
+			.setTitle(R.string.add_param)
 			.setView(viewToLoad)
 			.setPositiveButton(R.string.add_param, new DialogInterface.OnClickListener(){
 				@Override
