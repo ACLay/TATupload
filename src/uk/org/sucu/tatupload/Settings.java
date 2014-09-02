@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.apache.pig.impl.util.ObjectSerializer;
 
+import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.parse.Parameters;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -49,13 +50,31 @@ public class Settings {
 		try {
 			list = (ArrayList<String>) ObjectSerializer.deserialize(serialData);
 		} catch (IOException e) {
-			if(getTutorialVersionSeen(context) != 0){
+			if(getTutorialVersionSeen(context) != TUTORIAL_SEEN_DEFAULT){
 				Toast.makeText(context, context.getString(R.string.param_load_error), Toast.LENGTH_LONG).show();
 			}
 		}
 		
 		if(list == null){//The serializer will return null if the string is null or length 0
 			return Parameters.getDefaultList(parameter);
+		}
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Text> getSavedTexts(Context context){
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+		String serialData = sharedPref.getString(context.getString(R.string.saved_queue_key), SAVED_PARAMETER_DEFAULT);
+		ArrayList<Text> list = null;
+		
+		try {
+			list = (ArrayList<Text>) ObjectSerializer.deserialize(serialData);
+		} catch (IOException e) {
+
+		}
+		
+		if(list == null){
+			list = new ArrayList<Text>();
 		}
 		return list;
 	}

@@ -50,12 +50,12 @@ public class SmsReceiver extends BroadcastReceiver{
 				//process the message!
 				if(Settings.getAutoQueueTexts(context)){
 					//queue it if set to confirm before upload, the browser is not set/is uninstalled, or there's no network connection
-					queueMessages(texts);
+					queueMessages(texts, context);
 				} else if(!BrowserAccessor.usable(context)){
-					queueMessages(texts);
+					queueMessages(texts, context);
 				} else if(!NetCaller.isOnline(context)){
 					//TODO PLAY ALARM WHEN TRYING TO UPLOAD AND NO NETWORK!!!
-					queueMessages(texts);
+					queueMessages(texts, context);
 				}else {
 					for(Text m : texts){
 						if(m != null){
@@ -69,8 +69,9 @@ public class SmsReceiver extends BroadcastReceiver{
 
 	}
 	
-	private void queueMessages(Collection<Text> messages){
+	private void queueMessages(Collection<Text> messages, Context context){
 		SmsList.addTexts(messages);
+		SmsList.saveQueue(context);
 	}
 
 	public void autoProcess(Text text, Context context){

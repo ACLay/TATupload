@@ -146,6 +146,7 @@ public class SmsReviewActivity extends Activity {
 			NetCaller.callScript(uri, this);
 			
 			SmsList.removeText(text);
+			SmsList.saveQueue(this);
 
 			this.finish();
 		}
@@ -165,6 +166,7 @@ public class SmsReviewActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				SmsList.removeText(text);
+				SmsList.saveQueue(SmsReviewActivity.this);
 				act.finish();
 			}
 		})

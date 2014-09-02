@@ -114,6 +114,7 @@ public class MainActivity extends Activity {
 				public void onClick(DialogInterface dialog, int which) {
 					//remove
 					SmsList.clearList();
+					SmsList.saveQueue(MainActivity.this);
 				}
 			};
 
@@ -238,6 +239,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				SmsList.clearList();
+				SmsList.saveQueue(MainActivity.this);
 				startTatNewSpreadsheet();
 			}
 		})
