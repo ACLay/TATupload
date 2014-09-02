@@ -1,6 +1,5 @@
 package uk.org.sucu.tatupload.activity;
 
-import java.util.Collection;
 import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.MessageArrayAdapter;
 import uk.org.sucu.tatupload.NetCaller;
@@ -120,10 +119,6 @@ public class MainActivity extends Activity {
 
 			confirmChoice(action, R.string.clear_queue_button);
 		}
-	}
-
-	public void addMessages(Collection<Text> msgs){
-		SmsList.addTexts(msgs);
 	}
 
 	public void startTat(View v){
