@@ -10,13 +10,13 @@ import android.content.Context;
 public class SmsList {
 
 	private static ArrayList<Text> texts = new ArrayList<Text>();
-	private static MessageArrayAdapter adapter;
+	private static MessageArrayAdapter adapter = null;
 	
 	public static void addText(Text msg){
 		synchronized(texts){
 			texts.add(msg);
 		}
-		adapter.notifyDataSetChanged();
+		notifyAdapter();
 	}
 	
 	public static void addTexts(Collection<Text> msgs){
@@ -25,26 +25,34 @@ public class SmsList {
 				texts.add(t);
 			}
 		}
-		adapter.notifyDataSetChanged();
+		notifyAdapter();
 	}
 	
 	public static void clearList(){
 		synchronized(texts){
 			texts.clear();
 		}
-		adapter.notifyDataSetChanged();
+		notifyAdapter();
 	}
 	
 	public static void removeText(Text msg){
 		synchronized(texts){
 			texts.remove(msg);
 		}
-		adapter.notifyDataSetChanged();
+		notifyAdapter();
 	}
 	
 	public static MessageArrayAdapter getMessageArrayAdapter(Context context){
-		adapter = new MessageArrayAdapter(context, R.id.messageListView, texts);
+		if(adapter == null){
+			adapter = new MessageArrayAdapter(context, R.id.messageListView, texts);
+		}
 		return adapter;
+	}
+	
+	private static void notifyAdapter(){
+		if(adapter != null){
+			adapter.notifyDataSetChanged();
+		}
 	}
 	
 	public static boolean isEmpty(){
