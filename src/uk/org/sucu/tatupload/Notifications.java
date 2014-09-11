@@ -57,7 +57,7 @@ public class Notifications {
 		.setSmallIcon(R.drawable.icon)
 		.setContentTitle(title)
 		.setAutoCancel(false)
-		.setOngoing(true)
+		.setOngoing(processingTexts)
 		.setContentText(text);
 		
 		if(processingTexts){
