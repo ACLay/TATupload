@@ -65,6 +65,8 @@ public class Notifications {
 		}
 		
 		Intent resultIntent = new Intent(context,MainActivity.class);
+		//prevent a new instance of the application being opened
+		resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		PendingIntent resultPendingIntent =
 				PendingIntent.getActivity(
 						context,
