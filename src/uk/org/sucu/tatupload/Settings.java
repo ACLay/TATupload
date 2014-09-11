@@ -23,6 +23,7 @@ public class Settings {
 	public static final String BROWSER_PACKAGE_DEFAULT = null;
 	public static final String BROWSER_NAME_DEFAULT = null;
 	public static final boolean USED_DEFAULT = false;
+	public static final boolean NOTIFICATION_DEFAULT = true;
 
 	public static boolean getProcessingTexts(Context context){
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -96,6 +97,12 @@ public class Settings {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 		boolean used = sharedPref.getBoolean(context.getString(R.string.used_key), USED_DEFAULT);
 		return used;
+	}
+	
+	public static boolean getShowingNotification(Context context){
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+		boolean showing = sharedPref.getBoolean(context.getString(R.string.show_notification_key), NOTIFICATION_DEFAULT);
+		return showing;
 	}
 
 	

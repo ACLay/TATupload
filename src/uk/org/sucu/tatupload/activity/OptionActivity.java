@@ -1,9 +1,11 @@
 package uk.org.sucu.tatupload.activity;
 
 import uk.org.sucu.tatupload.BrowserAccessor;
+import uk.org.sucu.tatupload.Notifications;
 import uk.org.sucu.tatupload.R;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 
@@ -29,6 +31,20 @@ public class OptionActivity extends PreferenceActivity {
 
 		});
 
+		Preference notify = findPreference(getString(R.string.show_notification_key));
+		notify.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				Boolean processing = (Boolean) newValue;
+				if(processing){
+					Notifications.displayNotification(OptionActivity.this);
+				} else {
+					Notifications.hideNotification(OptionActivity.this);
+				}
+				return true;
+			}
+			
+		});
 	}
 
 }
