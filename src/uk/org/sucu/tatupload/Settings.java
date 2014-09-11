@@ -58,7 +58,7 @@ public class Settings {
 		}
 		
 		if(list == null){//The serializer will return null if the string is null or length 0
-			return Parameters.getDefaultList(parameter);
+			return Parameters.getDefaultList(parameter, context);
 		}
 		return list;
 	}

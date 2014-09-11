@@ -66,4 +66,39 @@
 	<string name="no_queued_messages">No queued messages</string>
 	<string name="one_queued_message">1 queued message</string>
 	<string name="_queued_messages">" queued messages"</string>
+	<string-array name="default_flavours">
+        <item>ham</item>
+        <item>cheese</item>
+        <item>tomato</item>
+        <item>pineapple</item>
+    </string-array>
+	<string-array name="default_locations">
+	    <item>library</item>
+        <item>bar</item>
+        <item>pub</item>
+        <item>club</item>
+        <item>road</item>
+        <item>rd</item>
+        <item>avenue</item>
+        <item>gardens</item>
+        <item>street</item>
+        <item>st</item>
+        <item>crescent</item>
+        <item>terrace</item>
+        <item>block</item>
+        <item>flat</item>
+        <item>floor</item>
+        <item>room</item>
+    </string-array>
+    <string-array name="default_questions">
+        <item>who</item>
+        <item>what</item>
+        <item>where</item>
+        <item>when</item>
+        <item>why</item>
+        <item>could</item>
+        <item>would</item>
+        <item>should</item>
+        <item>\?</item>
+    </string-array>
 </resources>

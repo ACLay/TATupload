@@ -93,7 +93,7 @@ public class ParameterViewActivity extends Activity {
 	}
 
 	public void restoreDefaultParameter(){
-		ArrayList<String> defaults = Parameters.getDefaultList(parameterIdentifier);
+		ArrayList<String> defaults = Parameters.getDefaultList(parameterIdentifier, this);
 		Parameters.loadParameter(parameterIdentifier, defaults);
 		saveParameter();
 		adapter.notifyDataSetChanged();

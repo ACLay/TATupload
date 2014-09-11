@@ -20,8 +20,8 @@ public class Parameters {
 	public static final ArrayList<String> locationParameter = new ArrayList<String>();
 	public static final ArrayList<String> questionParameter = new ArrayList<String>();
 
-	public static void restoreDefaults(){
-		loadParameters(getDefaultList(FLAVOUR_PARAMETER), getDefaultList(LOCATION_PARAMETER), getDefaultList(QUESTION_PARAMETER));
+	public static void restoreDefaults(Context context){
+		loadParameters(getDefaultList(FLAVOUR_PARAMETER, context), getDefaultList(LOCATION_PARAMETER, context), getDefaultList(QUESTION_PARAMETER, context));
 	}
 	
 	public static void loadParameters(ArrayList<String> flavour, ArrayList<String> location, ArrayList<String> question){
@@ -40,13 +40,16 @@ public class Parameters {
 		}
 	}
 	
-	public static ArrayList<String> getDefaultList(String identifier){
+	public static ArrayList<String> getDefaultList(String identifier, Context context){
 		if(identifier.equals(FLAVOUR_PARAMETER)){
-			return new ArrayList<String>(Arrays.asList("ham","cheese","tomato","pineapple"));
+			String[] defaults = context.getResources().getStringArray(R.array.default_flavours);
+			return new ArrayList<String>(Arrays.asList(defaults));
 		} else if(identifier.equals(LOCATION_PARAMETER)){
-			return new ArrayList<String>(Arrays.asList("library","bar","pub","club","road","rd","avenue","gardens","street","st","crescent","terrace","block","flat","floor","room"));
+			String[] defaults = context.getResources().getStringArray(R.array.default_locations);
+			return new ArrayList<String>(Arrays.asList(defaults));
 		} else if(identifier.equals(QUESTION_PARAMETER)){
-			return new ArrayList<String>(Arrays.asList("who","what","where","when","why","how","could","would","should","?"));
+			String[] defaults = context.getResources().getStringArray(R.array.default_questions);
+			return new ArrayList<String>(Arrays.asList(defaults));
 		}
 		return null;
 	}
