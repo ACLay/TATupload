@@ -65,5 +65,5 @@
 	<string name="processing_texts">Processing incoming texts</string>
 	<string name="no_queued_messages">No queued messages</string>
 	<string name="one_queued_message">1 queued message</string>
-	<string name="_queued_messages"> queued messages</string>
+	<string name="_queued_messages">" queued messages"</string>
 </resources>
