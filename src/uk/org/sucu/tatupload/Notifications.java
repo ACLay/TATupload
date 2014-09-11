@@ -57,6 +57,7 @@ public class Notifications {
 		.setSmallIcon(R.drawable.icon)
 		.setContentTitle(title)
 		.setAutoCancel(false)
+		.setOngoing(true)
 		.setNumber(queueSize)
 		.setContentText(text);
 		
