@@ -58,9 +58,11 @@ public class Notifications {
 		.setContentTitle(title)
 		.setAutoCancel(false)
 		.setOngoing(true)
-		.setNumber(queueSize)
 		.setContentText(text);
 		
+		if(processingTexts){
+			builder.setNumber(queueSize);
+		}
 		
 		Intent resultIntent = new Intent(context,MainActivity.class);
 		PendingIntent resultPendingIntent =
