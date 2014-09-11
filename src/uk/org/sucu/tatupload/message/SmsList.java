@@ -69,4 +69,8 @@ public class SmsList {
 		}
 		return data;
 	}
+	
+	public static int getSize(){
+		return texts.size();
+	}
 }
