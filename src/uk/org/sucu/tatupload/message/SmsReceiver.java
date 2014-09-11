@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.NetCaller;
+import uk.org.sucu.tatupload.Notifications;
 import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.parse.Parser;
 import android.content.BroadcastReceiver;
@@ -72,6 +73,7 @@ public class SmsReceiver extends BroadcastReceiver{
 	private void queueMessages(Collection<Text> messages, Context context){
 		SmsList.addTexts(messages);
 		Settings.saveSmsList(context);
+		Notifications.updateNotification(context);
 	}
 
 	public void autoProcess(Text text, Context context){

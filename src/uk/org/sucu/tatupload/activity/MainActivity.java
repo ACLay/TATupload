@@ -3,6 +3,7 @@ package uk.org.sucu.tatupload.activity;
 import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.MessageArrayAdapter;
 import uk.org.sucu.tatupload.NetCaller;
+import uk.org.sucu.tatupload.Notifications;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.message.SmsList;
@@ -115,6 +116,7 @@ public class MainActivity extends Activity {
 					//remove
 					SmsList.clearList();
 					Settings.saveSmsList(MainActivity.this);
+					Notifications.updateNotification(MainActivity.this);
 				}
 			};
 
@@ -131,6 +133,7 @@ public class MainActivity extends Activity {
 		Settings.setProcessingTexts(true, this);
 		Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
 		toggleButton.setText(R.string.stop);
+		Notifications.updateNotification(this);
 	}
 	
 	private void startTatNewSpreadsheet(){
@@ -203,6 +206,7 @@ public class MainActivity extends Activity {
 				//change button text to Start
 				Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
 				toggleButton.setText(R.string.start);
+				Notifications.updateNotification(MainActivity.this);
 			}
 		};
 		

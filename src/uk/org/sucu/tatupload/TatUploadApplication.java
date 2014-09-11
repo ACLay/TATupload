@@ -22,6 +22,8 @@ public class TatUploadApplication extends Application {
 		
 		ArrayList<Text> savedQueue = Settings.getSavedTexts(this);
 		SmsList.addTexts(savedQueue);
+		
+		Notifications.updateNotification(this);
 	}
 
 

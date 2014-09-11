@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.NetCaller;
+import uk.org.sucu.tatupload.Notifications;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.message.SmsList;
@@ -149,6 +150,7 @@ public class SmsReviewActivity extends Activity {
 			
 			SmsList.removeText(text);
 			Settings.saveSmsList(this);
+			Notifications.updateNotification(this);
 
 			this.finish();
 		}
@@ -160,7 +162,6 @@ public class SmsReviewActivity extends Activity {
 	}
 
 	public void discardText(View v){
-		final Activity act = this;
 		new AlertDialog.Builder(this)
 		.setTitle(R.string.discard)
 		.setMessage(R.string.confirm_choice)
@@ -169,7 +170,8 @@ public class SmsReviewActivity extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 				SmsList.removeText(text);
 				Settings.saveSmsList(SmsReviewActivity.this);
-				act.finish();
+				Notifications.updateNotification(SmsReviewActivity.this);
+				SmsReviewActivity.this.finish();
 			}
 		})
 		.setNegativeButton(android.R.string.cancel, null)
