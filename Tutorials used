@@ -41,3 +41,7 @@ Opening links in the first available browser:
 	
 Getting app icons:
 	http://stackoverflow.com/a/10696164
+	
+Notifications:
+	http://developer.android.com/training/notify-user/index.html
+	http://developer.android.com/design/patterns/notifications.html
