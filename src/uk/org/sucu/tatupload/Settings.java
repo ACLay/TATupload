@@ -24,35 +24,39 @@ public class Settings {
 	public static final String BROWSER_NAME_DEFAULT = null;
 	public static final boolean USED_DEFAULT = false;
 	public static final boolean NOTIFICATION_DEFAULT = true;
+	
+	private SharedPreferences sharedPref;
+	private Context context;
 
-	public static boolean getProcessingTexts(Context context){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	public Settings(Context context){
+		sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+		this.context = context;
+	}
+
+	public boolean getProcessingTexts(){
 		boolean processing = sharedPref.getBoolean(context.getString(R.string.processing_key), PROCESSING_TEXTS_DEFAULT);
 		return processing;
 	}
 	
-	public static boolean getAutoQueueTexts(Context context){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	public boolean getAutoQueueTexts(){
 		boolean confirmSplit = sharedPref.getBoolean(context.getString(R.string.confirm_split_key), AUTO_QUEUE_TEXTS_DEFAULT);
 		return confirmSplit;
 	}
 	
-	public static int getTutorialVersionSeen(Context context){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	public int getTutorialVersionSeen(){
 		int versionSeen = sharedPref.getInt(context.getString(R.string.tutorial_ver_key), TUTORIAL_SEEN_DEFAULT);
 		return versionSeen;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static ArrayList<String> getSavedParameter(Context context, String parameter){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	public ArrayList<String> getSavedParameter(String parameter){
 		String serialData = sharedPref.getString(parameter, SAVED_PARAMETER_DEFAULT);
 		ArrayList<String> list = null;
 		
 		try {
 			list = (ArrayList<String>) ObjectSerializer.deserialize(serialData);
 		} catch (IOException e) {
-			if(getTutorialVersionSeen(context) != TUTORIAL_SEEN_DEFAULT){
+			if(getTutorialVersionSeen() != TUTORIAL_SEEN_DEFAULT){
 				Toast.makeText(context, context.getString(R.string.param_load_error), Toast.LENGTH_LONG).show();
 			}
 		}
@@ -64,8 +68,7 @@ public class Settings {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Text> getSavedTexts(Context context){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	public ArrayList<Text> getSavedTexts(){
 		String serialData = sharedPref.getString(context.getString(R.string.saved_queue_key), SAVED_PARAMETER_DEFAULT);
 		ArrayList<Text> list = null;
 		
@@ -81,63 +84,59 @@ public class Settings {
 		return list;
 	}
 	
-	public static String getChosenBrowserPackage(Context context){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	public String getChosenBrowserPackage(){
 		String browserPackage = sharedPref.getString(context.getString(R.string.browser_package_key), BROWSER_PACKAGE_DEFAULT);
 		return browserPackage;
 	}
 	
-	public static String getChosenBrowserName(Context context){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	public String getChosenBrowserName(){
 		String browserName = sharedPref.getString(context.getString(R.string.browser_name_key), BROWSER_NAME_DEFAULT);
 		return browserName;
 	}
 	
-	public static boolean getUsed(Context context){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	public boolean getUsed(){
 		boolean used = sharedPref.getBoolean(context.getString(R.string.used_key), USED_DEFAULT);
 		return used;
 	}
 	
-	public static boolean getShowingNotification(Context context){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	public boolean getShowingNotification(){
 		boolean showing = sharedPref.getBoolean(context.getString(R.string.show_notification_key), NOTIFICATION_DEFAULT);
 		return showing;
 	}
 
 	
-	public static void setProcessingTexts(boolean processingTexts, Context context){
-		getEditor(context)
+	public void setProcessingTexts(boolean processingTexts){
+		getEditor()
 		.putBoolean(context.getString(R.string.processing_key), processingTexts)
 		.commit();
 	}
 
-	public static void setConfirmSplit(boolean confirmSplit, Context context){
-		getEditor(context)
+	public void setConfirmSplit(boolean confirmSplit){
+		getEditor()
 		.putBoolean(context.getString(R.string.confirm_split_key), confirmSplit)
 		.commit();
 	}
 	
-	public static void setTutorialVersionShown(int version, Context context){
-		getEditor(context)
+	public void setTutorialVersionShown(int version){
+		getEditor()
 		.putInt(context.getString(R.string.tutorial_ver_key), version)
 		.commit();
 	}
 	
-	public static void setBrowserData(String packageName, String name, Context context){
-		getEditor(context)
+	public void setBrowserData(String packageName, String name){
+		getEditor()
 		.putString(context.getString(R.string.browser_package_key), packageName)
 		.putString(context.getString(R.string.browser_name_key), name)
 		.commit();
 	}
 	
-	public static void setUsed(boolean used, Context context){
-		getEditor(context)
+	public void setUsed(boolean used){
+		getEditor()
 		.putBoolean(context.getString(R.string.used_key), used)
 		.commit();
 	}
 	
-	public static void saveSmsList(Context context){
+	public void saveSmsList(){
 		String data = null;
 		try {
 			data = SmsList.getSerialList();
@@ -145,33 +144,32 @@ public class Settings {
 
 		}
 		
-		getEditor(context)
+		getEditor()
 		.putString(context.getString(R.string.saved_queue_key), data)
 		.commit();
 	}
 	
-	public static void saveParameter(String identifier, Context context) throws IOException{
+	public void saveParameter(String identifier) throws IOException{
 		if(Parameters.isValidIdentifier(identifier)){
 			
 			String data = Parameters.getAsSerialString(identifier);
 			
-			getEditor(context)
+			getEditor()
 			.putString(identifier, data)
 			.commit();
 		}
 	}
 	
 	
-	public static void removePreference(String key, Context context){
-		getEditor(context)
+	public void removePreference(String key){
+		getEditor()
 		.remove(key)
 		.commit();
 	}
 	
 	
 	@SuppressLint("CommitPrefEdits")
-	private static SharedPreferences.Editor getEditor(Context context){
-		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+	private SharedPreferences.Editor getEditor(){
 		SharedPreferences.Editor editor = sharedPref.edit();
 		return editor;
 	}

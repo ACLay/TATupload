@@ -35,14 +35,17 @@ public class MainActivity extends Activity {
 	public static final int TUTORIAL_VERSION = 4;//TODO update this each time the tutorial is changed.
 
 	private MessageArrayAdapter adapter;
-
+	private Settings settings;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		settings = new Settings(this);
+		
 		setupUI();
 
-		int versionSeen = Settings.getTutorialVersionSeen(this);
+		int versionSeen = settings.getTutorialVersionSeen();
 		
 		if(versionSeen == Settings.TUTORIAL_SEEN_DEFAULT){
 			Intent intent = new Intent(this, TutorialActivity.class);
@@ -51,11 +54,11 @@ public class MainActivity extends Activity {
 			return;
 		} else if(versionSeen < 4){// add extra cases inform the user of changes to the app, etc.
 			//remove the now unused form name field from the preference save file.
-			Settings.removePreference(getString(R.string.form_name_key),this);
+			settings.removePreference(getString(R.string.form_name_key));
 			BrowserAccessor.openBrowserChoicePopup(this, false, null);
 		}
 		if(versionSeen != TUTORIAL_VERSION){
-			Settings.setTutorialVersionShown(TUTORIAL_VERSION, this);
+			settings.setTutorialVersionShown(TUTORIAL_VERSION);
 		}
 
 	}	
@@ -63,11 +66,11 @@ public class MainActivity extends Activity {
 
 	private void setupUI(){
 
-		if(Settings.getUsed(this)){
+		if(settings.getUsed()){
 			setContentView(R.layout.message_queue);
 			
 			Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
-			if(Settings.getProcessingTexts(this)){
+			if(settings.getProcessingTexts()){
 				toggleButton.setText(R.string.stop);
 			} else {
 				toggleButton.setText(R.string.start);
@@ -115,7 +118,7 @@ public class MainActivity extends Activity {
 				public void onClick(DialogInterface dialog, int which) {
 					//remove
 					SmsList.clearList();
-					Settings.saveSmsList(MainActivity.this);
+					settings.saveSmsList();
 					Notifications.updateNotification(MainActivity.this);
 				}
 			};
@@ -130,7 +133,7 @@ public class MainActivity extends Activity {
 	
 	//TODO test the browser check runnables
 	private void resumeTat(){
-		Settings.setProcessingTexts(true, this);
+		settings.setProcessingTexts(true);
 		Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
 		toggleButton.setText(R.string.stop);
 		Notifications.updateNotification(this);
@@ -165,8 +168,8 @@ public class MainActivity extends Activity {
 						Uri uri = Parser.createNewSpreadsheetUri(ssName, MainActivity.this);
 						NetCaller.callScript(uri, MainActivity.this);
 						//If it's the first use, set used to true
-						if(!Settings.getUsed(MainActivity.this)){
-							Settings.setUsed(true, MainActivity.this);
+						if(!settings.getUsed()){
+							settings.setUsed(true);
 							setupUI();//the toggle button must be created before resumeTat() sets its text
 						}
 
@@ -202,7 +205,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				//stop processing new texts
-				Settings.setProcessingTexts(false, MainActivity.this);
+				settings.setProcessingTexts(false);
 				//change button text to Start
 				Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
 				toggleButton.setText(R.string.start);
@@ -215,7 +218,7 @@ public class MainActivity extends Activity {
 	
 	public void toggleTat(View v){
 		//if TAT is running
-		if(Settings.getProcessingTexts(this)){
+		if(settings.getProcessingTexts()){
 			stopTat();
 		} else {
 			if(SmsList.isEmpty()){
@@ -243,7 +246,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				SmsList.clearList();
-				Settings.saveSmsList(MainActivity.this);
+				settings.saveSmsList();
 				startTatNewSpreadsheet();
 			}
 		})

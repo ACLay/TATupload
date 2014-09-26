@@ -37,7 +37,7 @@ public class TutorialActivity extends Activity {
 		
 		if(BrowserAccessor.browserSet(this)){
 			//update the saved value of seen tutorial version
-			Settings.setTutorialVersionShown(MainActivity.TUTORIAL_VERSION, this);
+			new Settings(this).setTutorialVersionShown(MainActivity.TUTORIAL_VERSION);
 			//relaunch the main activity
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);

@@ -14,13 +14,15 @@ public class TatUploadApplication extends Application {
 		super.onCreate();
 		//Load the data extraction parameters, which need de-serializing to be usable, for improved access time.
 		
-		ArrayList<String> flavourList = Settings.getSavedParameter(this, Parameters.FLAVOUR_PARAMETER);	
-		ArrayList<String> locationList = Settings.getSavedParameter(this, Parameters.LOCATION_PARAMETER);
-		ArrayList<String> questionList = Settings.getSavedParameter(this, Parameters.QUESTION_PARAMETER);
+		Settings settings = new Settings(this);
+		
+		ArrayList<String> flavourList = settings.getSavedParameter(Parameters.FLAVOUR_PARAMETER);	
+		ArrayList<String> locationList = settings.getSavedParameter(Parameters.LOCATION_PARAMETER);
+		ArrayList<String> questionList = settings.getSavedParameter(Parameters.QUESTION_PARAMETER);
 
 		Parameters.loadParameters(flavourList, locationList, questionList);
 		
-		ArrayList<Text> savedQueue = Settings.getSavedTexts(this);
+		ArrayList<Text> savedQueue = settings.getSavedTexts();
 		SmsList.addTexts(savedQueue);
 		
 		Notifications.updateNotification(this);

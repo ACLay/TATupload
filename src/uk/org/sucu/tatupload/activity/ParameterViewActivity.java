@@ -32,12 +32,15 @@ public class ParameterViewActivity extends Activity {
 	private String parameterIdentifier;
 	
 	private AlertDialog dialog;
+	private Settings settings;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_parameter_view);
+		
+		settings = new Settings(this);
 		
 		Intent intent = getIntent();
 		parameterIdentifier = intent.getStringExtra(Parameters.PARAMETER);
@@ -148,7 +151,7 @@ public class ParameterViewActivity extends Activity {
 	private void saveParameter(){
 		if(parameterIdentifier != null){
 			try {
-				Settings.saveParameter(parameterIdentifier, this);
+				settings.saveParameter(parameterIdentifier);
 			} catch (IOException e) {
 				Toast.makeText(this, "Unable to save parameter.", Toast.LENGTH_SHORT).show();
 			}

@@ -16,14 +16,16 @@ public class Notifications {
 	
 	public static void updateNotification(Context context){
 		
-		boolean showingNotification = Settings.getShowingNotification(context);
+		Settings settings = new Settings(context);
+		
+		boolean showingNotification = settings.getShowingNotification();
 		
 		if(!showingNotification){
 			hideNotification(context);
 			return;
 		}
 		
-		boolean processingTexts = Settings.getProcessingTexts(context);
+		boolean processingTexts = settings.getProcessingTexts();
 		int queueSize = SmsList.getSize();
 
 		if((!processingTexts) && queueSize == 0){
@@ -80,7 +82,7 @@ public class Notifications {
 	}
 	
 	public static void displayNotification(Context context){
-		boolean processingTexts = Settings.getProcessingTexts(context);
+		boolean processingTexts = new Settings(context).getProcessingTexts();
 		int queueSize = SmsList.getSize();
 		
 		Notification notification = buildNotification(context, processingTexts, queueSize);

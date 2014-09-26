@@ -149,7 +149,7 @@ public class SmsReviewActivity extends Activity {
 			NetCaller.callScript(uri, this);
 			
 			SmsList.removeText(text);
-			Settings.saveSmsList(this);
+			new Settings(this).saveSmsList();
 			Notifications.updateNotification(this);
 
 			this.finish();
@@ -169,7 +169,7 @@ public class SmsReviewActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				SmsList.removeText(text);
-				Settings.saveSmsList(SmsReviewActivity.this);
+				new Settings(SmsReviewActivity.this).saveSmsList();
 				Notifications.updateNotification(SmsReviewActivity.this);
 				SmsReviewActivity.this.finish();
 			}

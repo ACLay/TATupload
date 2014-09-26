@@ -35,8 +35,9 @@ public class BrowserAccessor {
 	}
 	
 	public static boolean browserSet(Context context){
-		String browserPackageName = Settings.getChosenBrowserPackage(context);
-		String browserName = Settings.getChosenBrowserName(context);
+		Settings settings = new Settings(context);
+		String browserPackageName = settings.getChosenBrowserPackage();
+		String browserName = settings.getChosenBrowserName();
 		//null is returned as default if no saved browser package name is able to be loaded
 		return ((browserPackageName != null) && (browserName != null));
 	}
@@ -75,7 +76,7 @@ public class BrowserAccessor {
 				String packageName = getPackageName(selected);
 				String className = getName(selected);
 				//save it
-				Settings.setBrowserData(packageName, className, context);
+				new Settings(context).setBrowserData(packageName, className);
 				if(onCloseCode != null){
 					onCloseCode.run();
 				}
@@ -102,8 +103,9 @@ public class BrowserAccessor {
 	
 	public static boolean usable(Context context){
 		//load the browser data
-		String packageName = Settings.getChosenBrowserPackage(context);
-		String className = Settings.getChosenBrowserName(context);
+		Settings settings = new Settings(context);
+		String packageName = settings.getChosenBrowserPackage();
+		String className = settings.getChosenBrowserName();
 		//check they're actual saved values, not the defaults from failure
 		if(packageName == Settings.BROWSER_PACKAGE_DEFAULT || className == Settings.BROWSER_NAME_DEFAULT){
 			return false;

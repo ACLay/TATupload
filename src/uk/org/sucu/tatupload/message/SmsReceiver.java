@@ -21,7 +21,8 @@ public class SmsReceiver extends BroadcastReceiver{
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		//only proceed if we're processing
-		if(Settings.getProcessingTexts(context)){
+		Settings settings = new Settings(context);
+		if(settings.getProcessingTexts()){
 
 			//get the SMS message passed in
 			Bundle bundle = intent.getExtras();
@@ -49,7 +50,7 @@ public class SmsReceiver extends BroadcastReceiver{
 				Collection<Text> texts = numberBodyMap.values();
 
 				//process the message!
-				if(Settings.getAutoQueueTexts(context)){
+				if(settings.getAutoQueueTexts()){
 					//queue it if set to confirm before upload, the browser is not set/is uninstalled, or there's no network connection
 					queueMessages(texts, context);
 				} else if(!BrowserAccessor.usable(context)){
@@ -72,7 +73,7 @@ public class SmsReceiver extends BroadcastReceiver{
 	
 	private void queueMessages(Collection<Text> messages, Context context){
 		SmsList.addTexts(messages);
-		Settings.saveSmsList(context);
+		new Settings(context).saveSmsList();
 		Notifications.updateNotification(context);
 	}
 
