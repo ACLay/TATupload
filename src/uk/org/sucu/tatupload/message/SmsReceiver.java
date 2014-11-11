@@ -35,7 +35,7 @@ public class SmsReceiver extends BroadcastReceiver{
 				HashMap<String,Text> numberBodyMap = new HashMap<String,Text>();
 				
 				for (int i = 0; i < msgs.length; i++){
-					//createFromPdu to be deprecated soon... new method added in 4.4 KitKat
+					//createFromPdu to be deprecated soon
 					msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
 					//if 2 texts in the same receive are from the same number, merge them
 					String number = msgs[i].getOriginatingAddress();
