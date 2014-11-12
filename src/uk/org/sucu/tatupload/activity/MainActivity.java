@@ -173,7 +173,7 @@ public class MainActivity extends Activity {
 						if(!settings.getUsed()){
 							settings.setUsed(true);
 							//Add a text to the queue explaining how to use the queue
-							SmsList.addText(new Text("TATupload","Tap a queued message to review and upload or delete it.",Calendar.getInstance().getTimeInMillis()));
+							SmsList.addText(new Text(getString(R.string.app_name),getString(R.string.queue_explanation),Calendar.getInstance().getTimeInMillis()));
 							setupUI();//the toggle button must be created before resumeTat() the button's text
 						}
 
