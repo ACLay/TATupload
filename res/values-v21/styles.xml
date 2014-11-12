@@ -5,8 +5,10 @@
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 21+ devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Material.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="android:Theme.Material.Light">
         <!-- API 21 theme customizations can go here. -->
+        <item name="android:colorPrimary">#FFFF00</item>
+        <item name="android:colorPrimaryDark">#FFA500</item>
     </style>
 
 </resources>
