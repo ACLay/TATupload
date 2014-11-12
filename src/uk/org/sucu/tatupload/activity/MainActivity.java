@@ -2,6 +2,7 @@ package uk.org.sucu.tatupload.activity;
 
 import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.MessageArrayAdapter;
+import uk.org.sucu.tatupload.MessageArrayAdapter.ViewHolder;
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.Notifications;
 import uk.org.sucu.tatupload.R;
@@ -9,7 +10,6 @@ import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.parse.Parser;
-import uk.org.sucu.tatupload.views.QueuedSmsView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -86,8 +86,8 @@ public class MainActivity extends Activity {
 				public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 
 					// Get the sms message contained in the clicked object
-					QueuedSmsView smsView = (QueuedSmsView) v;
-					Text sms = smsView.getSMS();
+					ViewHolder holder = (ViewHolder) v.getTag();
+					Text sms = holder.getText();
 					//send it in an intent to an SmsReviewActivity
 					Intent intent = new Intent(v.getContext(), SmsReviewActivity.class);
 					intent.putExtra(TEXT_MESSAGE, sms);
