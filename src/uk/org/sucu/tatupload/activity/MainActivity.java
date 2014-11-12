@@ -1,5 +1,7 @@
 package uk.org.sucu.tatupload.activity;
 
+import java.util.Calendar;
+
 import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.MessageArrayAdapter;
 import uk.org.sucu.tatupload.MessageArrayAdapter.ViewHolder;
@@ -170,7 +172,9 @@ public class MainActivity extends Activity {
 						//If it's the first use, set used to true
 						if(!settings.getUsed()){
 							settings.setUsed(true);
-							setupUI();//the toggle button must be created before resumeTat() sets its text
+							//Add a text to the queue explaining how to use the queue
+							SmsList.addText(new Text("TATupload","Tap a queued message to review and upload or delete it.",Calendar.getInstance().getTimeInMillis()));
+							setupUI();//the toggle button must be created before resumeTat() the button's text
 						}
 
 						resumeTat();
