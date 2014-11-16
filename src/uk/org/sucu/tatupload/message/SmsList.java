@@ -12,17 +12,28 @@ import android.content.Context;
 
 public class SmsList {
 
-	private static ArrayList<Text> texts = new ArrayList<Text>();
-	private static MessageArrayAdapter adapter = null;
+	public static SmsList unprocessedList;
+	public static SmsList processedList;
 	
-	public static void addText(Text msg){
+	public static SmsList getPendingList(){//unprocessed, pending
+		return unprocessedList;
+	}
+	
+	public static SmsList getUploadedList(){//processed, uploaded
+		return processedList;
+	}
+	
+	private ArrayList<Text> texts = new ArrayList<Text>();
+	private MessageArrayAdapter adapter = null;
+	
+	public void addText(Text msg){
 		synchronized(texts){
 			texts.add(msg);
 		}
 		notifyAdapter();
 	}
 	
-	public static void addTexts(Collection<Text> msgs){
+	public void addTexts(Collection<Text> msgs){
 		synchronized(texts){
 			for(Text t : msgs){
 				texts.add(t);
@@ -31,38 +42,38 @@ public class SmsList {
 		notifyAdapter();
 	}
 	
-	public static void clearList(){
+	public void clearList(){
 		synchronized(texts){
 			texts.clear();
 		}
 		notifyAdapter();
 	}
 	
-	public static void removeText(Text msg){
+	public void removeText(Text msg){
 		synchronized(texts){
 			texts.remove(msg);
 		}
 		notifyAdapter();
 	}
 	
-	public static MessageArrayAdapter getMessageArrayAdapter(Context context){
+	public MessageArrayAdapter getMessageArrayAdapter(Context context){
 		if(adapter == null){
 			adapter = new MessageArrayAdapter(context, R.id.messageListView, texts);
 		}
 		return adapter;
 	}
 	
-	private static void notifyAdapter(){
+	private void notifyAdapter(){
 		if(adapter != null){
 			adapter.notifyDataSetChanged();
 		}
 	}
 	
-	public static boolean isEmpty(){
+	public boolean isEmpty(){
 		return texts.isEmpty();
 	}
 	
-	public static String getSerialList() throws IOException{
+	public String getSerialList() throws IOException{
 		String data;
 		synchronized(texts){
 			data = ObjectSerializer.serialize(texts);
@@ -70,7 +81,7 @@ public class SmsList {
 		return data;
 	}
 	
-	public static int getSize(){
+	public int getSize(){
 		return texts.size();
 	}
 }

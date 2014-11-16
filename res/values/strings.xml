@@ -27,8 +27,9 @@
     <string name="processing_key">uk.org.sucu.tatupload.processing</string>
     <string name="confirm_split_key">uk.org.sucu.tatupload.confirmSplit</string>
     <string name="tutorial_ver_key">uk.org.sucu.tatupload.tutorialVersion</string>
-    <string name="saved_queue_key">uk.org.sucu.tatupload.savedTextsList</string>
+    <string name="pending_text_list_key">uk.org.sucu.tatupload.savedTextsList</string>
     <string name="show_notification_key">uk.org.sucu.tatupload.showNotifications</string>
+    <string name="processed_text_list_key">uk.org.tatupload.processedTextList</string>
     <string name="scriptURL">https://script.google.com/macros/s/AKfycbzlHUVyYLlB6oWRCUomhNKBNVfsXD1fPJH61D_RsY8R1uhKmpNz/exec</string>
     <string name="parameter_indicator">uk.org.sucu.tatupload.PARAMETER</string>
     <string name="flavour_parameter">uk.org.sucu.tatupload.FLAVOUR_PARAMETER</string>

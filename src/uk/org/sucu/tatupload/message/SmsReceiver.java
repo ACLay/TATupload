@@ -72,8 +72,8 @@ public class SmsReceiver extends BroadcastReceiver{
 	}
 	
 	private void queueMessages(Collection<Text> messages, Context context){
-		SmsList.addTexts(messages);
-		new Settings(context).saveSmsList();
+		SmsList.getPendingList().addTexts(messages);
+		new Settings(context).savePendingTextsList();
 		Notifications.updateNotification(context);
 	}
 
@@ -90,6 +90,8 @@ public class SmsReceiver extends BroadcastReceiver{
 		Uri uri = Parser.createUploadUri(number, question, location, toastie, body, time, context);
 		NetCaller.callScript(uri, context);
 
+		SmsList.getUploadedList().addText(text);
+		new Settings(context).saveUploadedTextsList();
 	}
 
 }

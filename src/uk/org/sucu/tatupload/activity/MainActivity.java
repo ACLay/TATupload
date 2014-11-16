@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
 			}
 			
 			ListView messageView = (ListView) findViewById(R.id.messageListView);
-			adapter = SmsList.getMessageArrayAdapter(this);
+			adapter = SmsList.getPendingList().getMessageArrayAdapter(this);
 			messageView.setAdapter(adapter);
 
 			messageView.setOnItemClickListener(new OnItemClickListener(){
@@ -113,14 +113,14 @@ public class MainActivity extends Activity {
 
 	public void clearMessages(View v){
 		//show nothing if the list is empty
-		if(!SmsList.isEmpty()){
+		if(!SmsList.getPendingList().isEmpty()){
 			//confirm user choice
 			DialogInterface.OnClickListener action = new DialogInterface.OnClickListener(){
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					//remove
-					SmsList.clearList();
-					settings.saveSmsList();
+					SmsList.getPendingList().clearList();
+					settings.savePendingTextsList();
 					Notifications.updateNotification(MainActivity.this);
 				}
 			};
@@ -169,11 +169,15 @@ public class MainActivity extends Activity {
 						//create the spreadsheet in the browser
 						Uri uri = Parser.createNewSpreadsheetUri(ssName, MainActivity.this);
 						NetCaller.callScript(uri, MainActivity.this);
+						//Clear the uploaded list from the previous session
+						SmsList.getUploadedList().clearList();
+						settings.saveUploadedTextsList();
 						//If it's the first use, set used to true
 						if(!settings.getUsed()){
 							settings.setUsed(true);
 							//Add a text to the queue explaining how to use the queue
-							SmsList.addText(new Text(getString(R.string.app_name),getString(R.string.queue_explanation),Calendar.getInstance().getTimeInMillis()));
+							SmsList.getPendingList().addText(new Text(getString(R.string.app_name),getString(R.string.queue_explanation),Calendar.getInstance().getTimeInMillis()));
+							settings.savePendingTextsList();
 							setupUI();//the toggle button must be created before resumeTat() the button's text
 						}
 
@@ -225,7 +229,7 @@ public class MainActivity extends Activity {
 		if(settings.getProcessingTexts()){
 			stopTat();
 		} else {
-			if(SmsList.isEmpty()){
+			if(SmsList.getPendingList().isEmpty()){
 				startTatNewSpreadsheet();
 			} else {
 				clearQueueBeforeStartDialog();
@@ -238,7 +242,7 @@ public class MainActivity extends Activity {
 	private void clearQueueBeforeStartDialog(){
 		new AlertDialog.Builder(this)
 		.setTitle(R.string.start)
-		.setMessage("Clear message queue before starting?")
+		.setMessage("Clear unprocessed message list before starting?")
 		.setNegativeButton(android.R.string.cancel, null)
 		.setNeutralButton(R.string.no, new DialogInterface.OnClickListener() {
 			@Override
@@ -249,8 +253,8 @@ public class MainActivity extends Activity {
 		.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				SmsList.clearList();
-				settings.saveSmsList();
+				SmsList.getPendingList().clearList();
+				settings.savePendingTextsList();
 				startTatNewSpreadsheet();
 			}
 		})

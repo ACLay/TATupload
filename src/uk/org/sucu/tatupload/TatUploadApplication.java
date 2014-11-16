@@ -22,8 +22,11 @@ public class TatUploadApplication extends Application {
 
 		Parameters.loadParameters(flavourList, locationList, questionList);
 		
-		ArrayList<Text> savedQueue = settings.getSavedTexts();
-		SmsList.addTexts(savedQueue);
+		ArrayList<Text> pendingTexts = settings.loadPendingTexts();
+		SmsList.getPendingList().addTexts(pendingTexts);
+		
+		ArrayList<Text> uploadedTexts = settings.loadUploadedTexts();
+		SmsList.getUploadedList().addTexts(uploadedTexts);
 		
 		Notifications.updateNotification(this);
 	}

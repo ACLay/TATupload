@@ -26,7 +26,7 @@ public class Notifications {
 		}
 		
 		boolean processingTexts = settings.getProcessingTexts();
-		int queueSize = SmsList.getSize();
+		int queueSize = SmsList.getPendingList().getSize();
 
 		if((!processingTexts) && queueSize == 0){
 			hideNotification(context);
@@ -83,7 +83,7 @@ public class Notifications {
 	
 	public static void displayNotification(Context context){
 		boolean processingTexts = new Settings(context).getProcessingTexts();
-		int queueSize = SmsList.getSize();
+		int queueSize = SmsList.getPendingList().getSize();
 		
 		Notification notification = buildNotification(context, processingTexts, queueSize);
 		showNotification(context, notification);

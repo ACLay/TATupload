@@ -148,8 +148,11 @@ public class SmsReviewActivity extends Activity {
 			Uri uri = Parser.createUploadUri(text.getNumber(), question, location, toastie, body, time, this);
 			NetCaller.callScript(uri, this);
 			
-			SmsList.removeText(text);
-			new Settings(this).saveSmsList();
+			SmsList.getPendingList().removeText(text);
+			SmsList.getUploadedList().addText(text);
+			Settings settings = new Settings(this);
+			settings.savePendingTextsList();
+			settings.saveUploadedTextsList();
 			Notifications.updateNotification(this);
 
 			this.finish();
@@ -168,8 +171,8 @@ public class SmsReviewActivity extends Activity {
 		.setPositiveButton(R.string.discard, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				SmsList.removeText(text);
-				new Settings(SmsReviewActivity.this).saveSmsList();
+				SmsList.getPendingList().removeText(text);
+				new Settings(SmsReviewActivity.this).savePendingTextsList();
 				Notifications.updateNotification(SmsReviewActivity.this);
 				SmsReviewActivity.this.finish();
 			}

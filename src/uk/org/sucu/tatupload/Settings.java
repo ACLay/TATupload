@@ -19,7 +19,7 @@ public class Settings {
 	public static final boolean PROCESSING_TEXTS_DEFAULT = false;
 	public static final boolean AUTO_QUEUE_TEXTS_DEFAULT = false;
 	public static final int TUTORIAL_SEEN_DEFAULT = 0;
-	private static final String SAVED_PARAMETER_DEFAULT = null;
+	private static final String SAVED_SERIAL_ARRAYLIST_DEFAULT = null;
 	public static final String BROWSER_PACKAGE_DEFAULT = null;
 	public static final String BROWSER_NAME_DEFAULT = null;
 	public static final boolean USED_DEFAULT = false;
@@ -48,41 +48,61 @@ public class Settings {
 		return versionSeen;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public ArrayList<String> getSavedParameter(String parameter){
-		String serialData = sharedPref.getString(parameter, SAVED_PARAMETER_DEFAULT);
-		ArrayList<String> list = null;
 		
-		try {
-			list = (ArrayList<String>) ObjectSerializer.deserialize(serialData);
-		} catch (IOException e) {
-			if(getTutorialVersionSeen() != TUTORIAL_SEEN_DEFAULT){
-				Toast.makeText(context, context.getString(R.string.param_load_error), Toast.LENGTH_LONG).show();
+		ArrayListLoader<String> loader = new ArrayListLoader<String>();
+		loader.setExceptionRunnable(new Runnable(){
+			public void run() {
+				//show a loading error if there should be data to load
+				if(getTutorialVersionSeen() != TUTORIAL_SEEN_DEFAULT){
+					Toast.makeText(context, context.getString(R.string.param_load_error), Toast.LENGTH_LONG).show();
+				}
 			}
-		}
-		
-		if(list == null){//The serializer will return null if the string is null or length 0
-			return Parameters.getDefaultList(parameter, context);
-		}
-		return list;
+		});
+		return loader.loadList(parameter);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public ArrayList<Text> getSavedTexts(){
-		String serialData = sharedPref.getString(context.getString(R.string.saved_queue_key), SAVED_PARAMETER_DEFAULT);
-		ArrayList<Text> list = null;
-		
-		try {
-			list = (ArrayList<Text>) ObjectSerializer.deserialize(serialData);
-		} catch (IOException e) {
-
-		}
-		
-		if(list == null){
-			list = new ArrayList<Text>();
-		}
-		return list;
+	public ArrayList<Text> loadPendingTexts(){
+		ArrayListLoader<Text> loader = new ArrayListLoader<Text>();
+		return loader.loadList(context.getString(R.string.pending_text_list_key));
 	}
+	
+	
+	public ArrayList<Text> loadUploadedTexts(){
+		ArrayListLoader<Text> loader = new ArrayListLoader<Text>();
+		return loader.loadList(context.getString(R.string.processed_text_list_key));
+	}
+	
+	
+	private class ArrayListLoader<T>{
+		
+		private Runnable exceptionRunnable = null;
+		
+		public void setExceptionRunnable(Runnable runner){
+			exceptionRunnable = runner;
+		}
+		
+		@SuppressWarnings("unchecked")
+		public ArrayList<T> loadList(String key){
+			String serialData = sharedPref.getString(key, SAVED_SERIAL_ARRAYLIST_DEFAULT);
+			ArrayList<T> list = null;
+			
+			try {
+				list = (ArrayList<T>) ObjectSerializer.deserialize(serialData);
+			} catch (IOException e) {
+				if(exceptionRunnable != null){
+					exceptionRunnable.run();
+				}
+			}
+			
+			if(list == null){
+				list = new ArrayList<T>();
+			}
+			return list;
+		}
+		
+	}
+	
 	
 	public String getChosenBrowserPackage(){
 		String browserPackage = sharedPref.getString(context.getString(R.string.browser_package_key), BROWSER_PACKAGE_DEFAULT);
@@ -136,16 +156,24 @@ public class Settings {
 		.commit();
 	}
 	
-	public void saveSmsList(){
+	public void savePendingTextsList(){
+		saveSmsList(SmsList.getPendingList(), context.getString(R.string.pending_text_list_key));
+	}
+	
+	public void saveUploadedTextsList(){
+		saveSmsList(SmsList.getUploadedList(), context.getString(R.string.processed_text_list_key));
+	}
+	
+	private void saveSmsList(SmsList list, String key){
 		String data = null;
 		try {
-			data = SmsList.getSerialList();
+			data = list.getSerialList();
 		} catch (IOException e) {
-
+			
 		}
 		
 		getEditor()
-		.putString(context.getString(R.string.saved_queue_key), data)
+		.putString(key, data)
 		.commit();
 	}
 	
