@@ -69,6 +69,8 @@
 	<string name="_queued_messages">" queued messages"</string>
 	<string name="action_icon_desc">Process message</string>
 	<string name="queue_explanation">Tap a queued message to review, and upload or delete it.</string>
+	<string name="uploaded">uploaded messages</string>
+	<string name="unprocessed">new messages</string>
 	<string-array name="default_flavours">
         <item>ham</item>
         <item>cheese</item>

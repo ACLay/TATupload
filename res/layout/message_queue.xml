@@ -4,46 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/processingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/queue_title" />
-
     <ListView
         android:id="@+id/messageListView"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/clearQueueButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="clearMessages"
-            android:text="@string/clear_queue_button" />
-
-        <Button
-            android:id="@+id/toggleTatButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="toggleTat" />
-
-        <Button
-            android:id="@+id/openSettingsButton"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/settings"
-            android:onClick="showSettings" />
-
-    </LinearLayout>
 
 </LinearLayout>

@@ -3,41 +3,43 @@ package uk.org.sucu.tatupload.activity;
 import java.util.Calendar;
 
 import uk.org.sucu.tatupload.BrowserAccessor;
-import uk.org.sucu.tatupload.MessageArrayAdapter;
-import uk.org.sucu.tatupload.MessageArrayAdapter.ViewHolder;
 import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.Notifications;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.Settings;
+import uk.org.sucu.tatupload.TabContent;
+import uk.org.sucu.tatupload.TabManager;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
 import uk.org.sucu.tatupload.parse.Parser;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.TabHost;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends SherlockFragmentActivity {
+	
+	public static final String[] TAB_TITLES = new String[]{"Incoming","Processed"};
 
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
 	public static final int TUTORIAL_VERSION = 4;//TODO update this each time the tutorial is changed.
 
-	private MessageArrayAdapter adapter;
 	private Settings settings;
+
+	private TabHost mTabHost;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class MainActivity extends Activity {
 
 		settings = new Settings(this);
 		
-		setupUI();
+		setupUI(savedInstanceState);
 
 		int versionSeen = settings.getTutorialVersionSeen();
 		
@@ -65,11 +67,10 @@ public class MainActivity extends Activity {
 
 	}	
 	
-
-	private void setupUI(){
+	private void setupUI(Bundle savedInstanceState){
 
 		if(settings.getUsed()){
-			setContentView(R.layout.message_queue);
+			setContentView(R.layout.main_queues);
 			
 			Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
 			if(settings.getProcessingTexts()){
@@ -78,50 +79,67 @@ public class MainActivity extends Activity {
 				toggleButton.setText(R.string.start);
 			}
 			
-			ListView messageView = (ListView) findViewById(R.id.messageListView);
-			adapter = SmsList.getPendingList().getMessageArrayAdapter(this);
-			messageView.setAdapter(adapter);
+			mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+			mTabHost.setup();
+			//TODO new logo
+			//TODO settings for the 2nd queue
+			
+			TabManager mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
+			String unprocessed = getString(R.string.unprocessed);
+			Bundle bundle = new Bundle(); bundle.putInt("queue", R.string.unprocessed);
+			mTabManager.addTab(mTabHost.newTabSpec(unprocessed).setIndicator(unprocessed), TabContent.class, bundle);
+			String uploaded = getString(R.string.uploaded);
+			bundle = new Bundle(); bundle.putInt("queue", R.string.uploaded);
+			mTabManager.addTab(mTabHost.newTabSpec(uploaded).setIndicator(uploaded), TabContent.class, bundle);
+			
+			if (savedInstanceState != null) {
+	            mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
+	        }
 
-			messageView.setOnItemClickListener(new OnItemClickListener(){
-
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-
-					// Get the sms message contained in the clicked object
-					ViewHolder holder = (ViewHolder) v.getTag();
-					Text sms = holder.getText();
-					//send it in an intent to an SmsReviewActivity
-					Intent intent = new Intent(v.getContext(), SmsReviewActivity.class);
-					intent.putExtra(TEXT_MESSAGE, sms);
-					startActivity(intent);
-				}
-
-			});
 		} else {
 			setContentView(R.layout.start_screen);	
 		}
 
 
 	}
+	
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("tab", mTabHost.getCurrentTabTag());
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getSupportMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
 	public void clearMessages(View v){
-		//show nothing if the list is empty
-		if(!SmsList.getPendingList().isEmpty()){
+		final SmsList visibleList;
+		String currentTabTag = mTabHost.getCurrentTabTag();
+		if(currentTabTag.equals(getString(R.string.unprocessed))){
+			visibleList = SmsList.getPendingList();
+		} else if(currentTabTag.equals(getString(R.string.uploaded))){
+			visibleList = SmsList.getUploadedList();
+		} else {
+			return;
+		}
+		
+		//do nothing if the list is empty
+		if(!visibleList.isEmpty()){
 			//confirm user choice
 			DialogInterface.OnClickListener action = new DialogInterface.OnClickListener(){
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					//remove
-					SmsList.getPendingList().clearList();
-					settings.savePendingTextsList();
-					Notifications.updateNotification(MainActivity.this);
+					visibleList.clearList();
+					if(visibleList == SmsList.getPendingList()){
+						settings.savePendingTextsList();
+						Notifications.updateNotification(MainActivity.this);
+					} else if(visibleList == SmsList.getUploadedList()){
+						settings.saveUploadedTextsList();
+					}
 				}
 			};
 
@@ -178,7 +196,7 @@ public class MainActivity extends Activity {
 							//Add a text to the queue explaining how to use the queue
 							SmsList.getPendingList().addText(new Text(getString(R.string.app_name),getString(R.string.queue_explanation),Calendar.getInstance().getTimeInMillis()));
 							settings.savePendingTextsList();
-							setupUI();//the toggle button must be created before resumeTat() the button's text
+							setupUI(null);//the toggle button must be created before resumeTat() the button's text
 						}
 
 						resumeTat();
@@ -282,17 +300,16 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
+
 	public boolean onOptionsItemSelected(MenuItem item){
-		
-		switch (item.getItemId()){
-			case R.id.action_settings:
-				showSettings();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+		int itemId  = item.getItemId();
+		if(itemId == R.id.action_settings){
+			showSettings();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
 		}
 		
 	}
-	
 	
 }
