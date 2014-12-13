@@ -49,3 +49,10 @@ Notifications:
 	
 ArrayAdapter View Holders:
 	http://developer.android.com/training/improving-layouts/smooth-scrolling.html
+
+Tabs:
+	ActonBarSherlock fragment samples https://github.com/JakeWharton/ActionBarSherlock
+
+Notification icons varying with API level
+	http://stackoverflow.com/a/9592604
+	http://stackoverflow.com/questions/8793183
