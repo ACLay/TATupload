@@ -12,8 +12,8 @@ import android.content.Context;
 
 public class SmsList {
 
-	public static SmsList unprocessedList;
-	public static SmsList processedList;
+	public static final SmsList unprocessedList = new SmsList();
+	public static final SmsList processedList = new SmsList();
 	
 	public static SmsList getPendingList(){//unprocessed, pending
 		return unprocessedList;
