@@ -84,13 +84,12 @@ public class ParameterViewActivity extends Activity {
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item){
-		
-		switch (item.getItemId()){
-			case R.id.restore_default:
-				restoreDefaultParameter();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+		int itemId = item.getItemId();
+		if(itemId == R.id.restore_default){
+			restoreDefaultParameter();
+			return true;
+		} else{
+			return super.onOptionsItemSelected(item);
 		}
 		
 	}
