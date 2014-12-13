@@ -8,6 +8,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 
 public class Notifications {
@@ -54,13 +56,16 @@ public class Notifications {
 			text = Integer.toString(queueSize) + context.getString(R.string._queued_messages);
 		}
 		
+		int iconId = getResIdFromAttribute(context, R.attr.notification_icon);
+		
 		NotificationCompat.Builder builder =
 				new NotificationCompat.Builder(context)
-		.setSmallIcon(R.drawable.icon)
+		.setSmallIcon(iconId)
 		.setContentTitle(title)
 		.setAutoCancel(false)
 		.setOngoing(processingTexts)
-		.setContentText(text);
+		.setContentText(text)
+		.setColor(Color.YELLOW);
 		
 		if(processingTexts){
 			builder.setNumber(queueSize);
@@ -99,4 +104,11 @@ public class Notifications {
 		manager.cancel(notificationId);
 	}
 
+	public static int getResIdFromAttribute(Context activity, int attr){
+		TypedArray a = activity.getTheme().obtainStyledAttributes(new int[]{attr});
+		int drawableId = a.getResourceId(0, 0);
+		a.recycle();
+		return drawableId;
+	}
+	
 }

@@ -5,10 +5,12 @@
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 21+ devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Material.Light">
+    <style name="AppTheme" parent="android:Theme.Material.Light">
         <!-- API 21 theme customizations can go here. -->
+        <item name="android:colorAccent">#FF4500</item>
         <item name="android:colorPrimary">#FFFF00</item>
-        <item name="android:colorPrimaryDark">#FFA500</item>
+        <item name="android:colorPrimaryDark">#FF4500</item>"
+        <item name="notification_icon">@drawable/material_notification</item>
     </style>
 
 </resources>
