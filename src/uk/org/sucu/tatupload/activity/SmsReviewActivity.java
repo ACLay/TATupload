@@ -105,8 +105,8 @@ public class SmsReviewActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.action_settings:
+		int itemId = item.getItemId();
+		if(itemId == R.id.action_settings){
 			Intent intent = new Intent(this, OptionActivity.class);
 			startActivity(intent);
 			return true;
