@@ -59,3 +59,8 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+
+#
+# Added by me
+#
+libs/
