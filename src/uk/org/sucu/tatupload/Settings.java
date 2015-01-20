@@ -18,6 +18,7 @@ public class Settings {
 	
 	public static final boolean PROCESSING_TEXTS_DEFAULT = false;
 	public static final boolean AUTO_QUEUE_TEXTS_DEFAULT = false;
+	public static final boolean STORING_PROCESSED_TEXTS_DEFAULT = true;
 	public static final int TUTORIAL_SEEN_DEFAULT = 0;
 	private static final String SAVED_SERIAL_ARRAYLIST_DEFAULT = null;
 	public static final String BROWSER_PACKAGE_DEFAULT = null;
@@ -41,6 +42,11 @@ public class Settings {
 	public boolean getAutoQueueTexts(){
 		boolean confirmSplit = sharedPref.getBoolean(context.getString(R.string.confirm_split_key), AUTO_QUEUE_TEXTS_DEFAULT);
 		return confirmSplit;
+	}
+	
+	public boolean getStoringProcesseds(){
+		boolean storeProcesseds = sharedPref.getBoolean(context.getString(R.string.store_processed_key), STORING_PROCESSED_TEXTS_DEFAULT);
+		return storeProcesseds;
 	}
 	
 	public int getTutorialVersionSeen(){
