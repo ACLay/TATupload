@@ -84,4 +84,8 @@ public class SmsList {
 	public int getSize(){
 		return texts.size();
 	}
+	
+	public boolean contains(Text text){
+		return texts.contains(text);
+	}
 }
