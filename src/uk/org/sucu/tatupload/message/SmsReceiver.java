@@ -90,8 +90,12 @@ public class SmsReceiver extends BroadcastReceiver{
 		Uri uri = Parser.createUploadUri(number, question, location, toastie, body, time, context);
 		NetCaller.callScript(uri, context);
 
-		SmsList.getUploadedList().addText(text);
-		new Settings(context).saveUploadedTextsList();
+		Settings settings = new Settings(context);
+		if(settings.getStoringProcesseds()){
+			SmsList.getUploadedList().addText(text);
+			settings.saveUploadedTextsList();
+		}
+		
 	}
 
 }
