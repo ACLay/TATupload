@@ -3,7 +3,7 @@
 
     <string name="app_name">TATupload</string>
     <string name="ss_name">Name for new spreadsheet: </string>
-    <string name="confirm_checkbox">Queue all messages</string>
+    <string name="confirm_checkbox">Queue all new messages</string>
     <string name="clear_queue_button">Clear queue</string>
     <string name="queue_title">Messages to process:</string>
     <string name="message_number">Sender\'s number:</string>
@@ -71,6 +71,13 @@
 	<string name="queue_explanation">Tap a queued message to review, and upload or delete it.</string>
 	<string name="uploaded">uploaded messages</string>
 	<string name="unprocessed">new messages</string>
+    <string name="store_processed_key">uk.org.sucu.tatupload.storeProcessed</string>
+    <string name="store_processed_title">Store uploaded messages</string>
+    <string name="store_processed_desc">For review or reuploading</string>
+    <string name="bundle_key_tab_selected">uk.org.sucu.tatupload.selectedTabKey</string>
+    <string name="show_notification_title">Show notification</string>
+    <string name="show_notification_desc">Summarising the app status</string>
+    <string name="parameter_category_title">Data extraction parameters</string>
 	<string-array name="default_flavours">
         <item>ham</item>
         <item>cheese</item>
