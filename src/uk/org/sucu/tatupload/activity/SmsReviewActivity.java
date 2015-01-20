@@ -28,7 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SmsReviewActivity extends Activity {
-	//TODO number blacklist
+	
 	private Text text;
 
 	@SuppressLint("InflateParams")
@@ -148,11 +148,18 @@ public class SmsReviewActivity extends Activity {
 			Uri uri = Parser.createUploadUri(text.getNumber(), question, location, toastie, body, time, this);
 			NetCaller.callScript(uri, this);
 			
-			SmsList.getPendingList().removeText(text);
-			SmsList.getUploadedList().addText(text);
-			Settings settings = new Settings(this);
-			settings.savePendingTextsList();
-			settings.saveUploadedTextsList();
+			SmsList pendingList = SmsList.getPendingList();
+			if(pendingList.contains(text)){
+				Settings settings = new Settings(this);
+				pendingList.removeText(text);
+				settings.savePendingTextsList();
+				if(settings.getStoringProcesseds()){
+					SmsList.getUploadedList().addText(text);
+					settings.saveUploadedTextsList();
+				}
+			}
+			
+			
 			Notifications.updateNotification(this);
 
 			this.finish();
@@ -171,9 +178,16 @@ public class SmsReviewActivity extends Activity {
 		.setPositiveButton(R.string.discard, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				SmsList.getPendingList().removeText(text);
-				new Settings(SmsReviewActivity.this).savePendingTextsList();
-				Notifications.updateNotification(SmsReviewActivity.this);
+				SmsList pendingList = SmsList.getPendingList();
+				SmsList uploadedList = SmsList.getUploadedList();
+				if(pendingList.contains(text)){
+					pendingList.removeText(text);
+					new Settings(SmsReviewActivity.this).savePendingTextsList();
+					Notifications.updateNotification(SmsReviewActivity.this);
+				} else if(uploadedList.contains(text)){
+					uploadedList.removeText(text);
+					new Settings(SmsReviewActivity.this).saveUploadedTextsList();
+				}
 				SmsReviewActivity.this.finish();
 			}
 		})
