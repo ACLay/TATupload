@@ -31,7 +31,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 public class MainActivity extends SherlockFragmentActivity {
 	
-	public static final String[] TAB_TITLES = new String[]{"Incoming","Processed"};
+	//TODO move all strings into xml
 
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
@@ -81,8 +81,7 @@ public class MainActivity extends SherlockFragmentActivity {
 			
 			mTabHost = (TabHost) findViewById(android.R.id.tabhost);
 			mTabHost.setup();
-			//TODO new logo
-			//TODO settings for the 2nd queue
+			
 			
 			TabManager mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
 			String unprocessed = getString(R.string.unprocessed);
@@ -93,7 +92,8 @@ public class MainActivity extends SherlockFragmentActivity {
 			mTabManager.addTab(mTabHost.newTabSpec(uploaded).setIndicator(uploaded), TabContent.class, bundle);
 			
 			if (savedInstanceState != null) {
-	            mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
+				String tabKey = getString(R.string.bundle_key_tab_selected);
+	            mTabHost.setCurrentTabByTag(savedInstanceState.getString(tabKey));
 	        }
 
 		} else {
@@ -105,7 +105,8 @@ public class MainActivity extends SherlockFragmentActivity {
 	
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("tab", mTabHost.getCurrentTabTag());
+        String tabKey = getString(R.string.bundle_key_tab_selected);
+        outState.putString(tabKey, mTabHost.getCurrentTabTag());
     }
 
 	@Override
