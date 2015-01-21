@@ -9,7 +9,7 @@
         <!-- API 21 theme customizations can go here. -->
         <item name="android:colorAccent">#FF4500</item>
         <item name="android:colorPrimary">#FFFF00</item>
-        <item name="android:colorPrimaryDark">#FF4500</item>"
+        <item name="android:colorPrimaryDark">#FF4500</item>
         <item name="notification_icon">@drawable/material_notification</item>
     </style>
 
