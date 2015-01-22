@@ -105,8 +105,10 @@ public class MainActivity extends SherlockFragmentActivity {
 	
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        String tabKey = getString(R.string.bundle_key_tab_selected);
-        outState.putString(tabKey, mTabHost.getCurrentTabTag());
+        if(mTabHost != null){
+        	String tabKey = getString(R.string.bundle_key_tab_selected);
+        	outState.putString(tabKey, mTabHost.getCurrentTabTag());
+        }
     }
 
 	@Override
