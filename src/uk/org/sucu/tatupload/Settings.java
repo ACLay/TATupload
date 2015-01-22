@@ -65,18 +65,30 @@ public class Settings {
 				}
 			}
 		});
-		return loader.loadList(parameter);
+		ArrayList<String> params = loader.loadList(parameter);
+		if(params == null){
+			params = Parameters.getDefaultList(parameter, context);
+		}
+		return params;
 	}
 	
 	public ArrayList<Text> loadPendingTexts(){
 		ArrayListLoader<Text> loader = new ArrayListLoader<Text>();
-		return loader.loadList(context.getString(R.string.pending_text_list_key));
+		ArrayList<Text> texts = loader.loadList(context.getString(R.string.pending_text_list_key));
+		if(texts == null){
+			texts = new ArrayList<Text>();
+		}
+		return texts;
 	}
 	
 	
 	public ArrayList<Text> loadUploadedTexts(){
 		ArrayListLoader<Text> loader = new ArrayListLoader<Text>();
-		return loader.loadList(context.getString(R.string.processed_text_list_key));
+		ArrayList<Text> texts = loader.loadList(context.getString(R.string.processed_text_list_key));
+		if(texts == null){
+			texts = new ArrayList<Text>();
+		}
+		return texts;
 	}
 	
 	
@@ -101,9 +113,6 @@ public class Settings {
 				}
 			}
 			
-			if(list == null){
-				list = new ArrayList<T>();
-			}
 			return list;
 		}
 		
