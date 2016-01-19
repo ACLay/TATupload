@@ -1,6 +1,5 @@
 package uk.org.sucu.tatupload;
 
-import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.activity.MainActivity;
 import uk.org.sucu.tatupload.message.SmsList;
 import android.app.Notification;
@@ -14,7 +13,7 @@ import android.support.v4.app.NotificationCompat;
 
 public class Notifications {
 
-	public static final int notificationId = 001;
+	public static final int notificationId = 1;
 	
 	public static void updateNotification(Context context){
 		

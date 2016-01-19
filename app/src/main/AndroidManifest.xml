@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE xml>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uk.org.sucu.tatupload"
     android:versionCode="18"
@@ -40,7 +39,7 @@
             android:parentActivityName=".activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="uk.org.sucu.tatupload.MainActivity" />
+                android:value="uk.org.sucu.tatupload.activity.MainActivity" />
         </activity>
         <activity
             android:name=".activity.ParameterViewActivity"
