@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class TutorialActivity extends Activity {
+import android.support.v7.app.AppCompatActivity;
+
+public class TutorialActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

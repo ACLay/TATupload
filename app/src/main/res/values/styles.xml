@@ -1,10 +1,13 @@
 <resources>
 
+    <color name="TatOrange">#FF4500</color>
+    <color name="TatYellow">#FFFF00</color>
+
     <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="Theme.Sherlock.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light">
         <item name="notification_icon">@drawable/light_layout_notification</item>
         <!--
             Theme customizations available in newer API levels can go in
@@ -16,6 +19,36 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="preferenceTheme">@style/MyPreferenceTheme</item>
+
+        <item name="colorAccent">@color/TatOrange</item>
+        <item name="colorPrimary">@color/TatYellow</item>
+        <item name="colorPrimaryDark">@color/TatOrange</item>
+
+    </style>
+
+    <style name="MyPreferenceTheme" parent="@style/PreferenceThemeOverlay">
+
+    </style>
+
+    <!-- This styling for  Preference Category headings due to Rohan Kandwal from http://stackoverflow.com/a/19221499 -->
+    <style name="Widget.TextView.ListSeparator" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="PreferenceListHeader" parent="Widget.TextView.ListSeparator">
+        <item name="android:textColor">@color/TatOrange</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingLeft">12dp</item>
+    </style>
+    <style name="PreferenceScreen" parent="AppTheme">
+        <item name="android:listSeparatorTextViewStyle">@style/PreferenceListHeader</item>
     </style>
 
 </resources>

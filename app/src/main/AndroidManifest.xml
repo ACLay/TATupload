@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -45,11 +45,19 @@
             android:name=".activity.ParameterViewActivity"
             android:label="@string/invalid_heading"
             android:parentActivityName=".activity.OptionActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.org.sucu.tatupload.activity.OptionActivity" />
         </activity>
         <activity
             android:name=".activity.OptionActivity"
             android:label="@string/settings"
+            android:launchMode="singleTop"
+            android:theme="@style/PreferenceScreen"
             android:parentActivityName=".activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.org.sucu.tatupload.activity.MainActivity" />
         </activity>
         <activity
             android:name=".activity.TutorialActivity"

@@ -24,12 +24,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 
-public class MainActivity extends SherlockFragmentActivity {
+public class MainActivity extends AppCompatActivity {
 	
 	//TODO move all strings into xml
 
@@ -114,7 +114,7 @@ public class MainActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 

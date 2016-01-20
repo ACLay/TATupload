@@ -1,20 +1,11 @@
 package uk.org.sucu.tatupload.activity;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import uk.org.sucu.tatupload.ParameterArrayAdapter;
-import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.Settings;
-import uk.org.sucu.tatupload.parse.Parameters;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +16,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ParameterViewActivity extends Activity {
+import java.io.IOException;
+import java.util.ArrayList;
+
+import uk.org.sucu.tatupload.ParameterArrayAdapter;
+import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload.Settings;
+import uk.org.sucu.tatupload.parse.Parameters;
+
+public class ParameterViewActivity extends AppCompatActivity {
 
 	private ArrayList<String> parameter;
 	private ParameterArrayAdapter adapter;
@@ -65,15 +64,9 @@ public class ParameterViewActivity extends Activity {
 		
 	}
 
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-			getActionBar().setTitle(Parameters.getParamHeading(parameterIdentifier, this));
-		}
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setTitle(Parameters.getParamHeading(parameterIdentifier, this));
 	}
 	
 	@Override
@@ -88,7 +81,10 @@ public class ParameterViewActivity extends Activity {
 		if(itemId == R.id.restore_default){
 			restoreDefaultParameter();
 			return true;
-		} else{
+		} else if (itemId == android.R.id.home) {
+			onBackPressed();
+			return true;
+		} else {
 			return super.onOptionsItemSelected(item);
 		}
 		

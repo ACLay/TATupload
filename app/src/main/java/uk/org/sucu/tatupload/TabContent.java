@@ -1,7 +1,6 @@
 package uk.org.sucu.tatupload;
 
 import uk.org.sucu.tatupload.MessageArrayAdapter.ViewHolder;
-import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.activity.SmsReviewActivity;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
@@ -14,9 +13,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockFragment;
+import android.support.v4.app.Fragment;
 
-public class TabContent extends SherlockFragment {
+public class TabContent extends Fragment {
 
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 	
