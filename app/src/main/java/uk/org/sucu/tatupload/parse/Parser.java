@@ -131,65 +131,6 @@ public class Parser {
 		return date;
 	}
 
-	public static Uri createNewSpreadsheetUri(String sheetName, Context context){
-		//TODO should not accept empty string
-		try{
-			sheetName = URLEncoder.encode(sheetName, "utf-8");
-		} catch (UnsupportedEncodingException e){
-
-		}
-
-		StringBuilder builder = new StringBuilder();
-		builder.append(context.getString(R.string.scriptURL));
-		builder.append("?action=create&");
-		builder.append("sheetName=");
-		builder.append(sheetName);
-
-		String uri = builder.toString();
-
-		return Uri.parse(uri);
-	}
-
-	public static Uri createUploadUri(String number, String question, String location, String toastie, String sms, String time, Context context){
-
-		StringBuilder builder = new StringBuilder();
-
-		try{
-			number = URLEncoder.encode(number, "utf-8");
-			question = URLEncoder.encode(question, "utf-8");
-			location = URLEncoder.encode(location, "utf-8");
-			toastie = URLEncoder.encode(toastie, "utf-8");
-			sms = URLEncoder.encode(sms, "utf-8");
-			time = URLEncoder.encode(time, "utf-8");
-		} catch (UnsupportedEncodingException e){
-
-		}
-
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("action", "upload");
-		params.put("number", number);
-		params.put("question", question);
-		params.put("location", location);
-		params.put("toastie", toastie);
-		params.put("SMS", sms);
-		params.put("time", time);
-
-		Iterator<Entry<String, String>> iterator = params.entrySet().iterator();
-		builder.append(context.getString(R.string.scriptURL)).append("?");
-
-		while (iterator.hasNext()) {
-			Entry<String, String> param = iterator.next();
-			builder.append(param.getKey()).append('=').append(param.getValue());
-			if (iterator.hasNext()) {
-				builder.append('&');
-			}
-		}
-
-		String uri = builder.toString();
-
-		return Uri.parse(uri);
-	}
-
 	public static String[] splitSentences(String message){
 		return message.split("(?<=[?!.[\\n][\\r]])");		
 	}
