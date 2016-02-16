@@ -6,14 +6,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
-import uk.org.sucu.tatupload.BrowserAccessor;
 import uk.org.sucu.tatupload.Notifications;
 import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload.network.AuthManager;
 
-@SuppressWarnings("deprecation") //it uses methods replaced within new PreferenceFragments in honeycomb
 public class OptionActivity extends AppCompatActivity {
 
 	public static class MyPreferenceFrag extends PreferenceFragmentCompat {
@@ -23,11 +21,11 @@ public class OptionActivity extends AppCompatActivity {
 
 			addPreferencesFromResource(R.xml.preferences);
 
-			Preference restore = findPreference(getString(R.string.browser));
-			restore.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+			Preference account = findPreference(getString(R.string.account));
+			account.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 				@Override
 				public boolean onPreferenceClick(Preference arg0) {
-					BrowserAccessor.openBrowserChoicePopup(getContext(), true);
+					AuthManager.chooseAccount(getActivity());
 					return true;
 				}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
+import uk.org.sucu.tatupload.network.AuthManager;
 import uk.org.sucu.tatupload.parse.Parameters;
 import android.app.Application;
 
@@ -27,7 +28,9 @@ public class TatUploadApplication extends Application {
 		
 		ArrayList<Text> uploadedTexts = settings.loadUploadedTexts();
 		SmsList.getUploadedList().addTexts(uploadedTexts);
-		
+
+		AuthManager.initializeCredential(this);
+
 		Notifications.updateNotification(this);
 	}
 

@@ -1,5 +1,4 @@
-function create(e){
-  var sheetName = e.parameters.sheetName;
+function create(sheetName){
   try{
     var spread = buildSpread(sheetName);
     var sheet = spread.getSheets()[0];
@@ -23,9 +22,9 @@ function buildSheet(sheet){
   //insert headers into the first row
   var range = sheet.getRange(1, 1, 1, 6);
   range.setValues([["Time received", "Their phone number", "Question", "Location", "Toastie flavours", "Original text"]]);
-  /*for(var i = 1; i <= 6; i++){
+  for(var i = 1; i <= 6; i++){
     sheet.autoResizeColumn(i);//Not yet supported by new version of sheets
-  }*/
+  }
   sheet.getRange(1,1,sheet.getMaxRows(),6).setWrap(true);
   //Save its ID
   saveSheetId(sheet.getSheetId());

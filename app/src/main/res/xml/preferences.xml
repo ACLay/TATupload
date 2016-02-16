@@ -6,66 +6,65 @@
         android:key="@string/show_notification_key"
         android:title="@string/show_notification_title"
         android:summary="@string/show_notification_desc"/>
-    
-    <Preference android:title="@string/web_browser"
-        android:summary="@string/browser_description"
-        android:key="@string/browser" />
+
+    <Preference android:title="@string/account"
+        android:summary="@string/account_description"
+        android:key="@string/account" />
 
     <PreferenceCategory 
         android:title="Message Queues">
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="@string/confirm_split_key"
-        android:title="@string/confirm_checkbox" />
-    
-    <CheckBoxPreference 
-        android:defaultValue="true"
-        android:key="@string/store_processed_key"
-        android:title="@string/store_processed_title"
-        android:summary="@string/store_processed_desc"/>
-        
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/confirm_split_key"
+            android:title="@string/confirm_checkbox" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/store_processed_key"
+            android:title="@string/store_processed_title"
+            android:summary="@string/store_processed_desc"/>
         
     </PreferenceCategory>
     
     <PreferenceCategory 
         android:title="@string/parameter_category_title">
     
-    <Preference android:title="@string/flavour_heading" >
-        <intent 
-            android:action="android.intent.action.VIEW"
-			android:targetPackage="uk.org.sucu.tatupload"
-            android:targetClass="uk.org.sucu.tatupload.activity.ParameterViewActivity" >
-            <extra
-                android:name="@string/parameter_indicator"
-                android:value="@string/flavour_parameter" />
-        </intent>	
+        <Preference android:title="@string/flavour_heading" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="uk.org.sucu.tatupload"
+                android:targetClass="uk.org.sucu.tatupload.activity.ParameterViewActivity" >
+                <extra
+                    android:name="@string/parameter_indicator"
+                    android:value="@string/flavour_parameter" />
+            </intent>
 
-    </Preference>
+        </Preference>
 
-    <Preference android:title="@string/location_heading" >
-        <intent 
-            android:action="android.intent.action.VIEW"
-			android:targetPackage="uk.org.sucu.tatupload"
-            android:targetClass="uk.org.sucu.tatupload.activity.ParameterViewActivity" >
-            <extra
-                android:name="@string/parameter_indicator"
-                android:value="@string/location_parameter" />
-        </intent>	
+        <Preference android:title="@string/location_heading" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="uk.org.sucu.tatupload"
+                android:targetClass="uk.org.sucu.tatupload.activity.ParameterViewActivity" >
+                <extra
+                    android:name="@string/parameter_indicator"
+                    android:value="@string/location_parameter" />
+            </intent>
 
-    </Preference>
-    
-    <Preference android:title="@string/question_heading" >
-        <intent 
-            android:action="android.intent.action.VIEW"
-			android:targetPackage="uk.org.sucu.tatupload"
-            android:targetClass="uk.org.sucu.tatupload.activity.ParameterViewActivity" >
-            <extra
-                android:name="@string/parameter_indicator"
-                android:value="@string/question_parameter" />
-        </intent>	
+        </Preference>
 
-    </Preference>
+        <Preference android:title="@string/question_heading" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="uk.org.sucu.tatupload"
+                android:targetClass="uk.org.sucu.tatupload.activity.ParameterViewActivity" >
+                <extra
+                    android:name="@string/parameter_indicator"
+                    android:value="@string/question_parameter" />
+            </intent>
+
+        </Preference>
     
     </PreferenceCategory>
     

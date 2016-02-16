@@ -21,10 +21,9 @@ public class Settings {
 	public static final boolean STORING_PROCESSED_TEXTS_DEFAULT = true;
 	public static final int TUTORIAL_SEEN_DEFAULT = 0;
 	private static final String SAVED_SERIAL_ARRAYLIST_DEFAULT = null;
-	public static final String BROWSER_PACKAGE_DEFAULT = null;
-	public static final String BROWSER_NAME_DEFAULT = null;
 	public static final boolean USED_DEFAULT = false;
 	public static final boolean NOTIFICATION_DEFAULT = true;
+	public static final String ACCOUNT_DEFAULT = null;
 	
 	private SharedPreferences sharedPref;
 	private Context context;
@@ -117,17 +116,7 @@ public class Settings {
 		}
 		
 	}
-	
-	
-	public String getChosenBrowserPackage(){
-		String browserPackage = sharedPref.getString(context.getString(R.string.browser_package_key), BROWSER_PACKAGE_DEFAULT);
-		return browserPackage;
-	}
-	
-	public String getChosenBrowserName(){
-		String browserName = sharedPref.getString(context.getString(R.string.browser_name_key), BROWSER_NAME_DEFAULT);
-		return browserName;
-	}
+
 	
 	public boolean getUsed(){
 		boolean used = sharedPref.getBoolean(context.getString(R.string.used_key), USED_DEFAULT);
@@ -137,6 +126,11 @@ public class Settings {
 	public boolean getShowingNotification(){
 		boolean showing = sharedPref.getBoolean(context.getString(R.string.show_notification_key), NOTIFICATION_DEFAULT);
 		return showing;
+	}
+
+	public String getPreferredAccount(){
+		String account = sharedPref.getString(context.getString(R.string.preferred_account_key), ACCOUNT_DEFAULT);
+		return account;
 	}
 
 	
@@ -158,16 +152,15 @@ public class Settings {
 		.commit();
 	}
 	
-	public void setBrowserData(String packageName, String name){
-		getEditor()
-		.putString(context.getString(R.string.browser_package_key), packageName)
-		.putString(context.getString(R.string.browser_name_key), name)
-		.commit();
-	}
-	
 	public void setUsed(boolean used){
 		getEditor()
 		.putBoolean(context.getString(R.string.used_key), used)
+		.commit();
+	}
+
+	public void setPreferredAccount(String account){
+		getEditor()
+		.putString(context.getString(R.string.preferred_account_key),account)
 		.commit();
 	}
 	

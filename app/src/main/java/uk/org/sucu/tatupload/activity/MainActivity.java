@@ -1,9 +1,24 @@
 package uk.org.sucu.tatupload.activity;
 
+import android.accounts.AccountManager;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TabHost;
+import android.widget.Toast;
+
 import java.util.Calendar;
 
-import uk.org.sucu.tatupload.BrowserAccessor;
-import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.Notifications;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.Settings;
@@ -11,22 +26,10 @@ import uk.org.sucu.tatupload.TabContent;
 import uk.org.sucu.tatupload.TabManager;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
+import uk.org.sucu.tatupload.network.AuthManager;
+import uk.org.sucu.tatupload.network.MakeSheetTask;
+import uk.org.sucu.tatupload.network.NetManager;
 import uk.org.sucu.tatupload.parse.Parser;
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TabHost;
-
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
-	public static final int TUTORIAL_VERSION = 4;//TODO update this each time the tutorial is changed.
+	public static final int TUTORIAL_VERSION = 5;//TODO update this each time the tutorial is changed.
 
 	private Settings settings;
 
@@ -49,17 +52,50 @@ public class MainActivity extends AppCompatActivity {
 		
 		setupUI(savedInstanceState);
 
+		if (!AuthManager.isGooglePlayServicesAvailable(this)) {
+			Toast.makeText(this, "Google play services are required for TATupload to function.", Toast.LENGTH_SHORT).show();
+			this.finish();
+			return;
+		}
+
 		int versionSeen = settings.getTutorialVersionSeen();
 		
 		if(versionSeen == Settings.TUTORIAL_SEEN_DEFAULT){
+			//new install, show them the tutorial
 			Intent intent = new Intent(this, TutorialActivity.class);
 			startActivity(intent);
 			this.finish();
 			return;
-		} else if(versionSeen < 4){// add extra cases inform the user of changes to the app, etc.
+		} else if(versionSeen < 5){// add extra cases inform the user of changes to the app, etc.
 			//remove the now unused form name field from the preference save file.
 			settings.removePreference(getString(R.string.form_name_key));
-			BrowserAccessor.openBrowserChoicePopup(this, false, null);
+			//remove the now unused browser settings
+			settings.removePreference(getString(R.string.browser_package_key));
+			settings.removePreference(getString(R.string.browser_name_key));
+			//if a previous install has just been updated to the new uploading method, let them know
+			//the exact message should change if TAT is running
+			if(settings.getProcessingTexts()){
+				new AlertDialog.Builder(this)
+						.setTitle("TATupload 2.0")
+						.setMessage("Hello, TATupload 2.0 uses a new method to upload texts without having to open a web browser. This means you will need to sign in to the app with your google account, open a new spreadsheet, and may want to copy any uploaded texts into it. Sorry for any inconvenience, but I hope not having the browser open every time you receive a text makes up for it.")
+						.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// Run the account picker
+								AuthManager.chooseAccount(MainActivity.this);
+							}
+						})
+						.setCancelable(false)
+						.create()
+						.show();
+			} else {
+				new AlertDialog.Builder(this)
+						.setTitle("TATupload 2.0")
+						.setMessage("Hello, TATupload 2.0 uses a new method to upload texts without having to open a web browser. This means you will need to sign in to the app with your google account when you open a new spreadsheet. Sorry for any inconvenience, but I hope not having the browser open every time you receive a text makes up for it.")
+						.setPositiveButton(android.R.string.ok, null)
+						.create()
+						.show();
+			}
 		}
 		if(versionSeen != TUTORIAL_VERSION){
 			settings.setTutorialVersionShown(TUTORIAL_VERSION);
@@ -118,6 +154,47 @@ public class MainActivity extends AppCompatActivity {
 		return true;
 	}
 
+	/**
+	 * Called when an activity launched here (specifically, AccountPicker
+	 * and authorization) exits, giving you the requestCode you started it with,
+	 * the resultCode it returned, and any additional data from it.
+	 * @param requestCode code indicating which activity result is incoming.
+	 * @param resultCode code indicating the result of the incoming
+	 *     activity result.
+	 * @param data Intent (containing result data) returned by incoming
+	 *     activity result.
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch(requestCode) {
+			case AuthManager.REQUEST_GOOGLE_PLAY_SERVICES:
+				if (resultCode != RESULT_OK) {
+					AuthManager.isGooglePlayServicesAvailable(this);
+				}
+				break;
+			case AuthManager.REQUEST_ACCOUNT_PICKER:
+				if (resultCode == RESULT_OK && data != null &&
+						data.getExtras() != null) {
+					String accountName =
+							data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+					if (accountName != null) {
+						AuthManager.setAccountName(accountName, this);
+					}
+				} else if (resultCode == RESULT_CANCELED) {
+					Toast.makeText(this, "No account selected", Toast.LENGTH_SHORT).show();
+				}
+				break;
+			case AuthManager.REQUEST_AUTHORIZATION:
+				if (resultCode != RESULT_OK) {
+					AuthManager.chooseAccount(this);
+				}
+				break;
+		}
+
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
 	public void clearMessages(View v){
 		final SmsList visibleList;
 		String currentTabTag = mTabHost.getCurrentTabTag();
@@ -153,8 +230,7 @@ public class MainActivity extends AppCompatActivity {
 	public void startTat(View v){
 		startTatNewSpreadsheet();
 	}
-	
-	//TODO test the browser check runnables
+
 	private void resumeTat(){
 		settings.setProcessingTexts(true);
 		Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
@@ -166,11 +242,10 @@ public class MainActivity extends AppCompatActivity {
 		String name = getString(R.string.text_a_toastie) + " " + Parser.getCurrentDateString();
 		startTatNewSpreadsheet(name);
 	}
-	
+
 	@SuppressLint("InflateParams")
 	private void startTatNewSpreadsheet(String defaultName){
-		if(BrowserAccessor.usable(this)){
-			
+		if(AuthManager.isAccountSet()){
 			View view = LayoutInflater.from(this).inflate(R.layout.setup_layout , null);
 			final EditText ssNameEdit = (EditText) view.findViewById(R.id.ssNameEditText);
 
@@ -186,23 +261,33 @@ public class MainActivity extends AppCompatActivity {
 
 					String ssName = ssNameEdit.getText().toString();
 					
-					if(NetCaller.isOnlineWithToast(MainActivity.this)){
-						//create the spreadsheet in the browser
-						Uri uri = Parser.createNewSpreadsheetUri(ssName, MainActivity.this);
-						NetCaller.callScript(uri, MainActivity.this);
-						//Clear the uploaded list from the previous session
-						SmsList.getUploadedList().clearList();
-						settings.saveUploadedTextsList();
-						//If it's the first use, set used to true
-						if(!settings.getUsed()){
-							settings.setUsed(true);
-							//Add a text to the queue explaining how to use the queue
-							SmsList.getPendingList().addText(new Text(getString(R.string.app_name),getString(R.string.queue_explanation),Calendar.getInstance().getTimeInMillis()));
-							settings.savePendingTextsList();
-							setupUI(null);//the toggle button must be created before resumeTat() the button's text
-						}
+					if(NetManager.isOnlineWithToast(MainActivity.this)){
+						//create the spreadsheet
+						ProgressDialog mProgress = new ProgressDialog(MainActivity.this);
+						mProgress.setMessage("Creating spreadsheet...");
+						MakeSheetTask creator = new MakeSheetTask(ssName, mProgress, MainActivity.this){
 
-						resumeTat();
+							@Override
+							protected void onPostExecute(Void output) {
+								super.onPostExecute(output);
+								//Clear the uploaded list from the previous session
+								SmsList.getUploadedList().clearList();
+								settings.saveUploadedTextsList();
+								//If it's the first use, set used to true
+								if(!settings.getUsed()){
+									settings.setUsed(true);
+									//Add a text to the queue explaining how to use the queue
+									SmsList.getPendingList().addText(new Text(getString(R.string.app_name),getString(R.string.queue_explanation),Calendar.getInstance().getTimeInMillis()));
+									settings.savePendingTextsList();
+									setupUI(null);//the toggle button must be created before resumeTat() the button's text
+								}
+
+								resumeTat();
+							}
+
+						};
+						creator.execute();
+
 
 					} else {
 						//If no network connection is available, reopen the dialog
@@ -217,14 +302,8 @@ public class MainActivity extends AppCompatActivity {
 			.show();
 
 		} else {
-			final String name = defaultName;
-			Runnable code = new Runnable(){
-				@Override
-				public void run() {
-					startTatNewSpreadsheet(name);
-				}
-			};
-			BrowserAccessor.openBrowserChoicePopup(this, false, code);
+			// Run the account picker
+			AuthManager.chooseAccount(this);
 		}
 	}
 	

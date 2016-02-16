@@ -1,11 +1,4 @@
-function submit(e){
-  var number = e.parameters.number;
-  var question = e.parameters.question;
-  var location = e.parameters.location;
-  var toastie = e.parameters.toastie;
-  var SMS = e.parameters.SMS;
-  var time = e.parameters.time;
-  
+function upload(number, question, location, toastie, SMS, time){
   try{
     submitSMS(number, question, location, toastie, SMS, time);
     return 'Message submitted';
@@ -16,7 +9,7 @@ function submit(e){
 
 function submitSMS(number, question, location, toastie, SMS, time){
   var sheet = findSheet();
-  var row = [time[0], number[0], question[0], location[0], toastie[0], SMS[0]];//de-array needed with e.parameter because...?
+  var row = [time, number, question, location, toastie, SMS];
   sheet.appendRow(row);//atomic operation
 }
 
@@ -35,7 +28,7 @@ function findSheet(){
 
 function testSubmit(){
   try{
-    submitSMS(["42"], ["which?"], ["somewhere"], ["cheese ham"], ["SMS thing, testing!"], ["tea time"]);
+    submit("42", "which?", "somewhere", "cheese ham", "SMS thing, testing!", "tea time");
     return 'Message submitted';
   }catch (err){
     Logger.log(err.message);

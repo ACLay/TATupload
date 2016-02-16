@@ -60,23 +60,6 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="10dp" />
-        
-        <Button
-            android:id="@+id/browser_set_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/web_browser"
-            android:onClick="setBrowser" />
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/tutorial_info2" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="10dp" />
 
         <Button
             android:id="@+id/tutorial_done_button"

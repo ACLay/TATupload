@@ -1,6 +1,7 @@
 package uk.org.sucu.tatupload;
 
 import uk.org.sucu.tatupload.MessageArrayAdapter.ViewHolder;
+import uk.org.sucu.tatupload.activity.MainActivity;
 import uk.org.sucu.tatupload.activity.SmsReviewActivity;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
@@ -17,8 +18,6 @@ import android.support.v4.app.Fragment;
 
 public class TabContent extends Fragment {
 
-	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
-	
 	int queue;
 	SmsList smsList;
 	
@@ -62,7 +61,7 @@ public class TabContent extends Fragment {
 				Text sms = holder.getText();
 				//send it in an intent to an SmsReviewActivity
 				Intent intent = new Intent(v.getContext(), SmsReviewActivity.class);
-				intent.putExtra(TEXT_MESSAGE, sms);
+				intent.putExtra(MainActivity.TEXT_MESSAGE, sms);
 				startActivity(intent);
 			}
 

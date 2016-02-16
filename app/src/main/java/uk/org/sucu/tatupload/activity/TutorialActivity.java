@@ -1,15 +1,12 @@
 package uk.org.sucu.tatupload.activity;
 
-import uk.org.sucu.tatupload.BrowserAccessor;
-import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.Settings;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import android.support.v7.app.AppCompatActivity;
+import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload.Settings;
 
 public class TutorialActivity extends AppCompatActivity {
 
@@ -31,27 +28,12 @@ public class TutorialActivity extends AppCompatActivity {
 		startActivity(intent);
 	}
 	
-	public void setBrowser(View v){
-		BrowserAccessor.openBrowserChoicePopup(this, false);
-	}
-	
 	public void done(View v){
-		
-		if(BrowserAccessor.browserSet(this)){
-			//update the saved value of seen tutorial version
-			new Settings(this).setTutorialVersionShown(MainActivity.TUTORIAL_VERSION);
-			//relaunch the main activity
-			Intent intent = new Intent(this, MainActivity.class);
-			startActivity(intent);
-			this.finish();
-		} else {
-			//show a 'you must set a browser' popup if no browser is set.
-			new AlertDialog.Builder(this)
-			.setTitle("TATupload")  
-			.setMessage("You must set a browser for TATupload to use before continuing.")
-			.setPositiveButton("Okay", null)
-			.create()
-			.show();
-		}
+		//update the saved value of seen tutorial version
+		new Settings(this).setTutorialVersionShown(MainActivity.TUTORIAL_VERSION);
+		//relaunch the main activity
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
+		this.finish();
 	}
 }

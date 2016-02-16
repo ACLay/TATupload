@@ -6,8 +6,8 @@
     <string name="confirm_checkbox">Queue all new messages</string>
     <string name="clear_queue_button">Clear queue</string>
     <string name="queue_title">Messages to process:</string>
-    <string name="message_number">Sender\'s number:</string>
-    <string name="message_time">Time received:</string>
+    <string name="message_number">Sender\'s number: </string>
+    <string name="message_time">Time received: </string>
     <string name="message_body">Message:</string>
     <string name="message_question">Question:</string>
     <string name="message_location">Location:</string>
@@ -30,6 +30,8 @@
     <string name="pending_text_list_key">uk.org.sucu.tatupload.savedTextsList</string>
     <string name="show_notification_key">uk.org.sucu.tatupload.showNotifications</string>
     <string name="processed_text_list_key">uk.org.tatupload.processedTextList</string>
+    <string name="preferred_account_key">uk.org.tatupload.preferredAccount</string>
+    <string name="using_new_method_key">uk.org.tatupload.usingNewMethod</string>
     <string name="scriptURL">https://script.google.com/macros/s/AKfycbzlHUVyYLlB6oWRCUomhNKBNVfsXD1fPJH61D_RsY8R1uhKmpNz/exec</string>
     <string name="parameter_indicator">uk.org.sucu.tatupload.PARAMETER</string>
     <string name="flavour_parameter">uk.org.sucu.tatupload.FLAVOUR_PARAMETER</string>
@@ -51,14 +53,15 @@
     <string name="flavour_explanation">The toastie fillings being offered.</string>
     <string name="location_explanation">One of these words marks a sentence as containing a location.</string>
     <string name="question_explanation">One of these marks a sentence as containing a question.</string>
-    <string name="tutorial_info">TATupload puts data into a google drive spreadsheet using web links opened in a browser. Spreadsheets are created in the drive of the google account signed into that browser.</string>
-    <string name="tutorial_info2">Please select which browser TATupload should use to open web links. This can be changed later in the settings menu.</string>
+    <string name="tutorial_info">TATupload puts data into a google drive spreadsheet. This will need to be authorised the first time TATupload creates a spreadsheet.</string>
     <string name="web_browser">Web Browser</string>
     <string name="confirm_choice">Are you sure?</string>
     <string name="browser_package_key">uk.org.sucu.tatupload.browserPackage</string>
     <string name="browser_name_key">uk.org.sucu.tatupload.browserName</string>
 	<string name="browser">Browser</string>
 	<string name="browser_description">The browser to upload messages with</string>
+    <string name="account">Google account</string>
+    <string name="account_description">The google account to upload messages with.</string>
 	<string name="chrome_notice">Please note that Google Chrome will not open links when the phone is sleeping. This can cause messages to not be uploaded automatically.</string>
 	<string name="used_key">uk.org.sucu.tatupload.usedBefore</string>
 	<string name="no">No</string>

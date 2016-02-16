@@ -2,10 +2,11 @@ package uk.org.sucu.tatupload.activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,17 +18,19 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import uk.org.sucu.tatupload.BrowserAccessor;
-import uk.org.sucu.tatupload.NetCaller;
 import uk.org.sucu.tatupload.Notifications;
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
+import uk.org.sucu.tatupload.network.AuthManager;
+import uk.org.sucu.tatupload.network.NetManager;
+import uk.org.sucu.tatupload.network.UploadTextTask;
 import uk.org.sucu.tatupload.parse.Parser;
 
+//TODO: move/copy some of this activity's functionality to a menu on the message queue
 public class SmsReviewActivity extends AppCompatActivity {
-	
+
 	private Text text;
 
 	@SuppressLint("InflateParams")
@@ -36,7 +39,7 @@ public class SmsReviewActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		//extract the sms parameters from the intent
 		Intent intent = getIntent();
-		
+
 		text = (Text) intent.getSerializableExtra(MainActivity.TEXT_MESSAGE);
 
 		//create the UI
@@ -61,7 +64,7 @@ public class SmsReviewActivity extends AppCompatActivity {
 			buttons = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.sms_review_button_portrait, null);
 		}
 		layout.addView(buttons);
-		
+
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
@@ -85,7 +88,10 @@ public class SmsReviewActivity extends AppCompatActivity {
 	}
 
 	private void setupActionBar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		ActionBar actionbar = getSupportActionBar();
+		if(actionbar != null) {
+			actionbar.setDisplayHomeAsUpEnabled(true);
+		}
 	}
 
 	@Override
@@ -109,55 +115,43 @@ public class SmsReviewActivity extends AppCompatActivity {
 
 
 	public void uploadMessage(View v){
-
-		if(BrowserAccessor.usable(this)){
-			uploadMessage();
-		} else {
-			Runnable code = new Runnable(){
-				@Override
-				public void run() {
-					uploadMessage();
-				}
-			};
-			BrowserAccessor.openBrowserChoicePopup(this, false, code);
-		}
+		uploadMessage();
 	}
-	
-	
+
+
 	private void uploadMessage(){
-		if(NetCaller.isOnlineWithToast(this)){
+		if(NetManager.isOnlineWithToast(this)){
 
-			EditText questionEdit = (EditText) findViewById(R.id.messageQuestionEditText);
-			EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
-			EditText toastieEdit = (EditText) findViewById(R.id.messageToastieEditText);
-			EditText bodyEdit = (EditText) findViewById(R.id.messageBodyEditText);
-			
-			String question = questionEdit.getText().toString();
-			String location = locationEdit.getText().toString();
-			String toastie = toastieEdit.getText().toString();
-			String body = bodyEdit.getText().toString();
-			String time = Parser.timeStampToString(text.getTimestamp());
-			
-			Uri uri = Parser.createUploadUri(text.getNumber(), question, location, toastie, body, time, this);
-			NetCaller.callScript(uri, this);
-			
-			SmsList pendingList = SmsList.getPendingList();
-			if(pendingList.contains(text)){
-				Settings settings = new Settings(this);
-				pendingList.removeText(text);
-				settings.savePendingTextsList();
-				if(settings.getStoringProcesseds()){
-					SmsList.getUploadedList().addText(text);
-					settings.saveUploadedTextsList();
-				}
+			if(AuthManager.isAccountSet()) {
+				// retrieve the edited values
+				EditText questionEdit = (EditText) findViewById(R.id.messageQuestionEditText);
+				EditText locationEdit = (EditText) findViewById(R.id.messageLocationEditText);
+				EditText toastieEdit = (EditText) findViewById(R.id.messageToastieEditText);
+				EditText bodyEdit = (EditText) findViewById(R.id.messageBodyEditText);
+
+				String question = questionEdit.getText().toString();
+				String location = locationEdit.getText().toString();
+				String toastie = toastieEdit.getText().toString();
+				String body = bodyEdit.getText().toString();
+				// make the task to upload the text
+				ProgressDialog mProgress = new ProgressDialog(this);
+				mProgress.setMessage("Uploading text...");
+				UploadTextTask uploader = new UploadTextTask(text, mProgress, this, question, location, toastie, body) {
+
+					@Override
+					protected void onPostExecute(Void output) {
+						super.onPostExecute(output);
+						SmsReviewActivity.this.finish();
+					}
+
+				};
+				uploader.execute();
+			} else {
+				// Run the account picker
+				AuthManager.chooseAccount(this);
 			}
-			
-			
-			Notifications.updateNotification(this);
-
-			this.finish();
 		}
-		
+
 	}
 
 	public void undoChanges(View v){
@@ -166,28 +160,28 @@ public class SmsReviewActivity extends AppCompatActivity {
 
 	public void discardText(View v){
 		new AlertDialog.Builder(this)
-		.setTitle(R.string.discard)
-		.setMessage(R.string.confirm_choice)
-		.setPositiveButton(R.string.discard, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				SmsList pendingList = SmsList.getPendingList();
-				SmsList uploadedList = SmsList.getUploadedList();
-				if(pendingList.contains(text)){
-					pendingList.removeText(text);
-					new Settings(SmsReviewActivity.this).savePendingTextsList();
-					Notifications.updateNotification(SmsReviewActivity.this);
-				} else if(uploadedList.contains(text)){
-					uploadedList.removeText(text);
-					new Settings(SmsReviewActivity.this).saveUploadedTextsList();
-				}
-				SmsReviewActivity.this.finish();
-			}
-		})
-		.setNegativeButton(android.R.string.cancel, null)
-		.create()
-		.show();
-		
+				.setTitle(R.string.discard)
+				.setMessage(R.string.confirm_choice)
+				.setPositiveButton(R.string.discard, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						SmsList pendingList = SmsList.getPendingList();
+						SmsList uploadedList = SmsList.getUploadedList();
+						if(pendingList.contains(text)){
+							pendingList.removeText(text);
+							new Settings(SmsReviewActivity.this).savePendingTextsList();
+							Notifications.updateNotification(SmsReviewActivity.this);
+						} else if(uploadedList.contains(text)){
+							uploadedList.removeText(text);
+							new Settings(SmsReviewActivity.this).saveUploadedTextsList();
+						}
+						SmsReviewActivity.this.finish();
+					}
+				})
+				.setNegativeButton(android.R.string.cancel, null)
+				.create()
+				.show();
+
 
 	}
 
