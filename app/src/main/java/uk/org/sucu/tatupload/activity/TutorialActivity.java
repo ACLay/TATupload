@@ -7,6 +7,7 @@ import android.view.View;
 
 import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.Settings;
+import uk.org.sucu.tatupload.parse.Parameters;
 
 public class TutorialActivity extends AppCompatActivity {
 
@@ -18,13 +19,13 @@ public class TutorialActivity extends AppCompatActivity {
 	
 	public void setupFlavours(View v){
 		Intent intent = new Intent(this, ParameterViewActivity.class);
-		intent.putExtra(getString(R.string.parameter_indicator), getString(R.string.flavour_parameter));
+		intent.putExtra(Parameters.PARAMETER, Parameters.FLAVOUR_PARAMETER);
 		startActivity(intent);
 	}
 	
 	public void setupLocation(View v){
 		Intent intent = new Intent(this, ParameterViewActivity.class);
-		intent.putExtra(getString(R.string.parameter_indicator), getString(R.string.location_parameter));
+		intent.putExtra(Parameters.PARAMETER, Parameters.LOCATION_PARAMETER);
 		startActivity(intent);
 	}
 	

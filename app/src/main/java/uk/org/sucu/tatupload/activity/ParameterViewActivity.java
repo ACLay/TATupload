@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,7 +52,7 @@ public class ParameterViewActivity extends AppCompatActivity {
 		if(parameterIdentifier == null) {
 			parameterIdentifier = null;
 			parameter = new ArrayList<String>();
-			parameter.add("This shouldn't appear");
+			parameter.add(getString(R.string.invalid_item));
 		}
 		
 		
@@ -65,8 +66,11 @@ public class ParameterViewActivity extends AppCompatActivity {
 	}
 
 	private void setupActionBar() {
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle(Parameters.getParamHeading(parameterIdentifier, this));
+		ActionBar actionbar = getSupportActionBar();
+		if(actionbar != null){
+			actionbar.setDisplayHomeAsUpEnabled(true);
+			actionbar.setTitle(Parameters.getParamHeading(parameterIdentifier, this));
+		}
 	}
 	
 	@Override
@@ -148,7 +152,7 @@ public class ParameterViewActivity extends AppCompatActivity {
 			try {
 				settings.saveParameter(parameterIdentifier);
 			} catch (IOException e) {
-				Toast.makeText(this, "Unable to save parameter.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, R.string.param_save_error, Toast.LENGTH_SHORT).show();
 			}
 		}
 	}

@@ -12,6 +12,7 @@ import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecovera
 import java.io.IOException;
 
 import uk.org.sucu.tatupload.Notifications;
+import uk.org.sucu.tatupload.R;
 import uk.org.sucu.tatupload.Settings;
 import uk.org.sucu.tatupload.message.SmsList;
 import uk.org.sucu.tatupload.message.Text;
@@ -85,7 +86,7 @@ public class UploadTextTask extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void output) {
         mProgress.hide();
         // Set the text as uploaded if not already
-        Toast.makeText(mActivity, "Text uploaded", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, R.string.text_upload_success, Toast.LENGTH_SHORT).show();
 
         SmsList pendingList = SmsList.getPendingList();
         if (pendingList.contains(message)) {
@@ -114,10 +115,11 @@ public class UploadTextTask extends AsyncTask<Void, Void, Void> {
                         ((UserRecoverableAuthIOException) mLastError).getIntent(),
                         AuthManager.REQUEST_AUTHORIZATION);
             } else {
-                Toast.makeText(mActivity, "Error occurred uploading text: " + mLastError.getMessage(), Toast.LENGTH_SHORT).show();
+                String errorMsg = mActivity.getString(R.string.text_upload_error) + mLastError.getMessage();
+                Toast.makeText(mActivity, errorMsg, Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(mActivity, "Text upload cancelled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity, R.string.text_upload_cancel, Toast.LENGTH_SHORT).show();
         }
     }
 }

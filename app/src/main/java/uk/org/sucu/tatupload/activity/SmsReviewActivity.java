@@ -135,7 +135,7 @@ public class SmsReviewActivity extends AppCompatActivity {
 				String body = bodyEdit.getText().toString();
 				// make the task to upload the text
 				ProgressDialog mProgress = new ProgressDialog(this);
-				mProgress.setMessage("Uploading text...");
+				mProgress.setMessage(getString(R.string.progress_uploading));
 				UploadTextTask uploader = new UploadTextTask(text, mProgress, this, question, location, toastie, body) {
 
 					@Override

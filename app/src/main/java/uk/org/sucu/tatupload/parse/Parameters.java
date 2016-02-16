@@ -10,7 +10,7 @@ import uk.org.sucu.tatupload.R;
 import android.content.Context;
 
 public class Parameters {
-
+	//These constants are duplicated in strings.xml so other xml files can load them
 	public static final String FLAVOUR_PARAMETER = "uk.org.sucu.tatupload.FLAVOUR_PARAMETER";
 	public static final String LOCATION_PARAMETER = "uk.org.sucu.tatupload.LOCATION_PARAMETER";
 	public static final String QUESTION_PARAMETER = "uk.org.sucu.tatupload.QUESTION_PARAMETER";

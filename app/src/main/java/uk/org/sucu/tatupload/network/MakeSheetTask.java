@@ -8,10 +8,7 @@ import android.widget.Toast;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 
-import java.util.Calendar;
-
 import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.message.Text;
 
 /**
  * An asynchronous task that handles the Google Apps Script Execution API call.
@@ -58,7 +55,7 @@ public class MakeSheetTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void output) {
         mProgress.hide();
-        Toast.makeText(mActivity, "Sheet created", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, R.string.sheet_create_success, Toast.LENGTH_SHORT).show();
         // extend method when used and update the UI as needed (message queues etc)
     }
 
@@ -75,10 +72,11 @@ public class MakeSheetTask extends AsyncTask<Void, Void, Void> {
                         ((UserRecoverableAuthIOException) mLastError).getIntent(),
                         AuthManager.REQUEST_AUTHORIZATION);
             } else {
-                Toast.makeText(mActivity, "Error occurred during sheet creation: " + mLastError.getMessage(), Toast.LENGTH_SHORT).show();
+                String errorMsg = mActivity.getString(R.string.sheet_create_error) + mLastError.getMessage();
+                Toast.makeText(mActivity, errorMsg, Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(mActivity, "Sheet creation cancelled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity, R.string.sheet_create_cancel, Toast.LENGTH_SHORT).show();
         }
     }
 }

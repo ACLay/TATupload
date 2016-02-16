@@ -8,6 +8,8 @@ import android.widget.Toast;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
 
+import uk.org.sucu.tatupload.R;
+
 public class NetManager {
 
     /**
@@ -48,7 +50,7 @@ public class NetManager {
         boolean online = isOnline(context);
 
         if(!online){
-            Toast.makeText(context, "There is no network connection available.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.network_unavailable, Toast.LENGTH_SHORT).show();
         }
 
         return online;

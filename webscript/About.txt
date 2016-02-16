@@ -1,7 +1,7 @@
 This is a Google apps script that creates the spreadsheet, and enters texts sent to it via the API.
 A project that runs the code can be created at script.google.com
 
-If you modify and use the script youself, the API ID of the deployed script will need to be updated in the android apps strings.xml file.
+If you modify and use the script youself, the API ID of the deployed script will need to be updated in the android apps ApiAccessor class.
 
 The script is given in 3 files, but this just is for readability by grouping functions (entering texts, creating the form, storing script settings) and should be able to run from a single file with no issues.
 

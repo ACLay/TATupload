@@ -18,6 +18,8 @@ import android.support.v4.app.Fragment;
 
 public class TabContent extends Fragment {
 
+	public static final String QUEUE_ID = "queue";
+
 	int queue;
 	SmsList smsList;
 	
@@ -25,7 +27,7 @@ public class TabContent extends Fragment {
 		TabContent tc = new TabContent();
 		
 		Bundle args  = new Bundle();
-		args.putInt("queue", queue);
+		args.putInt(QUEUE_ID, queue);
 		tc.setArguments(args);
 		
 		tc.setQueue(queue);
@@ -35,14 +37,14 @@ public class TabContent extends Fragment {
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		queue = getArguments() != null ? getArguments().getInt("queue") : -1;
+		queue = getArguments() != null ? getArguments().getInt(QUEUE_ID) : -1;
 		setQueue(queue);
 	}
 	
 	
 	public void onSaveInstanceState(Bundle outState){
 		super.onSaveInstanceState(outState);
-		outState.putInt("queue", queue);
+		outState.putInt(QUEUE_ID, queue);
 	}
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){

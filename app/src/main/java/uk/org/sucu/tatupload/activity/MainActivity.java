@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 		setupUI(savedInstanceState);
 
 		if (!AuthManager.isGooglePlayServicesAvailable(this)) {
-			Toast.makeText(this, "Google play services are required for TATupload to function.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.play_services_warning, Toast.LENGTH_SHORT).show();
 			this.finish();
 			return;
 		}
@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
 			//the exact message should change if TAT is running
 			if(settings.getProcessingTexts()){
 				new AlertDialog.Builder(this)
-						.setTitle("TATupload 2.0")
-						.setMessage("Hello, TATupload 2.0 uses a new method to upload texts without having to open a web browser. This means you will need to sign in to the app with your google account, open a new spreadsheet, and may want to copy any uploaded texts into it. Sorry for any inconvenience, but I hope not having the browser open every time you receive a text makes up for it.")
+						.setTitle(R.string.v2_update_heading)
+						.setMessage(R.string.v2_update_running)
 						.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
 						.show();
 			} else {
 				new AlertDialog.Builder(this)
-						.setTitle("TATupload 2.0")
-						.setMessage("Hello, TATupload 2.0 uses a new method to upload texts without having to open a web browser. This means you will need to sign in to the app with your google account when you open a new spreadsheet. Sorry for any inconvenience, but I hope not having the browser open every time you receive a text makes up for it.")
+						.setTitle(R.string.v2_update_heading)
+						.setMessage(R.string.v2_update_not_running)
 						.setPositiveButton(android.R.string.ok, null)
 						.create()
 						.show();
@@ -121,10 +121,10 @@ public class MainActivity extends AppCompatActivity {
 			
 			TabManager mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
 			String unprocessed = getString(R.string.unprocessed);
-			Bundle bundle = new Bundle(); bundle.putInt("queue", R.string.unprocessed);
+			Bundle bundle = new Bundle(); bundle.putInt(TabContent.QUEUE_ID, R.string.unprocessed);
 			mTabManager.addTab(mTabHost.newTabSpec(unprocessed).setIndicator(unprocessed), TabContent.class, bundle);
 			String uploaded = getString(R.string.uploaded);
-			bundle = new Bundle(); bundle.putInt("queue", R.string.uploaded);
+			bundle = new Bundle(); bundle.putInt(TabContent.QUEUE_ID, R.string.uploaded);
 			mTabManager.addTab(mTabHost.newTabSpec(uploaded).setIndicator(uploaded), TabContent.class, bundle);
 			
 			if (savedInstanceState != null) {
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 						AuthManager.setAccountName(accountName, this);
 					}
 				} else if (resultCode == RESULT_CANCELED) {
-					Toast.makeText(this, "No account selected", Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, R.string.no_account_selected, Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case AuthManager.REQUEST_AUTHORIZATION:
@@ -264,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
 					if(NetManager.isOnlineWithToast(MainActivity.this)){
 						//create the spreadsheet
 						ProgressDialog mProgress = new ProgressDialog(MainActivity.this);
-						mProgress.setMessage("Creating spreadsheet...");
+						mProgress.setMessage(getString(R.string.progress_creating));
 						MakeSheetTask creator = new MakeSheetTask(ssName, mProgress, MainActivity.this){
 
 							@Override
@@ -342,9 +342,9 @@ public class MainActivity extends AppCompatActivity {
 	private void clearQueueBeforeStartDialog(){
 		new AlertDialog.Builder(this)
 		.setTitle(R.string.start)
-		.setMessage("Clear unprocessed message list before starting?")
+		.setMessage(R.string.clear_unprocessed)
 		.setNegativeButton(android.R.string.cancel, null)
-		.setNeutralButton(R.string.no, new DialogInterface.OnClickListener() {
+		.setNeutralButton(android.R.string.no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				startTatNewSpreadsheet();

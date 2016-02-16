@@ -32,7 +32,6 @@
     <string name="processed_text_list_key">uk.org.tatupload.processedTextList</string>
     <string name="preferred_account_key">uk.org.tatupload.preferredAccount</string>
     <string name="using_new_method_key">uk.org.tatupload.usingNewMethod</string>
-    <string name="scriptURL">https://script.google.com/macros/s/AKfycbzlHUVyYLlB6oWRCUomhNKBNVfsXD1fPJH61D_RsY8R1uhKmpNz/exec</string>
     <string name="parameter_indicator">uk.org.sucu.tatupload.PARAMETER</string>
     <string name="flavour_parameter">uk.org.sucu.tatupload.FLAVOUR_PARAMETER</string>
     <string name="question_parameter">uk.org.sucu.tatupload.QUESTION_PARAMETER</string>
@@ -41,12 +40,14 @@
     <string name="question_heading">Question identifiers</string>
     <string name="location_heading">Delivery locations</string>
     <string name="invalid_heading">Invalid Parameter, you shouldn\'t see this.</string>
+    <string name="invalid_item">This shouldn\'t appear</string>
     <string name="restore_defaults">Restore default parameters</string>
     <string name="change_label">Change to:</string>
     <string name="change_param">Change</string>
     <string name="remove_param">Remove</string>
     <string name="add_param">Add</string>
     <string name="param_load_error">Unable to load stored parameter data. Check the settings are correct before running TAT</string>
+    <string name="param_save_error">Unable to save parameter.</string>
     <string name="title_activity_tutorial">Initial Setup</string>
     <string name="first_run_tutorial">Welcome to TATupload. Before starting, please enter the names of toastie flavours you will be using, as well as major delivery locations, such as names of halls of residence.</string>
     <string name="tutorial_done">Done</string>
@@ -54,17 +55,12 @@
     <string name="location_explanation">One of these words marks a sentence as containing a location.</string>
     <string name="question_explanation">One of these marks a sentence as containing a question.</string>
     <string name="tutorial_info">TATupload puts data into a google drive spreadsheet. This will need to be authorised the first time TATupload creates a spreadsheet.</string>
-    <string name="web_browser">Web Browser</string>
     <string name="confirm_choice">Are you sure?</string>
     <string name="browser_package_key">uk.org.sucu.tatupload.browserPackage</string>
     <string name="browser_name_key">uk.org.sucu.tatupload.browserName</string>
-	<string name="browser">Browser</string>
-	<string name="browser_description">The browser to upload messages with</string>
     <string name="account">Google account</string>
     <string name="account_description">The google account to upload messages with.</string>
-	<string name="chrome_notice">Please note that Google Chrome will not open links when the phone is sleeping. This can cause messages to not be uploaded automatically.</string>
 	<string name="used_key">uk.org.sucu.tatupload.usedBefore</string>
-	<string name="no">No</string>
 	<string name="icon_description">App icon</string>
 	<string name="processing_texts">Processing incoming texts</string>
 	<string name="no_queued_messages">No queued messages</string>
@@ -81,7 +77,22 @@
     <string name="show_notification_title">Show notification</string>
     <string name="show_notification_desc">Summarising the app status</string>
     <string name="parameter_category_title">Data extraction parameters</string>
-	<string-array name="default_flavours">
+    <string name="play_services_warning">Google play services are required for TATupload to function.</string>
+	<string name="v2_update_heading">Updates!</string>
+    <string name="v2_update_running">Hello, TATupload now uses a new method to upload texts without having to open a web browser. This means you will need to sign in to the app with your google account, open a new spreadsheet, and may want to copy any uploaded texts into it. Sorry for any inconvenience, but I hope not having the browser open every time you receive a text makes up for it.</string>
+    <string name="v2_update_not_running">Hello, TATupload now uses a new method to upload texts without having to open a web browser. This means you will need to sign in to the app with your google account when you open a new spreadsheet. Sorry for any inconvenience, but I hope not having the browser open every time you receive a text makes up for it.</string>
+    <string name="no_account_selected">No account selected</string>
+    <string name="progress_creating">Creating spreadsheet…</string>
+    <string name="progress_uploading">Uploading text…</string>
+    <string name="sheet_create_success">Sheet created</string>
+    <string name="sheet_create_cancel">Sheet creation cancelled</string>
+    <string name="sheet_create_error">Error occurred during sheet creation: </string>
+    <string name="text_upload_success">Text uploaded</string>
+    <string name="text_upload_cancel">Text upload cancelled</string>
+    <string name="text_upload_error">Error occurred uploading text: </string>
+    <string name="clear_unprocessed">Clear unprocessed message list before starting?</string>
+    <string name="network_unavailable">There is no network connection available.</string>
+    <string-array name="default_flavours">
         <item>ham</item>
         <item>cheese</item>
         <item>tomato</item>
