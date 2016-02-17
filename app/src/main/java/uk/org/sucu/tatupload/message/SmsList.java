@@ -23,7 +23,7 @@ public class SmsList {
 		return processedList;
 	}
 	
-	private ArrayList<Text> texts = new ArrayList<Text>();
+	private final ArrayList<Text> texts = new ArrayList<Text>();
 	private MessageArrayAdapter adapter = null;
 	
 	public void addText(Text msg){

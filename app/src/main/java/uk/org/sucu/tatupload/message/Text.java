@@ -55,9 +55,7 @@ public class Text implements Serializable{
 				return false;
 		} else if (!number.equals(other.number))
 			return false;
-		if (timestamp != other.timestamp)
-			return false;
-		return true;
+		return timestamp == other.timestamp;
 	}
 
 	public String getNumber(){

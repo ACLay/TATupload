@@ -120,8 +120,7 @@ public class Parser {
 	
 	public static String getCurrentDateString(){
 		Date d = new Date(Calendar.getInstance().getTimeInMillis());
-		String date = DateFormat.getDateInstance().format(d);
-		return date;
+		return DateFormat.getDateInstance().format(d);
 	}
 
 	public static String[] splitSentences(String message){

@@ -34,23 +34,19 @@ public class Settings {
 	}
 
 	public boolean getProcessingTexts(){
-		boolean processing = sharedPref.getBoolean(context.getString(R.string.processing_key), PROCESSING_TEXTS_DEFAULT);
-		return processing;
+		return sharedPref.getBoolean(context.getString(R.string.processing_key), PROCESSING_TEXTS_DEFAULT);
 	}
 	
 	public boolean getAutoQueueTexts(){
-		boolean confirmSplit = sharedPref.getBoolean(context.getString(R.string.confirm_split_key), AUTO_QUEUE_TEXTS_DEFAULT);
-		return confirmSplit;
+		return sharedPref.getBoolean(context.getString(R.string.confirm_split_key), AUTO_QUEUE_TEXTS_DEFAULT);
 	}
 	
 	public boolean getStoringProcesseds(){
-		boolean storeProcesseds = sharedPref.getBoolean(context.getString(R.string.store_processed_key), STORING_PROCESSED_TEXTS_DEFAULT);
-		return storeProcesseds;
+		return sharedPref.getBoolean(context.getString(R.string.store_processed_key), STORING_PROCESSED_TEXTS_DEFAULT);
 	}
 	
 	public int getTutorialVersionSeen(){
-		int versionSeen = sharedPref.getInt(context.getString(R.string.tutorial_ver_key), TUTORIAL_SEEN_DEFAULT);
-		return versionSeen;
+		return sharedPref.getInt(context.getString(R.string.tutorial_ver_key), TUTORIAL_SEEN_DEFAULT);
 	}
 	
 	public ArrayList<String> getSavedParameter(String parameter){
@@ -119,18 +115,15 @@ public class Settings {
 
 	
 	public boolean getUsed(){
-		boolean used = sharedPref.getBoolean(context.getString(R.string.used_key), USED_DEFAULT);
-		return used;
+		return sharedPref.getBoolean(context.getString(R.string.used_key), USED_DEFAULT);
 	}
 	
 	public boolean getShowingNotification(){
-		boolean showing = sharedPref.getBoolean(context.getString(R.string.show_notification_key), NOTIFICATION_DEFAULT);
-		return showing;
+		return sharedPref.getBoolean(context.getString(R.string.show_notification_key), NOTIFICATION_DEFAULT);
 	}
 
 	public String getPreferredAccount(){
-		String account = sharedPref.getString(context.getString(R.string.preferred_account_key), ACCOUNT_DEFAULT);
-		return account;
+		return sharedPref.getString(context.getString(R.string.preferred_account_key), ACCOUNT_DEFAULT);
 	}
 
 	
@@ -177,7 +170,7 @@ public class Settings {
 		try {
 			data = list.getSerialList();
 		} catch (IOException e) {
-			
+			Toast.makeText(context, "TATupload was unable to save a text list", Toast.LENGTH_SHORT).show();
 		}
 		
 		getEditor()
@@ -206,7 +199,6 @@ public class Settings {
 	
 	@SuppressLint("CommitPrefEdits")
 	private SharedPreferences.Editor getEditor(){
-		SharedPreferences.Editor editor = sharedPref.edit();
-		return editor;
+		return sharedPref.edit();
 	}
 }

@@ -41,26 +41,31 @@ public class Parameters {
 	}
 	
 	public static ArrayList<String> getDefaultList(String identifier, Context context){
-		if(identifier.equals(FLAVOUR_PARAMETER)){
-			String[] defaults = context.getResources().getStringArray(R.array.default_flavours);
-			return new ArrayList<String>(Arrays.asList(defaults));
-		} else if(identifier.equals(LOCATION_PARAMETER)){
-			String[] defaults = context.getResources().getStringArray(R.array.default_locations);
-			return new ArrayList<String>(Arrays.asList(defaults));
-		} else if(identifier.equals(QUESTION_PARAMETER)){
-			String[] defaults = context.getResources().getStringArray(R.array.default_questions);
-			return new ArrayList<String>(Arrays.asList(defaults));
+		switch (identifier) {
+			case FLAVOUR_PARAMETER: {
+				String[] defaults = context.getResources().getStringArray(R.array.default_flavours);
+				return new ArrayList<String>(Arrays.asList(defaults));
+			}
+			case LOCATION_PARAMETER: {
+				String[] defaults = context.getResources().getStringArray(R.array.default_locations);
+				return new ArrayList<String>(Arrays.asList(defaults));
+			}
+			case QUESTION_PARAMETER: {
+				String[] defaults = context.getResources().getStringArray(R.array.default_questions);
+				return new ArrayList<String>(Arrays.asList(defaults));
+			}
 		}
 		return null;
 	}
 	
 	public static ArrayList<String> getList(String identifier){
-		if(identifier.equals(FLAVOUR_PARAMETER)){
-			return flavourParameter;
-		} else if(identifier.equals(LOCATION_PARAMETER)){
-			return locationParameter;
-		} else if(identifier.equals(QUESTION_PARAMETER)){
-			return questionParameter;
+		switch (identifier) {
+			case FLAVOUR_PARAMETER:
+				return flavourParameter;
+			case LOCATION_PARAMETER:
+				return locationParameter;
+			case QUESTION_PARAMETER:
+				return questionParameter;
 		}
 		return null;
 	}
@@ -107,11 +112,7 @@ public class Parameters {
 	}
 	
 	public static boolean isValidIdentifier(String identifier){
-		if(getList(identifier) == null){
-			return false;
-		} else {
-			return true;
-		}
+		return getList(identifier) != null;
 	}
 
 }
