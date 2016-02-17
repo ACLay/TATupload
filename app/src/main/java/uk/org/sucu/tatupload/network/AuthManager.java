@@ -5,7 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.util.ExponentialBackOff;
 
@@ -67,9 +67,9 @@ public class AuthManager {
      *     date on this device; false otherwise.
      */
     public static boolean isGooglePlayServicesAvailable(Activity activity) {
-        final int connectionStatusCode =
-                GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
-        if (GooglePlayServicesUtil.isUserRecoverableError(connectionStatusCode)) {
+        GoogleApiAvailability apis = GoogleApiAvailability.getInstance();
+        final int connectionStatusCode = apis.isGooglePlayServicesAvailable(activity);
+        if (apis.isUserResolvableError(connectionStatusCode)) {
             showGooglePlayServicesAvailabilityErrorDialog(connectionStatusCode, activity);
             return false;
         } else if (connectionStatusCode != ConnectionResult.SUCCESS ) {
@@ -85,9 +85,9 @@ public class AuthManager {
      *     Google Play Services on this device.
      */
     public static void showGooglePlayServicesAvailabilityErrorDialog(final int connectionStatusCode, Activity activity) {
-        Dialog dialog = GooglePlayServicesUtil.getErrorDialog(
-                connectionStatusCode,
+        Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(
                 activity,
+                connectionStatusCode,
                 REQUEST_GOOGLE_PLAY_SERVICES);
         dialog.show();
     }

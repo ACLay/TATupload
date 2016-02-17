@@ -3,7 +3,9 @@ package uk.org.sucu.tatupload.message;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.telephony.SmsMessage;
 
 import com.google.android.gms.auth.GoogleAuthException;
@@ -28,17 +30,27 @@ public class SmsReceiver extends BroadcastReceiver{
 
 			//get the SMS message passed in
 			Bundle bundle = intent.getExtras();
-			SmsMessage[] msgs = null;
 			if (bundle != null){
-				//retrieve the SMS message received
-				Object[] pdus = (Object[]) bundle.get("pdus");
-				msgs = new SmsMessage[pdus.length];
+				//retrieve the received SMS messages
+				SmsMessage[] msgs;
+				// A new method to read SMS' was introduced in kitkat, and the old one deprecated in marshmallow
+				if (Build.VERSION.SDK_INT >= 19) { //KITKAT
+					msgs = Telephony.Sms.Intents.getMessagesFromIntent(intent);
+				} else {
+					Object pdus[] = (Object[]) bundle.get("pdus");
+					if(pdus == null){
+						return;
+					}
+					msgs = new SmsMessage[pdus.length];
+					for(int i = 0; i < pdus.length; i++) {
+						//noinspection deprecation
+						msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
+					}
+				}
 
 				HashMap<String,Text> numberBodyMap = new HashMap<String,Text>();
 				
 				for (int i = 0; i < msgs.length; i++){
-					//createFromPdu to be deprecated soon
-					msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
 					//if 2 texts in the same receive are from the same number, merge them
 					String number = msgs[i].getOriginatingAddress();
 					if(numberBodyMap.containsKey(number)){
