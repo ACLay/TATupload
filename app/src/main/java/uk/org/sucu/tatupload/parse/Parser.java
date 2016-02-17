@@ -1,19 +1,12 @@
 package uk.org.sucu.tatupload.parse;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import android.annotation.SuppressLint;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
-
-import uk.org.sucu.tatupload.R;
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.net.Uri;
 
 @SuppressLint("DefaultLocale")
 public class Parser {

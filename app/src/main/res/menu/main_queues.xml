@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <!--
+        <item
+            android:id="@+id/action_upload_all"
+            android:orderInCategory="30"
+            app:showAsAction="never"
+            android:title="@string/upload_all"/>
+    -->
+    <item
+        android:id="@+id/action_clear_all"
+        android:orderInCategory="60"
+        app:showAsAction="never"
+        android:title="@string/clear_all"/>
+
+</menu>

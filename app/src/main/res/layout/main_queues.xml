@@ -30,8 +30,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+<!--
             <Button
                 android:id="@+id/clearQueueButton"
                 android:layout_width="wrap_content"
@@ -39,21 +40,21 @@
                 android:layout_weight="1"
                 android:onClick="clearMessages"
                 android:text="@string/clear_queue_button" />
-
+-->
             <Button
                 android:id="@+id/toggleTatButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="toggleTat" />
 
+                android:onClick="toggleTat" />
+<!--
             <Button
                 android:id="@+id/openSettingsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="showSettings"
-                android:text="@string/settings" />
+                android:text="@string/settings" /> -->
         </LinearLayout>
     </LinearLayout>
 

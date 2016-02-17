@@ -66,3 +66,8 @@ Preference styling:
 Google authorisation:
 	https://developers.google.com/apps-script/guides/rest/quickstart/android
 	
+Context menus:
+	http://developer.android.com/guide/topics/ui/menus.html#FloatingContextMenu
+
+Context menu's on regular touch:
+	http://stackoverflow.com/a/11536397

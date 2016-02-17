@@ -68,6 +68,7 @@ public class MakeSheetTask extends AsyncTask<Void, Void, Void> {
                         ((GooglePlayServicesAvailabilityIOException) mLastError)
                                 .getConnectionStatusCode(), mActivity);
             } else if (mLastError instanceof UserRecoverableAuthIOException) {
+                AuthManager.setAuthReason(AuthManager.CREATING);
                 mActivity.startActivityForResult(
                         ((UserRecoverableAuthIOException) mLastError).getIntent(),
                         AuthManager.REQUEST_AUTHORIZATION);

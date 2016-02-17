@@ -15,6 +15,10 @@ import uk.org.sucu.tatupload.Settings;
 
 public class AuthManager {
 
+    public static int authReason;
+    public static final int UPLOADING = 1610;
+    public static final int CREATING = 616;
+
     public static final int REQUEST_ACCOUNT_PICKER = 1000;
     public static final int REQUEST_AUTHORIZATION = 1001;
     public static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
@@ -49,6 +53,10 @@ public class AuthManager {
      */
     public static void chooseAccount(Activity activity) {
         activity.startActivityForResult(mCredential.newChooseAccountIntent(), REQUEST_ACCOUNT_PICKER);
+    }
+
+    public static void setAuthReason(int reason){
+        authReason = reason;
     }
 
     /**

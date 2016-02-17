@@ -33,8 +33,6 @@ import uk.org.sucu.tatupload.parse.Parser;
 
 
 public class MainActivity extends AppCompatActivity {
-	
-	//TODO move all strings into xml
 
 	public final static String TEXT_MESSAGE = "uk.org.sucu.tatupload.TEXT_MESSAGE";
 
@@ -43,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
 	private Settings settings;
 
 	private TabHost mTabHost;
-	
+
+	private String sheetName = "";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								// Run the account picker
+								AuthManager.setAuthReason(AuthManager.CREATING);
 								AuthManager.chooseAccount(MainActivity.this);
 							}
 						})
@@ -150,7 +151,10 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.main_settings, menu);
+		if(settings.getUsed()) {
+			getMenuInflater().inflate(R.menu.main_queues, menu);
+		}
 		return true;
 	}
 
@@ -180,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
 							data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
 					if (accountName != null) {
 						AuthManager.setAccountName(accountName, this);
+						successfulAuthorisation();
 					}
 				} else if (resultCode == RESULT_CANCELED) {
 					Toast.makeText(this, R.string.no_account_selected, Toast.LENGTH_SHORT).show();
@@ -188,6 +193,8 @@ public class MainActivity extends AppCompatActivity {
 			case AuthManager.REQUEST_AUTHORIZATION:
 				if (resultCode != RESULT_OK) {
 					AuthManager.chooseAccount(this);
+				} else {
+					successfulAuthorisation();
 				}
 				break;
 		}
@@ -195,7 +202,17 @@ public class MainActivity extends AppCompatActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	public void clearMessages(View v){
+	private void successfulAuthorisation(){
+		// was auth requested when uploading a text or making a sheet?
+		// return to where it was
+		if(AuthManager.authReason == AuthManager.UPLOADING){
+			TabContent.retryTextUpload(this);
+		} else if (AuthManager.authReason == AuthManager.CREATING){
+			startTatNewSpreadsheet(false);
+		}
+	}
+
+	private void clearCurrentQueue(){
 		final SmsList visibleList;
 		String currentTabTag = mTabHost.getCurrentTabTag();
 		if(currentTabTag.equals(getString(R.string.unprocessed))){
@@ -205,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 		} else {
 			return;
 		}
-		
+
 		//do nothing if the list is empty
 		if(!visibleList.isEmpty()){
 			//confirm user choice
@@ -228,28 +245,28 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void startTat(View v){
-		startTatNewSpreadsheet();
+		startTatNewSpreadsheet(true);
 	}
 
+	//TODO rename, misleading
 	private void resumeTat(){
 		settings.setProcessingTexts(true);
 		Button toggleButton = (Button) findViewById(R.id.toggleTatButton);
 		toggleButton.setText(R.string.stop);
 		Notifications.updateNotification(this);
 	}
-	
-	private void startTatNewSpreadsheet(){
-		String name = getString(R.string.text_a_toastie) + " " + Parser.getCurrentDateString();
-		startTatNewSpreadsheet(name);
-	}
 
 	@SuppressLint("InflateParams")
-	private void startTatNewSpreadsheet(String defaultName){
+	private void startTatNewSpreadsheet(boolean useNewName){
+		if(useNewName){
+			sheetName = getString(R.string.text_a_toastie) + " " + Parser.getCurrentDateString();
+		}
+
 		if(AuthManager.isAccountSet()){
 			View view = LayoutInflater.from(this).inflate(R.layout.setup_layout , null);
 			final EditText ssNameEdit = (EditText) view.findViewById(R.id.ssNameEditText);
 
-			ssNameEdit.setText(defaultName);
+			ssNameEdit.setText(sheetName);
 
 			new AlertDialog.Builder(this)
 			.setTitle(R.string.start)
@@ -259,39 +276,13 @@ public class MainActivity extends AppCompatActivity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 
-					String ssName = ssNameEdit.getText().toString();
+					sheetName = ssNameEdit.getText().toString();
 					
 					if(NetManager.isOnlineWithToast(MainActivity.this)){
-						//create the spreadsheet
-						ProgressDialog mProgress = new ProgressDialog(MainActivity.this);
-						mProgress.setMessage(getString(R.string.progress_creating));
-						MakeSheetTask creator = new MakeSheetTask(ssName, mProgress, MainActivity.this){
-
-							@Override
-							protected void onPostExecute(Void output) {
-								super.onPostExecute(output);
-								//Clear the uploaded list from the previous session
-								SmsList.getUploadedList().clearList();
-								settings.saveUploadedTextsList();
-								//If it's the first use, set used to true
-								if(!settings.getUsed()){
-									settings.setUsed(true);
-									//Add a text to the queue explaining how to use the queue
-									SmsList.getPendingList().addText(new Text(getString(R.string.app_name),getString(R.string.queue_explanation),Calendar.getInstance().getTimeInMillis()));
-									settings.savePendingTextsList();
-									setupUI(null);//the toggle button must be created before resumeTat() the button's text
-								}
-
-								resumeTat();
-							}
-
-						};
-						creator.execute();
-
-
+						runCreateSheetTask();
 					} else {
 						//If no network connection is available, reopen the dialog
-						startTatNewSpreadsheet(ssName);
+						startTatNewSpreadsheet(false);
 					}
 
 
@@ -303,8 +294,38 @@ public class MainActivity extends AppCompatActivity {
 
 		} else {
 			// Run the account picker
+			AuthManager.setAuthReason(AuthManager.CREATING);
 			AuthManager.chooseAccount(this);
 		}
+	}
+
+	private void runCreateSheetTask(){
+		//create the spreadsheet
+		ProgressDialog mProgress = new ProgressDialog(MainActivity.this);
+		mProgress.setMessage(getString(R.string.progress_creating));
+		MakeSheetTask creator = new MakeSheetTask(sheetName, mProgress, MainActivity.this){
+
+			@Override
+			protected void onPostExecute(Void output) {
+				super.onPostExecute(output);
+				//Clear the uploaded list from the previous session
+				SmsList.getUploadedList().clearList();
+				settings.saveUploadedTextsList();
+				//If it's the first use, set used to true
+				if(!settings.getUsed()){
+					settings.setUsed(true);
+					//Add a text to the queue explaining how to use the queue
+					SmsList.getPendingList().addText(new Text(getString(R.string.app_name),getString(R.string.queue_explanation),Calendar.getInstance().getTimeInMillis()));
+					settings.savePendingTextsList();
+					setupUI(null);//the toggle button must be created before resumeTat() the button's text
+					invalidateOptionsMenu();
+				}
+
+				resumeTat();
+			}
+
+		};
+		creator.execute();
 	}
 	
 	private void stopTat(){
@@ -330,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
 			stopTat();
 		} else {
 			if(SmsList.getPendingList().isEmpty()){
-				startTatNewSpreadsheet();
+				startTatNewSpreadsheet(true);
 			} else {
 				clearQueueBeforeStartDialog();
 			}
@@ -347,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
 		.setNeutralButton(android.R.string.no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				startTatNewSpreadsheet();
+				startTatNewSpreadsheet(true);
 			}
 		})
 		.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
@@ -355,15 +376,11 @@ public class MainActivity extends AppCompatActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				SmsList.getPendingList().clearList();
 				settings.savePendingTextsList();
-				startTatNewSpreadsheet();
+				startTatNewSpreadsheet(true);
 			}
 		})
 		.create()
 		.show();
-	}
-	
-	public void showSettings(View v){
-		showSettings();
 	}
 	
 	private void confirmChoice(DialogInterface.OnClickListener action, int action_name){
@@ -385,13 +402,16 @@ public class MainActivity extends AppCompatActivity {
 
 	public boolean onOptionsItemSelected(MenuItem item){
 		int itemId  = item.getItemId();
-		if(itemId == R.id.action_settings){
+		if(itemId == R.id.action_settings) {
 			showSettings();
+			return true;
+		} else if (itemId == R.id.action_clear_all) {
+			clearCurrentQueue();
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
-		
+		//TODO: an option to upload all
 	}
 	
 }

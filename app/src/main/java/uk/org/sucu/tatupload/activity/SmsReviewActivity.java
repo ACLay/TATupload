@@ -1,5 +1,6 @@
 package uk.org.sucu.tatupload.activity;
 
+import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,7 +30,7 @@ import uk.org.sucu.tatupload.network.NetManager;
 import uk.org.sucu.tatupload.network.UploadTextTask;
 import uk.org.sucu.tatupload.parse.Parser;
 
-//TODO: move/copy some of this activity's functionality to a menu on the message queue
+
 public class SmsReviewActivity extends AppCompatActivity {
 
 	private Text text;
@@ -148,10 +150,55 @@ public class SmsReviewActivity extends AppCompatActivity {
 				uploader.execute();
 			} else {
 				// Run the account picker
+				AuthManager.setAuthReason(AuthManager.UPLOADING);
 				AuthManager.chooseAccount(this);
 			}
 		}
 
+	}
+
+	/**
+	 * Called when an activity launched here (specifically, AccountPicker
+	 * and authorization) exits, giving you the requestCode you started it with,
+	 * the resultCode it returned, and any additional data from it.
+	 * @param requestCode code indicating which activity result is incoming.
+	 * @param resultCode code indicating the result of the incoming
+	 *     activity result.
+	 * @param data Intent (containing result data) returned by incoming
+	 *     activity result.
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch(requestCode) {
+			case AuthManager.REQUEST_GOOGLE_PLAY_SERVICES:
+				if (resultCode != RESULT_OK) {
+					AuthManager.isGooglePlayServicesAvailable(this);
+				}
+				break;
+			case AuthManager.REQUEST_ACCOUNT_PICKER:
+				if (resultCode == RESULT_OK && data != null &&
+						data.getExtras() != null) {
+					String accountName =
+							data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+					if (accountName != null) {
+						AuthManager.setAccountName(accountName, this);
+					}
+				} else if (resultCode == RESULT_CANCELED) {
+					Toast.makeText(this, R.string.no_account_selected, Toast.LENGTH_SHORT).show();
+				}
+				break;
+			case AuthManager.REQUEST_AUTHORIZATION:
+				if (resultCode != RESULT_OK) {
+					AuthManager.chooseAccount(this);
+				} else {
+					// Successful authorisation, try upload again.
+					uploadMessage();
+				}
+				break;
+		}
+
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	public void undoChanges(View v){

@@ -9,6 +9,7 @@
     -->
     <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light">
         <item name="notification_icon">@drawable/light_layout_notification</item>
+        <item name="android:background">#ffffff</item>
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
