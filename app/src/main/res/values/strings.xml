@@ -28,7 +28,6 @@
     <string name="upload_all">Upload entire queue</string>
     <string name="clear_all">Clear queue</string>
     <string name="preference_file_key">uk.org.sucu.tatupload.PREFERENCE_FILE_KEY</string>
-    <string name="form_name_key">uk.org.sucu.tatupload.formName</string>
     <string name="processing_key">uk.org.sucu.tatupload.processing</string>
     <string name="confirm_split_key">uk.org.sucu.tatupload.confirmSplit</string>
     <string name="tutorial_ver_key">uk.org.sucu.tatupload.tutorialVersion</string>
@@ -61,8 +60,6 @@
     <string name="question_explanation">One of these marks a sentence as containing a question.</string>
     <string name="tutorial_info">TATupload puts data into a google drive spreadsheet. This will need to be authorised the first time TATupload creates a spreadsheet.</string>
     <string name="confirm_choice">Are you sure?</string>
-    <string name="browser_package_key">uk.org.sucu.tatupload.browserPackage</string>
-    <string name="browser_name_key">uk.org.sucu.tatupload.browserName</string>
     <string name="account">Google account</string>
     <string name="account_description">The google account to upload messages with.</string>
 	<string name="used_key">uk.org.sucu.tatupload.usedBefore</string>
@@ -83,10 +80,7 @@
     <string name="show_notification_desc">Summarising the app status</string>
     <string name="parameter_category_title">Data extraction parameters</string>
     <string name="play_services_warning">Google play services are required for TATupload to function.</string>
-	<string name="v2_update_heading">Updates!</string>
-    <string name="v2_update_running">Hello, TATupload now uses a new method to upload texts without having to open a web browser. This means you will need to sign in to the app with your google account, open a new spreadsheet, and may want to copy any uploaded texts into it. Sorry for any inconvenience, but I hope not having the browser open every time you receive a text makes up for it.</string>
-    <string name="v2_update_not_running">Hello, TATupload now uses a new method to upload texts without having to open a web browser. This means you will need to sign in to the app with your google account when you open a new spreadsheet. Sorry for any inconvenience, but I hope not having the browser open every time you receive a text makes up for it.</string>
-    <string name="no_account_selected">No account selected</string>
+	<string name="no_account_selected">No account selected</string>
     <string name="progress_creating">Creating spreadsheet…</string>
     <string name="progress_uploading">Uploading text…</string>
     <string name="sheet_create_success">Sheet created</string>

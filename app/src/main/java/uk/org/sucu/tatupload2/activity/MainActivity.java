@@ -58,44 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
 		int versionSeen = settings.getTutorialVersionSeen();
 		
-		if(versionSeen == Settings.TUTORIAL_SEEN_DEFAULT){
+		if(versionSeen == Settings.TUTORIAL_SEEN_DEFAULT){// add extra cases inform the user of changes to the app, etc.
 			//new install, show them the tutorial
 			Intent intent = new Intent(this, TutorialActivity.class);
 			startActivity(intent);
 			this.finish();
 			return;
-		} else if(versionSeen < 5){// add extra cases inform the user of changes to the app, etc.
-			//remove the now unused form name field from the preference save file.
-			settings.removePreference(getString(R.string.form_name_key));
-			//remove the now unused browser settings
-			settings.removePreference(getString(R.string.browser_package_key));
-			settings.removePreference(getString(R.string.browser_name_key));
-			//if a previous install has just been updated to the new uploading method, let them know
-			//the exact message should change if TAT is running
-			if(settings.getProcessingTexts()){
-				new AlertDialog.Builder(this)
-						.setTitle(R.string.v2_update_heading)
-						.setMessage(R.string.v2_update_running)
-						.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								// Run the account picker
-								AuthManager.setAuthReason(AuthManager.CREATING);
-								AuthManager.chooseAccount(MainActivity.this);
-							}
-						})
-						.setCancelable(false)
-						.create()
-						.show();
-			} else {
-				new AlertDialog.Builder(this)
-						.setTitle(R.string.v2_update_heading)
-						.setMessage(R.string.v2_update_not_running)
-						.setPositiveButton(android.R.string.ok, null)
-						.create()
-						.show();
-			}
 		}
+
 		if(versionSeen != TUTORIAL_VERSION){
 			settings.setTutorialVersionShown(TUTORIAL_VERSION);
 		}
