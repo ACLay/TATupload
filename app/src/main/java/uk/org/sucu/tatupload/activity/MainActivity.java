@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
 		if (!AuthManager.isGooglePlayServicesAvailable(this)) {
 			Toast.makeText(this, R.string.play_services_warning, Toast.LENGTH_SHORT).show();
-			this.finish();
-			return;
 		}
 
 		int versionSeen = settings.getTutorialVersionSeen();
