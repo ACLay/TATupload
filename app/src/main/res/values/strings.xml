@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">TATupload</string>
+    <string name="app_label">TATupload 2</string>
     <string name="ss_name">Name for new spreadsheet: </string>
     <string name="confirm_checkbox">Queue all new messages</string>
     <string name="clear_queue_button">Clear queue</string>

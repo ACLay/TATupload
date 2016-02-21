@@ -17,12 +17,12 @@
         android:name="uk.org.sucu.tatupload2.TatUploadApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon"
-        android:label="@string/app_name"
+        android:label="@string/app_label"
         android:theme="@style/AppTheme" >
         <activity
             android:name="uk.org.sucu.tatupload2.activity.MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
+            <intent-filter android:label="@string/app_label">
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
