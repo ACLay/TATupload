@@ -1,3 +1,6 @@
+TATupload 2 is now available at https://play.google.com/store/apps/details?id=uk.org.sucu.tatupload2
+It no longer uploads texts using the web browser, and has many other improvements as well. It does require up to date Google Play services, so this version will remain online for older phones that can't support them.
+
 TATupload is an android app designed to get relevant data from SMS messages sent to Text a Toastie events, and put it into a spreadsheet on Google drive so you don't have to type it up yourself.
 
 Data is uploaded using the phones web browser, and the google account signed into that browser.
