@@ -12,14 +12,13 @@ import java.util.Iterator;
 public class Parser {
 
 	public static ArrayList<String> getQuestion(String message){
-		message = message.toLowerCase();
 		ArrayList<String> questions = new ArrayList<String>();
 		String[] sentences = splitSentences(message);
 		//for each sentence in the message
 		for(String sentence : sentences){
 			for(String qID : Parameters.questionParameter){
 				//if it contains a question identifier, add it to the list of questions
-				if (sentence.contains(qID)){
+				if (sentenceContainsString(sentence, qID)){
 					questions.add(sentence);
 					break;
 				}
@@ -30,7 +29,6 @@ public class Parser {
 	}
 
 	public static ArrayList<String> getLocation(String message){
-		message = message.toLowerCase();
 		ArrayList<String> locations = new ArrayList<String>();
 		String[] sentences = splitSentences(message);
 		//for each sentence in the message
@@ -96,6 +94,10 @@ public class Parser {
 			}
 		}
 		return false;
+	}
+
+	private static boolean sentenceContainsString(String sentence, String string){
+		return sentence.toLowerCase().contains(string);
 	}
 
 	public static String concatenateArrayList(ArrayList<String> strings, String divider){
