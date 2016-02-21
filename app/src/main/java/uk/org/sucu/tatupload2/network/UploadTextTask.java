@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.network;
+package uk.org.sucu.tatupload2.network;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -11,12 +11,12 @@ import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecovera
 
 import java.io.IOException;
 
-import uk.org.sucu.tatupload.Notifications;
-import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.Settings;
-import uk.org.sucu.tatupload.message.SmsList;
-import uk.org.sucu.tatupload.message.Text;
-import uk.org.sucu.tatupload.parse.Parser;
+import uk.org.sucu.tatupload2.Notifications;
+import uk.org.sucu.tatupload2.R;
+import uk.org.sucu.tatupload2.Settings;
+import uk.org.sucu.tatupload2.message.SmsList;
+import uk.org.sucu.tatupload2.message.Text;
+import uk.org.sucu.tatupload2.parse.Parser;
 
 public class UploadTextTask extends AsyncTask<Void, Void, Void> {
 

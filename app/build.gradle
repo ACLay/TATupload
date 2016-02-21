@@ -21,7 +21,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "uk.org.sucu.tatupload"
+        applicationId "uk.org.sucu.tatupload2"
         minSdkVersion 9
         targetSdkVersion 23
     }

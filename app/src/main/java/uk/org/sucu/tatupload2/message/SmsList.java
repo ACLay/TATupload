@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.message;
+package uk.org.sucu.tatupload2.message;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,8 +6,8 @@ import java.util.Collection;
 
 import org.apache.pig.impl.util.ObjectSerializer;
 
-import uk.org.sucu.tatupload.MessageArrayAdapter;
-import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload2.MessageArrayAdapter;
+import uk.org.sucu.tatupload2.R;
 import android.content.Context;
 
 public class SmsList {

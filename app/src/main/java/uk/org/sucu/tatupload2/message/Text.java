@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.message;
+package uk.org.sucu.tatupload2.message;
 
 import java.io.Serializable;
 

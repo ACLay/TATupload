@@ -1,7 +1,7 @@
-package uk.org.sucu.tatupload;
+package uk.org.sucu.tatupload2;
 
-import uk.org.sucu.tatupload.activity.MainActivity;
-import uk.org.sucu.tatupload.message.SmsList;
+import uk.org.sucu.tatupload2.activity.MainActivity;
+import uk.org.sucu.tatupload2.message.SmsList;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;

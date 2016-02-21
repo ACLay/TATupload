@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload;
+package uk.org.sucu.tatupload2;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,12 +18,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import uk.org.sucu.tatupload.MessageArrayAdapter.ViewHolder;
-import uk.org.sucu.tatupload.activity.MainActivity;
-import uk.org.sucu.tatupload.activity.SmsReviewActivity;
-import uk.org.sucu.tatupload.message.SmsList;
-import uk.org.sucu.tatupload.message.Text;
-import uk.org.sucu.tatupload.network.UploadTextTask;
+import uk.org.sucu.tatupload2.MessageArrayAdapter.ViewHolder;
+import uk.org.sucu.tatupload2.activity.MainActivity;
+import uk.org.sucu.tatupload2.activity.SmsReviewActivity;
+import uk.org.sucu.tatupload2.message.SmsList;
+import uk.org.sucu.tatupload2.message.Text;
+import uk.org.sucu.tatupload2.network.UploadTextTask;
 
 public class TabContent extends Fragment {
 

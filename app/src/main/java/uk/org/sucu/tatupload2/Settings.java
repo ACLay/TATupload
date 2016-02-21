@@ -1,13 +1,13 @@
-package uk.org.sucu.tatupload;
+package uk.org.sucu.tatupload2;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.pig.impl.util.ObjectSerializer;
 
-import uk.org.sucu.tatupload.message.SmsList;
-import uk.org.sucu.tatupload.message.Text;
-import uk.org.sucu.tatupload.parse.Parameters;
+import uk.org.sucu.tatupload2.message.SmsList;
+import uk.org.sucu.tatupload2.message.Text;
+import uk.org.sucu.tatupload2.parse.Parameters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;

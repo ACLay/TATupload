@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.parse;
+package uk.org.sucu.tatupload2.parse;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,15 +6,15 @@ import java.util.Arrays;
 
 import org.apache.pig.impl.util.ObjectSerializer;
 
-import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload2.R;
 import android.content.Context;
 
 public class Parameters {
 	//These constants are duplicated in strings.xml so other xml files can load them
-	public static final String FLAVOUR_PARAMETER = "uk.org.sucu.tatupload.FLAVOUR_PARAMETER";
-	public static final String LOCATION_PARAMETER = "uk.org.sucu.tatupload.LOCATION_PARAMETER";
-	public static final String QUESTION_PARAMETER = "uk.org.sucu.tatupload.QUESTION_PARAMETER";
-	public static final String PARAMETER = "uk.org.sucu.tatupload.PARAMETER"; //identifies a parameter being passed in an intent extra
+	public static final String FLAVOUR_PARAMETER = "uk.org.sucu.tatupload2.FLAVOUR_PARAMETER";
+	public static final String LOCATION_PARAMETER = "uk.org.sucu.tatupload2.LOCATION_PARAMETER";
+	public static final String QUESTION_PARAMETER = "uk.org.sucu.tatupload2.QUESTION_PARAMETER";
+	public static final String PARAMETER = "uk.org.sucu.tatupload2.PARAMETER"; //identifies a parameter being passed in an intent extra
 	
 	public static final ArrayList<String> flavourParameter = new ArrayList<String>();
 	public static final ArrayList<String> locationParameter = new ArrayList<String>();

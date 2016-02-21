@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.network;
+package uk.org.sucu.tatupload2.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
 
-import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload2.R;
 
 public class NetManager {
 

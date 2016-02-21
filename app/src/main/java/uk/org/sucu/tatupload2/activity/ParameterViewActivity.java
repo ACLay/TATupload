@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.activity;
+package uk.org.sucu.tatupload2.activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -20,10 +20,10 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import uk.org.sucu.tatupload.ParameterArrayAdapter;
-import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.Settings;
-import uk.org.sucu.tatupload.parse.Parameters;
+import uk.org.sucu.tatupload2.ParameterArrayAdapter;
+import uk.org.sucu.tatupload2.R;
+import uk.org.sucu.tatupload2.Settings;
+import uk.org.sucu.tatupload2.parse.Parameters;
 
 public class ParameterViewActivity extends AppCompatActivity {
 

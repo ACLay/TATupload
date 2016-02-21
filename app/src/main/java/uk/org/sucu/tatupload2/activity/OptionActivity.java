@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.activity;
+package uk.org.sucu.tatupload2.activity;
 
 import android.accounts.AccountManager;
 import android.content.Intent;
@@ -11,10 +11,10 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.widget.Toast;
 
-import uk.org.sucu.tatupload.Notifications;
-import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.Settings;
-import uk.org.sucu.tatupload.network.AuthManager;
+import uk.org.sucu.tatupload2.Notifications;
+import uk.org.sucu.tatupload2.R;
+import uk.org.sucu.tatupload2.Settings;
+import uk.org.sucu.tatupload2.network.AuthManager;
 
 public class OptionActivity extends AppCompatActivity {
 

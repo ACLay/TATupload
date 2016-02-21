@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="uk.org.sucu.tatupload"
+    package="uk.org.sucu.tatupload2"
     android:versionCode="18"
     android:versionName="1.7.2"
     android:installLocation="auto" >
@@ -14,13 +14,13 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <application
-        android:name=".TatUploadApplication"
+        android:name="uk.org.sucu.tatupload2.TatUploadApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activity.MainActivity"
+            android:name="uk.org.sucu.tatupload2.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,40 +29,40 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".message.SmsReceiver" >
+        <receiver android:name="uk.org.sucu.tatupload2.message.SmsReceiver" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name=".activity.SmsReviewActivity"
+            android:name="uk.org.sucu.tatupload2.activity.SmsReviewActivity"
             android:label="@string/title_activity_sms_review"
-            android:parentActivityName=".activity.MainActivity" >
+            android:parentActivityName="uk.org.sucu.tatupload2.activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="uk.org.sucu.tatupload.activity.MainActivity" />
+                android:value="uk.org.sucu.tatupload2.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.ParameterViewActivity"
+            android:name="uk.org.sucu.tatupload2.activity.ParameterViewActivity"
             android:label="@string/invalid_heading"
-            android:parentActivityName=".activity.OptionActivity" >
+            android:parentActivityName="uk.org.sucu.tatupload2.activity.OptionActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="uk.org.sucu.tatupload.activity.OptionActivity" />
+                android:value="uk.org.sucu.tatupload2.activity.OptionActivity" />
         </activity>
         <activity
-            android:name=".activity.OptionActivity"
+            android:name="uk.org.sucu.tatupload2.activity.OptionActivity"
             android:label="@string/settings"
             android:launchMode="singleTop"
             android:theme="@style/PreferenceScreen"
-            android:parentActivityName=".activity.MainActivity" >
+            android:parentActivityName="uk.org.sucu.tatupload2.activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="uk.org.sucu.tatupload.activity.MainActivity" />
+                android:value="uk.org.sucu.tatupload2.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.TutorialActivity"
+            android:name="uk.org.sucu.tatupload2.activity.TutorialActivity"
             android:label="@string/title_activity_tutorial" >
         </activity>
     </application>

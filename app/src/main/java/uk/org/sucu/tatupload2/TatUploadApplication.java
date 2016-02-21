@@ -1,11 +1,11 @@
-package uk.org.sucu.tatupload;
+package uk.org.sucu.tatupload2;
 
 import java.util.ArrayList;
 
-import uk.org.sucu.tatupload.message.SmsList;
-import uk.org.sucu.tatupload.message.Text;
-import uk.org.sucu.tatupload.network.AuthManager;
-import uk.org.sucu.tatupload.parse.Parameters;
+import uk.org.sucu.tatupload2.message.SmsList;
+import uk.org.sucu.tatupload2.message.Text;
+import uk.org.sucu.tatupload2.network.AuthManager;
+import uk.org.sucu.tatupload2.parse.Parameters;
 import android.app.Application;
 
 public class TatUploadApplication extends Application {

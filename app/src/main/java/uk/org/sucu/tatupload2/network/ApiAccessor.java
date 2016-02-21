@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.network;
+package uk.org.sucu.tatupload2.network;
 
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import uk.org.sucu.tatupload.message.Text;
-import uk.org.sucu.tatupload.parse.Parser;
+import uk.org.sucu.tatupload2.message.Text;
+import uk.org.sucu.tatupload2.parse.Parser;
 
 public class ApiAccessor {
 

@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.network;
+package uk.org.sucu.tatupload2.network;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 
-import uk.org.sucu.tatupload.R;
+import uk.org.sucu.tatupload2.R;
 
 /**
  * An asynchronous task that handles the Google Apps Script Execution API call.

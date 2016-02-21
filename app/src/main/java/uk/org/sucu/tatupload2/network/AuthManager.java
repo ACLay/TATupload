@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.network;
+package uk.org.sucu.tatupload2.network;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -11,7 +11,7 @@ import com.google.api.client.util.ExponentialBackOff;
 
 import java.util.Arrays;
 
-import uk.org.sucu.tatupload.Settings;
+import uk.org.sucu.tatupload2.Settings;
 
 public class AuthManager {
 

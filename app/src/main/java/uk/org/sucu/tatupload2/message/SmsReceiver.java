@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.message;
+package uk.org.sucu.tatupload2.message;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 
-import uk.org.sucu.tatupload.Notifications;
-import uk.org.sucu.tatupload.Settings;
-import uk.org.sucu.tatupload.network.ApiAccessor;
-import uk.org.sucu.tatupload.network.NetManager;
+import uk.org.sucu.tatupload2.Notifications;
+import uk.org.sucu.tatupload2.Settings;
+import uk.org.sucu.tatupload2.network.ApiAccessor;
+import uk.org.sucu.tatupload2.network.NetManager;
 
 public class SmsReceiver extends BroadcastReceiver{
 

@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.parse;
+package uk.org.sucu.tatupload2.parse;
 
 import android.annotation.SuppressLint;
 

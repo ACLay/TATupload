@@ -1,9 +1,9 @@
-package uk.org.sucu.tatupload;
+package uk.org.sucu.tatupload2;
 
 import java.util.List;
 
-import uk.org.sucu.tatupload.message.Text;
-import uk.org.sucu.tatupload.parse.Parser;
+import uk.org.sucu.tatupload2.message.Text;
+import uk.org.sucu.tatupload2.parse.Parser;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

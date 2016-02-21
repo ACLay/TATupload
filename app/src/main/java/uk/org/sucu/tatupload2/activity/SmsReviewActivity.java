@@ -1,4 +1,4 @@
-package uk.org.sucu.tatupload.activity;
+package uk.org.sucu.tatupload2.activity;
 
 import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
@@ -20,15 +20,15 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import uk.org.sucu.tatupload.Notifications;
-import uk.org.sucu.tatupload.R;
-import uk.org.sucu.tatupload.Settings;
-import uk.org.sucu.tatupload.message.SmsList;
-import uk.org.sucu.tatupload.message.Text;
-import uk.org.sucu.tatupload.network.AuthManager;
-import uk.org.sucu.tatupload.network.NetManager;
-import uk.org.sucu.tatupload.network.UploadTextTask;
-import uk.org.sucu.tatupload.parse.Parser;
+import uk.org.sucu.tatupload2.Notifications;
+import uk.org.sucu.tatupload2.R;
+import uk.org.sucu.tatupload2.Settings;
+import uk.org.sucu.tatupload2.message.SmsList;
+import uk.org.sucu.tatupload2.message.Text;
+import uk.org.sucu.tatupload2.network.AuthManager;
+import uk.org.sucu.tatupload2.network.NetManager;
+import uk.org.sucu.tatupload2.network.UploadTextTask;
+import uk.org.sucu.tatupload2.parse.Parser;
 
 
 public class SmsReviewActivity extends AppCompatActivity {
