@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uk.org.sucu.tatupload"
     android:versionCode="18"
-    android:versionName="1.7.2" >
+    android:versionName="1.7.2"
+    android:installLocation="auto" >
 
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
