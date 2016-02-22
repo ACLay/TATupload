@@ -23,7 +23,7 @@ import uk.org.sucu.tatupload2.activity.MainActivity;
 import uk.org.sucu.tatupload2.activity.SmsReviewActivity;
 import uk.org.sucu.tatupload2.message.SmsList;
 import uk.org.sucu.tatupload2.message.Text;
-import uk.org.sucu.tatupload2.network.UploadTextTask;
+import uk.org.sucu.tatupload2.network.ForegroundUploadTask;
 
 public class TabContent extends Fragment {
 
@@ -142,7 +142,7 @@ public class TabContent extends Fragment {
 		// make the task to upload the text
 		ProgressDialog mProgress = new ProgressDialog(activity);
 		mProgress.setMessage(activity.getString(R.string.progress_uploading));
-		UploadTextTask uploader = new UploadTextTask(menuSms, mProgress, activity);
+		ForegroundUploadTask uploader = new ForegroundUploadTask(menuSms, mProgress, activity);
 		uploader.execute();
 	}
 

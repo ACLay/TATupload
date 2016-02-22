@@ -27,7 +27,7 @@ import uk.org.sucu.tatupload2.message.SmsList;
 import uk.org.sucu.tatupload2.message.Text;
 import uk.org.sucu.tatupload2.network.AuthManager;
 import uk.org.sucu.tatupload2.network.NetManager;
-import uk.org.sucu.tatupload2.network.UploadTextTask;
+import uk.org.sucu.tatupload2.network.ForegroundUploadTask;
 import uk.org.sucu.tatupload2.parse.Parser;
 
 
@@ -138,7 +138,7 @@ public class SmsReviewActivity extends AppCompatActivity {
 				// make the task to upload the text
 				ProgressDialog mProgress = new ProgressDialog(this);
 				mProgress.setMessage(getString(R.string.progress_uploading));
-				UploadTextTask uploader = new UploadTextTask(text, mProgress, this, question, location, toastie, body) {
+				ForegroundUploadTask uploader = new ForegroundUploadTask(text, mProgress, this, question, location, toastie, body) {
 
 					@Override
 					protected void onPostExecute(Void output) {

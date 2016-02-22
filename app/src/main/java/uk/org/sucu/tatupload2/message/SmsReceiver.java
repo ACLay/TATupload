@@ -8,15 +8,12 @@ import android.os.Bundle;
 import android.provider.Telephony;
 import android.telephony.SmsMessage;
 
-import com.google.android.gms.auth.GoogleAuthException;
-
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 
 import uk.org.sucu.tatupload2.Notifications;
 import uk.org.sucu.tatupload2.Settings;
-import uk.org.sucu.tatupload2.network.ApiAccessor;
+import uk.org.sucu.tatupload2.network.BackgroundUploadTask;
 import uk.org.sucu.tatupload2.network.NetManager;
 
 public class SmsReceiver extends BroadcastReceiver{
@@ -73,7 +70,7 @@ public class SmsReceiver extends BroadcastReceiver{
 				} else {
 					for(Text m : texts){
 						if(m != null){
-							autoProcess(m, context);
+							new BackgroundUploadTask(m, context).execute();
 						}
 					}
 				}
@@ -87,27 +84,6 @@ public class SmsReceiver extends BroadcastReceiver{
 		SmsList.getPendingList().addTexts(messages);
 		new Settings(context).savePendingTextsList();
 		Notifications.updateNotification(context);
-	}
-
-	private void autoProcess(Text text, Context context){
-
-		Settings settings = new Settings(context);
-
-		try {
-			ApiAccessor.uploadText(text);
-		} catch (IOException | GoogleAuthException e) {
-			SmsList.getPendingList().addText(text);
-			settings.savePendingTextsList();
-			Notifications.updateNotification(context);
-			return;
-		}
-
-
-		if(settings.getStoringProcesseds()){
-			SmsList.getUploadedList().addText(text);
-			settings.saveUploadedTextsList();
-		}
-		
 	}
 
 }
