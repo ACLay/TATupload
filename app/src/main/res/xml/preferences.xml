@@ -33,8 +33,8 @@
         <Preference android:title="@string/flavour_heading" >
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetPackage="uk.org.sucu.tatupload"
-                android:targetClass="uk.org.sucu.tatupload.activity.ParameterViewActivity" >
+                android:targetPackage="uk.org.sucu.tatupload2"
+                android:targetClass="uk.org.sucu.tatupload2.activity.ParameterViewActivity" >
                 <extra
                     android:name="@string/parameter_indicator"
                     android:value="@string/flavour_parameter" />
@@ -45,8 +45,8 @@
         <Preference android:title="@string/location_heading" >
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetPackage="uk.org.sucu.tatupload"
-                android:targetClass="uk.org.sucu.tatupload.activity.ParameterViewActivity" >
+                android:targetPackage="uk.org.sucu.tatupload2"
+                android:targetClass="uk.org.sucu.tatupload2.activity.ParameterViewActivity" >
                 <extra
                     android:name="@string/parameter_indicator"
                     android:value="@string/location_parameter" />
@@ -57,8 +57,8 @@
         <Preference android:title="@string/question_heading" >
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetPackage="uk.org.sucu.tatupload"
-                android:targetClass="uk.org.sucu.tatupload.activity.ParameterViewActivity" >
+                android:targetPackage="uk.org.sucu.tatupload2"
+                android:targetClass="uk.org.sucu.tatupload2.activity.ParameterViewActivity" >
                 <extra
                     android:name="@string/parameter_indicator"
                     android:value="@string/question_parameter" />
