@@ -3,7 +3,9 @@ package uk.org.sucu.tatupload2.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.widget.TextView;
 
 import uk.org.sucu.tatupload2.R;
 import uk.org.sucu.tatupload2.Settings;
@@ -15,6 +17,9 @@ public class TutorialActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tutorial);
+
+		TextView view = (TextView)findViewById(R.id.privacy_policy_text);
+		view.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
 	public void setupFlavours(View v){

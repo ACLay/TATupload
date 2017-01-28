@@ -59,6 +59,8 @@
     <string name="location_explanation">One of these words marks a sentence as containing a location.</string>
     <string name="question_explanation">One of these marks a sentence as containing a question.</string>
     <string name="tutorial_info">TATupload puts data into a google drive spreadsheet. This will need to be authorised the first time TATupload creates a spreadsheet.</string>
+    <string name="tutorial_privacy">There is also a brief privacy policy, which can be read <a href="https://github.com/ACLay/TATupload/blob/master/privacy%20policy.md">here</a>.</string>
+    <string name="privacy_url">https://github.com/ACLay/TATupload/blob/master/privacy%20policy.md</string>
     <string name="confirm_choice">Are you sure?</string>
     <string name="account">Google account</string>
     <string name="account_description">The google account to upload messages with.</string>
@@ -91,6 +93,7 @@
     <string name="text_upload_error">Error occurred uploading text: </string>
     <string name="clear_unprocessed">Clear unprocessed message list before starting?</string>
     <string name="network_unavailable">There is no network connection available.</string>
+    <string name="privacy_policy">Privacy Policy</string>
     <string-array name="default_flavours">
         <item>ham</item>
         <item>cheese</item>
