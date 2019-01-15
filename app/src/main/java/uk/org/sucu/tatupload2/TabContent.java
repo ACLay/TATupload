@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -18,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import androidx.fragment.app.Fragment;
 import uk.org.sucu.tatupload2.MessageArrayAdapter.ViewHolder;
 import uk.org.sucu.tatupload2.activity.MainActivity;
 import uk.org.sucu.tatupload2.activity.SmsReviewActivity;

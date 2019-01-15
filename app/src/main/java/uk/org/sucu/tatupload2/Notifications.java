@@ -1,7 +1,5 @@
 package uk.org.sucu.tatupload2;
 
-import uk.org.sucu.tatupload2.activity.MainActivity;
-import uk.org.sucu.tatupload2.message.SmsList;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,7 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.v4.app.NotificationCompat;
+
+import androidx.core.app.NotificationCompat;
+import uk.org.sucu.tatupload2.activity.MainActivity;
+import uk.org.sucu.tatupload2.message.SmsList;
 
 public class Notifications {
 

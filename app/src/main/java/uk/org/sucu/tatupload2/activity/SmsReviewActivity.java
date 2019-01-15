@@ -7,8 +7,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,14 +18,16 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import uk.org.sucu.tatupload2.Notifications;
 import uk.org.sucu.tatupload2.R;
 import uk.org.sucu.tatupload2.Settings;
 import uk.org.sucu.tatupload2.message.SmsList;
 import uk.org.sucu.tatupload2.message.Text;
 import uk.org.sucu.tatupload2.network.AuthManager;
-import uk.org.sucu.tatupload2.network.NetManager;
 import uk.org.sucu.tatupload2.network.ForegroundUploadTask;
+import uk.org.sucu.tatupload2.network.NetManager;
 import uk.org.sucu.tatupload2.parse.Parser;
 
 
